@@ -1,17 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deploy-{{ .Release.Name }}
-  annotations:
-    {{- include "gitlab.annotations" . | indent 4 }}
+  name: table
 spec:
   replicas: {{ .Values.deployment.replicas }}
   template:
     metadata:
       labels:
         app: table
-      annotations:
-        {{- include "gitlab.annotations" . | indent 8 }}
     spec:
       containers:
         - name: container-table
