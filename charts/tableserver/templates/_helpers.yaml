@@ -1,0 +1,9 @@
+
+{{/*
+# CI_PROJECT_PATH_SLUG = gamesnake-tableserver
+# CI_ENVIRONMENT_SLUG = dev
+*/}}
+{{- define "gitlab.annotations" }}
+app.gitlab.com/app: {{ required "app.gitlab.com/app is empty..." .Values.gitlab.project }}
+app.gitlab.com/env: {{ required "app.gitlab.com/env is empty..." .Values.gitlab.environment }}
+{{- end }}

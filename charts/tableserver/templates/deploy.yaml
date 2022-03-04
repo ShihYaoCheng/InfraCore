@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-{{ .Release.Name }}
+  annotations:
+    {{- include "gitlab.annotations" . | indent 4 }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  template:
+    metadata:
+      labels:
+        app: table
+      annotations:
+        {{- include "gitlab.annotations" . | indent 8 }}
+    spec:
+      containers:
+        - name: container-table
+          image: "{{- .Values.image.name }}:{{ default .Chart.AppVersion .Values.image.tag -}}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            {{- range $key, $val := .Values.deployment.env }}
+            - name: {{ $key }}
+              value: {{ $val }}
+            {{- end }}
+          ports:
+            - containerPort: 80
+              name: http
+          livenessProbe:
+            httpGet:
+              port: 80
+              path: /
+            initialDelaySeconds: 3
+          readinessProbe:
+            httpGet:
+              port: 80
+              path: /
+            initialDelaySeconds: 3
+          resources:
+            requests:
+              cpu : {{ .Values.deployment.resources.requests.cpu }}
+              memory : {{ .Values.deployment.resources.requests.memory }}
+            limits:
+              cpu : {{ .Values.deployment.resources.limits.cpu }}
+              memory : {{ .Values.deployment.resources.limits.memory }}
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: table
+
