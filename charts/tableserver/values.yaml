@@ -4,15 +4,13 @@
 
 image:
   name: asia.gcr.io/stellar-38931/sk-table
-  tag: ""
+  tag: "main"
   pullPolicy: IfNotPresent
 
 deployment:
   replicas: 1
   env:
-    # Possible value: Alpha, Beta, Open.
-    Deploy__Environment: "Alpha"
-    Deploy__Test: "Test"
+    ExternalServers__User: "http://service-user:5500"
   resources:
     requests:
       cpu: 1m
@@ -22,13 +20,11 @@ deployment:
       memory: 200Mi
 
 service:
-  port: 5000
+  port: 80
 
 ingress:
   path: /api/table/
   # for example: sre.ponponsnake.com
   domainName: ""
 
-gitlab:
-  project: ""
-  environment: ""
+
