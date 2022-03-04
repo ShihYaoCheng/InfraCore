@@ -1,0 +1,20 @@
+﻿apiVersion: v1
+kind: Namespace
+metadata:
+  name: token
+  labels:
+    kubed: sync
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: user
+  labels:
+    kubed: sync
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring
+  labels:
+    kubed: sync

@@ -1,0 +1,35 @@
+﻿# https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+# https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+# https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack#kube-prometheus-stack
+# https://github.com/prometheus-operator/kube-prometheus
+# helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack -n monitoring --create-namespace -f values/prometheus-stack.yaml -f values/prometheus-stack-alerts.yaml --set slackChannel=
+# helm uninstall kube-prometheus-stack -n monitoring
+resource "helm_release" "prometheus" {
+  depends_on = [module.gke, helm_release.configuration]
+
+  name             = "prometheus"
+  repository       = "https://prometheus-community.github.io/helm-charts"
+  chart            = "kube-prometheus-stack"
+  version          = "~>27.1.0"
+  namespace        = "monitoring"
+
+  values = [
+    templatefile("${path.module}/values/prometheus-stack.yaml",
+    {
+      slackChannel = var.AlertSlackChannel,
+      prometheusStorageClassName = var.PrometheusStorageClassName,
+      prometheusStorageSize = var.PrometheusStorageSize,
+      grafanaAdminPassword = var.GrafanaAdminPassword
+    }),
+
+    templatefile("${path.module}/values/prometheus-stack-alerts.yaml", {})
+  ]
+}
+
+resource "helm_release" "prometheus-resources" {
+  depends_on = [helm_release.prometheus, helm_release.traefik]
+
+  name             = "prometheus-stack-resources"
+  chart            = "../charts/prometheus-stack-resources"
+  namespace        = "monitoring"
+}
