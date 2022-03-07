@@ -1,7 +1,7 @@
 ﻿apiVersion: v1
 kind: Namespace
 metadata:
-  name: token
+  name: table
   labels:
     kubed: sync
 ---
