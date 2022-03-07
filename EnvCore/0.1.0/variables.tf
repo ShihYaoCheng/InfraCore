@@ -14,7 +14,7 @@ variable "GCPZone" {
 
 //============================== Game Project ==============================
 variable "ProjectAbbreviation" {
-  default = "dz"
+  default = "sk"
   type    = string
 }
 
@@ -50,13 +50,13 @@ variable "GKEMaxNodeCount" {
 
 
 //============================== Sealed-Secret ==============================
-variable "SealedSecretPublicKey" {
-  type = string
-}
-
-variable "SealedSecretPrivateKey" {
-  type = string
-}
+#variable "SealedSecretPublicKey" {
+#  type = string
+#}
+#
+#variable "SealedSecretPrivateKey" {
+#  type = string
+#}
 
 //============================== External-DNS ==============================
 variable "GodaddyAPIKey" {

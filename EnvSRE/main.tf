@@ -1,5 +1,5 @@
 ﻿module "infra" {
-  source = "../env-core/0.1.0"
+  source = "../EnvCore/0.1.0"
 
   GCPProjectID = var.GCPProjectID
   GCPRegion = var.GCPRegion
@@ -11,14 +11,14 @@
   GKEMinNodeCount = 1
   GKEMaxNodeCount = 5
 
-  SealedSecretPublicKey = var.SealedSecretPublicKey
-  SealedSecretPrivateKey = var.SealedSecretPrivateKey
+#  SealedSecretPublicKey = var.SealedSecretPublicKey
+#  SealedSecretPrivateKey = var.SealedSecretPrivateKey
 
   GodaddyAPIKey = var.GodaddyAPIKey
   GodaddyAPISecret = var.GodaddyAPISecret
   AutoRegisterDomainName = true
 
-  ArgoCD_Enable = true
+  ArgoCD_Enable = false
   ArgoCD_GitLabTokenName = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret = var.ArgoCD_GitLabTokenSecret
   ArgoCD_AppTokenBranchOrTag = "sre"

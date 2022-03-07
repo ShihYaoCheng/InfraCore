@@ -54,7 +54,7 @@ module "gke" {
   node_metadata = "UNSPECIFIED"
   node_pools = [
     {
-      name = "pool-1"
+      name = "pool-e2-standard-4"
       machine_type = "e2-standard-4"
 
 #      autoscaling = false # Default = true
