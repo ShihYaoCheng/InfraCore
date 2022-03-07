@@ -1,9 +1,9 @@
 
-// https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
+# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "gke" {
   source = "terraform-google-modules/kubernetes-engine/google"
-#  version = "~>17.1.0"
-  version = "~>18.0.0"
+#  version = "~>18.0.0"
+  version = "~>19.0.0"
 
   // Required.
   project_id = var.GCPProjectID

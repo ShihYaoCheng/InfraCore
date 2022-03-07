@@ -1,13 +1,14 @@
 terraform {
-  required_version = ">= 1.0.0"
+  # https://github.com/VladRassokhin/intellij-hcl/issues/365#issuecomment-996019841
+  # https://learn.hashicorp.com/tutorials/terraform/versions#terraform-version-constraints
+  required_version = "~> 1.0.8"
 
   required_providers {
     // https://registry.terraform.io/providers/hashicorp/google/latest
     google = {
       source  = "hashicorp/google"
-#      version = "~>3.89.0"
-      version = "~>3.90.1"
-#      version = "~>4.6.0"
+#      version = "~>3.90.1"
+      version = "~>4.12.0"
     }
 
     // https://registry.terraform.io/providers/hashicorp/helm/latest
