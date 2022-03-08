@@ -1,0 +1,9 @@
+﻿# helm upgrade --install table ./charts/sk-table -f ./charts/values/table-sre.yaml -n table --create-namespace
+# helm upgrade --install table ./charts/sk-table -f ./charts/values/table-sre.yaml -n table
+# kubectl label namespaces table kubed=sync
+# helm uninstall table -n table
+image:
+  tag: sre-5189b192
+ingress:
+  domainName: sre.origingaia.com
+

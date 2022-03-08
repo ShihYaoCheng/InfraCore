@@ -10,7 +10,7 @@ image:
 deployment:
   replicas: 1
   env:
-    ExternalServers__User: "http://service-user:5500"
+    ExternalServers__User: "http://svc-user:80"
   resources:
     requests:
       cpu: 1m
@@ -20,11 +20,12 @@ deployment:
       memory: 200Mi
 
 service:
+  name: table
   port: 80
 
 ingress:
   path: /api/table/
-  # for example: sre.ponponsnake.com
+  # for example: sre.origingaia.com
   domainName: ""
 
 
