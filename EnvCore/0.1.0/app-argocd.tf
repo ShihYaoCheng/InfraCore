@@ -15,7 +15,7 @@
 #
 #  repository       = "https://argoproj.github.io/argo-helm"
 #  chart            = "argo-cd"
-#  version          = "~>3.33.5"
+#  version          = "~>3.35.2"
 #
 #  create_namespace = true
 #  namespace        = "argocd"
@@ -40,7 +40,7 @@
 #  }
 #
 #  # https://github.com/helm/helm/issues/1987
-#  # Token Server.
+#  # Table Server.
 #  set {
 #    name  = "server.additionalApplications[0].source.helm.parameters[0].name"
 #    value = "deployment.keys.public"
