@@ -10,7 +10,7 @@ spec:
         app: table
     spec:
       containers:
-        - name: container-table
+        - name: table
           image: "{{- .Values.image.name }}:{{ default .Chart.AppVersion .Values.image.tag -}}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:

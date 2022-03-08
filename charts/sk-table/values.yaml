@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 image:
-  name: asia.gcr.io/stellar-38931/sk-table
+  name: gcr.io/stellar-38931/sk-table
   tag: "main"
   pullPolicy: IfNotPresent
 
@@ -24,7 +24,7 @@ service:
   port: 80
 
 ingress:
-  path: /api/table/
+  path: /api/table
   # for example: sre.origingaia.com
   domainName: ""
 
