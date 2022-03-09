@@ -3,8 +3,8 @@ stages:
 
 include:
   - project: "GameSnake/Pipeline"
-#    ref: 2022.03.01f1  
-    ref: master
+    ref: 2022.03.09
+#    ref: master
     file:
       - "/templates/.gitlab-ci-template.yml"
 
