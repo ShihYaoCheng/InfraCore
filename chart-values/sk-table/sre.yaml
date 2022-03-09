@@ -3,6 +3,6 @@
 # kubectl label namespaces table kubed=sync
 # helm uninstall table -n table
 image:
-  tag: sre-ac3f0a4f
+  tag: sre-db3aad6e
 ingress:
   domainName: sre.origingaia.com
