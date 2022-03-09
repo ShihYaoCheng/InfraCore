@@ -1,16 +1,18 @@
-﻿stages:
+stages:
   - helm
 
 include:
   - project: "GameSnake/Pipeline"
-#    ref: 2022.03.01f1
+#    ref: 2022.03.01f1  
     ref: master
     file:
       - "/templates/.gitlab-ci-template.yml"
 
+
 #======================= helm =======================
-sre:
+update-helm-values:
   extends: .template-update-helm-values
   variables:
     PERSONAL_ACCESS_TOKEN_READ_WRITE_REPOSITORY: ${PAT_READ_WRITE_REPOSITORY}
+
 
