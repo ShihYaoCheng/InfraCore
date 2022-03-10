@@ -100,15 +100,15 @@ variable "ArgoCD_GitLabTokenSecret" {
   description = "Deploy token"
 }
 
-variable "ArgoCD_AppTokenBranchOrTag" {
-  type = string
-  description = "branch name, for example: master, sre, production, or tag name, for example: 0.1.1, 0.2.3."
-}
-
-variable "ArgoCD_AppUserBranchOrTag" {
-  type = string
-  description = "branch name, for example: master, sre, production, or tag name, for example: 0.1.1, 0.2.3."
-}
+#variable "ArgoCD_AppTableBranchOrTag" {
+#  type = string
+#  description = "branch name, for example: master, sre, production, or tag name, for example: 0.1.1, 0.2.3."
+#}
+#
+#variable "ArgoCD_AppUserBranchOrTag" {
+#  type = string
+#  description = "branch name, for example: master, sre, production, or tag name, for example: 0.1.1, 0.2.3."
+#}
 
 # https://stackoverflow.com/questions/53846273/helm-passing-array-values-through-set
 # https://helm.sh/docs/intro/using_helm/#the-format-and-limitations-of---set
@@ -117,13 +117,13 @@ variable "ArgoCD_RepositoryHelmPathValueFiles" {
   description = "Sample: {../values-sre.yaml}"
 }
 
-variable "ArgoCD_ApplicationPublicKey" {
-  type = string
-}
-
-variable "ArgoCD_ApplicationPrivateKey" {
-  type = string
-}
+#variable "ArgoCD_ApplicationPublicKey" {
+#  type = string
+#}
+#
+#variable "ArgoCD_ApplicationPrivateKey" {
+#  type = string
+#}
 
 //============================== Prometheus ==============================
 variable "AlertSlackChannel" {

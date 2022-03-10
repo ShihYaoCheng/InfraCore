@@ -10,19 +10,22 @@ server:
   # @default -- `[]` (See [values.yaml])
   ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/
   additionalApplications:
-    - name: token
+    - name: table
       namespace: argocd
       project: default
       source:
-        repoURL: https://gitlab.com/gamedz/TokenServer.git
-        targetRevision: sre
-        path: charts/tokenserver
+        repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDApplications.git
+        targetRevision: main
+        path: charts/sk-table
         helm:
+          # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
+          # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
+          version: v3
           valueFiles:
-            - ../values.yaml
+            - values-sre.yaml
       destination:
         server: https://kubernetes.default.svc
-        namespace: token
+        namespace: table
       syncPolicy:
         automated:
           prune: true
@@ -30,26 +33,33 @@ server:
         syncOptions:
           - PruneLast=true
           - CreateNamespace=true
-    - name: user
-      namespace: argocd
-      project: default
-      source:
-        repoURL: https://gitlab.com/gamedz/userserver.git
-        targetRevision: sre
-        path: charts/userserver
-        helm:
-          valueFiles:
-            - ../values.yaml
-      destination:
-        server: https://kubernetes.default.svc
-        namespace: user
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
-        syncOptions:
-          - PruneLast=true
-          - CreateNamespace=true
+        # The retry feature is available since v1.7
+        retry:
+          limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+          backoff:
+            duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+            factor: 2 # a factor to multiply the base duration after each failed retry
+            maxDuration: 3m # the maximum amount of time allowed for the backoff strategy
+#    - name: user
+#      namespace: argocd
+#      project: default
+#      source:
+#        repoURL: https://gitlab.com/gamedz/userserver.git
+#        targetRevision: sre
+#        path: charts/userserver
+#        helm:
+#          valueFiles:
+#            - ../values.yaml
+#      destination:
+#        server: https://kubernetes.default.svc
+#        namespace: user
+#      syncPolicy:
+#        automated:
+#          prune: true
+#          selfHeal: true
+#        syncOptions:
+#          - PruneLast=true
+#          - CreateNamespace=true
 
 ## Argo Configs
 configs:
@@ -58,18 +68,26 @@ configs:
   ## Note: the last example in the list would use a repository credential template,
   # configured under "configs.repositoryCredentials".
   repositories:
-    token:
-      url: https://gitlab.com/gamedz/TokenServer.git
-      name: token
+    sk-helm-repo:
+      url: https://gitlab.com/GameSnake/SRE/ArgoCDApplications.git
+      name: sk-applications
       type: git
       password: my-password
       username: my-username
-    user:
-      url: https://gitlab.com/gamedz/userserver.git
-      name: user
-      type: git
-      password: my-password
-      username: my-username
+
+#  repositories: { }
+    # istio-helm-repo:
+    #   url: https://storage.googleapis.com/istio-prerelease/daily-build/master-latest-daily/charts
+    #   name: istio.io
+    #   type: helm
+    # private-helm-repo:
+    #   url: https://my-private-chart-repo.internal
+    #   name: private-repo
+    #   type: helm
+    #   password: my-password
+    #   username: my-username
+  # private-repo:
+  #   url: https://github.com/argoproj/private-repo
 
 
 ## Controller
@@ -94,33 +112,33 @@ controller:
         release: prometheus
     rules:
       # -- Deploy a PrometheusRule for the application controller
-      enabled: false
+      enabled: true
       # -- PrometheusRule.Spec for the application controller
-      spec: []
-      # - alert: ArgoAppMissing
-      #   expr: |
-      #     absent(argocd_app_info)
-      #   for: 15m
-      #   labels:
-      #     severity: critical
-      #   annotations:
-      #     summary: "[ArgoCD] No reported applications"
-      #     description: >
-      #       ArgoCD has not reported any applications data for the past 15 minutes which
-      #       means that it must be down or not functioning properly.  This needs to be
-      #       resolved for this cloud to continue to maintain state.
-      # - alert: ArgoAppNotSynced
-      #   expr: |
-      #     argocd_app_info{sync_status!="Synced"} == 1
-      #   for: 12h
-      #   labels:
-      #     severity: warning
-      #   annotations:
-      #     summary: "[{{`{{$labels.name}}`}}] Application not synchronized"
-      #     description: >
-      #       The application [{{`{{$labels.name}}`}} has not been synchronized for over
-      #       12 hours which means that the state of this cloud has drifted away from the
-      #       state inside Git.
+      spec:
+      - alert: ArgoAppMissing
+        expr: |
+          absent(argocd_app_info)
+        for: 15m
+        labels:
+          severity: critical
+        annotations:
+          summary: "[ArgoCD] No reported applications"
+          description: >
+            ArgoCD has not reported any applications data for the past 15 minutes which
+            means that it must be down or not functioning properly.  This needs to be
+            resolved for this cloud to continue to maintain state.
+      - alert: ArgoAppNotSynced
+        expr: |
+          argocd_app_info{sync_status!="Synced"} == 1
+        for: 12h
+        labels:
+          severity: warning
+        annotations:
+          summary: "[{{`{{$labels.name}}`}}] Application not synchronized"
+          description: >
+            The application [{{`{{$labels.name}}`}} has not been synchronized for over
+            12 hours which means that the state of this cloud has drifted away from the
+            state inside Git.
     #   selector:
     #     prometheus: kube-prometheus
     #   namespace: monitoring
