@@ -19,24 +19,11 @@ resource "helm_release" "argocd" {
   create_namespace = true
   namespace        = "argocd"
 
-#  set {
-#    name  = "server.additionalApplications[0].source.targetRevision"
-#    value = var.ArgoCD_AppTableBranchOrTag
-#  }
-#  set {
-#    name  = "server.additionalApplications[1].source.targetRevision"
-#    value = var.ArgoCD_AppUserBranchOrTag
-#  }
-
   # https://stackoverflow.com/questions/53846273/helm-passing-array-values-through-set
   set {
     name  = "server.additionalApplications[0].source.helm.valueFiles"
     value = var.ArgoCD_RepositoryHelmPathValueFiles
   }
-#  set {
-#    name  = "server.additionalApplications[1].source.helm.valueFiles"
-#    value = var.ArgoCD_RepositoryHelmPathValueFiles
-#  }
 
   # https://github.com/helm/helm/issues/1987
   # Table Server.
@@ -57,16 +44,6 @@ resource "helm_release" "argocd" {
 #    value = var.ArgoCD_ApplicationPrivateKey
 #  }
 
-  # User Server.
-#  set {
-#    name  = "server.additionalApplications[1].source.helm.parameters[0].name"
-#    value = "deployment.publicKey"
-#  }
-#  set {
-#    name  = "server.additionalApplications[1].source.helm.parameters[0].value"
-#    value = var.ArgoCD_ApplicationPublicKey
-#  }
-
   set_sensitive {
     name  = "configs.repositories.sk-helm-repo.username"
     value = var.ArgoCD_GitLabTokenName
@@ -75,15 +52,6 @@ resource "helm_release" "argocd" {
     name  = "configs.repositories.sk-helm-repo.password"
     value = var.ArgoCD_GitLabTokenSecret
   }
-
-#  set_sensitive {
-#    name  = "configs.repositories.user.username"
-#    value = var.ArgoCD_GitLabTokenName
-#  }
-#  set_sensitive {
-#    name  = "configs.repositories.user.password"
-#    value = var.ArgoCD_GitLabTokenSecret
-#  }
 
   values = [
     "${file("./${path.module}/values/argocd.yaml")}"
