@@ -70,6 +70,36 @@ server:
             duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
             factor: 2 # a factor to multiply the base duration after each failed retry
             maxDuration: 3m # the maximum amount of time allowed for the backoff strategy
+    - name: user
+      namespace: argocd
+      project: default
+      source:
+        repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDApplications.git
+        targetRevision: main
+        path: charts/sk-user
+        helm:
+          # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
+          # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
+          version: v3
+          valueFiles:
+            - values-sre.yaml
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: user
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - PruneLast=true
+        #          - CreateNamespace=true
+        # The retry feature is available since v1.7
+        retry:
+          limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+          backoff:
+            duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+            factor: 2 # a factor to multiply the base duration after each failed retry
+            maxDuration: 3m # the maximum amount of time allowed for the backoff strategy
 
 
 ## Argo Configs
