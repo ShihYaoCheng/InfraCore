@@ -1,5 +1,5 @@
 ﻿module "infra" {
-  source = "../env-core/0.1.0"
+  source = "../EnvCore/0.1.0"
 
   GCPProjectID = var.project-id
   GCPRegion = var.region
