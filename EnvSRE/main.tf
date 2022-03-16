@@ -19,6 +19,7 @@
   AutoRegisterDomainName = true
 
   ArgoCD_Enable = true
+  ArgoCD_EnableSelfHeal = false
   ArgoCD_GitLabTokenName = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret = var.ArgoCD_GitLabTokenSecret
 #  ArgoCD_AppTableBranchOrTag = "sre"

@@ -53,15 +53,14 @@ resource "helm_release" "argocd" {
     value = var.ArgoCD_GitLabTokenSecret
   }
 
-  values = [
-    "${file("./${path.module}/values/argocd.yaml")}"
-  ]
+#  values = [
+#    "${file("./${path.module}/values/argocd.yaml")}"
+#  ]
 
   # https://stackoverflow.com/questions/64696721/how-do-i-pass-variables-to-a-yaml-file-in-heml-tf
-#  values = [
-#    templatefile("${path.module}/manifests/values-argocd-token.yaml", {
-#      GitlabDeployTokenUserName = var.GitLabDeployTokenUserName
-#      GitlabDeployTokenSecret = var.GitLabDeployTokenSecret
-#    })
-#  ]
+  values = [
+    templatefile("${path.module}/values/argocd.yaml", {
+      enableSelfHeal = var.ArgoCD_EnableSelfHeal
+    })
+  ]
 }
