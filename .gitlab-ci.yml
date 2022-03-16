@@ -1,18 +1,220 @@
+#include:
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Terraform.gitlab-ci.yml
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Terraform/Base.latest.gitlab-ci.yml
+# https://gitlab.com/gitlab-org/terraform-images
+# https://gitlab.com/gitlab-org/terraform-images/-/blob/master/src/bin/gitlab-terraform.sh
+#  - template: Terraform.gitlab-ci.yml
+
 stages:
-  - helm
-
-include:
-  - project: "GameSnake/Pipeline"
-    ref: 2022.03.09
-#    ref: master
-    file:
-      - "/templates/.gitlab-ci-template.yml"
+  - plan
+  - deploy
+  - cleanup
 
 
-#======================= helm =======================
-update-helm-values:
-  extends: .template-update-helm-values
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Terraform/Base.latest.gitlab-ci.yml
+# Terraform/Base.latest
+#
+# The purpose of this template is to provide flexibility to the user so
+# they are able to only include the jobs that they find interesting.
+#
+# Therefore, this template is not supposed to run any jobs. The idea is to only
+# create hidden jobs. See: https://docs.gitlab.com/ee/ci/yaml/#hide-jobs
+#
+# There is a more opinionated template which we suggest the users to abide,
+# which is the lib/gitlab/ci/templates/Terraform.latest.gitlab-ci.yml
+
+image:
+  name: registry.gitlab.com/gitlab-org/terraform-images/stable:latest
+
+.plan:
+  stage: plan
   variables:
-    PERSONAL_ACCESS_TOKEN_READ_WRITE_REPOSITORY: ${PAT_READ_WRITE_REPOSITORY}
+    TF_ROOT: ./
+    TF_STATE_NAME: default
+  cache:
+    key: "${TF_ROOT}"
+    paths:
+      - ${TF_ROOT}/.terraform/
+      - ${TF_ROOT}/.terraform.lock.hcl
+  script:
+    - cd ${TF_ROOT}
+    - gitlab-terraform init
+    - gitlab-terraform validate
+    - gitlab-terraform plan
+    - gitlab-terraform plan-json
+  artifacts:
+    paths:
+      - ${TF_ROOT}/plan.cache
+    reports:
+      terraform: ${TF_ROOT}/plan.json
+
+.apply:
+  stage: deploy
+  variables:
+    TF_ROOT: ./
+    TF_STATE_NAME: default
+  cache:
+    key: "${TF_ROOT}"
+    paths:
+      - ${TF_ROOT}/.terraform/
+      - ${TF_ROOT}/.terraform.lock.hcl
+  script:
+    - cd ${TF_ROOT}
+    - gitlab-terraform apply
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
+
+
+.destroy:
+  stage: cleanup
+  variables:
+    TF_ROOT: ./
+    TF_STATE_NAME: default
+  cache:
+    key: "${TF_ROOT}"
+    paths:
+      - ${TF_ROOT}/.terraform/
+      - ${TF_ROOT}/.terraform.lock.hcl
+  script:
+    - cd ${TF_ROOT}
+    - gitlab-terraform destroy
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
+
+
+#===========================================================#
+variables:
+  DEV_DIR: EnvDEV
+  QA_DIR: EnvQA
+  PROD_DIR: EnvProduction
+
+# TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/sre-infra
+# ${CI_API_V4_URL} = https://gitlab.com/api/v4
+# ${CI_PROJECT_ID} = 27641226
+
+#===========================================================#
+#=========================== Dev ===========================#
+#===========================================================#
+dev-plan:
+  extends: .plan
+  variables:
+    TF_ROOT: ${DEV_DIR}
+    TF_STATE_NAME: ${DEV_DIR}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  script:
+    - cd ${TF_ROOT}
+    - cat $TERRAFORM_VAR_FILE_BASE64_DEV | base64 -d > var_file
+    - gitlab-terraform init
+    - gitlab-terraform validate
+    - gitlab-terraform plan -var-file=var_file
+    - gitlab-terraform plan-json -var-file=var_file
+
+dev-apply:
+  extends: .apply
+  needs: [dev-plan]
+  variables:
+    TF_ROOT: ${DEV_DIR}
+    TF_STATE_NAME: ${DEV_DIR}
+  before_script:
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+dev-destroy:
+  extends: .destroy
+  needs: [dev-plan]
+  variables:
+    TF_ROOT: ${DEV_DIR}
+    TF_STATE_NAME: ${DEV_DIR}
+  before_script:
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  script:
+    - cd ${TF_ROOT}
+    - cat $TERRAFORM_VAR_FILE_BASE64_DEV | base64 -d > var_file
+    - gitlab-terraform destroy -var-file=var_file
+
+#===========================================================#
+#=========================== QA ============================#
+#===========================================================#
+#qa-plan:
+#  extends: .plan
+#  variables:
+#    TF_ROOT: ${QA_DIR}
+#    TF_STATE_NAME: ${QA_DIR}
+#  before_script:
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#  script:
+#    - cd ${TF_ROOT}
+#    - cat $TERRAFORM_VAR_FILE_BASE64_QA | base64 -d > var_file
+#    - gitlab-terraform init
+#    - gitlab-terraform validate
+#    - gitlab-terraform plan -var-file=var_file
+#    - gitlab-terraform plan-json -var-file=var_file
+#
+#qa-apply:
+#  extends: .apply
+#  needs: [qa-plan]
+#  variables:
+#    TF_ROOT: ${QA_DIR}
+#    TF_STATE_NAME: ${QA_DIR}
+#  before_script:
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#
+#qa-destroy:
+#  extends: .destroy
+#  needs: [qa-plan]
+#  variables:
+#    TF_ROOT: ${QA_DIR}
+#    TF_STATE_NAME: ${QA_DIR}
+#  before_script:
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#  script:
+#    - cd ${TF_ROOT}
+#    - cat $TERRAFORM_VAR_FILE_BASE64_QA | base64 -d > var_file
+#    - gitlab-terraform destroy -var-file=var_file
+
+#===========================================================#
+#====================== Production =========================#
+#===========================================================#
+#prod-plan:
+#  extends: .plan
+#  variables:
+#    TF_ROOT: ${PROD_DIR}
+#    TF_STATE_NAME: ${PROD_DIR}
+#  before_script:
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#  script:
+#    - cd ${TF_ROOT}
+#    - cat $TERRAFORM_VAR_FILE_BASE64_PROD | base64 -d > var_file
+#    - gitlab-terraform init
+#    - gitlab-terraform validate
+#    - gitlab-terraform plan -var-file=var_file
+#    - gitlab-terraform plan-json -var-file=var_file
+#
+#prod-apply:
+#  extends: .apply
+#  needs: [prod-plan]
+#  variables:
+#    TF_ROOT: ${PROD_DIR}
+#    TF_STATE_NAME: ${PROD_DIR}
+#  before_script:
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#
+#prod-destroy:
+#  extends: .destroy
+#  needs: [prod-plan]
+#  variables:
+#    TF_ROOT: ${PROD_DIR}
+#    TF_STATE_NAME: ${PROD_DIR}
+#  before_script:
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#  script:
+#    - cd ${TF_ROOT}
+#    - cat $TERRAFORM_VAR_FILE_BASE64_PROD | base64 -d > var_file
+#    - gitlab-terraform destroy -var-file=var_file
+
+
 
 
