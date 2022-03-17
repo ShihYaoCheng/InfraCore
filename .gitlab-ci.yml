@@ -38,7 +38,7 @@ image:
       - ${TF_ROOT}/.terraform.lock.hcl
   script:
     - cd ${TF_ROOT}
-    - gitlab-terraform init
+    - gitlab-terraform init -upgrade
     - gitlab-terraform validate
     - gitlab-terraform plan
     - gitlab-terraform plan-json
