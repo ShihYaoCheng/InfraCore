@@ -86,7 +86,7 @@ image:
 
 #===========================================================#
 variables:
-  DEV_DIR: EnvDEV
+  DEV_DIR: EnvDev
   QA_DIR: EnvQA
   PROD_DIR: EnvProduction
 
