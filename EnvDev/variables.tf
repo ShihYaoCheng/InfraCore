@@ -1,28 +1,28 @@
 ﻿//============================== Project ==============================
-variable "project-id" {
+variable "GCPProjectID" {
   default = "stellar-38931"
   type    = string
 }
 
 // https://cloud.google.com/compute/docs/regions-zones
-variable "region" {
+variable "GCPRegion" {
   default     = "asia-east1"
   description = "cloud provider region."
 }
 
-variable "zone" {
+variable "GCPZone" {
   default     = "asia-east1-b"
   description = "cloud provider zone."
 }
 
 //============================== Sealed-Secret ==============================
-variable "SealedSecretPublicKey" {
-  type = string
-}
-
-variable "SealedSecretPrivateKey" {
-  type = string
-}
+#variable "SealedSecretPublicKey" {
+#  type = string
+#}
+#
+#variable "SealedSecretPrivateKey" {
+#  type = string
+#}
 
 //============================== External-DNS ==============================
 variable "GodaddyAPIKey" {
@@ -32,17 +32,6 @@ variable "GodaddyAPIKey" {
 variable "GodaddyAPISecret" {
   type = string
 }
-
-//============================== ZeroSSL certificate ==============================
-#variable "CertificatePublicKey" {
-#  type = string
-#  description = "SealedSecret format."
-#}
-#
-#variable "CertificatePrivateKey" {
-#  type = string
-#  description = "SealedSecret format."
-#}
 
 //============================== ArgoCD ==============================
 variable "ArgoCD_GitLabTokenName" {

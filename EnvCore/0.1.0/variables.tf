@@ -32,12 +32,14 @@ locals {
 }
 
 //============================== GKE ==============================
-variable "GKERegional" {
-  type = bool
-}
+#variable "GKERegional" {
+#  type = bool
+#  default = true
+#}
 
 variable "GKEZones" {
   type = list(string)
+  default = ["asia-east1-a"]
 }
 
 variable "GKEMinNodeCount" {
@@ -61,10 +63,12 @@ variable "GKEMaxNodeCount" {
 //============================== External-DNS ==============================
 variable "GodaddyAPIKey" {
   type = string
+  default = ""
 }
 
 variable "GodaddyAPISecret" {
   type = string
+  default = ""
 }
 
 variable "GodaddyDomainName" {
@@ -109,13 +113,12 @@ variable "ArgoCD_GitLabTokenSecret" {
 # https://helm.sh/docs/intro/using_helm/#the-format-and-limitations-of---set
 variable "ArgoCD_RepositoryHelmPathValueFiles" {
   type = string
-  description = "Sample: {../values-sre.yaml}"
+  description = "Sample: {values-sre.yaml}"
 }
 
 //============================== Prometheus ==============================
 variable "AlertSlackChannel" {
   type = string
-  default = "monitoring"
 }
 
 variable "PrometheusStorageClassName" {
@@ -140,6 +143,7 @@ variable "CreateStagingCertificate" {
 
 variable "CreateProductionCertificate" {
   type = bool
+  default = false
 }
 
 #variable "UseProductionCertificate" {

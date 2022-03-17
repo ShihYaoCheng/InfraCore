@@ -1,35 +1,21 @@
 ﻿module "infra" {
   source = "../EnvCore/0.1.0"
 
-  GCPProjectID = var.project-id
-  GCPRegion = var.region
-  GCPZone = var.zone
+  GCPProjectID = var.GCPProjectID
+  GCPRegion = var.GCPRegion
+  GCPZone = var.GCPZone
   ProjectEnvironment = "dev"
 
-  GKERegional = true
-  GKEZones = ["asia-east1-b"]
   GKEMinNodeCount = 1
   GKEMaxNodeCount = 3
 
-  SealedSecretPublicKey = var.SealedSecretPublicKey
-  SealedSecretPrivateKey = var.SealedSecretPrivateKey
-
-  GodaddyAPIKey = var.GodaddyAPIKey
-  GodaddyAPISecret = var.GodaddyAPISecret
-
-  ArgoCD_Enable = true
   ArgoCD_GitLabTokenName = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret = var.ArgoCD_GitLabTokenSecret
-  ArgoCD_AppTokenBranchOrTag = "master"
-  ArgoCD_AppUserBranchOrTag = "master"
-  ArgoCD_RepositoryHelmPathValueFiles = "{../values-dev.yaml}"
-  ArgoCD_ApplicationPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvVGVzk5fpMJo6kmVjcZHY4pfkvmlsmnrIMseDFQRz4NB0oTx5wZtP5ryuOGHoaTuJcq+DuVt6uBXEssdEtA9O3lS4O39p/uUaV/lsiw6e9sxp90oIw9+S+kwPhdLxxWkQsry09++YVHXSwX3t61DC71dKsg4F21FRvtSgRm9q91eFlSMiLhWnZ/JSFo7PxDESL9JTP4aOeZJ5pmsBcglFdyX9Cep7CSEILoxJ+CUycLggU7IWNfe1/9PI61/B/gnOxhGHV6nqQJVjYTv4tJOB3BBCuVepJat8c0OqtwkUWOe9UMWSxdIj0QI+zjxvO91NPws9DRUNaGf1ockDf8h7QIDAQAB"
-  ArgoCD_ApplicationPrivateKey = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC9UZXOTl+kwmjqSZWNxkdjil+S+aWyaesgyx4MVBHPg0HShPHnBm0/mvK44YehpO4lyr4O5W3q4FcSyx0S0D07eVLg7f2n+5RpX+WyLDp72zGn3SgjD35L6TA+F0vHFaRCyvLT375hUddLBfe3rUMLvV0qyDgXbUVG+1KBGb2r3V4WVIyIuFadn8lIWjs/EMRIv0lM/ho55knmmawFyCUV3Jf0J6nsJIQgujEn4JTJwuCBTshY197X/08jrX8H+Cc7GEYdXqepAlWNhO/i0k4HcEEK5V6klq3xzQ6q3CRRY571QxZLF0iPRAj7OPG873U0/Cz0NFQ1oZ/WhyQN/yHtAgMBAAECggEBAI1fHhn4Bo33KvdBSa+cD/UyAFq1l9laJN3RL7gPE1m9b2qwIh/deblUkMokh+7aRYftFO30v5b0PbFoAWbqH7+Iwq36qj9Fq7bgiJr7UhTpQvRSPsWnrS0sjfzf0pNxAr9p49j5rKXpwnZgl3IOrRFYL/lhmBlOXLw7sol7Wlq6Y4XNqH6TYOS0Y9jgFDFREukSUOBfDxUqlpqLH9yUm0s1iGHNxOWBsXCXMBKQWpSz3RGHZfuSyrnqqMgee+wjjMDpAiNO5E/NnoK/UVSB1/uqbf9iEz4AAaRZ53gPii2myw5s9l7xF9MKrTnHA+kdZVw5Vl4ixIsX2WaCr+xgEMECgYEA5lolfc2jGhA+7RXQO9gkJgLV7Svf7Lfq62+bmz3WaiLDTvZgmaaIzccXKTqbIeutQsj2B/mu6jc14F1STkYXU6itlJV7ODJSp0ACwufJCLFoGpQ205423TMsKcHSnA+t5poN2ysn1zIefnXqp0DCJW/GOsAV7DGgpt34DNdoTnECgYEA0mXXB1fot99o0Z/J9kWZ9kYCgBbCxisKBbGrhgEMdMQmxH5W0XuVeNUDED7UsZZBVoeDSYtfo489c+L9RIGflKqvRDTZ8XCeYATXHx04S4Q1foym0Z9CbJ29AwJ5vcDNawkjfmKuM/eFdz9RqU6HmKE2ae7626x/XzQpGCY2AT0CgYBCKdJq+A3JBrGMV5+gEM0RPe9EWD3ROGJ5jW0cgf58Lc/7djj46SSSNoUoinTUoWT6sc45LDZZf9Ixx5xEb01z8hcpfmYOFiY3c+NXKExN+ubz+25kCiWoE3Kz68Aao0ZH3ifss9CVtwebOzNTJv6c0iYV6eZiGT8Trt34kkabgQKBgF3psUqI1crFQR9YiKiRtsBzzYfpIPWdnnKeNKay7yFrsLZCgnQtCrINurlUolHGdNGv2U1Jld4HAPIqXsxmY5nTejoisSmREFBhuLgdrdQfZlVfaNLmmJqs6gJe54JofgiJ4rr2RzXRBVUOAWBmOiZJx2UPlA/b9lrDiJhL7g0tAoGBAIhP0k0hKHyBtK9ZReI+tizRTOJHPJGccUoQ/KyHWUJA5I12YMQzaz/abNIGYj0BA4MlU+k8311Mfc0XadyEmSiYxCXrYX3JxoAtCQrxjy65uAiTeJeZkOiOCS8LaN1/r2AWc1EtnQhaW3LblDU+nZ7PUKuZE1przYBtExLD4N4/"
+  ArgoCD_RepositoryHelmPathValueFiles = "{values-dev.yaml}"
 
-  AlertSlackChannel = "alert-dev"
+  AlertSlackChannel = "alert-sk-sre"
+  PrometheusStorageClassName = "ssd-delete"
   GrafanaAdminPassword = "admin1234"
-
-  CreateProductionCertificate = true
 }
 
 

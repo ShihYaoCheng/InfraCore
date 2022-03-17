@@ -23,7 +23,8 @@ module "gke" {
   kubernetes_version = "1.22.6-gke.300"
 
   // Optional.
-  regional = var.GKERegional # Default = true
+#  regional = var.GKERegional # Default = true
+  regional = true
   zones = var.GKEZones
 #  zones = ["asia-east1-b"]
 
