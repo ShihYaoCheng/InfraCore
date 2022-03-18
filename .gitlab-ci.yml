@@ -44,7 +44,7 @@ image:
   script:
     - cd ${TF_ROOT}
     - cat $TERRAFORM_VAR_FILE_BASE64_DEV | base64 -d > var_file
-    - gitlab-terraform init
+    - gitlab-terraform init -upgrade
     - gitlab-terraform validate
     - gitlab-terraform plan -var-file=var_file
     - gitlab-terraform plan-json -var-file=var_file
