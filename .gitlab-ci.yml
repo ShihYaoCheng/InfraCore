@@ -38,12 +38,16 @@ image:
     paths:
       - ${TF_ROOT}/.terraform/
       - ${TF_ROOT}/.terraform.lock.hcl
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
   script:
     - cd ${TF_ROOT}
+    - cat $TERRAFORM_VAR_FILE_BASE64_DEV | base64 -d > var_file
     - gitlab-terraform init
     - gitlab-terraform validate
-    - gitlab-terraform plan
-    - gitlab-terraform plan-json
+    - gitlab-terraform plan -var-file=var_file
+    - gitlab-terraform plan-json -var-file=var_file
   artifacts:
     paths:
       - ${TF_ROOT}/plan.cache
@@ -60,6 +64,9 @@ image:
     paths:
       - ${TF_ROOT}/.terraform/
       - ${TF_ROOT}/.terraform.lock.hcl
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
   script:
     - cd ${TF_ROOT}
     - gitlab-terraform apply
@@ -78,9 +85,13 @@ image:
     paths:
       - ${TF_ROOT}/.terraform/
       - ${TF_ROOT}/.terraform.lock.hcl
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
   script:
     - cd ${TF_ROOT}
-    - gitlab-terraform destroy
+    - cat $TERRAFORM_VAR_FILE_BASE64_DEV | base64 -d > var_file
+    - gitlab-terraform destroy -var-file=var_file
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: manual
@@ -104,16 +115,6 @@ dev-plan:
   variables:
     TF_ROOT: ${DEV_DIR}
     TF_STATE_NAME: ${DEV_DIR}
-  before_script:
-    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  script:
-    - cd ${TF_ROOT}
-    - cat $TERRAFORM_VAR_FILE_BASE64_DEV | base64 -d > var_file
-    - gitlab-terraform init -upgrade
-    - gitlab-terraform validate
-    - gitlab-terraform plan -var-file=var_file
-    - gitlab-terraform plan-json -var-file=var_file
 
 dev-apply:
   extends: .apply
@@ -121,8 +122,6 @@ dev-apply:
   variables:
     TF_ROOT: ${DEV_DIR}
     TF_STATE_NAME: ${DEV_DIR}
-  before_script:
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
 dev-destroy:
   extends: .destroy
@@ -130,12 +129,6 @@ dev-destroy:
   variables:
     TF_ROOT: ${DEV_DIR}
     TF_STATE_NAME: ${DEV_DIR}
-  before_script:
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  script:
-    - cd ${TF_ROOT}
-    - cat $TERRAFORM_VAR_FILE_BASE64_DEV | base64 -d > var_file
-    - gitlab-terraform destroy -var-file=var_file
 
 #===========================================================#
 #=========================== QA ============================#
