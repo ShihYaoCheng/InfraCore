@@ -24,7 +24,9 @@ stages:
 # which is the lib/gitlab/ci/templates/Terraform.latest.gitlab-ci.yml
 
 image:
-  name: registry.gitlab.com/gitlab-org/terraform-images/stable:latest
+  # https://gitlab.com/gitlab-org/terraform-images/container_registry/2018822
+  name: registry.gitlab.com/gitlab-org/terraform-images/releases/1.0:v0.31.0
+#  name: registry.gitlab.com/gitlab-org/terraform-images/releases/1.0:latest
 
 .plan:
   stage: plan
