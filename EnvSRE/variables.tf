@@ -1,4 +1,4 @@
-﻿//============================== Project ==============================
+//============================== Project ==============================
 variable "GCPProjectID" {
   default = "stellar-38931"
   type    = string
@@ -46,11 +46,11 @@ variable "GodaddyAPISecret" {
 
 //============================== ArgoCD ==============================
 variable "ArgoCD_GitLabTokenName" {
-  type = string
+  type      = string
   sensitive = true
 }
 
 variable "ArgoCD_GitLabTokenSecret" {
-  type = string
+  type      = string
   sensitive = true
 }

@@ -1,28 +1,28 @@
-﻿module "infra" {
+module "infra" {
   source = "../EnvCore/0.1.0"
 
-  GCPProjectID = var.GCPProjectID
-  GCPRegion = var.GCPRegion
-  GCPZone = var.GCPZone
+  GCPProjectID       = var.GCPProjectID
+  GCPRegion          = var.GCPRegion
+  GCPZone            = var.GCPZone
   ProjectEnvironment = "sre"
 
   GKEMinNodeCount = 1
   GKEMaxNodeCount = 3
 
-  GodaddyAPIKey = var.GodaddyAPIKey
-  GodaddyAPISecret = var.GodaddyAPISecret
+  GodaddyAPIKey          = var.GodaddyAPIKey
+  GodaddyAPISecret       = var.GodaddyAPISecret
   AutoRegisterDomainName = true
 
-  ArgoCD_Enable = true
-  ArgoCD_EnableSelfHeal = false
-  ArgoCD_GitLabTokenName = var.ArgoCD_GitLabTokenName
-  ArgoCD_GitLabTokenSecret = var.ArgoCD_GitLabTokenSecret
+  ArgoCD_Enable                       = true
+  ArgoCD_EnableSelfHeal               = false
+  ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
+  ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret
   ArgoCD_RepositoryHelmPathValueFiles = "{values-sre.yaml}"
 
-  AlertSlackChannel = "alert-sk-sre"
+  AlertSlackChannel          = "alert-sk-sre"
   PrometheusStorageClassName = "ssd-delete"
-  PrometheusStorageSize = "20Gi"
-  GrafanaAdminPassword = "admin1234"
+  PrometheusStorageSize      = "20Gi"
+  GrafanaAdminPassword       = "admin1234"
 }
 
 
