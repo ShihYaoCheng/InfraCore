@@ -49,6 +49,7 @@ image:
     - gitlab-terraform validate
     - gitlab-terraform plan -var-file=var_file
     - gitlab-terraform plan-json -var-file=var_file
+  resource_group: ${TF_STATE_NAME}
   artifacts:
     paths:
       - ${TF_ROOT}/plan.cache
@@ -71,6 +72,7 @@ image:
   script:
     - cd ${TF_ROOT}
     - gitlab-terraform apply
+  resource_group: ${TF_STATE_NAME}
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: manual
@@ -93,6 +95,7 @@ image:
     - cd ${TF_ROOT}
     - cat $TERRAFORM_VAR_FILE_BASE64_DEV | base64 -d > var_file
     - gitlab-terraform destroy -var-file=var_file
+  resource_group: ${TF_STATE_NAME}
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: manual
