@@ -24,25 +24,21 @@ resource "helm_release" "argocd" {
     name  = "server.additionalApplications[0].source.helm.valueFiles"
     value = var.ArgoCD_RepositoryHelmPathValueFiles
   }
+  set {
+    name  = "server.additionalApplications[1].source.helm.valueFiles"
+    value = var.ArgoCD_RepositoryHelmPathValueFiles
+  }
+  set {
+    name  = "server.additionalApplications[2].source.helm.valueFiles"
+    value = var.ArgoCD_RepositoryHelmPathValueFiles
+  }
+  set {
+    name  = "server.additionalApplications[3].source.helm.valueFiles"
+    value = var.ArgoCD_RepositoryHelmPathValueFiles
+  }
 
   # https://github.com/helm/helm/issues/1987
-  # Table Server.
-#  set {
-#    name  = "server.additionalApplications[0].source.helm.parameters[0].name"
-#    value = "deployment.keys.public"
-#  }
-#  set {
-#    name  = "server.additionalApplications[0].source.helm.parameters[0].value"
-#    value = var.ArgoCD_ApplicationPublicKey
-#  }
-#  set {
-#    name  = "server.additionalApplications[0].source.helm.parameters[1].name"
-#    value = "deployment.keys.private"
-#  }
-#  set_sensitive {
-#    name  = "server.additionalApplications[0].source.helm.parameters[1].value"
-#    value = var.ArgoCD_ApplicationPrivateKey
-#  }
+
 
   set_sensitive {
     name  = "configs.repositories.sk-helm-repo.username"
