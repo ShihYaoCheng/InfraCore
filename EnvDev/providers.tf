@@ -1,7 +1,7 @@
 terraform {
   # https://github.com/VladRassokhin/intellij-hcl/issues/365#issuecomment-996019841
   # https://learn.hashicorp.com/tutorials/terraform/versions#terraform-version-constraints
-  required_version = ">1.0.8"
+  required_version = "~>1.0.11"
 
   backend "http" {}
 
