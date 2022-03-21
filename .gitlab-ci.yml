@@ -33,11 +33,11 @@ image:
   variables:
     TF_ROOT: ./
     TF_STATE_NAME: default
-#  cache:
-#    key: "${TF_ROOT}"
-#    paths:
-#      - ${TF_ROOT}/.terraform/
-#      - ${TF_ROOT}/.terraform.lock.hcl
+  cache:
+    key: "${TF_ROOT}"
+    paths:
+      - ${TF_ROOT}/.terraform/
+      - ${TF_ROOT}/.terraform.lock.hcl
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -45,7 +45,7 @@ image:
     - cd ${TF_ROOT}
     - cat $TERRAFORM_VAR_FILE_BASE64_DEV | base64 -d > var_file
     - gitlab-terraform --version
-    - gitlab-terraform init -upgrade
+    - gitlab-terraform init
     - gitlab-terraform validate
     - gitlab-terraform plan -var-file=var_file
     - gitlab-terraform plan-json -var-file=var_file
@@ -61,11 +61,11 @@ image:
   variables:
     TF_ROOT: ./
     TF_STATE_NAME: default
-#  cache:
-#    key: "${TF_ROOT}"
-#    paths:
-#      - ${TF_ROOT}/.terraform/
-#      - ${TF_ROOT}/.terraform.lock.hcl
+  cache:
+    key: "${TF_ROOT}"
+    paths:
+      - ${TF_ROOT}/.terraform/
+      - ${TF_ROOT}/.terraform.lock.hcl
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -83,11 +83,11 @@ image:
   variables:
     TF_ROOT: ./
     TF_STATE_NAME: default
-#  cache:
-#    key: "${TF_ROOT}"
-#    paths:
-#      - ${TF_ROOT}/.terraform/
-#      - ${TF_ROOT}/.terraform.lock.hcl
+  cache:
+    key: "${TF_ROOT}"
+    paths:
+      - ${TF_ROOT}/.terraform/
+      - ${TF_ROOT}/.terraform.lock.hcl
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
