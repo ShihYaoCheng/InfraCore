@@ -33,11 +33,11 @@ image:
   variables:
     TF_ROOT: ./
     TF_STATE_NAME: default
-  cache:
-    key: "${TF_ROOT}"
-    paths:
-      - ${TF_ROOT}/.terraform/
-      - ${TF_ROOT}/.terraform.lock.hcl
+#  cache:
+#    key: "${TF_ROOT}"
+#    paths:
+#      - ${TF_ROOT}/.terraform/
+#      - ${TF_ROOT}/.terraform.lock.hcl
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -61,11 +61,11 @@ image:
   variables:
     TF_ROOT: ./
     TF_STATE_NAME: default
-  cache:
-    key: "${TF_ROOT}"
-    paths:
-      - ${TF_ROOT}/.terraform/
-      - ${TF_ROOT}/.terraform.lock.hcl
+#  cache:
+#    key: "${TF_ROOT}"
+#    paths:
+#      - ${TF_ROOT}/.terraform/
+#      - ${TF_ROOT}/.terraform.lock.hcl
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -83,11 +83,11 @@ image:
   variables:
     TF_ROOT: ./
     TF_STATE_NAME: default
-  cache:
-    key: "${TF_ROOT}"
-    paths:
-      - ${TF_ROOT}/.terraform/
-      - ${TF_ROOT}/.terraform.lock.hcl
+#  cache:
+#    key: "${TF_ROOT}"
+#    paths:
+#      - ${TF_ROOT}/.terraform/
+#      - ${TF_ROOT}/.terraform.lock.hcl
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
