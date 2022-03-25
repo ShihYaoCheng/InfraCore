@@ -10,8 +10,6 @@ terraform {
     // https://registry.terraform.io/providers/hashicorp/google/latest
     google = {
       source  = "hashicorp/google"
-      #      version = "~>3.90.1"
-#      version = "~>4.12.0"
       version = "4.14.0"
     }
 

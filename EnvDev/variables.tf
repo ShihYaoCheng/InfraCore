@@ -1,16 +1,18 @@
 ﻿//============================== Project ==============================
 variable "GCPProjectID" {
-  default = "stellar-38931"
   type    = string
+  default = "stellar-38931"
 }
 
 // https://cloud.google.com/compute/docs/regions-zones
 variable "GCPRegion" {
+  type        = string
   default     = "asia-east1"
   description = "cloud provider region."
 }
 
 variable "GCPZone" {
+  type        = string
   default     = "asia-east1-b"
   description = "cloud provider zone."
 }
@@ -26,11 +28,11 @@ variable "GCPZone" {
 
 //============================== ArgoCD ==============================
 variable "ArgoCD_GitLabTokenName" {
-  type = string
+  type      = string
   sensitive = true
 }
 
 variable "ArgoCD_GitLabTokenSecret" {
-  type = string
+  type      = string
   sensitive = true
 }
