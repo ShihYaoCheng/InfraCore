@@ -111,9 +111,9 @@ variables:
 # ${CI_API_V4_URL} = https://gitlab.com/api/v4
 # ${CI_PROJECT_ID} = 27641226
 
-#===========================================================#
-#=========================== Dev ===========================#
-#===========================================================#
+#============================#
+# Dev                        #
+#============================#
 dev-plan:
   extends: .plan
   variables:
@@ -134,45 +134,28 @@ dev-destroy:
     TF_ROOT: ${DEV_DIR}
     TF_STATE_NAME: ${DEV_DIR}
 
-#===========================================================#
-#=========================== QA ============================#
-#===========================================================#
-#qa-plan:
-#  extends: .plan
-#  variables:
-#    TF_ROOT: ${QA_DIR}
-#    TF_STATE_NAME: ${QA_DIR}
-#  before_script:
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  script:
-#    - cd ${TF_ROOT}
-#    - cat $TERRAFORM_VAR_FILE_BASE64_QA | base64 -d > var_file
-#    - gitlab-terraform init
-#    - gitlab-terraform validate
-#    - gitlab-terraform plan -var-file=var_file
-#    - gitlab-terraform plan-json -var-file=var_file
-#
-#qa-apply:
-#  extends: .apply
-#  needs: [qa-plan]
-#  variables:
-#    TF_ROOT: ${QA_DIR}
-#    TF_STATE_NAME: ${QA_DIR}
-#  before_script:
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#
-#qa-destroy:
-#  extends: .destroy
-#  needs: [qa-plan]
-#  variables:
-#    TF_ROOT: ${QA_DIR}
-#    TF_STATE_NAME: ${QA_DIR}
-#  before_script:
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  script:
-#    - cd ${TF_ROOT}
-#    - cat $TERRAFORM_VAR_FILE_BASE64_QA | base64 -d > var_file
-#    - gitlab-terraform destroy -var-file=var_file
+#============================#
+# QA                         #
+#============================#
+qa-plan:
+  extends: .plan
+  variables:
+    TF_ROOT: ${QA_DIR}
+    TF_STATE_NAME: ${QA_DIR}
+
+qa-apply:
+  extends: .apply
+  needs: [qa-plan]
+  variables:
+    TF_ROOT: ${QA_DIR}
+    TF_STATE_NAME: ${QA_DIR}
+
+qa-destroy:
+  extends: .destroy
+  needs: [qa-plan]
+  variables:
+    TF_ROOT: ${QA_DIR}
+    TF_STATE_NAME: ${QA_DIR}
 
 #===========================================================#
 #====================== Production =========================#
