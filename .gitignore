@@ -35,3 +35,4 @@ override.tf.json
 terraform.rc
 
 /.idea/sonarlint/issuestore/
+/tools/EnvProductionVariablesBase64.txt
