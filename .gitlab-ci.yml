@@ -42,12 +42,17 @@ image:
       - ${TF_ROOT}/.terraform/
       - ${TF_ROOT}/.terraform.lock.hcl
   before_script:
+    - pwd
     - cd ${TF_ROOT}
+    - pwd
 #  script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
 #    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
 #    - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
   after_script:
+    - pwd
+    - cd ${TF_ROOT}
+    - pwd
     - gitlab-terraform --version
     - gitlab-terraform init
     - gitlab-terraform validate
@@ -107,6 +112,9 @@ image:
 #    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
 #    - cat $TERRAFORM_VAR_FILE_BASE64_DEV | base64 -d > var_file
   after_script:
+    - pwd
+    - cd ${TF_ROOT}
+    - pwd
     - gitlab-terraform destroy -var-file=var_file
   resource_group: ${TF_STATE_NAME}
   rules:
@@ -133,6 +141,9 @@ dev-plan:
     TF_ROOT: ${DEV_DIR}
     TF_STATE_NAME: ${DEV_DIR}
   script:
+    - pwd
+    - cd ${TF_ROOT}
+    - pwd1
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
     - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
