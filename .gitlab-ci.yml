@@ -28,6 +28,9 @@ image:
   name: registry.gitlab.com/gitlab-org/terraform-images/releases/1.0:v0.31.0
 #  name: registry.gitlab.com/gitlab-org/terraform-images/releases/1.0:latest
 
+#============================#
+# .plan                      #
+#============================#
 .plan:
   stage: plan
   variables:
@@ -39,11 +42,12 @@ image:
       - ${TF_ROOT}/.terraform/
       - ${TF_ROOT}/.terraform.lock.hcl
   before_script:
-    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  script:
     - cd ${TF_ROOT}
-    - cat $TERRAFORM_VAR_FILE_BASE64_DEV | base64 -d > var_file
+#  script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#    - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+  after_script:
     - gitlab-terraform --version
     - gitlab-terraform init
     - gitlab-terraform validate
@@ -59,6 +63,9 @@ image:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: manual
 
+#============================#
+# .apply                     #
+#============================#
 .apply:
   stage: deploy
   variables:
@@ -69,10 +76,10 @@ image:
     paths:
       - ${TF_ROOT}/.terraform/
       - ${TF_ROOT}/.terraform.lock.hcl
-  before_script:
-    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  script:
+#  script:
+#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  after_script:
     - cd ${TF_ROOT}
     - gitlab-terraform apply
   resource_group: ${TF_STATE_NAME}
@@ -80,7 +87,9 @@ image:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: manual
 
-
+#============================#
+# .destroy                   #
+#============================#
 .destroy:
   stage: cleanup
   variables:
@@ -92,11 +101,12 @@ image:
       - ${TF_ROOT}/.terraform/
       - ${TF_ROOT}/.terraform.lock.hcl
   before_script:
-    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  script:
     - cd ${TF_ROOT}
-    - cat $TERRAFORM_VAR_FILE_BASE64_DEV | base64 -d > var_file
+#  script:
+#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#    - cat $TERRAFORM_VAR_FILE_BASE64_DEV | base64 -d > var_file
+  after_script:
     - gitlab-terraform destroy -var-file=var_file
   resource_group: ${TF_STATE_NAME}
   rules:
@@ -122,6 +132,10 @@ dev-plan:
   variables:
     TF_ROOT: ${DEV_DIR}
     TF_STATE_NAME: ${DEV_DIR}
+  script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
 dev-apply:
   extends: .apply
@@ -129,6 +143,9 @@ dev-apply:
   variables:
     TF_ROOT: ${DEV_DIR}
     TF_STATE_NAME: ${DEV_DIR}
+  script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
 dev-destroy:
   extends: .destroy
@@ -136,6 +153,10 @@ dev-destroy:
   variables:
     TF_ROOT: ${DEV_DIR}
     TF_STATE_NAME: ${DEV_DIR}
+  script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
 #============================#
 # QA                         #
@@ -145,6 +166,10 @@ qa-plan:
   variables:
     TF_ROOT: ${QA_DIR}
     TF_STATE_NAME: ${QA_DIR}
+  script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
 qa-apply:
   extends: .apply
@@ -152,6 +177,9 @@ qa-apply:
   variables:
     TF_ROOT: ${QA_DIR}
     TF_STATE_NAME: ${QA_DIR}
+  script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
 qa-destroy:
   extends: .destroy
@@ -159,6 +187,10 @@ qa-destroy:
   variables:
     TF_ROOT: ${QA_DIR}
     TF_STATE_NAME: ${QA_DIR}
+  script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
 #===========================================================#
 #====================== Production =========================#
