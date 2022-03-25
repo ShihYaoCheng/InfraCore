@@ -166,9 +166,10 @@ qa-plan:
   variables:
     TF_ROOT: ${QA_DIR}
     TF_STATE_NAME: ${QA_DIR}
-  script:
+  before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
 qa-apply:
@@ -177,7 +178,7 @@ qa-apply:
   variables:
     TF_ROOT: ${QA_DIR}
     TF_STATE_NAME: ${QA_DIR}
-  script:
+  before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
@@ -187,9 +188,10 @@ qa-destroy:
   variables:
     TF_ROOT: ${QA_DIR}
     TF_STATE_NAME: ${QA_DIR}
-  script:
+  before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
 #===========================================================#
