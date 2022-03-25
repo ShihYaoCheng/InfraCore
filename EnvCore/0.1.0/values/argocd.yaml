@@ -14,7 +14,7 @@ server:
       namespace: argocd
       project: default
       source:
-        repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDApplications.git
+        repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDApps.git
         targetRevision: main
         path: charts/sk-table
         helm:
@@ -44,7 +44,7 @@ server:
       namespace: argocd
       project: default
       source:
-        repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDApplications.git
+        repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDApps.git
         targetRevision: main
         path: charts/sk-file
         helm:
@@ -74,7 +74,7 @@ server:
       namespace: argocd
       project: default
       source:
-        repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDApplications.git
+        repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDApps.git
         targetRevision: main
         path: charts/sk-user
         helm:
@@ -104,7 +104,7 @@ server:
       namespace: argocd
       project: default
       source:
-        repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDApplications.git
+        repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDApps.git
         targetRevision: main
         path: charts/sk-battle
         helm:
@@ -140,7 +140,7 @@ configs:
   # configured under "configs.repositoryCredentials".
   repositories:
     sk-helm-repo:
-      url: https://gitlab.com/GameSnake/SRE/ArgoCDApplications.git
+      url: https://gitlab.com/GameSnake/SRE/ArgoCDApps.git
       name: sk-applications
       type: git
       password: my-password
