@@ -100,7 +100,7 @@ image:
       - ${TF_ROOT}/.terraform/
       - ${TF_ROOT}/.terraform.lock.hcl
 #  before_script:
-     https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
 #    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
 #    - cd ${TF_ROOT}
 #    - cat $TERRAFORM_VAR_FILE_BASE64_DEV | base64 -d > var_file
