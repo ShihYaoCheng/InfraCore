@@ -1,71 +1,41 @@
 ﻿//============================== Project ==============================
 variable "GCPProjectID" {
-  default = "stellar-38931"
   type    = string
+  default = "cqi-operation"
 }
 
 // https://cloud.google.com/compute/docs/regions-zones
 variable "GCPRegion" {
+  type        = string
   default     = "asia-east1"
   description = "cloud provider region."
 }
 
 variable "GCPZone" {
+  type        = string
   default     = "asia-east1-b"
   description = "cloud provider zone."
 }
 
 //============================== Sealed-Secret ==============================
-variable "SealedSecretPublicKey" {
-  type = string
-}
-
-variable "SealedSecretPrivateKey" {
-  type = string
-}
-
-//============================== External-DNS ==============================
-variable "GodaddyAPIKey" {
-  type = string
-}
-
-variable "GodaddyAPISecret" {
-  type = string
-}
-
-//============================== ZeroSSL certificate ==============================
-#variable "CertificatePublicKey" {
+#variable "SealedSecretPublicKey" {
 #  type = string
-#  description = "SealedSecret format."
 #}
 #
-#variable "CertificatePrivateKey" {
+#variable "SealedSecretPrivateKey" {
 #  type = string
-#  description = "SealedSecret format."
 #}
 
 //============================== ArgoCD ==============================
 variable "ArgoCD_GitLabTokenName" {
-  type = string
+  type      = string
   sensitive = true
 }
 
 variable "ArgoCD_GitLabTokenSecret" {
-  type = string
+  type      = string
   sensitive = true
 }
 
-variable "ApplicationPublicKey" {
-  type = string
-}
-
-variable "ApplicationPrivateKey" {
-  type = string
-}
-
-# ============================== Prometheus ==============================
-variable "GrafanaAdminPassword" {
-  type = string
-}
 
 
