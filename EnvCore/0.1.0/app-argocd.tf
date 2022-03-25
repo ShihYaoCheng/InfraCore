@@ -19,6 +19,25 @@ resource "helm_release" "argocd" {
   create_namespace = true
   namespace        = "argocd"
 
+  # Branch or Tag.
+  set {
+    name  = "server.additionalApplications[0].source.targetRevision"
+    value = var.ArgoCD_AppTableBranchOrTag
+  }
+  set {
+    name  = "server.additionalApplications[1].source.targetRevision"
+    value = var.ArgoCD_AppFileBranchOrTag
+  }
+  set {
+    name  = "server.additionalApplications[2].source.targetRevision"
+    value = var.ArgoCD_AppUserBranchOrTag
+  }
+  set {
+    name  = "server.additionalApplications[3].source.targetRevision"
+    value = var.ArgoCD_AppBattleBranchOrTag
+  }
+
+  # Helm Value File.
   # https://stackoverflow.com/questions/53846273/helm-passing-array-values-through-set
   set {
     name  = "server.additionalApplications[0].source.helm.valueFiles"

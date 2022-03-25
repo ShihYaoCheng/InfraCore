@@ -113,6 +113,22 @@ variable "ArgoCD_RepositoryHelmPathValueFiles" {
   description = "Sample: {values-sre.yaml}"
 }
 
+variable "ArgoCD_AppFileBranchOrTag" {
+  type = string
+}
+
+variable "ArgoCD_AppTableBranchOrTag" {
+  type = string
+}
+
+variable "ArgoCD_AppUserBranchOrTag" {
+  type = string
+}
+
+variable "ArgoCD_AppBattleBranchOrTag" {
+  type = string
+}
+
 //============================== Prometheus ==============================
 variable "AlertSlackChannel" {
   type = string
