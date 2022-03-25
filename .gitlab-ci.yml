@@ -169,7 +169,7 @@ qa-plan:
   script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
-    - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
 qa-apply:
   extends: .apply
