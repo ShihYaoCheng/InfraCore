@@ -26,7 +26,7 @@
   ArgoCD_AppBattleBranchOrTag = "v0.0.1"
 
   AlertSlackChannel = "alert-sk-qa"
-  GrafanaAdminPassword = "ran9977"
+  GrafanaAdminPassword = var.GrafanaAdminPassword
   PrometheusStorageClassName = "ssd-delete"
   PrometheusStorageSize      = "20Gi"
 }

@@ -37,5 +37,9 @@ variable "ArgoCD_GitLabTokenSecret" {
   sensitive = true
 }
 
-
+# ============================== Prometheus ==============================
+variable "GrafanaAdminPassword" {
+  type      = string
+  sensitive = true
+}
 
