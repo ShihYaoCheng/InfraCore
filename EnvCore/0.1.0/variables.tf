@@ -39,7 +39,7 @@ locals {
 
 variable "GKEZones" {
   type = list(string)
-  default = ["asia-east1-a"]
+#  default = ["asia-east1-a"]
 }
 
 variable "GKEMinNodeCount" {
@@ -63,22 +63,19 @@ variable "GKEMaxNodeCount" {
 //============================== External-DNS ==============================
 variable "GodaddyAPIKey" {
   type = string
-  default = ""
 }
 
 variable "GodaddyAPISecret" {
   type = string
-  default = ""
 }
 
 variable "GodaddyDomainName" {
   type = string
-  default = "origingaia.com"
+#  default = "origingaia.com"
 }
 
 variable "AutoRegisterDomainName" {
   type = bool
-  default = false
   description = "Only used for SRE environment.(It create/destroy kubernetes everyday) The Godaddy will overwrite A Record added by other Kubernetes."
 }
 
@@ -94,7 +91,7 @@ variable "ArgoCD_Enable" {
 
 variable "ArgoCD_EnableSelfHeal" {
   type = bool
-  default = true
+#  default = true
 }
 
 variable "ArgoCD_GitLabTokenName" {
@@ -123,12 +120,12 @@ variable "AlertSlackChannel" {
 
 variable "PrometheusStorageClassName" {
   type = string
-  default = "ssd-retain"
+#  default = "ssd-retain"
 }
 
 variable "PrometheusStorageSize" {
   type = string
-  default = "100Gi"
+#  default = "100Gi"
 }
 
 variable "GrafanaAdminPassword" {

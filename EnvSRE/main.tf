@@ -4,13 +4,16 @@ module "infra" {
   GCPProjectID       = var.GCPProjectID
   GCPRegion          = var.GCPRegion
   GCPZone            = var.GCPZone
+
   ProjectEnvironment = "sre"
 
+  GKEZones        = ["asia-east1-a"]
   GKEMinNodeCount = 1
   GKEMaxNodeCount = 3
 
   GodaddyAPIKey          = var.GodaddyAPIKey
   GodaddyAPISecret       = var.GodaddyAPISecret
+  GodaddyDomainName      = "origingaia.com"
   AutoRegisterDomainName = true
 
   ArgoCD_Enable                       = true
@@ -22,7 +25,7 @@ module "infra" {
   AlertSlackChannel          = "alert-sk-sre"
   PrometheusStorageClassName = "ssd-delete"
   PrometheusStorageSize      = "20Gi"
-  GrafanaAdminPassword       = "admin1234"
+  GrafanaAdminPassword       = "ran9977"
 }
 
 
