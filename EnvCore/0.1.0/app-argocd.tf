@@ -56,15 +56,43 @@ resource "helm_release" "argocd" {
     value = var.ArgoCD_RepositoryHelmPathValueFiles
   }
 
+  #============================#
+  # Set repository credentials #
+  #============================#
   # https://github.com/helm/helm/issues/1987
-
-
   set_sensitive {
-    name  = "configs.repositories.sk-helm-repo.username"
+    name  = "configs.repositories.sk-table.username"
     value = var.ArgoCD_GitLabTokenName
   }
   set_sensitive {
-    name  = "configs.repositories.sk-helm-repo.password"
+    name  = "configs.repositories.sk-table.password"
+    value = var.ArgoCD_GitLabTokenSecret
+  }
+
+  set_sensitive {
+    name  = "configs.repositories.sk-file.username"
+    value = var.ArgoCD_GitLabTokenName
+  }
+  set_sensitive {
+    name  = "configs.repositories.sk-file.password"
+    value = var.ArgoCD_GitLabTokenSecret
+  }
+
+  set_sensitive {
+    name  = "configs.repositories.sk-user.username"
+    value = var.ArgoCD_GitLabTokenName
+  }
+  set_sensitive {
+    name  = "configs.repositories.sk-user.password"
+    value = var.ArgoCD_GitLabTokenSecret
+  }
+
+  set_sensitive {
+    name  = "configs.repositories.sk-battle.username"
+    value = var.ArgoCD_GitLabTokenName
+  }
+  set_sensitive {
+    name  = "configs.repositories.sk-battle.password"
     value = var.ArgoCD_GitLabTokenSecret
   }
 

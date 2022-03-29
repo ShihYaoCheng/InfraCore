@@ -14,9 +14,9 @@ server:
       namespace: argocd
       project: default
       source:
-        repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDApps.git
+        repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppTable.git
         targetRevision: main
-        path: charts/sk-table
+        path: sk-table
         helm:
           # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
           # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
@@ -44,9 +44,9 @@ server:
       namespace: argocd
       project: default
       source:
-        repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDApps.git
+        repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppFile.git
         targetRevision: main
-        path: charts/sk-file
+        path: sk-file
         helm:
           # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
           # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
@@ -74,9 +74,9 @@ server:
       namespace: argocd
       project: default
       source:
-        repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDApps.git
+        repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppUser.git
         targetRevision: main
-        path: charts/sk-user
+        path: sk-user
         helm:
           # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
           # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
@@ -104,9 +104,9 @@ server:
       namespace: argocd
       project: default
       source:
-        repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDApps.git
+        repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppBattle.git
         targetRevision: main
-        path: charts/sk-battle
+        path: sk-battle
         helm:
           # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
           # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
@@ -139,9 +139,27 @@ configs:
   ## Note: the last example in the list would use a repository credential template,
   # configured under "configs.repositoryCredentials".
   repositories:
-    sk-helm-repo:
-      url: https://gitlab.com/GameSnake/SRE/ArgoCDApps.git
-      name: sk-applications
+    sk-table:
+      url: https://gitlab.com/GameSnake/SRE/ArgoCDAppTable.git
+      name: sk-table
+      type: git
+      password: my-password
+      username: my-username
+    sk-file:
+      url: https://gitlab.com/GameSnake/SRE/ArgoCDAppFile.git
+      name: sk-file
+      type: git
+      password: my-password
+      username: my-username
+    sk-user:
+      url: https://gitlab.com/GameSnake/SRE/ArgoCDAppUser.git
+      name: sk-user
+      type: git
+      password: my-password
+      username: my-username
+    sk-battle:
+      url: https://gitlab.com/GameSnake/SRE/ArgoCDAppBattle.git
+      name: sk-battle
       type: git
       password: my-password
       username: my-username
