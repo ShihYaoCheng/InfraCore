@@ -5,7 +5,7 @@
   GCPRegion = var.GCPRegion
   GCPZone = var.GCPZone
 
-  ProjectEnvironment = "production"
+  ProjectEnvironment = "prod"
 
   GKEZones = ["asia-east1-a"]
   GKEMinNodeCount = 1
