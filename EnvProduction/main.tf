@@ -20,10 +20,10 @@
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret
   ArgoCD_RepositoryHelmPathValueFiles = "{values-production.yaml}"
-  ArgoCD_AppFileBranchOrTag = "v0.0.8"
-  ArgoCD_AppTableBranchOrTag = "v0.0.2"
-  ArgoCD_AppUserBranchOrTag = "v0.0.3"
-  ArgoCD_AppBattleBranchOrTag = "v0.0.2"
+  ArgoCD_AppFileBranchOrTag = "v0.0.8f1"
+  ArgoCD_AppTableBranchOrTag = "v0.0.2f1"
+  ArgoCD_AppUserBranchOrTag = "v0.0.3f1"
+  ArgoCD_AppBattleBranchOrTag = "v0.0.2f1"
 
   AlertSlackChannel = "alert-sk-production"
   GrafanaAdminPassword = var.GrafanaAdminPassword
