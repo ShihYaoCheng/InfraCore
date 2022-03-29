@@ -194,45 +194,44 @@ qa-destroy:
     - cd ${TF_ROOT}
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
-#===========================================================#
-#====================== Production =========================#
-#===========================================================#
-#prod-plan:
-#  extends: .plan
-#  variables:
-#    TF_ROOT: ${PROD_DIR}
-#    TF_STATE_NAME: ${PROD_DIR}
-#  before_script:
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  script:
-#    - cd ${TF_ROOT}
-#    - cat $TERRAFORM_VAR_FILE_BASE64_PROD | base64 -d > var_file
-#    - gitlab-terraform init
-#    - gitlab-terraform validate
-#    - gitlab-terraform plan -var-file=var_file
-#    - gitlab-terraform plan-json -var-file=var_file
-#
-#prod-apply:
-#  extends: .apply
-#  needs: [prod-plan]
-#  variables:
-#    TF_ROOT: ${PROD_DIR}
-#    TF_STATE_NAME: ${PROD_DIR}
-#  before_script:
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#
-#prod-destroy:
-#  extends: .destroy
-#  needs: [prod-plan]
-#  variables:
-#    TF_ROOT: ${PROD_DIR}
-#    TF_STATE_NAME: ${PROD_DIR}
-#  before_script:
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $GOOGLE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  script:
-#    - cd ${TF_ROOT}
-#    - cat $TERRAFORM_VAR_FILE_BASE64_PROD | base64 -d > var_file
-#    - gitlab-terraform destroy -var-file=var_file
+
+#============================#
+# Production                 #
+#============================#
+prod-plan:
+  extends: .plan
+  variables:
+    TF_ROOT: ${PROD_DIR}
+    TF_STATE_NAME: ${PROD_DIR}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+
+prod-apply:
+  extends: .apply
+  needs: [prod-plan]
+  variables:
+    TF_ROOT: ${PROD_DIR}
+    TF_STATE_NAME: ${PROD_DIR}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+prod-destroy:
+  extends: .destroy
+  needs: [prod-plan]
+  variables:
+    TF_ROOT: ${PROD_DIR}
+    TF_STATE_NAME: ${PROD_DIR}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+
+
 
 
 
