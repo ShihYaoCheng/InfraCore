@@ -8,8 +8,7 @@ module "infra" {
   ProjectEnvironment = "sre"
 
   GKEZones        = ["asia-east1-a"]
-  GKEMinNodeCount = 1
-  GKEMaxNodeCount = 3
+  GKENodeCount = 2
 
   GodaddyAPIKey          = var.GodaddyAPIKey
   GodaddyAPISecret       = var.GodaddyAPISecret

@@ -32,26 +32,16 @@ locals {
 }
 
 //============================== GKE ==============================
-#variable "GKERegional" {
-#  type = bool
-#  default = true
-#}
-
 variable "GKEZones" {
   type = list(string)
 #  default = ["asia-east1-a"]
 }
 
-variable "GKEMinNodeCount" {
+variable "GKENodeCount" {
   type = number
 }
 
-variable "GKEMaxNodeCount" {
-  type = number
-}
-
-
-//============================== Sealed-Secret ==============================
+#============================== Sealed-Secret ==============================
 #variable "SealedSecretPublicKey" {
 #  type = string
 #}
@@ -60,7 +50,7 @@ variable "GKEMaxNodeCount" {
 #  type = string
 #}
 
-//============================== External-DNS ==============================
+#============================== External-DNS ==============================
 variable "GodaddyAPIKey" {
   type = string
 }
