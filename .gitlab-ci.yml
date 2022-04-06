@@ -31,6 +31,57 @@ image:
 #============================#
 # .plan                      #
 #============================#
+#.plan:
+#  stage: plan
+#  variables:
+#    TF_ROOT: ./
+#    TF_STATE_NAME: default
+#  cache:
+#    key: "${TF_ROOT}"
+#    paths:
+#      - ${TF_ROOT}/.terraform/
+#      - ${TF_ROOT}/.terraform.lock.hcl
+##  before_script:
+##    - cd ${TF_ROOT}
+#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+##    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+##    - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+#  script:
+#    - gitlab-terraform --version
+#    - gitlab-terraform init
+#    - gitlab-terraform validate
+#
+#    # -var-file=filename  Load variable values from the given file, in addition
+#    #                      to the default files terraform.tfvars and *.auto.tfvars.
+#    #                      Use this option more than once to include more than one
+#    #                      variables file.
+#    # -input=true         Ask for input for variables if not directly set.
+#    # -out=path           Write a plan file to the given path. This can be used as
+#    #                      input to the "apply" command.
+#
+#    # plan_cache="plan.cache"
+#    # terraform "${@}" -input=false -out="${plan_cache}
+#    - gitlab-terraform plan -var-file=var_file
+#
+#    # https://gitlab.com/gitlab-org/terraform-images/-/blob/master/src/bin/gitlab-terraform.sh
+#    # terraform show -json "${plan_cache}" | jq -r "${JQ_PLAN}" > "${plan_json}"
+#    # terraform show: Show the current state or a saved plan
+#    # https://stedolan.github.io/jq/
+#    # jq- jq is like sed for JSON data - you can use it to slice and filter and map and transform structured data with the same ease that sed, awk, grep and friends let you play with text.
+#    - gitlab-terraform plan-json -var-file=var_file
+#  resource_group: ${TF_STATE_NAME}
+#  artifacts:
+#    paths:
+#      # The [gitlab-terraform plan] creates this file.
+#      - ${TF_ROOT}/plan.cache
+#    reports:
+#      # The [gitlab-terraform plan-json] creates this file.
+#      terraform: ${TF_ROOT}/plan.json
+#  rules:
+#    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+#      when: manual
+
+
 .plan:
   stage: plan
   variables:
@@ -41,26 +92,76 @@ image:
     paths:
       - ${TF_ROOT}/.terraform/
       - ${TF_ROOT}/.terraform.lock.hcl
-#  before_script:
-#    - cd ${TF_ROOT}
+    #  before_script:
+    #    - cd ${TF_ROOT}
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#    - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
-  script:
-    - gitlab-terraform --version
-    - gitlab-terraform init
-    - gitlab-terraform validate
-    - gitlab-terraform plan -var-file=var_file
-    - gitlab-terraform plan-json -var-file=var_file
+  #    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  #    - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
   resource_group: ${TF_STATE_NAME}
   artifacts:
     paths:
+      # The [gitlab-terraform plan] creates this file.
       - ${TF_ROOT}/plan.cache
     reports:
+      # The [gitlab-terraform plan-json] creates this file.
       terraform: ${TF_ROOT}/plan.json
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: manual
+
+
+.plan.with.var.file:
+  extends: .plan
+  script:
+    - gitlab-terraform --version
+    - gitlab-terraform init
+    - gitlab-terraform validate
+
+    # -var-file=filename  Load variable values from the given file, in addition
+    #                      to the default files terraform.tfvars and *.auto.tfvars.
+    #                      Use this option more than once to include more than one
+    #                      variables file.
+    # -input=true         Ask for input for variables if not directly set.
+    # -out=path           Write a plan file to the given path. This can be used as
+    #                      input to the "apply" command.
+
+    # plan_cache="plan.cache"
+    # terraform "${@}" -input=false -out="${plan_cache}
+    - gitlab-terraform plan -var-file=var_file
+
+    # https://gitlab.com/gitlab-org/terraform-images/-/blob/master/src/bin/gitlab-terraform.sh
+    # terraform show -json "${plan_cache}" | jq -r "${JQ_PLAN}" > "${plan_json}"
+    # terraform show: Show the current state or a saved plan
+    # https://stedolan.github.io/jq/
+    # jq- jq is like sed for JSON data - you can use it to slice and filter and map and transform structured data with the same ease that sed, awk, grep and friends let you play with text.
+    - gitlab-terraform plan-json -var-file=var_file
+
+.plan.without.var.file:
+  extends: .plan
+  script:
+    - gitlab-terraform --version
+    - gitlab-terraform init
+    - gitlab-terraform validate
+
+    # -var-file=filename  Load variable values from the given file, in addition
+    #                      to the default files terraform.tfvars and *.auto.tfvars.
+    #                      Use this option more than once to include more than one
+    #                      variables file.
+    # -input=true         Ask for input for variables if not directly set.
+    # -out=path           Write a plan file to the given path. This can be used as
+    #                      input to the "apply" command.
+
+    # plan_cache="plan.cache"
+    # terraform "${@}" -input=false -out="${plan_cache}
+    - gitlab-terraform plan
+
+    # https://gitlab.com/gitlab-org/terraform-images/-/blob/master/src/bin/gitlab-terraform.sh
+    # terraform show -json "${plan_cache}" | jq -r "${JQ_PLAN}" > "${plan_json}"
+    # terraform show: Show the current state or a saved plan
+    # https://stedolan.github.io/jq/
+    # jq- jq is like sed for JSON data - you can use it to slice and filter and map and transform structured data with the same ease that sed, awk, grep and friends let you play with text.
+    - gitlab-terraform plan-json
+
 
 #============================#
 # .apply                     #
@@ -80,6 +181,9 @@ image:
 #    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
   script:
     - cd ${TF_ROOT}
+
+    # plan_cache="plan.cache"
+    # terraform "${@}" -input=false "${plan_cache}"
     - gitlab-terraform apply
   resource_group: ${TF_STATE_NAME}
   rules:
@@ -89,6 +193,29 @@ image:
 #============================#
 # .destroy                   #
 #============================#
+#.destroy:
+#  stage: cleanup
+#  variables:
+#    TF_ROOT: ./
+#    TF_STATE_NAME: default
+#  cache:
+#    key: "${TF_ROOT}"
+#    paths:
+#      - ${TF_ROOT}/.terraform/
+#      - ${TF_ROOT}/.terraform.lock.hcl
+##  before_script:
+##    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+##    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+##    - cd ${TF_ROOT}
+##    - cat $TERRAFORM_VAR_FILE_BASE64_DEV | base64 -d > var_file
+#  script:
+#    # terraform "${@}" -auto-approve
+#    - gitlab-terraform destroy -var-file=var_file
+#  resource_group: ${TF_STATE_NAME}
+#  rules:
+#    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+#      when: manual
+
 .destroy:
   stage: cleanup
   variables:
@@ -99,22 +226,33 @@ image:
     paths:
       - ${TF_ROOT}/.terraform/
       - ${TF_ROOT}/.terraform.lock.hcl
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#    - cd ${TF_ROOT}
-#    - cat $TERRAFORM_VAR_FILE_BASE64_DEV | base64 -d > var_file
-  script:
-    - gitlab-terraform destroy -var-file=var_file
+  #  before_script:
+  #    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+  #    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  #    - cd ${TF_ROOT}
+  #    - cat $TERRAFORM_VAR_FILE_BASE64_DEV | base64 -d > var_file
+
   resource_group: ${TF_STATE_NAME}
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: manual
 
+.destroy.with.var.file:
+  extends: .destroy
+  script:
+    # terraform "${@}" -auto-approve
+    - gitlab-terraform destroy -var-file=var_file
+
+.destroy.without.var.file:
+  extends: .destroy
+  script:
+    # terraform "${@}" -auto-approve
+    - gitlab-terraform destroy
+
 
 #===========================================================#
 variables:
-  DEV_DIR: EnvDev
+  DEV_VPC_DIR: EnvDev/1-VPC
   QA_DIR: EnvQA
   PROD_DIR: EnvProduction
 
@@ -123,113 +261,117 @@ variables:
 # ${CI_PROJECT_ID} = 27641226
 
 #============================#
-# Dev                        #
+# Dev - VPC                  #
 #============================#
-dev-plan:
-  extends: .plan
+dev-vpc-plan:
+  extends: .plan.without.var.file
   variables:
-    TF_ROOT: ${DEV_DIR}
-    TF_STATE_NAME: ${DEV_DIR}
+    TF_ROOT: ${DEV_VPC_DIR}
+    TF_STATE_NAME: ${DEV_VPC_DIR}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
-    - cd ${TF_ROOT}
-    - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
-dev-apply:
+dev-vpc-apply:
   extends: .apply
-  needs: [dev-plan]
+  needs: [dev-vpc-plan]
   variables:
-    TF_ROOT: ${DEV_DIR}
-    TF_STATE_NAME: ${DEV_DIR}
+    TF_ROOT: ${DEV_VPC_DIR}
+    TF_STATE_NAME: ${DEV_VPC_DIR}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
-dev-destroy:
-  extends: .destroy
-  needs: [dev-plan]
+dev-vpc-destroy:
+  extends: .destroy.without.var.file
+  needs: [dev-vpc-plan]
   variables:
-    TF_ROOT: ${DEV_DIR}
-    TF_STATE_NAME: ${DEV_DIR}
+    TF_ROOT: ${DEV_VPC_DIR}
+    TF_STATE_NAME: ${DEV_VPC_DIR}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
-    - cd ${TF_ROOT}
-    - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+
+
+
+
+
+
+
 
 #============================#
 # QA                         #
 #============================#
-qa-plan:
-  extends: .plan
-  variables:
-    TF_ROOT: ${QA_DIR}
-    TF_STATE_NAME: ${QA_DIR}
-  before_script:
-    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
-    - cd ${TF_ROOT}
-    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
-
-qa-apply:
-  extends: .apply
-  needs: [qa-plan]
-  variables:
-    TF_ROOT: ${QA_DIR}
-    TF_STATE_NAME: ${QA_DIR}
-  before_script:
-    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
-
-qa-destroy:
-  extends: .destroy
-  needs: [qa-plan]
-  variables:
-    TF_ROOT: ${QA_DIR}
-    TF_STATE_NAME: ${QA_DIR}
-  before_script:
-    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
-    - cd ${TF_ROOT}
-    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+#qa-plan:
+#  extends: .plan
+#  variables:
+#    TF_ROOT: ${QA_DIR}
+#    TF_STATE_NAME: ${QA_DIR}
+#  before_script:
+#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#    - cd ${TF_ROOT}
+#    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+#
+#qa-apply:
+#  extends: .apply
+#  needs: [qa-plan]
+#  variables:
+#    TF_ROOT: ${QA_DIR}
+#    TF_STATE_NAME: ${QA_DIR}
+#  before_script:
+#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#
+#qa-destroy:
+#  extends: .destroy
+#  needs: [qa-plan]
+#  variables:
+#    TF_ROOT: ${QA_DIR}
+#    TF_STATE_NAME: ${QA_DIR}
+#  before_script:
+#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#    - cd ${TF_ROOT}
+#    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
 
 #============================#
 # Production                 #
 #============================#
-prod-plan:
-  extends: .plan
-  variables:
-    TF_ROOT: ${PROD_DIR}
-    TF_STATE_NAME: ${PROD_DIR}
-  before_script:
-    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
-    - cd ${TF_ROOT}
-    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
-
-prod-apply:
-  extends: .apply
-  needs: [prod-plan]
-  variables:
-    TF_ROOT: ${PROD_DIR}
-    TF_STATE_NAME: ${PROD_DIR}
-  before_script:
-    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
-
-prod-destroy:
-  extends: .destroy
-  needs: [prod-plan]
-  variables:
-    TF_ROOT: ${PROD_DIR}
-    TF_STATE_NAME: ${PROD_DIR}
-  before_script:
-    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
-    - cd ${TF_ROOT}
-    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+#prod-plan:
+#  extends: .plan
+#  variables:
+#    TF_ROOT: ${PROD_DIR}
+#    TF_STATE_NAME: ${PROD_DIR}
+#  before_script:
+#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#    - cd ${TF_ROOT}
+#    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+#
+#prod-apply:
+#  extends: .apply
+#  needs: [prod-plan]
+#  variables:
+#    TF_ROOT: ${PROD_DIR}
+#    TF_STATE_NAME: ${PROD_DIR}
+#  before_script:
+#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#
+#prod-destroy:
+#  extends: .destroy
+#  needs: [prod-plan]
+#  variables:
+#    TF_ROOT: ${PROD_DIR}
+#    TF_STATE_NAME: ${PROD_DIR}
+#  before_script:
+#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#    - cd ${TF_ROOT}
+#    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
 
 
