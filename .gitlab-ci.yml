@@ -113,6 +113,7 @@ image:
 .plan.with.var.file:
   extends: .plan
   script:
+    - cd ${TF_ROOT}
     - gitlab-terraform --version
     - gitlab-terraform init
     - gitlab-terraform validate
@@ -246,6 +247,7 @@ image:
 .destroy.without.var.file:
   extends: .destroy
   script:
+    - cd ${TF_ROOT}
     # terraform "${@}" -auto-approve
     - gitlab-terraform destroy
 
