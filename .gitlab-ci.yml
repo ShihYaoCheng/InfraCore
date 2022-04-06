@@ -269,7 +269,7 @@ dev-vpc-plan:
   extends: .plan.without.var.file
   variables:
     TF_ROOT: ${DEV_VPC_DIR}
-    TF_STATE_NAME: ${DEV_VPC_DIR}
+    TF_STATE_NAME: "Dev-VPC"
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -279,7 +279,7 @@ dev-vpc-apply:
   needs: [dev-vpc-plan]
   variables:
     TF_ROOT: ${DEV_VPC_DIR}
-    TF_STATE_NAME: ${DEV_VPC_DIR}
+    TF_STATE_NAME: "Dev-VPC"
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -289,7 +289,7 @@ dev-vpc-destroy:
   needs: [dev-vpc-plan]
   variables:
     TF_ROOT: ${DEV_VPC_DIR}
-    TF_STATE_NAME: ${DEV_VPC_DIR}
+    TF_STATE_NAME: "Dev-VPC"
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
