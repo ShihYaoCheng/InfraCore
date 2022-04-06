@@ -6,9 +6,8 @@
   GCPZone            = var.GCPZone
   ProjectEnvironment = "dev"
 
-  GKEZones        = ["asia-east1-a"]
-  GKEMinNodeCount = 1
-  GKEMaxNodeCount = 3
+  GKEZones     = ["asia-east1-a"]
+  GKENodeCount = 2
 
   GodaddyAPIKey          = "godaddy-api-key"
   GodaddyAPISecret       = "godaddy-api-secret"
@@ -19,10 +18,10 @@
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret
   ArgoCD_RepositoryHelmPathValueFiles = "{values-dev.yaml}"
-  ArgoCD_AppFileBranchOrTag = "main"
-  ArgoCD_AppTableBranchOrTag = "main"
-  ArgoCD_AppUserBranchOrTag = "main"
-  ArgoCD_AppBattleBranchOrTag = "main"
+  ArgoCD_AppFileBranchOrTag           = "main"
+  ArgoCD_AppTableBranchOrTag          = "main"
+  ArgoCD_AppUserBranchOrTag           = "main"
+  ArgoCD_AppBattleBranchOrTag         = "main"
 
   AlertSlackChannel          = "alert-sk-dev"
   PrometheusStorageClassName = "ssd-delete"
