@@ -1,13 +1,13 @@
 module "infra" {
   source = "../EnvCore/0.1.0"
 
-  GCPProjectID       = var.GCPProjectID
-  GCPRegion          = var.GCPRegion
-  GCPZone            = var.GCPZone
+  GCPProjectID = var.GCPProjectID
+  GCPRegion    = var.GCPRegion
+  GCPZone      = var.GCPZone
 
   ProjectEnvironment = "sre"
 
-  GKEZones        = ["asia-east1-a"]
+  GKEZones     = ["asia-east1-a"]
   GKENodeCount = 2
 
   GodaddyAPIKey          = var.GodaddyAPIKey
