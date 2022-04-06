@@ -1,5 +1,5 @@
-﻿// https://goldilocks.docs.fairwinds.com/
-// Goldilocks is a utility that can help you identify a starting point for resource requests and limits.
+﻿# https://goldilocks.docs.fairwinds.com/
+# Goldilocks is a utility that can help you identify a starting point for resource requests and limits.
 resource "helm_release" "goldilocks" {
   count            = 0
   name             = "goldilocks"
@@ -15,10 +15,10 @@ resource "helm_release" "goldilocks" {
   }
 }
 
-// https://polaris.docs.fairwinds.com/
-// https://github.com/FairwindsOps/polaris
-// https://github.com/FairwindsOps/charts/tree/master/stable/polaris
-// Best Practices for Kubernetes Workload Configuration.
+# https://polaris.docs.fairwinds.com/
+# https://github.com/FairwindsOps/polaris
+# https://github.com/FairwindsOps/charts/tree/master/stable/polaris
+# Best Practices for Kubernetes Workload Configuration.
 resource "helm_release" "polaris" {
   name             = "polaris"
   repository       = "https://charts.fairwinds.com/stable"
