@@ -1,5 +1,5 @@
 ﻿locals {
-  GCSBucketName = "cqi-sk-sre"
+  GCSBucketName = "cqi-sk-dev"
 }
 
 //============================== Project ==============================
