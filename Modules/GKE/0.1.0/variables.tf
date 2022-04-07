@@ -1,4 +1,6 @@
-﻿//============================== Project ==============================
+﻿#============================
+# Project                   #
+#============================
 variable "GCPProjectID" {
   type    = string
   default = "stellar-38931"
@@ -16,3 +18,18 @@ variable "GCPZone" {
   default     = "asia-east1-b"
   description = "cloud provider zone."
 }
+
+#============================
+# GKE                       #
+#============================
+variable "GKEName" {
+  type = string
+}
+
+#============================
+# GCS                       #
+#============================
+variable "GCSBucketName" {
+  type = string
+}
+
