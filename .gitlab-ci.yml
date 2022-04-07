@@ -258,8 +258,8 @@ variables:
   DEV_RESOURCES_TF_STATE_NAME: "Dev-Resources"
   DEV_VPC_DIR: EnvDev/2-VPC
   DEV_VPC_TF_STATE_NAME: "Dev-VPC"
-  QA_DIR: EnvQA
-  PROD_DIR: EnvProduction
+  DEV_GKE_DIR: EnvDev/3-GKE
+  DEV_GKE_TF_STATE_NAME: "Dev-GKE"
 
 # TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/sre-infra
 # ${CI_API_V4_URL} = https://gitlab.com/api/v4
@@ -332,7 +332,37 @@ dev-vpc-destroy:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
 
+#============================#
+# Dev - GKE                  #
+#============================#
+dev-gke-plan:
+  extends: .plan.without.var.file
+  variables:
+    TF_ROOT: ${DEV_GKE_DIR}
+    TF_STATE_NAME: ${DEV_GKE_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
+dev-gke-apply:
+  extends: .apply
+  needs: [dev-gke-plan]
+  variables:
+    TF_ROOT: ${DEV_GKE_DIR}
+    TF_STATE_NAME: ${DEV_GKE_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+dev-gke-destroy:
+  extends: .destroy.without.var.file
+  needs: [dev-gke-plan]
+  variables:
+    TF_ROOT: ${DEV_GKE_DIR}
+    TF_STATE_NAME: ${DEV_GKE_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
 
 
