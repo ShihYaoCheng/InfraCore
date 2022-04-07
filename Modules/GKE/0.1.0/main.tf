@@ -88,15 +88,21 @@ module "gke" {
   ]
 }
 
+resource "google_storage_bucket_object" "gke-name" {
+  bucket = var.GCSBucketName
+  name   = "GKEName"
+  content = var.GKEName
+}
+
 resource "google_storage_bucket_object" "gke-api" {
   bucket = var.GCSBucketName
-  name   = "${var.GKEName}-api"
+  name   = "${var.GKEName}.api"
   content = module.gke.endpoint
 }
 
 resource "google_storage_bucket_object" "gke-ca" {
   bucket = var.GCSBucketName
-  name   = "${var.GKEName}-ca"
+  name   = "${var.GKEName}.ca"
   content = module.gke.ca_certificate
 }
 
