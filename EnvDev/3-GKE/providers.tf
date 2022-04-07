@@ -4,6 +4,8 @@
   # https://www.terraform.io/language/expressions/version-constraints
   required_version = "~> 1.0.11"
 
+  backend "http" {}
+
   required_providers {
     // https://registry.terraform.io/providers/hashicorp/google/latest
     google = {
