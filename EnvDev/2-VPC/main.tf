@@ -1,16 +1,11 @@
-
 # https://registry.terraform.io/modules/terraform-google-modules/network/google/latest
 module "vpc" {
-  source  = "terraform-google-modules/network/google"
-  version = "~>5.0.0"
+  source  = "../../Modules/VPC/0.1.0"
 
-  project_id   = var.GCPProjectID
-  network_name = "sk-dev"
+  GCPProjectID = var.GCPProjectID
+  GCPRegion = var.GCPRegion
+  VPCName = "cqi-sk-dev"
 
-  auto_create_subnetworks = true
-
-  # https://cloud.google.com/kubernetes-engine/docs/concepts/alias-ips#defaults_limits
-  # https://cidr.xyz/
-  subnets = []
+  GCSBucketName = "cqi-sk-dev"
 }
 
