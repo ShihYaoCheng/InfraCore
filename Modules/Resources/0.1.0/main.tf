@@ -14,6 +14,6 @@ module "sk-bucket" {
 
   # When deleting a bucket, this boolean option will delete all contained objects.
   # If false, Terraform will fail to delete buckets which contain objects.
-  force_destroy = true
+  force_destroy = false
 }
 
