@@ -3,5 +3,5 @@
 
   GCPProjectID = var.GCPProjectID
   GCPRegion = var.GCPRegion
-  GCSBucketName = "sk-sre"
+  GCSBucketName = "cqi-sk-sre"
 }

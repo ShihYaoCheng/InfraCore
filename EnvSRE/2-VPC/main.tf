@@ -5,8 +5,8 @@ module "vpc" {
 
   GCPProjectID = var.GCPProjectID
   GCPRegion = var.GCPRegion
-  VPCName = "sk-sre"
+  VPCName = "cqi-sk-sre"
 
-  GCSBucketName = "sk-sre"
+  GCSBucketName = "cqi-sk-sre"
 }
 
