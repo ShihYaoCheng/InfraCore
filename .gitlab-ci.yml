@@ -379,25 +379,25 @@ dev-4-op-plan:
 #    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
 #    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
-dev-4-opapps-apply:
+dev-4-op-apply:
   extends: .apply
   needs: [dev-4-op-plan]
   variables:
     TF_ROOT: ${DEV_OP_DIR}
     TF_STATE_NAME: ${DEV_OP_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
-dev-4-opapps-destroy:
+dev-4-op-destroy:
   extends: .destroy.without.var.file
   needs: [dev-4-op-plan]
   variables:
     TF_ROOT: ${DEV_OP_DIR}
     TF_STATE_NAME: ${DEV_OP_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
 
 
