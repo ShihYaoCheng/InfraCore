@@ -1,5 +1,5 @@
 ﻿#============================
-# Project
+# Project                   #
 #============================
 variable "GCPProjectID" {
   type    = string

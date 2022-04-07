@@ -5,6 +5,11 @@ module "OpApps" {
   AutoRegisterDomainName = true
   GodaddyAPIKey = var.GodaddyAPIKey
   GodaddyAPISecret = var.GodaddyAPISecret
+
+  AlertSlackChannel          = "alert-sk-sre"
+  PrometheusStorageClassName = "ssd-delete"
+  PrometheusStorageSize      = "20Gi"
+  GrafanaAdminPassword       = "ran9977"
 }
 
 
