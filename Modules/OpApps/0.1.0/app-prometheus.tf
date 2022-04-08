@@ -26,7 +26,7 @@ resource "helm_release" "Prometheus" {
   ]
 }
 
-resource "helm_release" "prometheus-resources" {
+resource "helm_release" "PrometheusResources" {
   depends_on = [helm_release.Prometheus, helm_release.Traefik]
 
   name             = "prometheus-stack-resources"
