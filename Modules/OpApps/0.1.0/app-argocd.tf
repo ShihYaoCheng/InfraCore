@@ -102,7 +102,7 @@ resource "helm_release" "ArgoCD" {
 
   # https://stackoverflow.com/questions/64696721/how-do-i-pass-variables-to-a-yaml-file-in-heml-tf
   values = [
-    templatefile("${path.module}/values/argocd.yaml", {
+    templatefile("${path.module}/Values/argocd.yaml", {
       enableSelfHeal = var.ArgoCD_EnableSelfHeal
     })
   ]
