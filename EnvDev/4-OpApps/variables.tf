@@ -1,8 +1,11 @@
-﻿locals {
-  GCSBucketName = "cqi-sk-dev"
+﻿#============================
+# Project                   #
+#============================
+variable "ProjectName" {
+  type = string
+  default = "cqi-sk-sre"
 }
 
-//============================== Project ==============================
 variable "GCPProjectID" {
   type    = string
   default = "stellar-38931"

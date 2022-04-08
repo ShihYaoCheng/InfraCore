@@ -30,12 +30,12 @@ provider "google" {
 data "google_client_config" "default" {}
 
 data "google_storage_bucket_object_content" "GKE-API" {
-  bucket = local.GCSBucketName
+  bucket = var.ProjectName
   name   = "GKE.api"
 }
 
 data "google_storage_bucket_object_content" "GKE-CA" {
-  bucket = local.GCSBucketName
+  bucket = var.ProjectName
   name   = "GKE.ca"
 }
 

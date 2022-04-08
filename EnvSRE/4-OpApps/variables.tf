@@ -1,8 +1,11 @@
-﻿locals {
-  GCSBucketName = "cqi-sk-sre"
+﻿#============================
+# Project                   #
+#============================
+variable "ProjectName" {
+  type = string
+  default = "cqi-sk-sre"
 }
 
-//============================== Project ==============================
 variable "GCPProjectID" {
   type    = string
   default = "stellar-38931"
@@ -21,8 +24,9 @@ variable "GCPZone" {
   description = "cloud provider zone."
 }
 
-
-//============================== External-DNS ==============================
+#============================
+# External-DNS              #
+#============================
 variable "GodaddyAPIKey" {
   type      = string
   sensitive = true

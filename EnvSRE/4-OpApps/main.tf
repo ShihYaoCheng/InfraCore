@@ -2,7 +2,7 @@
 module "OpApps" {
   source  = "../../Modules/OpApps/0.1.0"
 
-  ProjectName = "cqi-sk-sre"
+  ProjectName = var.ProjectName
 
   RegisterDomainName = true
   DomainName = "sre.origingaia.com"
