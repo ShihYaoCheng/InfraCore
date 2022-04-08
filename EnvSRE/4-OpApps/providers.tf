@@ -29,27 +29,22 @@ provider "google" {
 
 data "google_client_config" "default" {}
 
-data "google_storage_bucket_object_content" "gke-name" {
+data "google_storage_bucket_object_content" "GKE-API" {
   bucket = local.GCSBucketName
-  name   = "GKEName"
+  name   = "GKE.api"
 }
 
-data "google_storage_bucket_object_content" "gke-api" {
+data "google_storage_bucket_object_content" "GKE-CA" {
   bucket = local.GCSBucketName
-  name   = "${data.google_storage_bucket_object_content.gke-name.content}.api"
-}
-
-data "google_storage_bucket_object_content" "gke-ca" {
-  bucket = local.GCSBucketName
-  name   = "${data.google_storage_bucket_object_content.gke-name.content}.ca"
+  name   = "GKE.ca"
 }
 
 provider "helm" {
   debug = true
 
   kubernetes {
-    host                   = "https://${data.google_storage_bucket_object_content.gke-api.content}"
+    host                   = "https://${data.google_storage_bucket_object_content.GKE-API.content}"
     token                  = data.google_client_config.default.access_token
-    cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.gke-ca.content)
+    cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.GKE-CA.content)
   }
 }

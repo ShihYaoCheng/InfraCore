@@ -13,7 +13,7 @@ resource "helm_release" "Traefik" {
   values = [
     templatefile("${path.module}/Values/traefik.yaml",
     {
-      env-domain-name = var.RegisterDomainName ? var.RegisterDomainName : ""
+      env-domain-name = var.RegisterDomainName ? var.DomainName : ""
     })
   ]
 }

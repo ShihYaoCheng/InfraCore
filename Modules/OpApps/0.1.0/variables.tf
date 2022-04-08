@@ -1,4 +1,11 @@
 ﻿#============================
+# Project                   #
+#============================
+variable "ProjectName" {
+  type = string
+}
+
+#============================
 # External-DNS              #
 #============================
 variable "GodaddyAPIKey" {

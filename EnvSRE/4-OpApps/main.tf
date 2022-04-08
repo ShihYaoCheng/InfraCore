@@ -2,6 +2,8 @@
 module "OpApps" {
   source  = "../../Modules/OpApps/0.1.0"
 
+  ProjectName = "cqi-sk-sre"
+
   RegisterDomainName = true
   DomainName = "sre.origingaia.com"
   GodaddyAPIKey = var.GodaddyAPIKey
