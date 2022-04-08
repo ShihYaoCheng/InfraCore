@@ -2,7 +2,7 @@
 module "OpApps" {
   source  = "../../Modules/OpApps/0.1.0"
 
-  ProjectName = "cqi-sk-dev"
+  ProjectName = var.ProjectName
   DomainName = "dev.origingaia.com"
 
   AlertSlackChannel          = "alert-sk-dev"
