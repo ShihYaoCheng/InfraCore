@@ -5,6 +5,14 @@ module "OpApps" {
   ProjectName = var.ProjectName
   DomainName = "dev.origingaia.com"
 
+  ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
+  ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret
+  ArgoCD_RepositoryHelmPathValueFiles = "{values-dev.yaml}"
+  ArgoCD_AppFileBranchOrTag           = "main"
+  ArgoCD_AppTableBranchOrTag          = "main"
+  ArgoCD_AppUserBranchOrTag           = "main"
+  ArgoCD_AppBattleBranchOrTag         = "main"
+
   AlertSlackChannel          = "alert-sk-dev"
   PrometheusStorageClassName = "ssd-delete"
   PrometheusStorageSize      = "100Gi"

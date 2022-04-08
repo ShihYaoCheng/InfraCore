@@ -9,6 +9,16 @@ module "OpApps" {
   GodaddyAPIKey = var.GodaddyAPIKey
   GodaddyAPISecret = var.GodaddyAPISecret
 
+  ArgoCD_Enable                       = true
+  ArgoCD_EnableSelfHeal               = false
+  ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
+  ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret
+  ArgoCD_RepositoryHelmPathValueFiles = "{values-sre.yaml}"
+  ArgoCD_AppFileBranchOrTag           = "main"
+  ArgoCD_AppTableBranchOrTag          = "main"
+  ArgoCD_AppUserBranchOrTag           = "main"
+  ArgoCD_AppBattleBranchOrTag         = "main"
+
   AlertSlackChannel          = "alert-sk-sre"
   PrometheusStorageClassName = "ssd-delete"
   PrometheusStorageSize      = "20Gi"

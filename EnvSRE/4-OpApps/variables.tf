@@ -36,3 +36,18 @@ variable "GodaddyAPISecret" {
   type      = string
   sensitive = true
 }
+
+#============================
+# ArgoCD                    #
+#============================
+variable "ArgoCD_GitLabTokenName" {
+  type        = string
+  sensitive   = true
+  description = "Deploy token"
+}
+
+variable "ArgoCD_GitLabTokenSecret" {
+  type        = string
+  sensitive   = true
+  description = "Deploy token"
+}
