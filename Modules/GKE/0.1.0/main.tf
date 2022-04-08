@@ -1,6 +1,6 @@
 ﻿data "google_storage_bucket_object_content" "VPCName" {
+  bucket = var.GCSBucketName
   name   = "VPCName"
-  bucket = "cqi-sk-sre"
 }
 
 # https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
@@ -29,7 +29,7 @@ module "gke" {
   // Optional.
   #  regional = var.GKERegional # Default = true
   regional = true
-  zones = ["asia-east1-a"]
+  zones    = ["asia-east1-a"]
 
   initial_node_count       = 0 // default: 0
   remove_default_node_pool = false // default: false
@@ -88,21 +88,21 @@ module "gke" {
   ]
 }
 
-resource "google_storage_bucket_object" "gke-name" {
-  bucket = var.GCSBucketName
-  name   = "GKEName"
+resource "google_storage_bucket_object" "GKEName" {
+  bucket  = var.GCSBucketName
+  name    = "GKEName"
   content = var.GKEName
 }
 
-resource "google_storage_bucket_object" "gke-api" {
-  bucket = var.GCSBucketName
-  name   = "${var.GKEName}.api"
+resource "google_storage_bucket_object" "GKE-API" {
+  bucket  = var.GCSBucketName
+  name    = "${var.GKEName}.api"
   content = module.gke.endpoint
 }
 
-resource "google_storage_bucket_object" "gke-ca" {
-  bucket = var.GCSBucketName
-  name   = "${var.GKEName}.ca"
+resource "google_storage_bucket_object" "GKE-CA" {
+  bucket  = var.GCSBucketName
+  name    = "${var.GKEName}.ca"
   content = module.gke.ca_certificate
 }
 
