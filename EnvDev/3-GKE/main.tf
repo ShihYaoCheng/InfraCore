@@ -2,11 +2,9 @@
 module "gke" {
   source  = "../../Modules/GKE/0.1.0"
 
+  ProjectName = "cqi-sk-dev"
   GCPProjectID = var.GCPProjectID
   GCPRegion = var.GCPRegion
   GCPZone = var.GCPZone
-
-  GKEName = "cqi-sk-dev"
-  GCSBucketName = "cqi-sk-dev"
 }
 

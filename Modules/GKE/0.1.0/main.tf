@@ -1,20 +1,15 @@
-﻿data "google_storage_bucket_object_content" "VPCName" {
-  bucket = var.GCSBucketName
-  name   = "VPCName"
-}
-
-# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
+﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "gke" {
   source  = "terraform-google-modules/kubernetes-engine/google"
   version = "~>20.0.0"
 
   // Required.
   project_id = var.GCPProjectID
-  name       = var.GKEName
+  name       = var.ProjectName
   region     = var.GCPRegion
 
-  network           = data.google_storage_bucket_object_content.VPCName.content
-  subnetwork        = data.google_storage_bucket_object_content.VPCName.content
+  network           = var.ProjectName
+  subnetwork        = var.ProjectName
   // module.vpc.subnets_secondary_ranges[x], access subnet.
   // module.vpc.subnets_secondary_ranges[x][x], access subnet - secondary.
   ip_range_pods     = ""
@@ -88,21 +83,15 @@ module "gke" {
   ]
 }
 
-resource "google_storage_bucket_object" "GKEName" {
-  bucket  = var.GCSBucketName
-  name    = "GKEName"
-  content = var.GKEName
-}
-
 resource "google_storage_bucket_object" "GKE-API" {
-  bucket  = var.GCSBucketName
-  name    = "${var.GKEName}.api"
+  bucket  = var.ProjectName
+  name    = "GKE.api"
   content = module.gke.endpoint
 }
 
 resource "google_storage_bucket_object" "GKE-CA" {
-  bucket  = var.GCSBucketName
-  name    = "${var.GKEName}.ca"
+  bucket  = var.ProjectName
+  name    = "GKE.ca"
   content = module.gke.ca_certificate
 }
 
