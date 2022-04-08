@@ -33,7 +33,7 @@ resource "helm_release" "Loki" {
   values = [
     templatefile("${path.module}/Values/loki.yaml",
     {
-      bucket-name = var.ProjectName
+      bucket-name = "${var.ProjectName}-loki"
     })
   ]
 }
