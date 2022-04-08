@@ -370,7 +370,7 @@ dev-3-gke-destroy:
 #============================#
 # Dev - OpApps               #
 #============================#
-dev-4-op-plan:
+Dev-4-OP-Plan:
   extends: .plan.with.var.file
   variables:
     TF_ROOT: ${DEV_OP_DIR}
@@ -381,9 +381,9 @@ dev-4-op-plan:
     - cd ${TF_ROOT}
     - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
-dev-4-op-apply:
+Dev-4-OP-Apply:
   extends: .apply
-  needs: [dev-4-op-plan]
+  needs: [Dev-4-OP-Plan]
   variables:
     TF_ROOT: ${DEV_OP_DIR}
     TF_STATE_NAME: ${DEV_OP_TF_STATE_NAME}
@@ -393,9 +393,9 @@ dev-4-op-apply:
     - cd ${TF_ROOT}
     - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
-dev-4-op-destroy:
+Dev-4-OP-Destroy:
   extends: .destroy.with.var.file
-  needs: [dev-4-op-plan]
+  needs: [Dev-4-OP-Plan]
   variables:
     TF_ROOT: ${DEV_OP_DIR}
     TF_STATE_NAME: ${DEV_OP_TF_STATE_NAME}
