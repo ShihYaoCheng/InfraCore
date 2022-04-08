@@ -2,7 +2,8 @@
 module "OpApps" {
   source  = "../../Modules/OpApps/0.1.0"
 
-  AutoRegisterDomainName = true
+  RegisterDomainName = true
+  DomainName = "sre.origingaia.com"
   GodaddyAPIKey = var.GodaddyAPIKey
   GodaddyAPISecret = var.GodaddyAPISecret
 

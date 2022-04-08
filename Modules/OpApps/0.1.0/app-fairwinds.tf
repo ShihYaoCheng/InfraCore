@@ -2,7 +2,7 @@
 # https://goldilocks.docs.fairwinds.com/
 # Goldilocks is a utility that can help you identify a starting point for resource requests and limits.
 # find resource requests and limits with VPA.
-resource "helm_release" "goldilocks" {
+resource "helm_release" "Goldilocks" {
   count            = 0
   name             = "goldilocks"
   repository       = "https://charts.fairwinds.com/stable"
@@ -22,7 +22,7 @@ resource "helm_release" "goldilocks" {
 # https://github.com/FairwindsOps/polaris
 # https://github.com/FairwindsOps/charts/tree/master/stable/polaris
 # Best Practices for Kubernetes Workload Configuration.(check YAML files)
-resource "helm_release" "polaris" {
+resource "helm_release" "Polaris" {
   name             = "polaris"
   repository       = "https://charts.fairwinds.com/stable"
   chart            = "polaris"
@@ -36,7 +36,7 @@ resource "helm_release" "polaris" {
 # https://github.com/FairwindsOps/rbac-manager
 # https://github.com/FairwindsOps/charts/tree/master/stable/rbac-manager
 # RBAC Manager is designed to simplify authorization in Kubernetes.
-resource "helm_release" "rbac-manager" {
+resource "helm_release" "RBACManager" {
   name             = "rbac-manager"
   repository       = "https://charts.fairwinds.com/stable"
   chart            = "rbac-manager"

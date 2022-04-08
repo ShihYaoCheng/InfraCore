@@ -4,8 +4,8 @@
 # https://github.com/prometheus-operator/kube-prometheus
 # helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack -n monitoring --create-namespace -f values/prometheus-stack.yaml -f values/prometheus-stack-alerts.yaml --set slackChannel=
 # helm uninstall kube-prometheus-stack -n monitoring
-resource "helm_release" "prometheus" {
-  depends_on = [helm_release.configuration]
+resource "helm_release" "Prometheus" {
+  depends_on = [helm_release.Configuration]
 
   name             = "prometheus"
   repository       = "https://prometheus-community.github.io/helm-charts"
@@ -26,10 +26,10 @@ resource "helm_release" "prometheus" {
   ]
 }
 
-#resource "helm_release" "prometheus-resources" {
-#  depends_on = [helm_release.prometheus, helm_release.traefik]
-#
-#  name             = "prometheus-stack-resources"
-#  chart            = "../charts/prometheus-stack-resources"
-#  namespace        = "monitoring"
-#}
+resource "helm_release" "prometheus-resources" {
+  depends_on = [helm_release.Prometheus, helm_release.Traefik]
+
+  name             = "prometheus-stack-resources"
+  chart            = "${path.module}/Charts/prometheus-stack-resources"
+  namespace        = "monitoring"
+}

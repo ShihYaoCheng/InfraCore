@@ -1,8 +1,8 @@
 ﻿// https://artifacthub.io/packages/helm/bitnami/external-dns
 // It doesn't support godaddy.
 
-resource "helm_release" "external-dns" {
-  count = var.AutoRegisterDomainName ? 1 : 0
+resource "helm_release" "ExternalDNS" {
+  count = var.RegisterDomainName ? 1 : 0
 
   name      = "external-dns"
   chart     = "${path.module}/Charts/external-dns"

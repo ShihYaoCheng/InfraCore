@@ -13,12 +13,12 @@ variable "GodaddyAPISecret" {
   sensitive = true
 }
 
-variable "GodaddyDomainName" {
+variable "DomainName" {
   type    = string
-  default = "origingaia.com"
+#  default = "sre.origingaia.com"
 }
 
-variable "AutoRegisterDomainName" {
+variable "RegisterDomainName" {
   type        = bool
   default     = false
   description = "Only used for SRE environment.(It create/destroy kubernetes everyday) The Godaddy will overwrite A Record added by other Kubernetes."
@@ -44,3 +44,17 @@ variable "PrometheusStorageSize" {
 variable "GrafanaAdminPassword" {
   type = string
 }
+
+#============================
+# Cert-Manager              #
+#============================
+variable "CreateStagingCertificate" {
+  type = bool
+  default = true
+}
+
+variable "CreateProductionCertificate" {
+  type = bool
+  default = false
+}
+
