@@ -1,14 +1,13 @@
-﻿
-# https://registry.terraform.io/modules/terraform-google-modules/network/google/latest
-module "vpc" {
+﻿# https://registry.terraform.io/modules/terraform-google-modules/network/google/latest
+module "VPC" {
   source  = "terraform-google-modules/network/google"
   version = "~>5.0.0"
 
+  network_name = var.ProjectName
   project_id   = var.GCPProjectID
-  network_name = var.VPCName
 
   auto_create_subnetworks = true
-  subnets = []
+  subnets                 = []
 
   # https://cloud.google.com/kubernetes-engine/docs/concepts/alias-ips#defaults_limits
   # https://cidr.xyz/
@@ -37,10 +36,3 @@ module "vpc" {
   #    ]
   #  }
 }
-
-resource "google_storage_bucket_object" "vpc-name" {
-  bucket = var.GCSBucketName
-  name   = "VPCName"
-  content = var.VPCName
-}
-

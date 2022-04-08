@@ -3,10 +3,9 @@
 module "vpc" {
   source  = "../../Modules/VPC/0.1.0"
 
+  ProjectName = "cqi-sk-sre"
+
   GCPProjectID = var.GCPProjectID
   GCPRegion = var.GCPRegion
-  VPCName = "cqi-sk-sre"
-
-  GCSBucketName = "cqi-sk-sre"
 }
 
