@@ -283,12 +283,17 @@ variables:
 
   PROD_VPC_DIR: EnvProd/1-VPC
   PROD_VPC_TF_STATE_NAME: "Prod-VPC"
+
   PROD_ASIA_RES_DIR: EnvProd/AsiaEast1/2-Res
   PROD_ASIA_RES_TF_STATE_NAME: "Prod-Asia-East1-Res"
   PROD_ASIA_GKE_DIR: EnvProd/AsiaEast1/3-GKE
   PROD_ASIA_GKE_TF_STATE_NAME: "Prod-Asia-East1-GKE"
+
   PROD_EUROPE_RES_DIR: EnvProd/EuropeWest2/2-Res
   PROD_EUROPE_RES_TF_STATE_NAME: "Prod-Europe-West2-Res"
+  PROD_EUROPE_GKE_DIR: EnvProd/EuropeWest2/3-GKE
+  PROD_EUROPE_GKE_TF_STATE_NAME: "Prod-Europe-West2-GKE"
+
   PROD_US_RES_DIR: EnvProd/USCentral1/2-Res
   PROD_US_RES_TF_STATE_NAME: "Prod-US-Central1-Res"
 
@@ -672,6 +677,38 @@ Prod-3-Asia-GKE-Destroy:
   variables:
     TF_ROOT: ${PROD_ASIA_GKE_DIR}
     TF_STATE_NAME: ${PROD_ASIA_GKE_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+#==============================#
+# Production(Asia East1) - GKE #
+#==============================#
+Prod-3-EU-GKE-Plan:
+  extends: .plan.without.var.file
+  variables:
+    TF_ROOT: ${PROD_EUROPE_GKE_DIR}
+    TF_STATE_NAME: ${PROD_EUROPE_GKE_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+Prod-3-EU-GKE-Apply:
+  extends: .apply.without.var.file
+  needs: [Prod-3-EU-GKE-Plan]
+  variables:
+    TF_ROOT: ${PROD_EUROPE_GKE_DIR}
+    TF_STATE_NAME: ${PROD_EUROPE_GKE_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+Prod-3-EU-GKE-Destroy:
+  extends: .destroy.without.var.file
+  needs: [Prod-3-EU-GKE-Plan]
+  variables:
+    TF_ROOT: ${PROD_EUROPE_GKE_DIR}
+    TF_STATE_NAME: ${PROD_EUROPE_GKE_TF_STATE_NAME}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
