@@ -658,7 +658,7 @@ Prod-Asia-2-GKE-Plan:
 
 Prod-Asia-2-GKE-Apply:
   extends: .apply.without.var.file
-  needs: [Prod-2-GKE-Plan]
+  needs: [Prod-Asia-2-GKE-Plan]
   variables:
     TF_ROOT: ${PROD_ASIA_GKE_DIR}
     TF_STATE_NAME: ${PROD_ASIA_GKE_TF_STATE_NAME}
@@ -668,7 +668,7 @@ Prod-Asia-2-GKE-Apply:
 
 Prod-Asia-2-GKE-Destroy:
   extends: .destroy.without.var.file
-  needs: [Prod-2-GKE-Plan]
+  needs: [Prod-Asia-2-GKE-Plan]
   variables:
     TF_ROOT: ${PROD_ASIA_GKE_DIR}
     TF_STATE_NAME: ${PROD_ASIA_GKE_TF_STATE_NAME}
