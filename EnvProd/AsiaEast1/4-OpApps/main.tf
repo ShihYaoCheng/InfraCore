@@ -13,7 +13,7 @@ module "OpApps" {
   ArgoCD_AppUserBranchOrTag           = "v0.0.4"
   ArgoCD_AppBattleBranchOrTag         = "v0.0.2f2"
 
-  AlertSlackChannel          = "alert-sk-prod"
+  AlertSlackChannel          = "alert-sk-prod-asia"
   PrometheusStorageClassName = "ssd-retain"
   PrometheusStorageSize      = "500Gi"
   GrafanaAdminPassword       = var.GrafanaAdminPassword
