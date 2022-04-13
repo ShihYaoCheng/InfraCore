@@ -272,6 +272,9 @@ variables:
   DEV_OP_DIR: EnvDev/4-OpApps
   DEV_OP_TF_STATE_NAME: "Dev-OpApps"
 
+  PROD_VPC_DIR: EnvProd/1-VPC
+  PROD_VPC_TF_STATE_NAME: "Prod-VPC"
+
 # TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/sre-infra
 # ${CI_API_V4_URL} = https://gitlab.com/api/v4
 # ${CI_PROJECT_ID} = 27641226
@@ -414,6 +417,38 @@ Dev-4-OP-Destroy:
     - cd ${TF_ROOT}
     - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
+
+#============================#
+# Prod - VPC                 #
+#============================#
+Prod-1-VPC-Plan:
+  extends: .plan.without.var.file
+  variables:
+    TF_ROOT: ${PROD_VPC_DIR}
+    TF_STATE_NAME: ${PROD_VPC_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+Prod-1-VPC-Apply:
+  extends: .apply.without.var.file
+  needs: [Prod-1-VPC-Plan]
+  variables:
+    TF_ROOT: ${PROD_VPC_DIR}
+    TF_STATE_NAME: ${PROD_VPC_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+Prod-1-VPC-Destroy:
+  extends: .destroy.without.var.file
+  needs: [Prod-1-VPC-Plan]
+  variables:
+    TF_ROOT: ${PROD_VPC_DIR}
+    TF_STATE_NAME: ${PROD_VPC_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
 
 
