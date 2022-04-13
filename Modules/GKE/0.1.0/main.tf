@@ -8,8 +8,8 @@ module "gke" {
   name       = var.ProjectName
   region     = var.GCPRegion
 
-  network           = var.ProjectName
-  subnetwork        = var.ProjectName
+  network           = var.GKE-VPCName != "" ? var.GKE-VPCName : var.ProjectName
+  subnetwork        = var.GKE-VPCName != "" ? var.GKE-VPCName : var.ProjectName
   // module.vpc.subnets_secondary_ranges[x], access subnet.
   // module.vpc.subnets_secondary_ranges[x][x], access subnet - secondary.
   ip_range_pods     = ""
@@ -24,7 +24,7 @@ module "gke" {
   // Optional.
   #  regional = var.GKERegional # Default = true
   regional = true
-  zones    = ["asia-east1-a"]
+  zones    = var.GKE-Zones
 
   initial_node_count       = 0 // default: 0
   remove_default_node_pool = false // default: false
