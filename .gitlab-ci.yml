@@ -625,7 +625,7 @@ Prod-2-Asia-Res-Plan:
   extends: .plan.without.var.file
   variables:
     TF_ROOT: ${PROD_ASIA_RES_DIR}
-    TF_STATE_NAME: ${PROD_EUROPE_RES_TF_STATE_NAME}
+    TF_STATE_NAME: ${PROD_ASIA_RES_TF_STATE_NAME}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -635,7 +635,7 @@ Prod-2-Asia-Res-Apply:
   needs: [Prod-2-Asia-Res-Plan]
   variables:
     TF_ROOT: ${PROD_ASIA_RES_DIR}
-    TF_STATE_NAME: ${PROD_EUROPE_RES_TF_STATE_NAME}
+    TF_STATE_NAME: ${PROD_ASIA_RES_TF_STATE_NAME}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -645,7 +645,7 @@ Prod-2-Asia-Res-Destroy:
   needs: [Prod-2-Asia-Res-Plan]
   variables:
     TF_ROOT: ${PROD_ASIA_RES_DIR}
-    TF_STATE_NAME: ${PROD_EUROPE_RES_TF_STATE_NAME}
+    TF_STATE_NAME: ${PROD_ASIA_RES_TF_STATE_NAME}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
