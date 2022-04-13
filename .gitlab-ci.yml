@@ -285,19 +285,19 @@ variables:
   PROD_VPC_TF_STATE_NAME: "Prod-VPC"
 
   PROD_ASIA_RES_DIR: EnvProd/AsiaEast1/2-Res
-  PROD_ASIA_RES_TF_STATE_NAME: "Prod-Asia-East1-Res"
+  PROD_ASIA_RES_TF_STATE_NAME: "Prod-Res-AsiaEast1"
   PROD_ASIA_GKE_DIR: EnvProd/AsiaEast1/3-GKE
-  PROD_ASIA_GKE_TF_STATE_NAME: "Prod-Asia-East1-GKE"
+  PROD_ASIA_GKE_TF_STATE_NAME: "Prod-GKE-AsiaEast1"
 
   PROD_EUROPE_RES_DIR: EnvProd/EuropeWest2/2-Res
-  PROD_EUROPE_RES_TF_STATE_NAME: "Prod-Europe-West2-Res"
+  PROD_EUROPE_RES_TF_STATE_NAME: "Prod-Res-EuropeWest2"
   PROD_EUROPE_GKE_DIR: EnvProd/EuropeWest2/3-GKE
-  PROD_EUROPE_GKE_TF_STATE_NAME: "Prod-Europe-West2-GKE"
+  PROD_EUROPE_GKE_TF_STATE_NAME: "Prod-GKE-EuropeWest2"
 
   PROD_US_RES_DIR: EnvProd/USCentral1/2-Res
-  PROD_US_RES_TF_STATE_NAME: "Prod-US-Central1-Res"
+  PROD_US_RES_TF_STATE_NAME: "Prod-Res-USCentral1"
   PROD_US_GKE_DIR: EnvProd/USCentral1/3-GKE
-  PROD_US_GKE_TF_STATE_NAME: "Prod-US-Central1-GKE"
+  PROD_US_GKE_TF_STATE_NAME: "Prod-GKE-USCentral1"
 
 # TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/sre-infra
 # ${CI_API_V4_URL} = https://gitlab.com/api/v4
