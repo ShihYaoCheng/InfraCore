@@ -4,7 +4,7 @@
   # https://cloud.google.com/storage/docs/troubleshooting#bucket-name-conflict
   # The GCS bucket name must be unique in the entire GCP. If you have a 409 conflict error
   # which means the bucket name has been used by another user, you should use another name.
-  ProjectName = "cqi-sk-prod-europe-west2"
+  ProjectName = "cqi-sk-prod-eu-west2"
 
   GCPProjectID = var.GCPProjectID
   GCPRegion = var.GCPRegion
