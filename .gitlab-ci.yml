@@ -647,7 +647,7 @@ Prod-Asia-East1-1-Res-Destroy:
 #==============================#
 # Production(Asia East1) - GKE #
 #==============================#
-Prod-2-GKE-Plan:
+Prod-Asia-2-GKE-Plan:
   extends: .plan.without.var.file
   variables:
     TF_ROOT: ${PROD_ASIA_GKE_DIR}
@@ -656,7 +656,7 @@ Prod-2-GKE-Plan:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
-Prod-2-GKE-Apply:
+Prod-Asia-2-GKE-Apply:
   extends: .apply.without.var.file
   needs: [Prod-2-GKE-Plan]
   variables:
@@ -666,7 +666,7 @@ Prod-2-GKE-Apply:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
-Prod-2-GKE-Destroy:
+Prod-Asia-2-GKE-Destroy:
   extends: .destroy.without.var.file
   needs: [Prod-2-GKE-Plan]
   variables:
