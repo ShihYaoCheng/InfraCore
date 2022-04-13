@@ -274,6 +274,8 @@ variables:
 
   QA_RES_DIR: EnvQA/1-Res
   QA_RES_TF_STATE_NAME: "QA-Res"
+  QA_VPC_DIR: EnvQA/2-VPC
+  QA_VPC_TF_STATE_NAME: "QA-VPC"
 
   PROD_VPC_DIR: EnvProd/1-VPC
   PROD_VPC_TF_STATE_NAME: "Prod-VPC"
@@ -452,6 +454,41 @@ QA-1-Res-Destroy:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+
+#============================#
+# QA - VPC                   #
+#============================#
+QA-2-VPC-Plan:
+  extends: .plan.without.var.file
+  variables:
+    TF_ROOT: ${QA_VPC_DIR}
+    TF_STATE_NAME: ${QA_VPC_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+QA-2-VPC-Apply:
+  extends: .apply.without.var.file
+  needs: [QA-2-VPC-Plan]
+  variables:
+    TF_ROOT: ${QA_VPC_DIR}
+    TF_STATE_NAME: ${QA_VPC_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+QA-2-VPC-Destroy:
+  extends: .destroy.without.var.file
+  needs: [QA-2-VPC-Plan]
+  variables:
+    TF_ROOT: ${QA_VPC_DIR}
+    TF_STATE_NAME: ${QA_VPC_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+
 
 
 
