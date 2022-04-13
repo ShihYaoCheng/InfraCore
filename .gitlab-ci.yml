@@ -302,6 +302,8 @@ variables:
   PROD_US_RES_TF_STATE_NAME: "Prod-Res-USCentral1"
   PROD_US_GKE_DIR: EnvProd/USCentral1/3-GKE
   PROD_US_GKE_TF_STATE_NAME: "Prod-GKE-USCentral1"
+  PROD_US_OP_DIR: EnvProd/USCentral1/4-OpApps
+  PROD_US_OP_TF_STATE_NAME: "Prod-OP-USCentral1"
 
 # TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/sre-infra
 # ${CI_API_V4_URL} = https://gitlab.com/api/v4
@@ -911,6 +913,49 @@ Prod-3-GKE-Destroy-US:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+#=============================#
+# Prod(US Central1) - OpApps #
+#=============================#
+Prod-4-OP-Plan-US:
+  extends: .plan.with.var.file
+  variables:
+    TF_ROOT: ${PROD_US_OP_DIR}
+    TF_STATE_NAME: ${PROD_US_OP_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_OP_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+
+Prod-4-OP-Apply-US:
+  extends: .apply.with.var.file
+  needs: [Prod-4-OP-Plan-US]
+  variables:
+    TF_ROOT: ${PROD_US_OP_DIR}
+    TF_STATE_NAME: ${PROD_US_OP_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_OP_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+
+Prod-4-OP-Destroy-US:
+  extends: .destroy.with.var.file
+  needs: [Prod-4-OP-Plan-US]
+  variables:
+    TF_ROOT: ${PROD_US_OP_DIR}
+    TF_STATE_NAME: ${PROD_US_OP_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_OP_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+
+
+
+
+
 
 
 
