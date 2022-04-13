@@ -283,6 +283,8 @@ variables:
 
   PROD_VPC_DIR: EnvProd/1-VPC
   PROD_VPC_TF_STATE_NAME: "Prod-VPC"
+  PROD_ASIA_EAST1_RES_DIR: EnvProd/AsiaEast1/1-Res
+  PROD_ASIA_EAST1_RES_TF_STATE_NAME: "Prod-Asia-East1-Res"
 
 # TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/sre-infra
 # ${CI_API_V4_URL} = https://gitlab.com/api/v4
@@ -603,42 +605,42 @@ Prod-1-VPC-Destroy:
 
 
 
+#===================================#
+# Production Asia East1 - Resources #
+#===================================#
+Prod-Asia-East1-1-Res-Plan:
+  extends: .plan.without.var.file
+  variables:
+    TF_ROOT: ${PROD_ASIA_EAST1_RES_DIR}
+    TF_STATE_NAME: ${PROD_ASIA_EAST1_RES_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
-#============================#
-# QA                         #
-#============================#
-#qa-plan:
-#  extends: .plan
-#  variables:
-#    TF_ROOT: ${QA_DIR}
-#    TF_STATE_NAME: ${QA_DIR}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#    - cd ${TF_ROOT}
-#    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
-#
-#qa-apply:
-#  extends: .apply
-#  needs: [qa-plan]
-#  variables:
-#    TF_ROOT: ${QA_DIR}
-#    TF_STATE_NAME: ${QA_DIR}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#
-#qa-destroy:
-#  extends: .destroy
-#  needs: [qa-plan]
-#  variables:
-#    TF_ROOT: ${QA_DIR}
-#    TF_STATE_NAME: ${QA_DIR}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_INFRA_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#    - cd ${TF_ROOT}
-#    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+Prod-Asia-East1-1-Res-Apply:
+  extends: .apply.without.var.file
+  needs: [Prod-Asia-East1-1-Res-Plan]
+  variables:
+    TF_ROOT: ${PROD_ASIA_EAST1_RES_DIR}
+    TF_STATE_NAME: ${PROD_ASIA_EAST1_RES_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+Prod-Asia-East1-1-Res-Destroy:
+  extends: .destroy.without.var.file
+  needs: [Prod-Asia-East1-1-Res-Plan]
+  variables:
+    TF_ROOT: ${PROD_ASIA_EAST1_RES_DIR}
+    TF_STATE_NAME: ${PROD_ASIA_EAST1_RES_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+
+
+
+
 
 
 #============================#
