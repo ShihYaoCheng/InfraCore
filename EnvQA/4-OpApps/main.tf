@@ -16,7 +16,7 @@ module "OpApps" {
   AlertSlackChannel          = "alert-sk-qa"
   PrometheusStorageClassName = "ssd-delete"
   PrometheusStorageSize      = "20Gi"
-  GrafanaAdminPassword       = "ran9977"
+  GrafanaAdminPassword       = var.GrafanaAdminPassword
 }
 
 

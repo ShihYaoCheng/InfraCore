@@ -38,3 +38,11 @@ variable "ArgoCD_GitLabTokenSecret" {
   sensitive   = true
   description = "Deploy token"
 }
+
+#============================
+# Grafana                   #
+#============================
+variable "GrafanaAdminPassword" {
+  type      = string
+  sensitive = true
+}
