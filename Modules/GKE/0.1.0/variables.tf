@@ -7,19 +7,19 @@ variable "ProjectName" {
 
 variable "GCPProjectID" {
   type    = string
-  default = "stellar-38931"
+#  default = "stellar-38931"
 }
 
 // https://cloud.google.com/compute/docs/regions-zones
 variable "GCPRegion" {
   type        = string
-  default     = "asia-east1"
+#  default     = "asia-east1"
   description = "cloud provider region."
 }
 
 variable "GCPZone" {
   type        = string
-  default     = "asia-east1-b"
+#  default     = "asia-east1-b"
   description = "cloud provider zone."
 }
 
@@ -33,5 +33,5 @@ variable "GKE-VPCName" {
 
 variable "GKE-Zones" {
   type = list(string)
-  default = ["asia-east1-a"]
+#  default = ["asia-east1-a"]
 }
