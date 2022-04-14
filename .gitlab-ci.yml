@@ -320,7 +320,7 @@ Dev-1-Res-Plan:
     TF_STATE_NAME: ${DEV_RES_TF_STATE_NAME}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_RESOURCES_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
 Dev-1-Res-Apply:
   extends: .apply.without.var.file
@@ -330,7 +330,7 @@ Dev-1-Res-Apply:
     TF_STATE_NAME: ${DEV_RES_TF_STATE_NAME}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_RESOURCES_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
 Dev-1-Res-Destroy:
   extends: .destroy.without.var.file
@@ -340,7 +340,7 @@ Dev-1-Res-Destroy:
     TF_STATE_NAME: ${DEV_RES_TF_STATE_NAME}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_RESOURCES_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
 
 #============================#
