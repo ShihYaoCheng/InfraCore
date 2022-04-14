@@ -289,21 +289,21 @@ variables:
   PROD_ASIA_GKE_DIR: EnvProd/AsiaEast1/3-GKE
   PROD_ASIA_GKE_TF_STATE_NAME: "Prod-GKE-AsiaEast1"
   PROD_ASIA_APPS_DIR: EnvProd/AsiaEast1/4-Apps
-  PROD_ASIA_APPS_TF_STATE_NAME: "Prod-APPS-AsiaEast1"
+  PROD_ASIA_APPS_TF_STATE_NAME: "Prod-Apps-AsiaEast1"
 
   PROD_EUROPE_RES_DIR: EnvProd/EuropeWest2/2-Res
   PROD_EUROPE_RES_TF_STATE_NAME: "Prod-Res-EuropeWest2"
   PROD_EUROPE_GKE_DIR: EnvProd/EuropeWest2/3-GKE
   PROD_EUROPE_GKE_TF_STATE_NAME: "Prod-GKE-EuropeWest2"
   PROD_APPS_DIR_EU: EnvProd/EuropeWest2/4-Apps
-  PROD_APPS_TF_STATE_NAME_EU: "Prod-APPS-EuropeWest2"
+  PROD_APPS_TF_STATE_NAME_EU: "Prod-Apps-EuropeWest2"
 
   PROD_US_RES_DIR: EnvProd/USCentral1/2-Res
   PROD_US_RES_TF_STATE_NAME: "Prod-Res-USCentral1"
   PROD_US_GKE_DIR: EnvProd/USCentral1/3-GKE
   PROD_US_GKE_TF_STATE_NAME: "Prod-GKE-USCentral1"
-  PROD_US_OP_DIR: EnvProd/USCentral1/4-OpApps
-  PROD_US_OP_TF_STATE_NAME: "Prod-OP-USCentral1"
+  PROD_APPS_DIR_US: EnvProd/USCentral1/4-Apps
+  PROD_APPS_TF_STATE_NAME_US: "Prod-Apps-USCentral1"
 
 # TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/sre-infra
 # ${CI_API_V4_URL} = https://gitlab.com/api/v4
@@ -849,9 +849,9 @@ Prod-4-OP-Destroy-EU:
 
 
 
-#======================================#
-# Production(US Central1) - Resources  #
-#======================================#
+#================================#
+# Prod(US Central1) - Resources  #
+#================================#
 Prod-2-Res-Plan-US:
   extends: .plan.without.var.file
   variables:
@@ -882,9 +882,9 @@ Prod-2-Res-Destroy-US:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
 
-#===============================#
-# Production(US Central1) - GKE #
-#===============================#
+#=========================#
+# Prod(US Central1) - GKE #
+#=========================#
 Prod-3-GKE-Plan-US:
   extends: .plan.without.var.file
   variables:
@@ -914,17 +914,17 @@ Prod-3-GKE-Destroy-US:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
-#=============================#
-# Prod(US Central1) - OpApps #
-#=============================#
+#==========================#
+# Prod(US Central1) - Apps #
+#==========================#
 Prod-4-OP-Plan-US:
   extends: .plan.with.var.file
   variables:
-    TF_ROOT: ${PROD_US_OP_DIR}
-    TF_STATE_NAME: ${PROD_US_OP_TF_STATE_NAME}
+    TF_ROOT: ${PROD_APPS_DIR_US}
+    TF_STATE_NAME: ${PROD_APPS_TF_STATE_NAME_US}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_OP_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
     - cd ${TF_ROOT}
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
@@ -932,11 +932,11 @@ Prod-4-OP-Apply-US:
   extends: .apply.with.var.file
   needs: [Prod-4-OP-Plan-US]
   variables:
-    TF_ROOT: ${PROD_US_OP_DIR}
-    TF_STATE_NAME: ${PROD_US_OP_TF_STATE_NAME}
+    TF_ROOT: ${PROD_APPS_DIR_US}
+    TF_STATE_NAME: ${PROD_APPS_TF_STATE_NAME_US}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_OP_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
     - cd ${TF_ROOT}
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
@@ -944,11 +944,11 @@ Prod-4-OP-Destroy-US:
   extends: .destroy.with.var.file
   needs: [Prod-4-OP-Plan-US]
   variables:
-    TF_ROOT: ${PROD_US_OP_DIR}
-    TF_STATE_NAME: ${PROD_US_OP_TF_STATE_NAME}
+    TF_ROOT: ${PROD_APPS_DIR_US}
+    TF_STATE_NAME: ${PROD_APPS_TF_STATE_NAME_US}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_OP_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
     - cd ${TF_ROOT}
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
