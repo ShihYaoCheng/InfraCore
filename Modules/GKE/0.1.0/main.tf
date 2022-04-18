@@ -51,7 +51,7 @@ module "gke" {
   cluster_autoscaling = {
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster#nested_cluster_autoscaling
     # (Required) Whether node auto-provisioning is enabled. Resource limits for cpu and memory must be defined to enable node auto-provisioning.
-    enabled       = true
+    enabled       = false
     min_cpu_cores = 2
     max_cpu_cores = 20
     min_memory_gb = 8
