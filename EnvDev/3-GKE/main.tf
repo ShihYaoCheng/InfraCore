@@ -6,5 +6,6 @@ module "gke" {
   GCPProjectID = var.GCPProjectID
   GCPRegion = var.GCPRegion
   GCPZone = var.GCPZone
+  GKE-Zones = ["asia-east1-a"]
 }
 

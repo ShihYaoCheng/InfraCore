@@ -13,6 +13,6 @@ variable "GCPRegion" {
 
 variable "GCPZone" {
   type        = string
-  default     = "asia-east1-b"
+  default     = "asia-east1-a"
   description = "cloud provider zone."
 }
