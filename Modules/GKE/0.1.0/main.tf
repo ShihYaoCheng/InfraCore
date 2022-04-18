@@ -23,7 +23,7 @@ module "gke" {
 
   // Optional.
   #  regional = var.GKERegional # Default = true
-  regional = true
+  regional = false
   zones    = var.GKE-Zones
 
   initial_node_count       = 0 // default: 0
