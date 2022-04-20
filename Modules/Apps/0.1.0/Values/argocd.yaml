@@ -16,7 +16,7 @@ server:
       source:
         repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppTable.git
         targetRevision: main
-        path: sk-table
+        path: chart
         helm:
           # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
           # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
@@ -46,7 +46,7 @@ server:
       source:
         repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppFile.git
         targetRevision: main
-        path: sk-file
+        path: chart
         helm:
           # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
           # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
@@ -76,7 +76,7 @@ server:
       source:
         repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppUser.git
         targetRevision: main
-        path: sk-user
+        path: chart
         helm:
           # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
           # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
@@ -106,7 +106,7 @@ server:
       source:
         repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppBattle.git
         targetRevision: main
-        path: sk-battle
+        path: chart
         helm:
           # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
           # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
