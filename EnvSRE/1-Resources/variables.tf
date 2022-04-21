@@ -1,5 +1,5 @@
 ﻿#============================
-# Project
+# Project                   #
 #============================
 variable "GCPProjectID" {
   type    = string
@@ -18,4 +18,3 @@ variable "GCPZone" {
   default     = "asia-east1-a"
   description = "cloud provider zone."
 }
-

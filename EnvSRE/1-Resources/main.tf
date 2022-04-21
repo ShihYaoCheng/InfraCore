@@ -1,4 +1,4 @@
-﻿module "sk-sre-bucket" {
+﻿module "res" {
   source  = "../../Modules/Resources/0.1.0"
 
   ProjectName = "cqi-sk-sre"
