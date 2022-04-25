@@ -29,6 +29,16 @@ resource "helm_release" "Polaris" {
   version          = "~>5.1.0"
   create_namespace = true
   namespace        = "fairwinds"
+  
+  set {
+    name  = "dashboard.resources.requests.cpu"
+    value = "1m"
+  }
+  
+  set {
+    name  = "webhook.resources.requests.cpu"
+    value = "1m"
+  }
 }
 
 # https://artifacthub.io/packages/helm/fairwinds-stable/rbac-manager
@@ -43,4 +53,9 @@ resource "helm_release" "RBACManager" {
   version          = "~>1.11.0"
   create_namespace = true
   namespace        = "fairwinds"
+  
+  set {
+    name  = "resources.requests.cpu"
+    value = "1m"
+  }
 }
