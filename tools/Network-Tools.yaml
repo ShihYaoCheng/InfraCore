@@ -1,0 +1,17 @@
+﻿# https://hub.docker.com/r/wbitt/network-multitool
+# kubectl run multitool --image=wbitt/network-multitool
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: network-tools
+  namespace: default
+spec:
+  containers:
+    - image: wbitt/network-multitool
+      command:
+        - sleep
+        - "3600"
+      imagePullPolicy: IfNotPresent
+      name: network-tools
+  restartPolicy: Always
