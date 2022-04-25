@@ -13,10 +13,16 @@ module "OpApps" {
   ArgoCD_AppUserBranchOrTag           = "main"
   ArgoCD_AppBattleBranchOrTag         = "main"
 
-  AlertSlackChannel          = "alert-sk-dev"
+  Prometheus_Enable = false
   PrometheusStorageClassName = "ssd-delete"
   PrometheusStorageSize      = "100Gi"
   GrafanaAdminPassword       = "ran9977"
+
+  AlertSlackChannel          = "alert-sk-dev"
+  
+  Loki_Enable = false
+  Tempo_Enable = false
+  Velero_Enable = false
 }
 
 
