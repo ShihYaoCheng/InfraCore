@@ -53,10 +53,10 @@ module "gke" {
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster#nested_cluster_autoscaling
     # (Required) Whether node auto-provisioning is enabled. Resource limits for cpu and memory must be defined to enable node auto-provisioning.
     enabled       = true
-    min_cpu_cores = 2
-    max_cpu_cores = 5
-    min_memory_gb = 5
-    max_memory_gb = 20
+    min_cpu_cores = var.GKE-AutoScaling-MinCPU
+    max_cpu_cores = var.GKE-AutoScaling-MaxCPU
+    min_memory_gb = var.GKE-AutoScaling-MinMemoryGB
+    max_memory_gb = var.GKE-AutoScaling-MaxMemoryGB
     gpu_resources = []
   }
 
@@ -71,7 +71,7 @@ module "gke" {
 
       autoscaling = false # Default = true
       # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
-      node_count  = 2
+      node_count  = var.GKE-NodeCount-e2-standard-2
 
       disk_size_gb = 20
       disk_type    = "pd-standard"
@@ -90,7 +90,7 @@ module "gke" {
 
       autoscaling = false # Default = true
       # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
-      node_count  = 1
+      node_count  = var.GKE-NodeCount-e2-medium
 
       disk_size_gb = 20
       disk_type    = "pd-standard"
