@@ -5,6 +5,8 @@ data "google_storage_bucket_object_content" "VeleroServiceAccountKey" {
 }
 
 resource "helm_release" "VeleroResourcesPre" {
+  count = var.Velero_Enable ? 1 : 0
+  
   name             = "velero-resources-pre"
   chart            = "${path.module}/Charts/velero-resources-pre"
   namespace        = "velero"
@@ -21,6 +23,8 @@ resource "helm_release" "VeleroResourcesPre" {
 # https://github.com/vmware-tanzu/helm-charts/blob/main/charts/velero/values.yaml
 # helm upgrade --install velero vmware-tanzu/velero -n velero -f velero-values.yaml --set-file credentials.secretContents.cloud=~/velero-sa.json --create-namespace
 resource "helm_release" "Velero" {
+  count = var.Velero_Enable ? 1 : 0
+  
   depends_on = [helm_release.Prometheus, helm_release.VeleroResourcesPre]
 
   name             = "velero"

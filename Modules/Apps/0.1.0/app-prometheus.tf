@@ -5,6 +5,8 @@
 # helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack -n monitoring --create-namespace -f values/prometheus-stack.yaml -f values/prometheus-stack-alerts.yaml --set slackChannel=
 # helm uninstall kube-prometheus-stack -n monitoring
 resource "helm_release" "Prometheus" {
+  count = var.Prometheus_Enable ? 1 : 0
+  
   depends_on = [helm_release.Configuration]
 
   name             = "prometheus"

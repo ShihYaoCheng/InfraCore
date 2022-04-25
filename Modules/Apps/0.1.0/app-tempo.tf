@@ -5,6 +5,8 @@
 # helm upgrade --install tempo grafana/tempo -n tempo --create-namespace
 # helm uninstall tempo -n tempo
 resource "helm_release" "Tempo" {
+  count = var.Tempo_Enable ? 1 : 0
+  
   depends_on = [helm_release.Prometheus]
 
   name             = "tempo"

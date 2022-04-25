@@ -19,6 +19,8 @@ resource "helm_release" "Traefik" {
 }
 
 resource "helm_release" "TraefikResources" {
+  count = var.Prometheus_Enable ? 1 : 0
+  
   depends_on = [helm_release.Traefik, helm_release.Prometheus]
 
   name             = "traefik-resources"

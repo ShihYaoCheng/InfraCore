@@ -34,6 +34,11 @@ variable "RegisterDomainName" {
 #============================
 # Prometheus                #
 #============================
+variable "Prometheus_Enable" {
+  type = bool
+  default = true
+}
+
 variable "AlertSlackChannel" {
   type = string
 }
@@ -64,6 +69,31 @@ variable "CreateProductionCertificate" {
   type    = bool
   default = false
 }
+
+#============================
+# Loki                      #
+#============================
+variable "Loki_Enable" {
+  type = bool
+  default = true
+}
+
+#============================
+# Tempo                     #
+#============================
+variable "Tempo_Enable" {
+  type = bool
+  default = true
+}
+
+#============================
+# Velero                    #
+#============================
+variable "Velero_Enable" {
+  type = bool
+  default = true
+}
+
 
 #============================
 # ArgoCD                    #
