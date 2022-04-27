@@ -31,6 +31,10 @@ metrics:
 # will be destructive.
 cleanUpCRDs: true
 
+resources:
+  requests:
+    cpu: 100m
+
 
 ##
 ## Parameters for the `default` BackupStorageLocation and VolumeSnapshotLocation,

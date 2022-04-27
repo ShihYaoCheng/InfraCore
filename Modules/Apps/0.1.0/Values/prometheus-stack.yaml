@@ -57,6 +57,10 @@ alertmanager:
     ## Size is the expected size of the alertmanager cluster. The controller will eventually
     ## make the size of the running cluster equal to the expected size.
     replicas: 1
+    
+    resources:
+      requests:
+        cpu: 100m
 
     ## Storage is the definition of how storage will be used by the Alertmanager instances.
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/user-guides/storage.md
@@ -236,6 +240,9 @@ prometheus:
   ## Settings affecting prometheusSpec
   ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#prometheusspec
   prometheusSpec:
+    resources:
+      requests:
+        cpu: 100m
     # Select all ServiceMonitor and PodMonitor without any label filter.
 
     ## If true, a nil or {} value for prometheus.prometheusSpec.serviceMonitorSelector will cause the

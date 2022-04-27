@@ -178,9 +178,26 @@ configs:
   # private-repo:
   #   url: https://github.com/argoproj/private-repo
 
+notifications:
+  resources:
+    requests:
+      cpu: 10m
+
+redis:
+  resources:
+    requests:
+      cpu: 10m
+
+applicationSet:
+  resources:
+    requests:
+      cpu: 10m
 
 ## Controller
 controller:
+  resources:
+    requests:
+      cpu: 100m
   ## Application controller metrics configuration
   metrics:
     # -- Deploy metrics service
