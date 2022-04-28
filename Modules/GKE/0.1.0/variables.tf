@@ -38,10 +38,10 @@ variable "GKE-Zones" {
 
 variable "GKE-NodeCount-e2-standard-2" {
   type = number
-  default = 1
+  default = 0
 }
 
-variable "GKE-NodeCount-e2-high-cpu-2" {
+variable "GKE-NodeCount-e2-high-cpu-4" {
   type = number
   default = 1
 }

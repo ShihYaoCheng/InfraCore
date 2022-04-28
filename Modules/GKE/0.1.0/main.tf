@@ -63,15 +63,15 @@ module "gke" {
   node_metadata = "UNSPECIFIED"
   node_pools    = [
     {
-      name         = "pool-e2-highcpu-2"
+      name         = "pool-e2-highcpu-4"
       # https://cloud.google.com/compute/docs/general-purpose-machines#e2-high-cpu
       # e2-highcpu-2, CPU=2, Memory=2G
       # e2-highcpu-4, CPU=4, Memory=4G
-      machine_type = "e2-highcpu-2"
+      machine_type = "e2-highcpu-4"
 
       autoscaling = false # Default = true
       # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
-      node_count  = var.GKE-NodeCount-e2-high-cpu-2
+      node_count  = var.GKE-NodeCount-e2-high-cpu-4
 
       disk_size_gb = 20
       disk_type    = "pd-standard"
