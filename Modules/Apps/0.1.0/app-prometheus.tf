@@ -2,6 +2,8 @@
 # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
 # https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack#kube-prometheus-stack
 # https://github.com/prometheus-operator/kube-prometheus
+# kubectl create ns monitoring
+# kubectl label ns monitoring kubed=sync
 # helm upgrade --install kube-prometheus-stack prometheus-community/kube-prometheus-stack -n monitoring --create-namespace -f values/prometheus-stack.yaml -f values/prometheus-stack-alerts.yaml --set slackChannel=
 # helm uninstall kube-prometheus-stack -n monitoring
 resource "helm_release" "Prometheus" {
