@@ -30,7 +30,7 @@ resource "helm_release" "CertManagerResources" {
 
   set {
     name  = "certificates.staging.create"
-    value = var.CreateStagingCertificate
+    value = !var.CreateProductionCertificate
   }
 
   set {

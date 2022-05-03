@@ -23,12 +23,12 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: cert.production
+  name: cert.prod
   annotations:
     cert-manager.io/issue-temporary-certificate: "true"
     acme.cert-manager.io/http01-edit-in-place: "true"
 spec:
-  secretName: cert.production # result.
+  secretName: cert.prod # result.
   secretTemplate:
     annotations:
       kubed.appscode.com/sync: "kubed=sync"

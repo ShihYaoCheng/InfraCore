@@ -60,10 +60,10 @@ variable "GrafanaAdminPassword" {
 #============================
 # Cert-Manager              #
 #============================
-variable "CreateStagingCertificate" {
-  type    = bool
-  default = true
-}
+#variable "CreateStagingCertificate" {
+#  type    = bool
+#  default = true
+#}
 
 variable "CreateProductionCertificate" {
   type    = bool
