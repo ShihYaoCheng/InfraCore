@@ -4,6 +4,7 @@ module "OpApps" {
 
   ProjectName = var.ProjectName
   DomainName = "dev.origingaia.com"
+  CreateProductionCertificate = true
 
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret

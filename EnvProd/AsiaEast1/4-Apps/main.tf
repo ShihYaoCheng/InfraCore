@@ -1,9 +1,10 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "OpApps" {
-  source = "../../../Modules/OpApps/0.1.0"
+  source = "../../../Modules/Apps/0.1.0"
 
   ProjectName = var.ProjectName
   DomainName  = "asia.origingaia.com"
+  CreateProductionCertificate = true
 
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret

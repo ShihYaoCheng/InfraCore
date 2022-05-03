@@ -1,11 +1,12 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
-module "OpApps" {
+module "Applications" {
   source = "../../Modules/Apps/0.1.0"
 
   ProjectName = var.ProjectName
 
   RegisterDomainName = true
   DomainName         = "sre.origingaia.com"
+  CreateProductionCertificate = false
   GodaddyAPIKey      = var.GodaddyAPIKey
   GodaddyAPISecret   = var.GodaddyAPISecret
 
