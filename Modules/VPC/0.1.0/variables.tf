@@ -1,16 +1,18 @@
 ﻿#============================
-# Project
+# Project                   #
 #============================
 variable "ProjectName" {
   type = string
+  description = "Unique name for every resource."
 }
 
 variable "GCPProjectID" {
   type = string
+  description = "Set GCP Project ID."
 }
 
-// https://cloud.google.com/compute/docs/regions-zones
 variable "GCPRegion" {
   type = string
+  description = "reference: https://cloud.google.com/compute/docs/regions-zones"
 }
 
