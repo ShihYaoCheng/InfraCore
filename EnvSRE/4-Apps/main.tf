@@ -4,11 +4,11 @@ module "Applications" {
 
   ProjectName = var.ProjectName
 
-  RegisterDomainName = true
-  DomainName         = "sre.origingaia.com"
+  RegisterDomainName          = true
+  DomainName                  = "sre.origingaia.com"
   CreateProductionCertificate = false
-  GodaddyAPIKey      = var.GodaddyAPIKey
-  GodaddyAPISecret   = var.GodaddyAPISecret
+  GodaddyAPIKey               = var.GodaddyAPIKey
+  GodaddyAPISecret            = var.GodaddyAPISecret
 
   ArgoCD_Enable                       = true
   ArgoCD_EnableSelfHeal               = false
