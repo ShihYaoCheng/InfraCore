@@ -32,6 +32,10 @@ resource "helm_release" "ArgoCD" {
     name  = "server.additionalApplications[2].source.targetRevision"
     value = var.ArgoCD_AppUserBranchOrTag
   }
+  set {
+    name  = "server.additionalApplications[3].source.targetRevision"
+    value = var.ArgoCD_AppBackstageBranchOrTag
+  }
 #  set {
 #    name  = "server.additionalApplications[3].source.targetRevision"
 #    value = var.ArgoCD_AppBattleBranchOrTag
@@ -51,10 +55,10 @@ resource "helm_release" "ArgoCD" {
     name  = "server.additionalApplications[2].source.helm.valueFiles"
     value = var.ArgoCD_RepositoryHelmPathValueFiles
   }
-#  set {
-#    name  = "server.additionalApplications[3].source.helm.valueFiles"
-#    value = var.ArgoCD_RepositoryHelmPathValueFiles
-#  }
+  set {
+    name  = "server.additionalApplications[3].source.helm.valueFiles"
+    value = var.ArgoCD_RepositoryHelmPathValueFiles
+  }
 
   #============================#
   # Set repository credentials #
@@ -87,6 +91,15 @@ resource "helm_release" "ArgoCD" {
     value = var.ArgoCD_GitLabTokenSecret
   }
 
+  set_sensitive {
+    name  = "configs.repositories.sk-backstage.username"
+    value = var.ArgoCD_GitLabTokenName
+  }
+  set_sensitive {
+    name  = "configs.repositories.sk-backstage.password"
+    value = var.ArgoCD_GitLabTokenSecret
+  }
+
 #  set_sensitive {
 #    name  = "configs.repositories.sk-battle.username"
 #    value = var.ArgoCD_GitLabTokenName
@@ -102,8 +115,12 @@ resource "helm_release" "ArgoCD" {
 
   # https://stackoverflow.com/questions/64696721/how-do-i-pass-variables-to-a-yaml-file-in-heml-tf
   values = [
-    templatefile("${path.module}/Values/argocd.yaml", {
-      enableSelfHeal = var.ArgoCD_EnableSelfHeal
-    })
+    templatefile("${path.module}/Values/argocd.yaml", {}),
+    templatefile("${path.module}/Values/argocd-configs.yaml", {}),
+    templatefile("${path.module}/Values/argocd-controller.yaml", {}),
+    templatefile("${path.module}/Values/argocd-server.yaml", 
+      {
+        enableSelfHeal = var.ArgoCD_EnableSelfHeal
+      })
   ]
 }

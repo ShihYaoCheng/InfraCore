@@ -29,6 +29,6 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: battle
+  name: backstage
   labels:
     kubed: sync
