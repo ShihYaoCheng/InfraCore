@@ -5,9 +5,10 @@
   GCPProjectID = var.GCPProjectID
   GCPRegion = var.GCPRegion
   GCPZone = var.GCPZone
+  
   CloudSQLRootPassword = "myrootpw"
-  CloudSQLEnableAutoBackup = true
-  CloudSQLEnablePointInTimeRecovery = true
+  CloudSQLEnableAutoBackup = false
+  CloudSQLEnablePointInTimeRecovery = false
   CloudSQLEnableDiskAutoResize = false
   CloudSQLEnableHighlyAvailable = false
   CloudSQLMachine = "db-g1-small"
