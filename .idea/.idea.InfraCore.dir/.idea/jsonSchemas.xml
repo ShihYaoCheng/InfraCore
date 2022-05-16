@@ -14,6 +14,9 @@
                   <Item>
                     <option name="path" value=".gitlab-ci.yml" />
                   </Item>
+                  <Item>
+                    <option name="path" value=".gitlab-ci-template.yml" />
+                  </Item>
                 </list>
               </option>
             </SchemaInfo>
