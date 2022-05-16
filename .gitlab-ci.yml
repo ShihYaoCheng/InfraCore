@@ -6,9 +6,32 @@
 #  - template: Terraform.gitlab-ci.yml
 
 stages:
+  - Security
   - plan
   - deploy
   - cleanup
+
+include:
+  - local: ".gitlab-ci-template.yml"
+
+TrivyScan-EnvSRE:
+  extends: .TrivyScanTemplate
+  variables:
+    SCAN_PATH: EnvSRE
+    REPORT_FILE: ReportSRE.txt
+  
+TrivyScan-Tools:
+  extends: .TrivyScanTemplate
+  variables:
+    SCAN_PATH: tools
+    REPORT_FILE: ReportTools.txt
+
+TrivyScan-Modules:
+  extends: .TrivyScanTemplate
+  variables:
+    SCAN_PATH: Modules
+    REPORT_FILE: ReportModules.txt
+
 
 
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Terraform/Base.latest.gitlab-ci.yml
