@@ -8,7 +8,7 @@
     # https://registry.terraform.io/providers/hashicorp/google/latest
     google = {
       source = "hashicorp/google"
-      version = "~>4.16.0"
+      version = "~>4.20.0"
     }
 
     # https://registry.terraform.io/providers/winebarrel/mysql/latest
@@ -20,7 +20,7 @@
     # https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id
     random = {
       source = "hashicorp/random"
-      version = "3.1.2"
+      version = "3.1.3"
     }
   }
 }

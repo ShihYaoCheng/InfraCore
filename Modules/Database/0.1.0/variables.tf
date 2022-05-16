@@ -28,3 +28,44 @@ variable "CloudSQLRootPassword" {
   type = string
   sensitive = true
 }
+
+# db-f1-micro, db-g1-small, db-n1-standard-1, db-n1-standard-2, db-n1-standard-4,
+# db-n1-standard-8, db-n1-standard-16, db-n1-standard-32, db-n1-standard-64,
+# db-n1-standard-96, db-n1-highmem-2, db-n1-highmem-4, db-n1-highmem-8, db-n1-highmem-16,
+# db-n1-highmem-32, db-n1-highmem-64, db-n1-highmem-96.
+# db-custom-#-#
+# db-custom-1-3840(1 vCPU, 3840MB)
+variable "CloudSQLMachine" {
+  type = string
+  default = "db-n1-standard-1"
+}
+
+variable "CloudSQLEnableDiskAutoResize" {
+  type = bool
+  default = true
+}
+
+variable "CloudSQLEnableAutoBackup" {
+  type = bool
+  default = true
+}
+
+variable "CloudSQLEnablePointInTimeRecovery" {
+  type = bool
+  default = true
+}
+
+variable "CloudSQLEnableHighlyAvailable" {
+  type = bool
+  default = false
+}
+
+variable "CloudSQLAllowDeletion" {
+  type = bool
+  default = false
+}
+
+variable "CloudSQLAllowPublicIP" {
+  type = string
+  default = "118.168.10.197/32"
+}
