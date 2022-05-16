@@ -49,10 +49,10 @@ module "CloudSQL" {
 
   enable_default_db = false
 
-  # create a root user.
+  # create a super user.
   enable_default_user = true
-  user_name           = "root"
-  user_password       = var.CloudSQLRootPassword
+  user_name           = "admin"
+  user_password       = var.CloudSQLAdminPassword
 
   # https://cloud.google.com/sql/docs/mysql/maintenance
   # update CloudSQL features, Database version upgrades, Operating system patches.
@@ -83,22 +83,4 @@ module "CloudSQL" {
 }
 
 
-# https://registry.terraform.io/providers/winebarrel/mysql/latest/docs/resources/database
-#resource "mysql_database" "User" {
-#  name = "User"
-#}
-#
-## https://registry.terraform.io/providers/winebarrel/mysql/latest/docs/resources/user
-#resource "mysql_user" "cqi" {
-#  user               = "cqi"
-#  host               = "%" // allow any host to connected. Default: localhost(allow localhost connected only).
-#  plaintext_password = "cqig7777"
-#}
-#
-## https://registry.terraform.io/providers/winebarrel/mysql/latest/docs/resources/grant
-#resource "mysql_grant" "cqi-user" {
-#  user       = mysql_user.cqi.user
-#  host       = mysql_user.cqi.host
-#  database   = "User"
-#  privileges = ["ALL PRIVILEGES"]
-#}
+

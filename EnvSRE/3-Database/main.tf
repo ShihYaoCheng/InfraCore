@@ -6,7 +6,9 @@
   GCPRegion = var.GCPRegion
   GCPZone = var.GCPZone
   
-  CloudSQLRootPassword = "myrootpw"
+  CloudSQLAdminPassword = var.CloudSQLAdminPassword
+  CloudSQLBackstagePassword = var.CloudSQLBackstagePassword
+  CloudSQLUserPassword = var.CloudSQLUserPassword
   CloudSQLEnableAutoBackup = false
   CloudSQLEnablePointInTimeRecovery = false
   CloudSQLEnableDiskAutoResize = false

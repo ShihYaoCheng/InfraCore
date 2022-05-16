@@ -24,11 +24,6 @@ variable "GCPZone" {
 #============================
 # CloudSQL                  #
 #============================
-variable "CloudSQLRootPassword" {
-  type = string
-  sensitive = true
-}
-
 # db-f1-micro, db-g1-small, db-n1-standard-1, db-n1-standard-2, db-n1-standard-4,
 # db-n1-standard-8, db-n1-standard-16, db-n1-standard-32, db-n1-standard-64,
 # db-n1-standard-96, db-n1-highmem-2, db-n1-highmem-4, db-n1-highmem-8, db-n1-highmem-16,
@@ -69,3 +64,20 @@ variable "CloudSQLAllowPublicIP" {
   type = string
   default = "118.168.10.197/32"
 }
+
+variable "CloudSQLAdminPassword" {
+  type = string
+  sensitive = true
+}
+
+variable "CloudSQLUserPassword" {
+  type = string
+  sensitive = true
+}
+
+variable "CloudSQLBackstagePassword" {
+  type = string
+  sensitive = true
+}
+
+
