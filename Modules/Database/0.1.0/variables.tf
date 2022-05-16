@@ -65,7 +65,7 @@ variable "CloudSQLAllowPublicIP" {
   default = "118.168.10.197/32"
 }
 
-variable "CloudSQLAdminPassword" {
+variable "CloudSQLRootPassword" {
   type = string
   sensitive = true
 }

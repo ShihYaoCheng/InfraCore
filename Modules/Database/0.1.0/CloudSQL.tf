@@ -51,8 +51,8 @@ module "CloudSQL" {
 
   # create a super user.
   enable_default_user = true
-  user_name           = "admin"
-  user_password       = var.CloudSQLAdminPassword
+  user_name           = "root"
+  user_password       = var.CloudSQLRootPassword
 
   # https://cloud.google.com/sql/docs/mysql/maintenance
   # update CloudSQL features, Database version upgrades, Operating system patches.

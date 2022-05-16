@@ -9,7 +9,7 @@ provider "google" {
 provider "mysql" {
   endpoint = module.database.CloudSQLPublicIP
   username = "admin"
-  password = var.CloudSQLAdminPassword
+  password = var.CloudSQLRootPassword
 }
 
 terraform {
