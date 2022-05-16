@@ -13,5 +13,6 @@
   CloudSQLEnablePointInTimeRecovery = false
   CloudSQLEnableDiskAutoResize = false
   CloudSQLEnableHighlyAvailable = false
+  CloudSQLAllowDeletion = true
   CloudSQLMachine = "db-g1-small"
 }
