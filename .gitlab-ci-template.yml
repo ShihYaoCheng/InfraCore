@@ -31,7 +31,7 @@
     - trivy fs --security-checks "config,secret" -o "$CI_PROJECT_DIR/$REPORT_FILE" $SCAN_PATH
 
     # Fail on high and critical vulnerabilities.
-    - trivy fs --security-checks 'config,secret' -s HIGH,CRITICAL -f json
+    - trivy fs --security-checks "config,secret" -s HIGH,CRITICAL -f json $SCAN_PATH
     - results=$(eval "trivy fs --security-checks 'config,secret' -s HIGH,CRITICAL -f json $SCAN_PATH | sed '1,2d' | jq '.Results | length'")
     - echo $results
     - if [ "$results" -gt 0 ]; then exit 1; fi
