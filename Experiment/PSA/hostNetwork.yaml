@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: host-network
+spec:
+  hostNetwork: true
+  containers:
+    - name: app
+      # https://hub.docker.com/r/wbitt/network-multitool
+      image: wbitt/network-multitool
