@@ -6,7 +6,7 @@
   GCPRegion = var.GCPRegion
   GCPZone = var.GCPZone
   
-  CloudSQLRootPassword = var.CloudSQLRootPassword
+  CloudSQLAdminPassword = var.CloudSQLAdminPassword
   CloudSQLBackstagePassword = var.CloudSQLBackstagePassword
   CloudSQLUserPassword = var.CloudSQLUserPassword
   CloudSQLEnableAutoBackup = false
@@ -15,4 +15,5 @@
   CloudSQLEnableHighlyAvailable = false
   CloudSQLAllowDeletion = true
   CloudSQLMachine = "db-g1-small"
+  CloudSQLAllowPublicIP = "111.251.22.68/32"
 }

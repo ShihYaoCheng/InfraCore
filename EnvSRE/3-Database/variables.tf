@@ -22,7 +22,7 @@ variable "GCPZone" {
 #============================
 # CloudSQL                  #
 #============================
-variable "CloudSQLRootPassword" {
+variable "CloudSQLAdminPassword" {
   type = string
   sensitive = true
 }

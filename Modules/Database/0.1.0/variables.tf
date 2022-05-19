@@ -65,7 +65,11 @@ variable "CloudSQLAllowPublicIP" {
   default = "118.168.10.197/32"
 }
 
-variable "CloudSQLRootPassword" {
+locals {
+  AdminName = "cqi-admin"
+}
+
+variable "CloudSQLAdminPassword" {
   type = string
   sensitive = true
 }

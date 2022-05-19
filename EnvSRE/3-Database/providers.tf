@@ -14,9 +14,9 @@ provider "google-beta" {
 }
 
 provider "mysql" {
-  endpoint = module.database.CloudSQLPublicIP
-  username = "root"
-  password = var.CloudSQLRootPassword
+  endpoint = module.database.PublicIP
+  username = module.database.AdminName
+  password = var.CloudSQLAdminPassword
 }
 
 terraform {
