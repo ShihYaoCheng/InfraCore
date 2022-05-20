@@ -1,4 +1,11 @@
-﻿//============================== Project ==============================
+﻿#============================
+# Project                   #
+#============================
+variable "ProjectName" {
+  type = string
+  default = "cqi-sk-sre"
+}
+
 variable "GCPProjectID" {
   type    = string
   default = "stellar-38931"
