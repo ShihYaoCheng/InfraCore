@@ -3,6 +3,8 @@ module "Applications" {
   source = "../../Modules/Apps/0.1.0"
 
   ProjectName = var.ProjectName
+  GCPProjectID = var.GCPProjectID
+  GCPZone = var.GCPZone
 
   RegisterDomainName          = true
   DomainName                  = "sre.origingaia.com"
