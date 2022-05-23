@@ -27,13 +27,4 @@ variable "CloudSQLAdminPassword" {
   sensitive = true
 }
 
-variable "CloudSQLBackstagePassword" {
-  type = string
-  sensitive = true
-}
-
-variable "CloudSQLUserPassword" {
-  type = string
-  sensitive = true
-}
 

@@ -7,13 +7,13 @@
   GCPZone = var.GCPZone
   
   CloudSQLAdminPassword = var.CloudSQLAdminPassword
-  CloudSQLBackstagePassword = var.CloudSQLBackstagePassword
-  CloudSQLUserPassword = var.CloudSQLUserPassword
+  CloudSQLBackstagePassword = "backstage1234"
+  CloudSQLUserPassword = "user1234"
   CloudSQLEnableAutoBackup = false
   CloudSQLEnablePointInTimeRecovery = false
   CloudSQLEnableDiskAutoResize = false
   CloudSQLEnableHighlyAvailable = false
   CloudSQLAllowDeletion = true
   CloudSQLMachine = "db-g1-small"
-  CloudSQLAllowPublicIP = "111.251.22.68/32"
+  CloudSQLAllowPublicIP = "111.251.35.156/32"
 }
