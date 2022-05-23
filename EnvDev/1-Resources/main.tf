@@ -8,5 +8,4 @@
 
   GCPProjectID = var.GCPProjectID
   GCPRegion = var.GCPRegion
-
 }
