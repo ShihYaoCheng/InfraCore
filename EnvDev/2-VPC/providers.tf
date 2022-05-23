@@ -12,7 +12,7 @@
 #      source = "hashicorp/google"
 #      version = "~>4.16.0"
 #    }
-  }
+#  }
 }
 
 // https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference
