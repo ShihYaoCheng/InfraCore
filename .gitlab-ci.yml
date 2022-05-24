@@ -286,13 +286,15 @@ image:
 
 #===========================================================#
 variables:
-  DEV_RES_DIR: EnvDev/1-Resources
+  DEV_RES_DIR: EnvDev/1-Res
   DEV_RES_TF_STATE_NAME: "Dev-Resources"
   DEV_VPC_DIR: EnvDev/2-VPC
   DEV_VPC_TF_STATE_NAME: "Dev-VPC"
-  DEV_GKE_DIR: EnvDev/3-GKE
+  DEV_DB_DIR: EnvDev/3-Database
+  DEV_DB_TF_STATE_NAME: "Dev-Database"
+  DEV_GKE_DIR: EnvDev/4-GKE
   DEV_GKE_TF_STATE_NAME: "Dev-GKE"
-  DEV_APPS_DIR: EnvDev/4-Apps
+  DEV_APPS_DIR: EnvDev/5-Apps
   DEV_APPS_TF_STATE_NAME: "Dev-Apps"
 
   QA_RES_DIR: EnvQA/1-Res
@@ -400,9 +402,43 @@ Dev-2-VPC-Destroy:
 
 
 #============================#
+# Dev - Database             #
+#============================#
+Dev-3-Database-Plan:
+  extends: .plan.without.var.file
+  variables:
+    TF_ROOT: ${DEV_DB_DIR}
+    TF_STATE_NAME: ${DEV_DB_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_DB_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+Dev-3-Database-Apply:
+  extends: .apply.without.var.file
+  needs: [Dev-3-Database-Plan]
+  variables:
+    TF_ROOT: ${DEV_DB_DIR}
+    TF_STATE_NAME: ${DEV_DB_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_DB_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+Dev-3-Database-Destroy:
+  extends: .destroy.without.var.file
+  needs: [Dev-3-Database-Plan]
+  variables:
+    TF_ROOT: ${DEV_DB_DIR}
+    TF_STATE_NAME: ${DEV_DB_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_DB_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+
+
+#============================#
 # Dev - GKE                  #
 #============================#
-Dev-3-GKE-Plan:
+Dev-4-GKE-Plan:
   extends: .plan.without.var.file
   variables:
     TF_ROOT: ${DEV_GKE_DIR}
@@ -411,9 +447,9 @@ Dev-3-GKE-Plan:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
-Dev-3-GKE-Apply:
+Dev-4-GKE-Apply:
   extends: .apply.without.var.file
-  needs: [Dev-3-GKE-Plan]
+  needs: [Dev-4-GKE-Plan]
   variables:
     TF_ROOT: ${DEV_GKE_DIR}
     TF_STATE_NAME: ${DEV_GKE_TF_STATE_NAME}
@@ -421,9 +457,9 @@ Dev-3-GKE-Apply:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
-Dev-3-GKE-Destroy:
+Dev-4-GKE-Destroy:
   extends: .destroy.without.var.file
-  needs: [Dev-3-GKE-Plan]
+  needs: [Dev-4-GKE-Plan]
   variables:
     TF_ROOT: ${DEV_GKE_DIR}
     TF_STATE_NAME: ${DEV_GKE_TF_STATE_NAME}
@@ -435,7 +471,7 @@ Dev-3-GKE-Destroy:
 #============================#
 # Dev - Apps                 #
 #============================#
-Dev-4-OP-Plan:
+Dev-5-Apps-Plan:
   extends: .plan.with.var.file
   variables:
     TF_ROOT: ${DEV_APPS_DIR}
@@ -446,9 +482,9 @@ Dev-4-OP-Plan:
     - cd ${TF_ROOT}
     - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
-Dev-4-OP-Apply:
+Dev-5-Apps-Apply:
   extends: .apply.with.var.file
-  needs: [Dev-4-OP-Plan]
+  needs: [Dev-5-Apps-Plan]
   variables:
     TF_ROOT: ${DEV_APPS_DIR}
     TF_STATE_NAME: ${DEV_APPS_TF_STATE_NAME}
@@ -458,9 +494,9 @@ Dev-4-OP-Apply:
     - cd ${TF_ROOT}
     - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
-Dev-4-OP-Destroy:
+Dev-5-Apps-Destroy:
   extends: .destroy.with.var.file
-  needs: [Dev-4-OP-Plan]
+  needs: [Dev-5-Apps-Plan]
   variables:
     TF_ROOT: ${DEV_APPS_DIR}
     TF_STATE_NAME: ${DEV_APPS_TF_STATE_NAME}
