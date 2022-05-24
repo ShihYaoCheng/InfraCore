@@ -412,6 +412,8 @@ Dev-3-Database-Plan:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_DB_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  tags:
+    - g1
 
 Dev-3-Database-Apply:
   extends: .apply.without.var.file
@@ -422,6 +424,8 @@ Dev-3-Database-Apply:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_DB_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  tags:
+    - g1
 
 Dev-3-Database-Destroy:
   extends: .destroy.without.var.file
