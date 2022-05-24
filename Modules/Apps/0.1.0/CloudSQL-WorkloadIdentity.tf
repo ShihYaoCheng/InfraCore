@@ -3,9 +3,21 @@ module "backstage-workload-identity" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
   version = "21.0.0"
 
-  name         = "cloud-sql-proxy"
+  name         = "backstage-cloud-sql-proxy"
   project_id   = var.GCPProjectID
   namespace    = "backstage"
+  roles        = ["roles/cloudsql.client"]
+  cluster_name = var.ProjectName
+  location     = var.GCPZone
+}
+
+module "user-workload-identity" {
+  source  = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
+  version = "21.0.0"
+
+  name         = "user-cloud-sql-proxy"
+  project_id   = var.GCPProjectID
+  namespace    = "user"
   roles        = ["roles/cloudsql.client"]
   cluster_name = var.ProjectName
   location     = var.GCPZone
