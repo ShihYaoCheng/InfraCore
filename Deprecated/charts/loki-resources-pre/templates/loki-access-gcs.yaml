@@ -1,7 +1,0 @@
-﻿apiVersion: v1
-kind: Secret
-metadata:
-  name: loki-access-gcs
-type: Opaque
-data:
-  key.json: {{ .Values.gcs_service_account_base64 }}

@@ -1,5 +1,0 @@
-# helm upgrade --install prometheus-stack-resources ./prometheus-stack-resources -n monitoring
-
-grafana:
-  ingress:
-    useProductionCert: false
