@@ -1,5 +1,5 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
-module "OpApps" {
+module "Apps" {
   source = "../../Modules/Apps/0.1.0"
 
   ProjectName  = var.ProjectName
