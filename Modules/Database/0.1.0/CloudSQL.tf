@@ -2,6 +2,10 @@
   byte_length = 2
 }
 
+data "http" "MyIP" {
+  url = "http://ipv4.icanhazip.com"
+}
+
 # https://registry.terraform.io/modules/GoogleCloudPlatform/sql-db/google/latest/submodules/mysql
 module "CloudSQL" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/mysql"
@@ -62,9 +66,16 @@ module "CloudSQL" {
   maintenance_window_hour         = 22
   maintenance_window_update_track = "stable"
 
+  # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database_instance
+  # https://www.unixtimestamp.com/
+  # https://stackoverflow.com/questions/46763287/i-want-to-identify-the-public-ip-of-the-terraform-execution-environment-and-add
   ip_configuration = {
     "allocated_ip_range" : null,
-    "authorized_networks" : [{ value = var.CloudSQLAllowPublicIP }],
+    "authorized_networks" : [
+      { 
+        value = "${chomp(data.http.MyIP.body)}/32"
+        expiration_time = timeadd(timestamp(), var.IPExpirationTime)
+      }],
     "ipv4_enabled" : true,
     "private_network" : null,
     "require_ssl" : null

@@ -60,13 +60,14 @@ variable "CloudSQLAllowDeletion" {
   default = false
 }
 
-variable "CloudSQLAllowPublicIP" {
-  type = string
-  default = "118.168.10.197/32"
-}
-
 locals {
   AdminName = "cqi-admin"
+}
+
+# https://www.terraform.io/language/functions/timeadd
+variable "IPExpirationTime" {
+  type = string
+  default = "5m"
 }
 
 variable "CloudSQLAdminPassword" {

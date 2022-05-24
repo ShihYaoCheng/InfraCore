@@ -15,5 +15,4 @@
   CloudSQLEnableHighlyAvailable = false
   CloudSQLAllowDeletion = true
   CloudSQLMachine = "db-f1-micro"
-  CloudSQLAllowPublicIP = "118.168.34.41/32"
 }

@@ -15,5 +15,5 @@
   CloudSQLEnableHighlyAvailable = false
   CloudSQLAllowDeletion = true
   CloudSQLMachine = "db-g1-small"
-  CloudSQLAllowPublicIP = "118.168.34.41/32"
+  IPExpirationTime = "24h"
 }
