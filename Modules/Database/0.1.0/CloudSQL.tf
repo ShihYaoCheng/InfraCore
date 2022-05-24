@@ -80,6 +80,8 @@ module "CloudSQL" {
   # db-custom-#-#
   # db-custom-1-3840(1 vCPU, 3840MB)
   tier = var.CloudSQLMachine
+  
+  create_timeout = var.CloudSQLMachine == "db-f1-micro" ? "20m" : "10m"
 }
 
 
