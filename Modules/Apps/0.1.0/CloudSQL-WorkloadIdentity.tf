@@ -1,5 +1,7 @@
 # https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest/submodules/workload-identity
 module "backstage-workload-identity" {
+  depends_on = [helm_release.Configuration]
+  
   source  = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
   version = "21.0.0"
 
@@ -16,6 +18,8 @@ module "backstage-workload-identity" {
 }
 
 module "user-workload-identity" {
+  depends_on = [helm_release.Configuration]
+  
   source  = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
   version = "21.0.0"
 
