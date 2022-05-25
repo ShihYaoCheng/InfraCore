@@ -1,10 +1,9 @@
 ﻿# https://artifacthub.io/packages/helm/argo/argo-cd
 # https://github.com/argoproj/argo-helm/blob/master/charts/argo-cd/values.yaml
 # https://github.com/argoproj/argo-helm/blob/argo-cd-3.35.2/charts/argo-cd/values.yaml
-
 # helm upgrade --install argocd argo/argo-cd -n argocd --create-namespace
-# helm upgrade --install argocd argo/argo-cd -f ./EnvCore/0.1.0/values/argocd.yaml -n argocd --create-namespace
 # helm uninstall argocd -n argocd
+
 resource "helm_release" "ArgoCD" {
   depends_on = [helm_release.Prometheus]
 
@@ -36,10 +35,6 @@ resource "helm_release" "ArgoCD" {
     name  = "server.additionalApplications[3].source.targetRevision"
     value = var.ArgoCD_AppBackstageBranchOrTag
   }
-#  set {
-#    name  = "server.additionalApplications[3].source.targetRevision"
-#    value = var.ArgoCD_AppBattleBranchOrTag
-#  }
 
   # Helm Value File.
   # https://stackoverflow.com/questions/53846273/helm-passing-array-values-through-set
@@ -51,14 +46,35 @@ resource "helm_release" "ArgoCD" {
     name  = "server.additionalApplications[1].source.helm.valueFiles"
     value = var.ArgoCD_RepositoryHelmPathValueFiles
   }
+  
+  # [2] = User service.
   set {
     name  = "server.additionalApplications[2].source.helm.valueFiles"
     value = var.ArgoCD_RepositoryHelmPathValueFiles
   }
   set {
+    name  = "server.additionalApplications[2].source.helm.parameters[0].name"
+    value = "cloudSQL.connectionName"
+  }
+  set {
+    name  = "server.additionalApplications[2].source.helm.parameters[0].value"
+    value = data.google_storage_bucket_object_content.CloudSQLConnectionName.content
+  }
+  
+  # [3] = Backstage service.
+  set {
     name  = "server.additionalApplications[3].source.helm.valueFiles"
     value = var.ArgoCD_RepositoryHelmPathValueFiles
   }
+  set {
+    name  = "server.additionalApplications[3].source.helm.parameters[0].name"
+    value = "cloudSQL.connectionName"
+  }
+  set {
+    name  = "server.additionalApplications[3].source.helm.parameters[0].value"
+    value = data.google_storage_bucket_object_content.CloudSQLConnectionName.content
+  }
+
 
   #============================#
   # Set repository credentials #
@@ -100,19 +116,6 @@ resource "helm_release" "ArgoCD" {
     value = var.ArgoCD_GitLabTokenSecret
   }
 
-#  set_sensitive {
-#    name  = "configs.repositories.sk-battle.username"
-#    value = var.ArgoCD_GitLabTokenName
-#  }
-#  set_sensitive {
-#    name  = "configs.repositories.sk-battle.password"
-#    value = var.ArgoCD_GitLabTokenSecret
-#  }
-
-  #  values = [
-  #    "${file("./${path.module}/values/argocd.yaml")}"
-  #  ]
-
   # https://stackoverflow.com/questions/64696721/how-do-i-pass-variables-to-a-yaml-file-in-heml-tf
   values = [
     templatefile("${path.module}/Values/argocd.yaml", {}),
@@ -124,3 +127,9 @@ resource "helm_release" "ArgoCD" {
       })
   ]
 }
+
+data "google_storage_bucket_object_content" "CloudSQLConnectionName" {
+  bucket = var.ProjectName
+  name   = "CloudSQLConnectionName"
+}
+

@@ -95,5 +95,10 @@ module "CloudSQL" {
   create_timeout = var.CloudSQLMachine == "db-f1-micro" ? "20m" : "10m"
 }
 
-
+# require permission: Storage Admin
+resource "google_storage_bucket_object" "CloudSQLConnectionName" {
+  bucket  = var.ProjectName
+  name    = "CloudSQLConnectionName"
+  content = module.CloudSQL.instance_connection_name
+}
 
