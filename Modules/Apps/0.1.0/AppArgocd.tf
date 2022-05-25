@@ -52,28 +52,28 @@ resource "helm_release" "ArgoCD" {
     name  = "server.additionalApplications[2].source.helm.valueFiles"
     value = var.ArgoCD_RepositoryHelmPathValueFiles
   }
-  set {
-    name  = "server.additionalApplications[2].source.helm.parameters[0].name"
-    value = "cloudSQL.connectionName"
-  }
-  set {
-    name  = "server.additionalApplications[2].source.helm.parameters[0].value"
-    value = data.google_storage_bucket_object_content.CloudSQLConnectionName.content
-  }
+#  set {
+#    name  = "server.additionalApplications[2].source.helm.parameters[0].name"
+#    value = "cloudSQL.connectionName"
+#  }
+#  set {
+#    name  = "server.additionalApplications[2].source.helm.parameters[0].value"
+#    value = data.google_storage_bucket_object_content.CloudSQLConnectionName.content
+#  }
   
   # [3] = Backstage service.
   set {
     name  = "server.additionalApplications[3].source.helm.valueFiles"
     value = var.ArgoCD_RepositoryHelmPathValueFiles
   }
-  set {
-    name  = "server.additionalApplications[3].source.helm.parameters[0].name"
-    value = "cloudSQL.connectionName"
-  }
-  set {
-    name  = "server.additionalApplications[3].source.helm.parameters[0].value"
-    value = data.google_storage_bucket_object_content.CloudSQLConnectionName.content
-  }
+#  set {
+#    name  = "server.additionalApplications[3].source.helm.parameters[0].name"
+#    value = "cloudSQL.connectionName"
+#  }
+#  set {
+#    name  = "server.additionalApplications[3].source.helm.parameters[0].value"
+#    value = data.google_storage_bucket_object_content.CloudSQLConnectionName.content
+#  }
 
 
   #============================#
@@ -126,10 +126,5 @@ resource "helm_release" "ArgoCD" {
         enableSelfHeal = var.ArgoCD_EnableSelfHeal
       })
   ]
-}
-
-data "google_storage_bucket_object_content" "CloudSQLConnectionName" {
-  bucket = var.ProjectName
-  name   = "CloudSQLConnectionName"
 }
 
