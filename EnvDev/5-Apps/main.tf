@@ -6,7 +6,7 @@ module "Apps" {
   GCPProjectID = var.GCPProjectID
   GCPZone      = var.GCPZone
 
-  DomainName                  = "dev.origingaia.com"
+  DomainName                  = "dev.ponponsnake.com"
   CreateProductionCertificate = true
 
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
