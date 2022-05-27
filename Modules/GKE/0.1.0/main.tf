@@ -73,7 +73,7 @@ module "gke" {
       # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
       node_count  = var.GKE-NodeCount-e2-high-cpu-4
 
-      disk_size_gb = 20
+      disk_size_gb = 60
       disk_type    = "pd-standard"
 
       auto_repair  = true
@@ -92,7 +92,7 @@ module "gke" {
       # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
       node_count  = var.GKE-NodeCount-e2-standard-2
 
-      disk_size_gb = 20
+      disk_size_gb = 60
       disk_type    = "pd-standard"
 
       auto_repair  = true
@@ -111,7 +111,7 @@ module "gke" {
       # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
       node_count  = var.GKE-NodeCount-e2-medium
 
-      disk_size_gb = 20
+      disk_size_gb = 60
       disk_type    = "pd-standard"
 
       auto_repair  = true
