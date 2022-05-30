@@ -16,6 +16,7 @@ module "Apps" {
   ArgoCD_AppTableBranchOrTag          = "main"
   ArgoCD_AppUserBranchOrTag           = "main"
   ArgoCD_AppBackstageBranchOrTag      = "main"
+  ArgoCD_AppBattleBranchOrTag         = "main"
 
   PrometheusStorageClassName = "ssd-delete"
   PrometheusStorageSize      = "100Gi"
