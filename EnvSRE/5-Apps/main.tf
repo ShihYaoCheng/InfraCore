@@ -25,7 +25,7 @@ module "Applications" {
   AlertSlackChannel          = "alert-sk-sre"
   PrometheusStorageClassName = "ssd-delete"
   PrometheusStorageSize      = "20Gi"
-  GrafanaAdminPassword       = "ran9977"
+  GrafanaAdminPassword       = "gra4422"
 }
 
 
