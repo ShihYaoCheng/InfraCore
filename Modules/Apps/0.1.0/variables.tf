@@ -165,7 +165,7 @@ variable "ArgoCD_AppBackstageBranchOrTag" {
   type = string
 }
 
-#variable "ArgoCD_AppBattleBranchOrTag" {
-#  type = string
-#}
+variable "ArgoCD_AppBattleBranchOrTag" {
+  type = string
+}
 

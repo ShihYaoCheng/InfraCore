@@ -32,3 +32,10 @@ metadata:
   name: backstage
   labels:
     kubed: sync
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: battle
+  labels:
+    kubed: sync

@@ -35,6 +35,10 @@ resource "helm_release" "ArgoCD" {
     name  = "server.additionalApplications[3].source.targetRevision"
     value = var.ArgoCD_AppBackstageBranchOrTag
   }
+  set {
+    name  = "server.additionalApplications[4].source.targetRevision"
+    value = var.ArgoCD_AppBattleBranchOrTag
+  }
 
   # Helm Value File.
   # https://stackoverflow.com/questions/53846273/helm-passing-array-values-through-set
@@ -52,28 +56,17 @@ resource "helm_release" "ArgoCD" {
     name  = "server.additionalApplications[2].source.helm.valueFiles"
     value = var.ArgoCD_RepositoryHelmPathValueFiles
   }
-#  set {
-#    name  = "server.additionalApplications[2].source.helm.parameters[0].name"
-#    value = "cloudSQL.connectionName"
-#  }
-#  set {
-#    name  = "server.additionalApplications[2].source.helm.parameters[0].value"
-#    value = data.google_storage_bucket_object_content.CloudSQLConnectionName.content
-#  }
-  
   # [3] = Backstage service.
   set {
     name  = "server.additionalApplications[3].source.helm.valueFiles"
     value = var.ArgoCD_RepositoryHelmPathValueFiles
   }
-#  set {
-#    name  = "server.additionalApplications[3].source.helm.parameters[0].name"
-#    value = "cloudSQL.connectionName"
-#  }
-#  set {
-#    name  = "server.additionalApplications[3].source.helm.parameters[0].value"
-#    value = data.google_storage_bucket_object_content.CloudSQLConnectionName.content
-#  }
+  # [3] = Battle service.
+  set {
+    name  = "server.additionalApplications[4].source.helm.valueFiles"
+    value = var.ArgoCD_RepositoryHelmPathValueFiles
+  }
+
 
 
   #============================#
@@ -113,6 +106,15 @@ resource "helm_release" "ArgoCD" {
   }
   set_sensitive {
     name  = "configs.repositories.sk-backstage.password"
+    value = var.ArgoCD_GitLabTokenSecret
+  }
+
+  set_sensitive {
+    name  = "configs.repositories.sk-battle.username"
+    value = var.ArgoCD_GitLabTokenName
+  }
+  set_sensitive {
+    name  = "configs.repositories.sk-battle.password"
     value = var.ArgoCD_GitLabTokenSecret
   }
 

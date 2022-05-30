@@ -2,9 +2,9 @@
 module "Applications" {
   source = "../../Modules/Apps/0.1.0"
 
-  ProjectName = var.ProjectName
+  ProjectName  = var.ProjectName
   GCPProjectID = var.GCPProjectID
-  GCPZone = var.GCPZone
+  GCPZone      = var.GCPZone
 
   RegisterDomainName          = true
   DomainName                  = "sre.origingaia.com"
@@ -21,6 +21,7 @@ module "Applications" {
   ArgoCD_AppTableBranchOrTag          = "main"
   ArgoCD_AppUserBranchOrTag           = "main"
   ArgoCD_AppBackstageBranchOrTag      = "main"
+  ArgoCD_AppBattleBranchOrTag         = "main"
 
   AlertSlackChannel          = "alert-sk-sre"
   PrometheusStorageClassName = "ssd-delete"

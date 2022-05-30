@@ -29,12 +29,12 @@ configs:
       type: git
       password: my-password
       username: my-username
-    #    sk-battle:
-    #      url: https://gitlab.com/GameSnake/SRE/ArgoCDAppBattle.git
-    #      name: sk-battle
-    #      type: git
-    #      password: my-password
-    #      username: my-username
+    sk-battle:
+      url: https://gitlab.com/GameSnake/SRE/ArgoCDAppBattle.git
+      name: sk-battle
+      type: git
+      password: my-password
+      username: my-username
     
     #  repositories: { }
     # istio-helm-repo:
