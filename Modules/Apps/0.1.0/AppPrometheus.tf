@@ -22,6 +22,7 @@ resource "helm_release" "Prometheus" {
       slackChannel = var.AlertSlackChannel,
       prometheusStorageClassName = var.PrometheusStorageClassName,
       prometheusStorageSize = var.PrometheusStorageSize,
+      prometheusRetention = var.PrometheusRetention,
       grafanaAdminPassword = var.GrafanaAdminPassword
     }),
 

@@ -71,6 +71,11 @@ variable "PrometheusStorageSize" {
   #  default = "100Gi"
 }
 
+variable "PrometheusRetention" {
+  type = string
+  default = "90d"
+}
+
 variable "GrafanaAdminPassword" {
   type = string
 }

@@ -1,5 +1,5 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
-module "OpApps" {
+module "Apps" {
   source = "../../Modules/Apps/0.1.0"
 
   ProjectName  = var.ProjectName
@@ -21,6 +21,7 @@ module "OpApps" {
   AlertSlackChannel          = "alert-sk-qa"
   PrometheusStorageClassName = "ssd-delete"
   PrometheusStorageSize      = "100Gi"
+  PrometheusRetention        = "14d"
   GrafanaAdminPassword       = "gra4422"
 
   Velero_Enable = false
