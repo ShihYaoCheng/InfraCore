@@ -648,7 +648,7 @@ QA-4-GKE-Destroy:
 #============================#
 # QA - OpApps                #
 #============================#
-QA-5-OP-Plan:
+QA-5-Apps-Plan:
   extends: .plan.with.var.file
   variables:
     TF_ROOT: ${QA_APPS_DIR}
@@ -659,9 +659,9 @@ QA-5-OP-Plan:
     - cd ${TF_ROOT}
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
-QA-5-OP-Apply:
+QA-5-Apps-Apply:
   extends: .apply.with.var.file
-  needs: [QA-5-OP-Plan]
+  needs: [QA-5-Apps-Plan]
   variables:
     TF_ROOT: ${QA_APPS_DIR}
     TF_STATE_NAME: ${QA_APPS_TF_STATE_NAME}
@@ -671,9 +671,9 @@ QA-5-OP-Apply:
     - cd ${TF_ROOT}
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
-QA-5-OP-Destroy:
+QA-5-Apps-Destroy:
   extends: .destroy.with.var.file
-  needs: [QA-5-OP-Plan]
+#  needs: [QA-5-OP-Plan]
   variables:
     TF_ROOT: ${QA_APPS_DIR}
     TF_STATE_NAME: ${QA_APPS_TF_STATE_NAME}
