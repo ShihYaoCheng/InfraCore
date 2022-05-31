@@ -673,7 +673,7 @@ QA-5-Apps-Apply:
 
 QA-5-Apps-Destroy:
   extends: .destroy.with.var.file
-  needs: [QA-5-OP-Plan]
+  needs: [QA-5-Apps-Plan]
   variables:
     TF_ROOT: ${QA_APPS_DIR}
     TF_STATE_NAME: ${QA_APPS_TF_STATE_NAME}
