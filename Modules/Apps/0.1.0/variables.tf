@@ -75,14 +75,6 @@ variable "GrafanaAdminPassword" {
   type = string
 }
 
-#============================
-# Cert-Manager              #
-#============================
-#variable "CreateStagingCertificate" {
-#  type    = bool
-#  default = true
-#}
-
 variable "CreateProductionCertificate" {
   type    = bool
   default = false
@@ -109,7 +101,7 @@ variable "Tempo_Enable" {
 #============================
 variable "Velero_Enable" {
   type = bool
-  default = true
+  default = false
 }
 
 
