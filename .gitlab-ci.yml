@@ -603,7 +603,7 @@ QA-3-DB-Apply:
 
 QA-3-DB-Destroy:
   extends: .destroy.without.var.file
-  needs: [QA-3-DB-Plan]
+#  needs: [QA-3-DB-Plan]
   variables:
     TF_ROOT: ${QA_DB_DIR}
     TF_STATE_NAME: ${QA_DB_TF_STATE_NAME}
