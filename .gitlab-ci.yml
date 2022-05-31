@@ -301,9 +301,11 @@ variables:
   QA_RES_TF_STATE_NAME: "QA-Res"
   QA_VPC_DIR: EnvQA/2-VPC
   QA_VPC_TF_STATE_NAME: "QA-VPC"
-  QA_GKE_DIR: EnvQA/3-GKE
+  QA_DB_DIR: EnvQA/3-Database
+  QA_DB_TF_STATE_NAME: "QA-DB"
+  QA_GKE_DIR: EnvQA/4-GKE
   QA_GKE_TF_STATE_NAME: "QA-GKE"
-  QA_APPS_DIR: EnvQA/4-Apps
+  QA_APPS_DIR: EnvQA/5-Apps
   QA_APPS_TF_STATE_NAME: "QA-Apps"
 
   PROD_VPC_DIR: EnvProd/1-VPC
@@ -578,9 +580,42 @@ QA-2-VPC-Destroy:
 
 
 #============================#
+# QA - Database              #
+#============================#
+QA-3-DB-Plan:
+  extends: .plan.without.var.file
+  variables:
+    TF_ROOT: ${QA_DB_DIR}
+    TF_STATE_NAME: ${QA_DB_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_DB_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+QA-3-DB-Apply:
+  extends: .apply.without.var.file
+  needs: [QA-3-DB-Plan]
+  variables:
+    TF_ROOT: ${QA_DB_DIR}
+    TF_STATE_NAME: ${QA_DB_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_DB_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+QA-3-DB-Destroy:
+  extends: .destroy.without.var.file
+  needs: [QA-3-DB-Plan]
+  variables:
+    TF_ROOT: ${QA_DB_DIR}
+    TF_STATE_NAME: ${QA_DB_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_DB_SERVICE_ACCOUNT_BASE64 | base64 -d)
+
+
+#============================#
 # QA - GKE                   #
 #============================#
-QA-3-GKE-Plan:
+QA-4-GKE-Plan:
   extends: .plan.without.var.file
   variables:
     TF_ROOT: ${QA_GKE_DIR}
@@ -589,9 +624,9 @@ QA-3-GKE-Plan:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
-QA-3-GKE-Apply:
+QA-4-GKE-Apply:
   extends: .apply.without.var.file
-  needs: [QA-3-GKE-Plan]
+  needs: [QA-4-GKE-Plan]
   variables:
     TF_ROOT: ${QA_GKE_DIR}
     TF_STATE_NAME: ${QA_GKE_TF_STATE_NAME}
@@ -599,9 +634,9 @@ QA-3-GKE-Apply:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
 
-QA-3-GKE-Destroy:
+QA-4-GKE-Destroy:
   extends: .destroy.without.var.file
-  needs: [QA-3-GKE-Plan]
+  needs: [QA-4-GKE-Plan]
   variables:
     TF_ROOT: ${QA_GKE_DIR}
     TF_STATE_NAME: ${QA_GKE_TF_STATE_NAME}
@@ -613,7 +648,7 @@ QA-3-GKE-Destroy:
 #============================#
 # QA - OpApps                #
 #============================#
-QA-4-OP-Plan:
+QA-5-OP-Plan:
   extends: .plan.with.var.file
   variables:
     TF_ROOT: ${QA_APPS_DIR}
@@ -624,9 +659,9 @@ QA-4-OP-Plan:
     - cd ${TF_ROOT}
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
-QA-4-OP-Apply:
+QA-5-OP-Apply:
   extends: .apply.with.var.file
-  needs: [QA-4-OP-Plan]
+  needs: [QA-5-OP-Plan]
   variables:
     TF_ROOT: ${QA_APPS_DIR}
     TF_STATE_NAME: ${QA_APPS_TF_STATE_NAME}
@@ -636,9 +671,9 @@ QA-4-OP-Apply:
     - cd ${TF_ROOT}
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
 
-QA-4-OP-Destroy:
+QA-5-OP-Destroy:
   extends: .destroy.with.var.file
-  needs: [QA-4-OP-Plan]
+  needs: [QA-5-OP-Plan]
   variables:
     TF_ROOT: ${QA_APPS_DIR}
     TF_STATE_NAME: ${QA_APPS_TF_STATE_NAME}
