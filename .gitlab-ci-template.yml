@@ -14,6 +14,7 @@
     TRIVY_IGNORE_UNFIXED: "true"
     SCAN_PATH: ./
     REPORT_FILE: report.txt
+  allow_failure: true
   before_script:
     # install jq.
     - wget -O jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
@@ -31,10 +32,10 @@
     - trivy fs --security-checks "config,secret" -o "$CI_PROJECT_DIR/$REPORT_FILE" $SCAN_PATH
 
     # Fail on high and critical vulnerabilities.
-    - trivy fs --security-checks "config,secret" -s HIGH,CRITICAL -f json $SCAN_PATH
-#    - results=$(eval "trivy fs --security-checks 'config,secret' -s HIGH,CRITICAL -f json $SCAN_PATH | sed '1d' | jq '.Results | length'")
-#    - echo $results
-#    - if [ "$results" -gt 0 ]; then exit 1; fi
+#    - trivy fs --security-checks "config,secret" -s HIGH,CRITICAL -f json $SCAN_PATH
+    - results=$(eval "trivy fs --security-checks 'config,secret' -s HIGH,CRITICAL -f json $SCAN_PATH | sed '1d' | jq '.Results | length'")
+    - echo $results
+    - if [ "$results" -gt 0 ]; then exit 1; fi
   artifacts:
     when: always
     paths:
