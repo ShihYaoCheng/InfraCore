@@ -3,6 +3,9 @@ module "OpApps" {
   source = "../../Modules/Apps/0.1.0"
 
   ProjectName = var.ProjectName
+  GCPProjectID = var.GCPProjectID
+  GCPZone      = var.GCPZone
+  
   DomainName  = "qa.origingaia.com"
   CreateProductionCertificate = true
 
@@ -12,12 +15,15 @@ module "OpApps" {
   ArgoCD_AppFileBranchOrTag           = "v0.0.9"
   ArgoCD_AppTableBranchOrTag          = "v0.0.3"
   ArgoCD_AppUserBranchOrTag           = "v0.0.4"
+  ArgoCD_AppBackstageBranchOrTag      = "main"
   ArgoCD_AppBattleBranchOrTag         = "v0.0.2f2"
 
   AlertSlackChannel          = "alert-sk-qa"
   PrometheusStorageClassName = "ssd-delete"
-  PrometheusStorageSize      = "20Gi"
-  GrafanaAdminPassword       = var.GrafanaAdminPassword
+  PrometheusStorageSize      = "100Gi"
+  GrafanaAdminPassword       = "gra4422"
+
+  Velero_Enable = false
 }
 
 
