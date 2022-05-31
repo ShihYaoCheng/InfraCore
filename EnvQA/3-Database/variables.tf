@@ -3,7 +3,7 @@
 #============================
 variable "GCPProjectID" {
   type    = string
-  default = "stellar-38931"
+  default = "cqi-operation"
 }
 
 // https://cloud.google.com/compute/docs/regions-zones
