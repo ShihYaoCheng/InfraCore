@@ -1,5 +1,6 @@
 ﻿# https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
 # https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+# https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
 
 ## Provide custom recording or alerting rules to be deployed into the cluster.
 # https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/
@@ -8,6 +9,8 @@
 
 ## Create default rules for monitoring the cluster
 defaultRules:
+  rules:
+    kubeProxy: false
   create: true
 #  rules:
 #    alertmanager: true
@@ -34,6 +37,9 @@ defaultRules:
 #    prometheus: true
 #    prometheusOperator: true
 #    time: false
+
+
+
 
 additionalPrometheusRulesMap:
   dz-app-rule:
