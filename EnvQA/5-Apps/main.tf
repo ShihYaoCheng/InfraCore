@@ -2,11 +2,11 @@
 module "OpApps" {
   source = "../../Modules/Apps/0.1.0"
 
-  ProjectName = var.ProjectName
+  ProjectName  = var.ProjectName
   GCPProjectID = var.GCPProjectID
   GCPZone      = var.GCPZone
-  
-  DomainName  = "qa.origingaia.com"
+
+  DomainName                  = "qa.ponponsnake.com"
   CreateProductionCertificate = true
 
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
