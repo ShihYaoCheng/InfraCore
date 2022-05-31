@@ -22,7 +22,7 @@ module "Apps" {
   PrometheusStorageClassName = "ssd-delete"
   PrometheusStorageSize      = "100Gi"
   PrometheusRetention        = "14d"
-  GrafanaAdminPassword       = "gra4422"
+  GrafanaAdminPassword       = var.GrafanaAdminPassword
 
   Velero_Enable = false
 }
