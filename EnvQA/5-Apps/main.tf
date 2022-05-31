@@ -12,11 +12,11 @@ module "OpApps" {
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret
   ArgoCD_RepositoryHelmPathValueFiles = "{values-prod.yaml}"
-  ArgoCD_AppFileBranchOrTag           = "v0.0.9"
-  ArgoCD_AppTableBranchOrTag          = "v0.0.3"
-  ArgoCD_AppUserBranchOrTag           = "v0.0.4"
-  ArgoCD_AppBackstageBranchOrTag      = "main"
-  ArgoCD_AppBattleBranchOrTag         = "v0.0.2f2"
+  ArgoCD_AppFileBranchOrTag           = "v0.3.0f1"
+  ArgoCD_AppTableBranchOrTag          = "v0.3.0f1"
+  ArgoCD_AppUserBranchOrTag           = "v0.3.0f1"
+  ArgoCD_AppBackstageBranchOrTag      = "v0.3.0f1"
+  ArgoCD_AppBattleBranchOrTag         = "v0.3.0f1"
 
   AlertSlackChannel          = "alert-sk-qa"
   PrometheusStorageClassName = "ssd-delete"
