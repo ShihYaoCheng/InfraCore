@@ -589,7 +589,7 @@ QA-3-DB-Plan:
     TF_STATE_NAME: ${QA_DB_TF_STATE_NAME}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_DB_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_DB_SA_BASE64 | base64 -d)
 
 QA-3-DB-Apply:
   extends: .apply.without.var.file
@@ -599,7 +599,7 @@ QA-3-DB-Apply:
     TF_STATE_NAME: ${QA_DB_TF_STATE_NAME}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_DB_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_DB_SA_BASE64 | base64 -d)
 
 QA-3-DB-Destroy:
   extends: .destroy.without.var.file
@@ -609,7 +609,7 @@ QA-3-DB-Destroy:
     TF_STATE_NAME: ${QA_DB_TF_STATE_NAME}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_DB_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_DB_SA_BASE64 | base64 -d)
 
 
 #============================#
