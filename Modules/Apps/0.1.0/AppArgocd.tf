@@ -39,6 +39,10 @@ resource "helm_release" "ArgoCD" {
     name  = "server.additionalApplications[4].source.targetRevision"
     value = var.ArgoCD_AppBattleBranchOrTag
   }
+  set {
+    name  = "server.additionalApplications[5].source.targetRevision"
+    value = var.ArgoCD_AppNFTBranchOrTag
+  }
 
   # Helm Value File.
   # https://stackoverflow.com/questions/53846273/helm-passing-array-values-through-set
@@ -61,9 +65,14 @@ resource "helm_release" "ArgoCD" {
     name  = "server.additionalApplications[3].source.helm.valueFiles"
     value = var.ArgoCD_RepositoryHelmPathValueFiles
   }
-  # [3] = Battle service.
+  # [4]
   set {
     name  = "server.additionalApplications[4].source.helm.valueFiles"
+    value = var.ArgoCD_RepositoryHelmPathValueFiles
+  }
+  # [5]
+  set {
+    name  = "server.additionalApplications[5].source.helm.valueFiles"
     value = var.ArgoCD_RepositoryHelmPathValueFiles
   }
 
@@ -115,6 +124,15 @@ resource "helm_release" "ArgoCD" {
   }
   set_sensitive {
     name  = "configs.repositories.sk-battle.password"
+    value = var.ArgoCD_GitLabTokenSecret
+  }
+
+  set_sensitive {
+    name  = "configs.repositories.sk-nft.username"
+    value = var.ArgoCD_GitLabTokenName
+  }
+  set_sensitive {
+    name  = "configs.repositories.sk-nft.password"
     value = var.ArgoCD_GitLabTokenSecret
   }
 

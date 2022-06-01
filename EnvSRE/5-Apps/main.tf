@@ -22,6 +22,7 @@ module "Applications" {
   ArgoCD_AppUserBranchOrTag           = "main"
   ArgoCD_AppBackstageBranchOrTag      = "main"
   ArgoCD_AppBattleBranchOrTag         = "main"
+  ArgoCD_AppNFTBranchOrTag            = "main"
 
   AlertSlackChannel          = "alert-sk-sre"
   PrometheusStorageClassName = "ssd-delete"

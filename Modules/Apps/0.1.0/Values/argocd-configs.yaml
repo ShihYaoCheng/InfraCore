@@ -35,6 +35,12 @@ configs:
       type: git
       password: my-password
       username: my-username
+    sk-nft:
+      url: https://gitlab.com/GameSnake/SRE/ArgoCDAppNFT.git
+      name: sk-nft
+      type: git
+      password: my-password
+      username: my-username
     
     #  repositories: { }
     # istio-helm-repo:

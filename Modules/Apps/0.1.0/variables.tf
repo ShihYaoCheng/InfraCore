@@ -166,3 +166,7 @@ variable "ArgoCD_AppBattleBranchOrTag" {
   type = string
 }
 
+variable "ArgoCD_AppNFTBranchOrTag" {
+  type = string
+}
+
