@@ -63,13 +63,32 @@ module "gke" {
   node_metadata = "UNSPECIFIED"
   node_pools    = [
     {
+      name         = "pool-e2-highcpu-2"
+      # https://cloud.google.com/compute/docs/general-purpose-machines#e2-high-cpu
+      # e2-highcpu-2, CPU=2, Memory=2G
+      # e2-highcpu-4, CPU=4, Memory=4G
+      machine_type = "e2-highcpu-2"
+
+      autoscaling = true # Default = true
+      # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
+      node_count  = var.GKE-NodeCount-e2-high-cpu-2
+
+      disk_size_gb = 60
+      disk_type    = "pd-standard"
+
+      auto_repair  = true
+      auto_upgrade = true
+
+      enable_secure_boot = true
+    },
+    {
       name         = "pool-e2-highcpu-4"
       # https://cloud.google.com/compute/docs/general-purpose-machines#e2-high-cpu
       # e2-highcpu-2, CPU=2, Memory=2G
       # e2-highcpu-4, CPU=4, Memory=4G
       machine_type = "e2-highcpu-4"
 
-      autoscaling = false # Default = true
+      autoscaling = true # Default = true
       # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
       node_count  = var.GKE-NodeCount-e2-high-cpu-4
 
@@ -88,9 +107,28 @@ module "gke" {
       # e2-standard-4, CPU=4, Memory=16G
       machine_type = "e2-standard-2"
 
-      autoscaling = false # Default = true
+      autoscaling = true # Default = true
       # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
       node_count  = var.GKE-NodeCount-e2-standard-2
+
+      disk_size_gb = 60
+      disk_type    = "pd-standard"
+
+      auto_repair  = true
+      auto_upgrade = true
+
+      enable_secure_boot = true
+    },
+    {
+      name         = "pool-e2-standard-4"
+      # https://cloud.google.com/compute/docs/general-purpose-machines#e2_limitations
+      # e2-standard-2, CPU=2, Memory=8G
+      # e2-standard-4, CPU=4, Memory=16G
+      machine_type = "e2-standard-4"
+
+      autoscaling = true # Default = true
+      # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
+      node_count  = var.GKE-NodeCount-e2-standard-4
 
       disk_size_gb = 60
       disk_type    = "pd-standard"
@@ -107,7 +145,7 @@ module "gke" {
       # e2-medium, CPU=2, Memory=4G
       machine_type = "e2-medium"
 
-      autoscaling = false # Default = true
+      autoscaling = true # Default = true
       # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
       node_count  = var.GKE-NodeCount-e2-medium
 

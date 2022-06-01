@@ -36,19 +36,34 @@ variable "GKE-Zones" {
 #  default = ["asia-east1-a"]
 }
 
-variable "GKE-NodeCount-e2-standard-2" {
+variable "GKE-NodeCount-e2-high-cpu-2" {
   type = number
   default = 0
+  description = "USD 41.82"
 }
 
 variable "GKE-NodeCount-e2-high-cpu-4" {
   type = number
+  default = 0
+  description = "USD 83.63"
+}
+
+variable "GKE-NodeCount-e2-standard-2" {
+  type = number
   default = 1
+  description = "USD 56.64"
+}
+
+variable "GKE-NodeCount-e2-standard-4" {
+  type = number
+  default = 0
+  description = "USD 113.28"
 }
 
 variable "GKE-NodeCount-e2-medium" {
   type = number
   default = 1
+  description = "USD 28.32"
 }
 
 variable "GKE-AutoScaling-MinCPU" {
@@ -63,10 +78,10 @@ variable "GKE-AutoScaling-MaxCPU" {
 
 variable "GKE-AutoScaling-MinMemoryGB" {
   type = number
-  default = 3
+  default = 5
 }
 
 variable "GKE-AutoScaling-MaxMemoryGB" {
   type = number
-  default = 13
+  default = 15
 }
