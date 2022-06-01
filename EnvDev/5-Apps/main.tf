@@ -12,11 +12,12 @@ module "Apps" {
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret
   ArgoCD_RepositoryHelmPathValueFiles = "{values-dev.yaml}"
-  ArgoCD_AppFileBranchOrTag           = "main"
-  ArgoCD_AppTableBranchOrTag          = "main"
-  ArgoCD_AppUserBranchOrTag           = "main"
   ArgoCD_AppBackstageBranchOrTag      = "main"
   ArgoCD_AppBattleBranchOrTag         = "main"
+  ArgoCD_AppFileBranchOrTag           = "main"
+  ArgoCD_AppNFTBranchOrTag            = "main"
+  ArgoCD_AppTableBranchOrTag          = "main"
+  ArgoCD_AppUserBranchOrTag           = "main"
 
   PrometheusStorageClassName = "ssd-delete"
   PrometheusStorageSize      = "100Gi"
