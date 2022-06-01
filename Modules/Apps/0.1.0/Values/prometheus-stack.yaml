@@ -181,14 +181,15 @@ grafana:
         revision: 1
         datasource: Prometheus
 
+      # https://github.com/grafana/tempo/tree/main/operations/tempo-mixin-compiled/dashboards
       tempo-operational:
-        url: https://raw.githubusercontent.com/grafana/tempo/main/operations/tempo-mixin/yamls/tempo-operational.json
+        url: https://raw.githubusercontent.com/grafana/tempo/main/operations/tempo-mixin-compiled/dashboards/tempo-operational.json
       tempo-reads:
-        url: https://raw.githubusercontent.com/grafana/tempo/main/operations/tempo-mixin/yamls/tempo-reads.json
+        url: https://raw.githubusercontent.com/grafana/tempo/main/operations/tempo-mixin-compiled/dashboards/tempo-reads.json
       tempo-resources:
-        url: https://raw.githubusercontent.com/grafana/tempo/main/operations/tempo-mixin/yamls/tempo-resources.json
+        url: https://raw.githubusercontent.com/grafana/tempo/main/operations/tempo-mixin-compiled/dashboards/tempo-resources.json
       tempo-writes:
-        url: https://raw.githubusercontent.com/grafana/tempo/main/operations/tempo-mixin/yamls/tempo-writes.json
+        url: https://raw.githubusercontent.com/grafana/tempo/main/operations/tempo-mixin-compiled/dashboards/tempo-writes.json
 
       argocd:
         url: https://raw.githubusercontent.com/argoproj/argo-cd/master/examples/dashboard.json
