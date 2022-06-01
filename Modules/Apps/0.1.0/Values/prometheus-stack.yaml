@@ -155,6 +155,11 @@ grafana:
         gnetId: 10880
         revision: 1
         datasource: Prometheus
+      # https://grafana.com/grafana/dashboards/10906
+      Traefik2:
+        gnetId: 10906
+        revision: 1
+        datasource: Prometheus
       # https://grafana.com/grafana/dashboards/11074
       1 Node Exporter for Prometheus Dashboard EN 20201010:
         gnetId: 11074
@@ -169,6 +174,11 @@ grafana:
       k8s-storage-volume-namespace:
         gnetId: 11455
         revision: 6
+        datasource: Prometheus
+      # https://grafana.com/grafana/dashboards/12250
+      Traefik 2.2:
+        gnetId: 12250
+        revision: 1
         datasource: Prometheus
       # https://grafana.com/grafana/dashboards/14348
       sloth-slo-detail:
@@ -185,6 +195,7 @@ grafana:
         gnetId: 15175
         revision: 1
         datasource: Prometheus
+      
       
 
       # https://github.com/grafana/tempo/tree/main/operations/tempo-mixin-compiled/dashboards
