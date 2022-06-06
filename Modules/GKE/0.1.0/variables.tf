@@ -73,7 +73,7 @@ variable "GKE-AutoScaling-MinCPU" {
 
 variable "GKE-AutoScaling-MaxCPU" {
   type = number
-  default = 5
+  default = 6
 }
 
 variable "GKE-AutoScaling-MinMemoryGB" {
@@ -83,5 +83,5 @@ variable "GKE-AutoScaling-MinMemoryGB" {
 
 variable "GKE-AutoScaling-MaxMemoryGB" {
   type = number
-  default = 15
+  default = 20
 }
