@@ -1,37 +1,10 @@
 ﻿apiVersion: v1
 kind: Namespace
 metadata:
-  name: table
-  labels:
-    kubed: sync
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: user
-  labels:
-    kubed: sync
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: monitoring
-  labels:
-    kubed: sync
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: file
-  labels:
-    kubed: sync
----
-apiVersion: v1
-kind: Namespace
-metadata:
   name: backstage
   labels:
     kubed: sync
+    pod-security.kubernetes.io/enforce: restricted
 ---
 apiVersion: v1
 kind: Namespace
@@ -39,3 +12,43 @@ metadata:
   name: battle
   labels:
     kubed: sync
+    pod-security.kubernetes.io/enforce: restricted
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: file
+  labels:
+    kubed: sync
+    pod-security.kubernetes.io/enforce: restricted
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nft
+  labels:
+    pod-security.kubernetes.io/enforce: restricted
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: table
+  labels:
+    kubed: sync
+    pod-security.kubernetes.io/enforce: restricted
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: user
+  labels:
+    kubed: sync
+    pod-security.kubernetes.io/enforce: restricted
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring
+  labels:
+    kubed: sync
+    pod-security.kubernetes.io/enforce: baseline
