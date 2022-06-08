@@ -67,7 +67,8 @@ locals {
 # https://www.terraform.io/language/functions/timeadd
 variable "IPExpirationTime" {
   type = string
-  default = "30m"
+  default = "120h"
+  description = "120h = 5 days."
 }
 
 variable "CloudSQLAdminPassword" {

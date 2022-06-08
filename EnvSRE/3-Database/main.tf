@@ -15,5 +15,4 @@
   CloudSQLEnableHighlyAvailable = false
   CloudSQLAllowDeletion = true
   CloudSQLMachine = "db-g1-small"
-  IPExpirationTime = "24h"
 }
