@@ -2,9 +2,13 @@
 resource "mysql_database" "User" {
   depends_on = [module.CloudSQL]
   name = "User"
+  default_character_set = "utf8mb4"
+  default_collation = "utf8mb4_0900_ai_ci"
 }
 
 resource "mysql_database" "Backstage" {
   depends_on = [module.CloudSQL]
   name = "Backstage"
+  default_character_set = "utf8mb4"
+  default_collation = "utf8mb4_0900_ai_ci"
 }
