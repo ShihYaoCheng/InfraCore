@@ -15,13 +15,14 @@ module "Apps" {
   ArgoCD_AppBackstageBranchOrTag      = "v0.3.0f2"
   ArgoCD_AppBattleBranchOrTag         = "v0.3.0f3"
   ArgoCD_AppFileBranchOrTag           = "v0.3.0f2"
+  ArgoCD_AppNFTBranchOrTag            = "v0.3.0"
   ArgoCD_AppTableBranchOrTag          = "v0.3.0f1"
   ArgoCD_AppUserBranchOrTag           = "v0.3.0f1"
 
   AlertSlackChannel          = "alert-sk-qa"
   PrometheusStorageClassName = "ssd-delete"
   PrometheusStorageSize      = "100Gi"
-  PrometheusRetention        = "14d"
+  PrometheusRetention        = "60d"
   GrafanaAdminPassword       = var.GrafanaAdminPassword
 
   Velero_Enable = false
