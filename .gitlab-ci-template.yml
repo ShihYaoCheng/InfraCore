@@ -3,7 +3,7 @@
   stage: Security
   image:
     # https://hub.docker.com/r/aquasec/trivy/tags
-    name: aquasec/trivy:0.27.1
+    name: aquasec/trivy:0.28.1
     entrypoint: [""]
   variables:
     # --no-progress          suppress progress bar (default: false) [$TRIVY_NO_PROGRESS]
