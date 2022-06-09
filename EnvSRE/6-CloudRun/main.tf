@@ -2,6 +2,7 @@
 module "battle-tw" {
   source = "../../Modules/CloudRun/0.1.0"
 
+  ProjectName = var.ProjectName
   GCPProjectID = var.GCPProjectID
   GCPRegion    = var.GCPRegion
   

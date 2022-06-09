@@ -1,6 +1,10 @@
 ﻿#============================
 # Project                   #
 #============================
+variable "ProjectName" {
+  type = string
+}
+
 variable "GCPProjectID" {
   type    = string
   #  default = "stellar-38931"
