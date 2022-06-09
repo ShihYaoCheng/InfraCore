@@ -1,7 +1,11 @@
-﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
+﻿data "http" "MyIP" {
+  url = "http://ipv4.icanhazip.com"
+}
+
+# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "gke" {
   source  = "terraform-google-modules/kubernetes-engine/google"
-  version = "~>20.0.0"
+  version = "~>21.1.0"
 
   // Required.
   project_id = var.GCPProjectID
@@ -33,6 +37,7 @@ module "gke" {
 
   enable_vertical_pod_autoscaling    = true
   horizontal_pod_autoscaling         = true
+  # https://cloud.google.com/binary-authorization
   enable_binary_authorization        = true
   enable_network_egress_export       = true
   enable_resource_consumption_export = true
@@ -40,6 +45,16 @@ module "gke" {
   network_policy                     = true
 
   maintenance_start_time = "14:00" # UTC.
+
+  # https://cloud.google.com/kubernetes-engine/docs/how-to/authorized-networks
+  # https://avd.aquasec.com/misconfig/google/gke/avd-gcp-0061/
+  master_authorized_networks = [
+    {
+      display_name = "Terraform"
+      cidr_block = "${chomp(data.http.MyIP.body)}/32"
+    }
+  ]
+
 
   # It always has a scaling issue when I turn on autoscaling functionality in the Kubernetes.
   # It wastes much time to find the root cause. Unfortunately, I choose to abandon this issue
