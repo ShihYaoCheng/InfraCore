@@ -348,8 +348,6 @@ Dev-1-Res-Plan:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 Dev-1-Res-Apply:
   extends: .apply.without.var.file
@@ -360,8 +358,6 @@ Dev-1-Res-Apply:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 Dev-1-Res-Destroy:
   extends: .destroy.without.var.file
@@ -372,8 +368,6 @@ Dev-1-Res-Destroy:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 #============================#
 # Dev - VPC                  #
@@ -386,8 +380,6 @@ Dev-2-VPC-Plan:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 Dev-2-VPC-Apply:
   extends: .apply.without.var.file
@@ -398,8 +390,6 @@ Dev-2-VPC-Apply:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 Dev-2-VPC-Destroy:
   extends: .destroy.without.var.file
@@ -410,8 +400,6 @@ Dev-2-VPC-Destroy:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 #============================#
 # Dev - Database             #
@@ -426,8 +414,6 @@ Dev-3-Database-Plan:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_DB_SERVICE_ACCOUNT_BASE64 | base64 -d)
   tags:
     - g1
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 Dev-3-Database-Apply:
   extends: .apply.without.var.file
@@ -440,8 +426,6 @@ Dev-3-Database-Apply:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_DB_SERVICE_ACCOUNT_BASE64 | base64 -d)
   tags:
     - g1
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 Dev-3-Database-Destroy:
   extends: .destroy.without.var.file
@@ -452,8 +436,6 @@ Dev-3-Database-Destroy:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_DB_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 
 #============================#
@@ -467,8 +449,6 @@ Dev-4-GKE-Plan:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 Dev-4-GKE-Apply:
   extends: .apply.without.var.file
@@ -479,8 +459,6 @@ Dev-4-GKE-Apply:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 Dev-4-GKE-Destroy:
   extends: .destroy.without.var.file
@@ -491,8 +469,6 @@ Dev-4-GKE-Destroy:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 #============================#
 # Dev - Apps                 #
@@ -507,8 +483,6 @@ Dev-5-Apps-Plan:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
     - cd ${TF_ROOT}
     - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 Dev-5-Apps-Apply:
   extends: .apply.with.var.file
@@ -521,8 +495,6 @@ Dev-5-Apps-Apply:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
     - cd ${TF_ROOT}
     - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 Dev-5-Apps-Destroy:
   extends: .destroy.with.var.file
@@ -535,8 +507,6 @@ Dev-5-Apps-Destroy:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
     - cd ${TF_ROOT}
     - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 #============================#
 # QA - Resources             #
@@ -551,6 +521,7 @@ QA-1-Res-Plan:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 QA-1-Res-Apply:
   extends: .apply.without.var.file
@@ -563,6 +534,7 @@ QA-1-Res-Apply:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 QA-1-Res-Destroy:
   extends: .destroy.without.var.file
@@ -575,6 +547,7 @@ QA-1-Res-Destroy:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 #============================#
 # QA - VPC                   #
@@ -589,6 +562,7 @@ QA-2-VPC-Plan:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 QA-2-VPC-Apply:
   extends: .apply.without.var.file
@@ -601,6 +575,7 @@ QA-2-VPC-Apply:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 QA-2-VPC-Destroy:
   extends: .destroy.without.var.file
@@ -613,6 +588,7 @@ QA-2-VPC-Destroy:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 #============================#
 # QA - Database              #
@@ -627,6 +603,7 @@ QA-3-DB-Plan:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_DB_SA_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 QA-3-DB-Apply:
   extends: .apply.without.var.file
@@ -639,6 +616,7 @@ QA-3-DB-Apply:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_DB_SA_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 QA-3-DB-Destroy:
   extends: .destroy.without.var.file
@@ -651,6 +629,7 @@ QA-3-DB-Destroy:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_DB_SA_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 #============================#
 # QA - GKE                   #
@@ -665,6 +644,7 @@ QA-4-GKE-Plan:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 QA-4-GKE-Apply:
   extends: .apply.without.var.file
@@ -677,6 +657,7 @@ QA-4-GKE-Apply:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 QA-4-GKE-Destroy:
   extends: .destroy.without.var.file
@@ -689,6 +670,7 @@ QA-4-GKE-Destroy:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 #============================#
 # QA - Apps                  #
@@ -705,6 +687,7 @@ QA-5-Apps-Plan:
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 QA-5-Apps-Apply:
   extends: .apply.with.var.file
@@ -719,6 +702,7 @@ QA-5-Apps-Apply:
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 QA-5-Apps-Destroy:
   extends: .destroy.with.var.file
@@ -733,6 +717,7 @@ QA-5-Apps-Destroy:
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 
 
@@ -751,6 +736,7 @@ Prod-1-VPC-Plan:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-1-VPC-Apply:
   extends: .apply.without.var.file
@@ -763,6 +749,7 @@ Prod-1-VPC-Apply:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-1-VPC-Destroy:
   extends: .destroy.without.var.file
@@ -775,6 +762,7 @@ Prod-1-VPC-Destroy:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 
 
@@ -794,6 +782,7 @@ Prod-2-Res-Plan-Asia:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-2-Res-Apply-Asia:
   extends: .apply.without.var.file
@@ -806,6 +795,7 @@ Prod-2-Res-Apply-Asia:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-2-Res-Destroy-Asia:
   extends: .destroy.without.var.file
@@ -818,6 +808,7 @@ Prod-2-Res-Destroy-Asia:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 #==============================#
 # Prod(Asia East1) - GKE       #
@@ -832,6 +823,7 @@ Prod-3-GKE-Plan-Asia:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-3-GKE-Apply-Asia:
   extends: .apply.without.var.file
@@ -844,6 +836,7 @@ Prod-3-GKE-Apply-Asia:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-3-GKE-Destroy-Asia:
   extends: .destroy.without.var.file
@@ -856,6 +849,7 @@ Prod-3-GKE-Destroy-Asia:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 #============================#
 # Prod(Asia East1) - Apps    #
@@ -872,6 +866,7 @@ Prod-4-OP-Plan-Asia:
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-4-OP-Apply-Asia:
   extends: .apply.with.var.file
@@ -886,6 +881,7 @@ Prod-4-OP-Apply-Asia:
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-4-OP-Destroy-Asia:
   extends: .destroy.with.var.file
@@ -900,6 +896,7 @@ Prod-4-OP-Destroy-Asia:
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 
 
@@ -920,6 +917,7 @@ Prod-2-Res-Plan-EU:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-2-Res-Apply-EU:
   extends: .apply.without.var.file
@@ -932,6 +930,7 @@ Prod-2-Res-Apply-EU:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-2-Res-Destroy-EU:
   extends: .destroy.without.var.file
@@ -944,6 +943,7 @@ Prod-2-Res-Destroy-EU:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 #================================#
 # Prod(Europe West2) - GKE       #
@@ -958,6 +958,7 @@ Prod-3-GKE-Plan-EU:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-3-GKE-Apply-EU:
   extends: .apply.without.var.file
@@ -970,6 +971,7 @@ Prod-3-GKE-Apply-EU:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-3-GKE-Destroy-EU:
   extends: .destroy.without.var.file
@@ -982,6 +984,7 @@ Prod-3-GKE-Destroy-EU:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 #=============================#
 # Prod(Europe West2) - Apps   #
@@ -998,6 +1001,7 @@ Prod-4-OP-Plan-EU:
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-4-OP-Apply-EU:
   extends: .apply.with.var.file
@@ -1012,6 +1016,7 @@ Prod-4-OP-Apply-EU:
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-4-OP-Destroy-EU:
   extends: .destroy.with.var.file
@@ -1026,6 +1031,7 @@ Prod-4-OP-Destroy-EU:
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 
 
@@ -1047,6 +1053,7 @@ Prod-2-Res-Plan-US:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-2-Res-Apply-US:
   extends: .apply.without.var.file
@@ -1059,6 +1066,7 @@ Prod-2-Res-Apply-US:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-2-Res-Destroy-US:
   extends: .destroy.without.var.file
@@ -1071,6 +1079,7 @@ Prod-2-Res-Destroy-US:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 #=========================#
 # Prod(US Central1) - GKE #
@@ -1085,6 +1094,7 @@ Prod-3-GKE-Plan-US:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-3-GKE-Apply-US:
   extends: .apply.without.var.file
@@ -1097,6 +1107,7 @@ Prod-3-GKE-Apply-US:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-3-GKE-Destroy-US:
   extends: .destroy.without.var.file
@@ -1109,6 +1120,7 @@ Prod-3-GKE-Destroy-US:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 #==========================#
 # Prod(US Central1) - Apps #
@@ -1125,6 +1137,7 @@ Prod-4-OP-Plan-US:
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-4-OP-Apply-US:
   extends: .apply.with.var.file
@@ -1139,6 +1152,7 @@ Prod-4-OP-Apply-US:
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 Prod-4-OP-Destroy-US:
   extends: .destroy.with.var.file
@@ -1153,6 +1167,7 @@ Prod-4-OP-Destroy-US:
     - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
 
 
 
