@@ -14,12 +14,13 @@
         image = var.Image
         ports {
           name = "http1"
-          protocol = "TCP"
+#          protocol = "TCP"
           container_port = 8080
         }
         resources {
           limits = {
-            memory: "900Mi"
+            memory: "512Mi"
+            cpu: "1000m"
           }
         }
       }
