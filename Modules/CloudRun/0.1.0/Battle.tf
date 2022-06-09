@@ -1,17 +1,17 @@
 ﻿resource "google_cloud_run_service" "battle" {
-  name     = "test"
+  name     = var.Name
   location = var.GCPRegion
 
   template {
     metadata {
       annotations = {
-        "autoscaling.knative.dev/minScale": 1
-        "autoscaling.knative.dev/maxScale": 1
+        "autoscaling.knative.dev/minScale": var.MinScale
+        "autoscaling.knative.dev/maxScale": var.MaxScale
       }
     }
     spec {
       containers {
-        image = "gcr.io/stellar-38931/sk-battle:sre-5878b06e"
+        image = var.Image
         ports {
           name = "http1"
           protocol = "TCP"
