@@ -50,38 +50,38 @@ variable "GKE-NodeCount-e2-high-cpu-4" {
 
 variable "GKE-NodeCount-e2-standard-2" {
   type = number
-  default = 1
+  default = 0
   description = "USD 56.64"
 }
 
 variable "GKE-NodeCount-e2-standard-4" {
   type = number
-  default = 0
+  default = 1
   description = "USD 113.28"
 }
 
 variable "GKE-NodeCount-e2-medium" {
   type = number
-  default = 1
+  default = 0
   description = "USD 28.32"
 }
 
-variable "GKE-AutoScaling-MinCPU" {
-  type = number
-  default = 1
-}
-
-variable "GKE-AutoScaling-MaxCPU" {
-  type = number
-  default = 6
-}
-
-variable "GKE-AutoScaling-MinMemoryGB" {
-  type = number
-  default = 5
-}
-
-variable "GKE-AutoScaling-MaxMemoryGB" {
-  type = number
-  default = 20
-}
+#variable "GKE-AutoScaling-MinCPU" {
+#  type = number
+#  default = 1
+#}
+#
+#variable "GKE-AutoScaling-MaxCPU" {
+#  type = number
+#  default = 6
+#}
+#
+#variable "GKE-AutoScaling-MinMemoryGB" {
+#  type = number
+#  default = 5
+#}
+#
+#variable "GKE-AutoScaling-MaxMemoryGB" {
+#  type = number
+#  default = 20
+#}
