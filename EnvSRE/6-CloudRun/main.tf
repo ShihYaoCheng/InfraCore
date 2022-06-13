@@ -6,8 +6,10 @@ module "battle-tw" {
   GCPProjectID = var.GCPProjectID
   GCPRegion    = var.GCPRegion
   
-  Name = "battle-tw"
-  Image = "gcr.io/stellar-38931/sk-battle:sre-5878b06e"
+  CloudRunName = "battle-tw"
+  CloudRunImage = "gcr.io/stellar-38931/sk-battle:sre-5878b06e"
+  
+  ConnectorSubnetName = "taiwan"
 }
 
 #module "battle-n" {

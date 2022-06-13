@@ -1,17 +1,18 @@
 ﻿resource "google_cloud_run_service" "battle" {
-  name     = var.Name
+  name     = var.CloudRunName
   location = var.GCPRegion
 
   template {
     metadata {
       annotations = {
-        "autoscaling.knative.dev/minScale": var.MinScale
-        "autoscaling.knative.dev/maxScale": var.MaxScale
+        "autoscaling.knative.dev/minScale" = var.CloudRunMinScale
+        "autoscaling.knative.dev/maxScale" = var.CloudRunMaxScale
+#        "run.googleapis.com/vpc-access-connector" = google_vpc_access_connector.connector.name
       }
     }
     spec {
       containers {
-        image = var.Image
+        image = var.CloudRunImage
         ports {
           name = "http1"
 #          protocol = "TCP"

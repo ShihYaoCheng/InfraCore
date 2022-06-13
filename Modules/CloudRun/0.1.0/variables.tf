@@ -20,21 +20,34 @@ variable "GCPRegion" {
 #============================
 # Cloud Run                 #
 #============================
-variable "Name" {
+variable "CloudRunName" {
   type = string
 }
 
-variable "Image" {
+variable "CloudRunImage" {
   type = string
 #  default = "gcr.io/stellar-38931/sk-battle:sre-5878b06e"
 }
 
-variable "MinScale" {
+variable "CloudRunMinScale" {
   type = number
   default = 1
 }
 
-variable "MaxScale" {
+variable "CloudRunMaxScale" {
   type = number
   default = 1
+}
+
+#============================
+# Connector                 #
+#============================
+variable "ConnectorSubnetName" {
+  type = string
+}
+
+variable "ConnectorMachineType" {
+  type = string
+  default = "f1-micro"
+  description = "Possible values are: [f1-micro, e2-micro, e2-standard-4]"
 }
