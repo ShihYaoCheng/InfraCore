@@ -9,10 +9,12 @@ module "cloud-run" {
   
   service_name = var.CloudRunName
   
+  # https://cloud.google.com/run/docs/reference/rpc/google.cloud.run.v1#revisiontemplate
   template_annotations = {
     "autoscaling.knative.dev/minScale" = var.CloudRunMinScale
     "autoscaling.knative.dev/maxScale" = var.CloudRunMaxScale
-    #        "run.googleapis.com/vpc-access-connector" = google_vpc_access_connector.connector.name
+    "run.googleapis.com/vpc-access-connector" = one(module.serverless-connector.connector_ids)
+    "run.googleapis.com/vpc-access-egress" = "all-traffic"
   }
   
   limits = {
