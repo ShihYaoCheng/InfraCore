@@ -3,7 +3,7 @@ provider "google" {
   project = var.GCPProjectID // assign default value.
   region  = var.GCPRegion    // assign default value.
   zone    = var.GCPZone      // assign default value.
-  credentials = file("../../../keys/gitlab-sk-infra-vpc.json")
+  credentials = file("../../../keys/dev-gitlab-sk-infra-vpc.json")
 }
 
 provider "google-beta" {
