@@ -20,3 +20,14 @@ module "battle-iowa" {
   CloudRunName = "battle-us-central1"
   CloudRunImage = "asia.gcr.io/cqi-operation/sk-battle:v2.6.0C1"
 }
+
+module "battle-tw" {
+  source = "../../Modules/CloudRun/0.1.0"
+
+  ProjectName = var.ProjectName
+  GCPProjectID = var.GCPProjectID
+  GCPRegion    = var.GCPRegion
+
+  CloudRunName = "battle-${var.GCPRegion}"
+  CloudRunImage = "asia.gcr.io/cqi-operation/sk-battle:v2.6.0C1"
+}
