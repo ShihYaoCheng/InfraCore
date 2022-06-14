@@ -6,7 +6,7 @@ module "Apps" {
   GCPProjectID = var.GCPProjectID
   GCPZone      = var.GCPZone
 
-  DomainName                  = "v2.6.0C1.ponponsnake.com"
+  DomainName                  = "v2.6.0c1.1.ponponsnake.com"
   CreateProductionCertificate = true
 
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
@@ -15,9 +15,9 @@ module "Apps" {
   ArgoCD_AppBackstageBranchOrTag      = "v0.3.0f3"
   ArgoCD_AppBattleBranchOrTag         = "v2.6.0C1"
   ArgoCD_AppFileBranchOrTag           = "v2.6.0C1f1"
-  ArgoCD_AppNFTBranchOrTag            = "v2.6.0C1f1"
-  ArgoCD_AppTableBranchOrTag          = "v2.6.0C1"
-  ArgoCD_AppUserBranchOrTag           = "v2.6.0C1"
+  ArgoCD_AppNFTBranchOrTag            = "v2.6.0C1.1"
+  ArgoCD_AppTableBranchOrTag          = "v2.6.0C1.1"
+  ArgoCD_AppUserBranchOrTag           = "v2.6.0C1.1"
 
   AlertSlackChannel          = "alert-sk-qa"
   PrometheusStorageClassName = "ssd-delete"
