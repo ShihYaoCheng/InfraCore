@@ -1,15 +1,13 @@
 ﻿# https://github.com/terraform-google-modules/terraform-google-network/blob/v5.1.0/examples/submodule_vpc_serverless_connector/main.tf
-resource "google_project_service" "vpc-access-api" {
-  project = var.GCPProjectID
-  service = "vpcaccess.googleapis.com"
-}
+#resource "google_project_service" "vpc-access-api" {
+#  project = var.GCPProjectID
+#  service = "vpcaccess.googleapis.com"
+#}
 
 # https://registry.terraform.io/modules/terraform-google-modules/network/google/latest/submodules/vpc-serverless-connector-beta
 # https://www.calculator.net/ip-subnet-calculator.html
 module "serverless-connector" {
-  depends_on = [
-    google_project_service.vpc-access-api
-  ]
+#  depends_on = [google_project_service.vpc-access-api]
 
   source         = "terraform-google-modules/network/google//modules/vpc-serverless-connector-beta"
   project_id     = var.GCPProjectID
