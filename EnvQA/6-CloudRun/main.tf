@@ -7,7 +7,7 @@ module "battle-london" {
   GCPRegion    = "europe-west2" 
   
   CloudRunName = "battle-europe-west2"
-  CloudRunImage = "gcr.io/cqi-operation/sk-battle:v2.6.0C1"
+  CloudRunImage = "asia.gcr.io/cqi-operation/sk-battle:v2.6.0C1"
 }
 
 module "battle-iowa" {
@@ -18,5 +18,5 @@ module "battle-iowa" {
   GCPRegion    = "us-central1"
 
   CloudRunName = "battle-us-central1"
-  CloudRunImage = "gcr.io/cqi-operation/sk-battle:v2.6.0C1"
+  CloudRunImage = "asia.gcr.io/cqi-operation/sk-battle:v2.6.0C1"
 }
