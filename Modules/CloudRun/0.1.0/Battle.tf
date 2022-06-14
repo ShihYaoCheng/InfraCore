@@ -1,4 +1,12 @@
-﻿# https://registry.terraform.io/modules/GoogleCloudPlatform/cloud-run/google/latest
+﻿# https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/service#metadata
+data "kubernetes_service" "user" {
+  metadata {
+    name = "user"
+    namespace = "user"
+  }
+}
+
+# https://registry.terraform.io/modules/GoogleCloudPlatform/cloud-run/google/latest
 module "cloud-run" {
   source  = "GoogleCloudPlatform/cloud-run/google"
   version = "0.3.0"
@@ -6,7 +14,7 @@ module "cloud-run" {
   project_id = var.GCPProjectID
   image = var.CloudRunImage
   location = var.GCPRegion
-  
+
   service_name = var.CloudRunName
   
   # https://cloud.google.com/run/docs/reference/rpc/google.cloud.run.v1#revisiontemplate
@@ -16,6 +24,13 @@ module "cloud-run" {
     "run.googleapis.com/vpc-access-connector" = one(module.serverless-connector.connector_ids)
     "run.googleapis.com/vpc-access-egress" = "all-traffic"
   }
+  
+  env_vars = [
+    {
+      name: "ExternalServers__User"
+      value: data.kubernetes_service.user.status.0.load_balancer.0.ingress.0.ip
+    }
+  ]
   
   limits = {
     memory: "512Mi"
