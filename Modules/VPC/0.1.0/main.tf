@@ -12,21 +12,21 @@ module "VPC" {
   # https://www.calculator.net/ip-subnet-calculator.html
   subnets = [
     {
-      subnet_name   = "london"
+      subnet_name   = "${var.ProjectName}-london"
       subnet_ip     = "192.168.0.0/28"
       subnet_region = "europe-west2"
       subnet_private_access = true # Whether this subnet will have private Google access enabled
       subnet_flow_logs = false # Whether the subnet will record and send flow log data to logging
     },
     {
-      subnet_name   = "iowa"
+      subnet_name   = "${var.ProjectName}-iowa"
       subnet_ip     = "192.168.0.16/28"
       subnet_region = "us-central1"
       subnet_private_access = true # Whether this subnet will have private Google access enabled
       subnet_flow_logs = false # Whether the subnet will record and send flow log data to logging
     },
     {
-      subnet_name   = "taiwan"
+      subnet_name   = "${var.ProjectName}-taiwan"
       subnet_ip     = "192.168.0.32/28"
       subnet_region = "asia-east1"
       subnet_private_access = true # Whether this subnet will have private Google access enabled
