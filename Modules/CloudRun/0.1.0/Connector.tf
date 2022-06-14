@@ -8,6 +8,8 @@
 # https://www.calculator.net/ip-subnet-calculator.html
 module "serverless-connector" {
 #  depends_on = [google_project_service.vpc-access-api]
+  
+  count = 0
 
   source         = "terraform-google-modules/network/google//modules/vpc-serverless-connector-beta"
   project_id     = var.GCPProjectID

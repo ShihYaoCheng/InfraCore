@@ -42,10 +42,6 @@ variable "CloudRunMaxScale" {
 #============================
 # Connector                 #
 #============================
-#variable "ConnectorSubnetName" {
-#  type = string
-#}
-
 variable "ConnectorMachineType" {
   type = string
   default = "f1-micro"
