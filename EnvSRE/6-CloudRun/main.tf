@@ -9,7 +9,7 @@ module "battle-tw" {
   CloudRunName = "battle-tw"
   CloudRunImage = "gcr.io/stellar-38931/sk-battle:sre-af369976"
   
-  ConnectorSubnetName = "${var.ProjectName}-taiwan"
+#  ConnectorSubnetName = "${var.ProjectName}-taiwan"
 }
 
 #module "battle-n" {

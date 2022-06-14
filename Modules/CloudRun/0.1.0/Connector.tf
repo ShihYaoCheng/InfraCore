@@ -15,8 +15,8 @@ module "serverless-connector" {
   project_id     = var.GCPProjectID
   vpc_connectors = [
     {
-      name            = var.ConnectorSubnetName
-      subnet_name     = var.ConnectorSubnetName
+      name            = "${var.ProjectName}-${var.GCPRegion}"
+      subnet_name     = "${var.ProjectName}-${var.GCPRegion}"
       region          = var.GCPRegion
       host_project_id = var.GCPProjectID
       machine_type    = var.ConnectorMachineType

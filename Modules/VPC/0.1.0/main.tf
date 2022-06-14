@@ -5,28 +5,31 @@ module "VPC" {
 
   network_name = var.ProjectName
   project_id   = var.GCPProjectID
-
+  
   auto_create_subnetworks = true
   #  subnets                 = []
 
   # https://www.calculator.net/ip-subnet-calculator.html
   subnets = [
     {
-      subnet_name   = "${var.ProjectName}-london"
+      # london
+      subnet_name   = "${var.ProjectName}-europe-west2"
       subnet_ip     = "192.168.0.0/28"
       subnet_region = "europe-west2"
       subnet_private_access = true # Whether this subnet will have private Google access enabled
       subnet_flow_logs = false # Whether the subnet will record and send flow log data to logging
     },
     {
-      subnet_name   = "${var.ProjectName}-iowa"
+      # iowa
+      subnet_name   = "${var.ProjectName}-us-central1"
       subnet_ip     = "192.168.0.16/28"
       subnet_region = "us-central1"
       subnet_private_access = true # Whether this subnet will have private Google access enabled
       subnet_flow_logs = false # Whether the subnet will record and send flow log data to logging
     },
     {
-      subnet_name   = "${var.ProjectName}-taiwan"
+      # taiwan
+      subnet_name   = "${var.ProjectName}-asia-east1"
       subnet_ip     = "192.168.0.32/28"
       subnet_region = "asia-east1"
       subnet_private_access = true # Whether this subnet will have private Google access enabled
