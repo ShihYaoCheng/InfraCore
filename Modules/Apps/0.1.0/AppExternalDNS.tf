@@ -2,7 +2,7 @@
 // It doesn't support godaddy.
 
 resource "helm_release" "ExternalDNS" {
-  count = var.RegisterDomainName ? 1 : 0
+  count = var.ExternalDNS_Enable ? 1 : 0
 
   name      = "external-dns"
   chart     = "${path.module}/Charts/external-dns"

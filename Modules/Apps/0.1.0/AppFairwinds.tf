@@ -7,7 +7,7 @@ resource "helm_release" "Goldilocks" {
   name             = "goldilocks"
   repository       = "https://charts.fairwinds.com/stable"
   chart            = "goldilocks"
-  version          = "~>6.1.1"
+  version          = "~>6.1.2"
   create_namespace = true
   namespace        = "fairwinds"
 
@@ -50,7 +50,7 @@ resource "helm_release" "RBACManager" {
   name             = "rbac-manager"
   repository       = "https://charts.fairwinds.com/stable"
   chart            = "rbac-manager"
-  version          = "~>1.11.0"
+  version          = "~>1.11.1"
   create_namespace = true
   namespace        = "fairwinds"
   

@@ -10,13 +10,6 @@ variable "GCPProjectID" {
   #  default = "stellar-38931"
 }
 
-# https://cloud.google.com/compute/docs/regions-zones
-#variable "GCPRegion" {
-#  type        = string
-#  #  default     = "asia-east1"
-#  description = "cloud provider region."
-#}
-
 variable "GCPZone" {
   type        = string
   #  default     = "asia-east1-b"
@@ -26,6 +19,17 @@ variable "GCPZone" {
 #============================
 # External-DNS              #
 #============================
+variable "ExternalDNS_Enable" {
+  type        = bool
+  default     = false
+  description = "Only used for SRE environment.(It create/destroy kubernetes everyday) The Godaddy will overwrite A Record added by other Kubernetes."
+}
+
+variable "DomainName" {
+  type = string
+  #  default = "sre.origingaia.com"
+}
+
 variable "GodaddyAPIKey" {
   type      = string
   default   = "godaddy-api-key"
@@ -38,16 +42,8 @@ variable "GodaddyAPISecret" {
   sensitive = true
 }
 
-variable "DomainName" {
-  type = string
-  #  default = "sre.origingaia.com"
-}
 
-variable "RegisterDomainName" {
-  type        = bool
-  default     = false
-  description = "Only used for SRE environment.(It create/destroy kubernetes everyday) The Godaddy will overwrite A Record added by other Kubernetes."
-}
+
 
 #============================
 # Prometheus                #
@@ -107,6 +103,22 @@ variable "Tempo_Enable" {
 variable "Velero_Enable" {
   type = bool
   default = false
+}
+
+#============================
+# Cert-Manager              #
+#============================
+variable "CertManager_Enable" {
+  type = bool
+  default = true
+}
+
+#============================
+# CloudSQL Proxy            #
+#============================
+variable "CloudSQLProxy_Enable" {
+  type = bool
+  default = true
 }
 
 

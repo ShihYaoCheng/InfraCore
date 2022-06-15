@@ -13,7 +13,7 @@ resource "helm_release" "Prometheus" {
   name             = "prometheus"
   repository       = "https://prometheus-community.github.io/helm-charts"
   chart            = "kube-prometheus-stack"
-  version          = "~>34.9.0"
+  version          = "~>36.0.1"
   namespace        = "monitoring"
 
   values = [

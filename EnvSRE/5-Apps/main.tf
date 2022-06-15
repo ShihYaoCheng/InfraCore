@@ -6,13 +6,13 @@ module "Applications" {
   GCPProjectID = var.GCPProjectID
   GCPZone      = var.GCPZone
 
-  RegisterDomainName          = true
+  ExternalDNS_Enable          = true
   DomainName                  = "sre.origingaia.com"
   CreateProductionCertificate = false
   GodaddyAPIKey               = var.GodaddyAPIKey
   GodaddyAPISecret            = var.GodaddyAPISecret
 
-  ArgoCD_Enable                       = true
+  ArgoCD_Enable                       = false
   ArgoCD_EnableSelfHeal               = false
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret

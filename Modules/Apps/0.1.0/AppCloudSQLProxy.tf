@@ -1,16 +1,19 @@
 ﻿data "google_storage_bucket_object_content" "CloudSQLConnectionName" {
+  count = var.CloudSQLProxy_Enable ? 1 : 0
   bucket = var.ProjectName
   name   = "CloudSQLConnectionName"
 }
 
 resource "kubernetes_namespace_v1" "CloudSQL" {
+  count = var.CloudSQLProxy_Enable ? 1 : 0
   metadata {
     name = "cloud-sql"
   }
 }
 
 # https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest/submodules/workload-identity
-module "workload-identity" {
+module "CloudSQLWorkloadIdentity" {
+  count = var.CloudSQLProxy_Enable ? 1 : 0
   depends_on = [kubernetes_namespace_v1.CloudSQL]
 
   source  = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
@@ -29,7 +32,8 @@ module "workload-identity" {
 }
 
 resource "helm_release" "CloudSQLProxy" {
-  depends_on = [module.workload-identity]
+  count = var.CloudSQLProxy_Enable ? 1 : 0
+  depends_on = [module.CloudSQLWorkloadIdentity]
   
   name             = "cloud-sql-proxy"
   chart            = "${path.module}/Charts/CloudSQL"
@@ -37,7 +41,7 @@ resource "helm_release" "CloudSQLProxy" {
   
   set {
     name  = "proxy.connectionName"
-    value = data.google_storage_bucket_object_content.CloudSQLConnectionName.content
+    value = data.google_storage_bucket_object_content.CloudSQLConnectionName[0].content
   }
 }
 

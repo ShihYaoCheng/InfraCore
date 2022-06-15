@@ -5,7 +5,7 @@ resource "helm_release" "Traefik" {
   name             = "traefik"
   repository       = "https://helm.traefik.io/traefik"
   chart            = "traefik"
-  version          = "~>10.19.4"
+  version          = "~>10.20.1"
   create_namespace = true
   namespace        = "traefik"
 
@@ -13,7 +13,7 @@ resource "helm_release" "Traefik" {
   values = [
     templatefile("${path.module}/Values/traefik.yaml",
     {
-      env-domain-name = var.RegisterDomainName ? var.DomainName : ""
+      env-domain-name = var.ExternalDNS_Enable ? var.DomainName : ""
     })
   ]
 }
