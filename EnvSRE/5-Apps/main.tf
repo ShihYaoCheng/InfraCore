@@ -14,7 +14,7 @@ module "Applications" {
 
   ArgoCD_Enable                       = true
   ArgoCD_EnableSelfHeal               = false
-  ArgoCD_EnableFullApps               = true
+  ArgoCD_EnableAllApps                = true
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret
   ArgoCD_RepositoryHelmPathValueFiles = "{values-sre.yaml}"

@@ -7,7 +7,7 @@
 resource "helm_release" "ArgoCDBattle" {
   depends_on = [helm_release.Prometheus]
 
-  count = var.ArgoCD_Enable && !var.ArgoCD_EnableFullApps ? 1 : 0
+  count = var.ArgoCD_Enable && !var.ArgoCD_EnableAllApps ? 1 : 0
 
   name = "argocd"
 

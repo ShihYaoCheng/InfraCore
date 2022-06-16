@@ -139,7 +139,7 @@ variable "ArgoCD_EnableSelfHeal" {
   default = true
 }
 
-variable "ArgoCD_EnableFullApps" {
+variable "ArgoCD_EnableAllApps" {
   type    = bool
   default = true
 }
