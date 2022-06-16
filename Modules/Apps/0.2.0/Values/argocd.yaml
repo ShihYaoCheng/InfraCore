@@ -1,0 +1,15 @@
+﻿notifications:
+  resources:
+    requests:
+      cpu: 10m
+
+redis:
+  resources:
+    requests:
+      cpu: 10m
+
+applicationSet:
+  resources:
+    requests:
+      cpu: 10m
+

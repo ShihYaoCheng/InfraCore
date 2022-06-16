@@ -1,0 +1,16 @@
+# Default values for external-dns.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+domain:
+  filter: origingaia.com
+
+godaddy:
+  api:
+    key: ""
+    secret: ""
+
+image:
+  name: k8s.gcr.io/external-dns/external-dns
+  # https://github.com/kubernetes-sigs/external-dns/releases
+  tag: v0.10.2
