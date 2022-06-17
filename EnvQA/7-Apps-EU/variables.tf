@@ -11,16 +11,16 @@ variable "GCPProjectID" {
   default = "cqi-operation"
 }
 
-// https://cloud.google.com/compute/docs/regions-zones
+# https://cloud.google.com/compute/docs/regions-zones
 variable "GCPRegion" {
   type        = string
-  default     = "asia-east1"
+  default     = "europe-west2"
   description = "cloud provider region."
 }
 
 variable "GCPZone" {
   type        = string
-  default     = "asia-east1-b"
+  default     = "europe-west2-a"
   description = "cloud provider zone."
 }
 
