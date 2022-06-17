@@ -309,6 +309,8 @@ variables:
   QA_APPS_TF_STATE_NAME: "QA-Apps"
   QA_GKE_EU_DIR: EnvQA/6-GKE-EU
   QA_GKE_EU_TF_STATE_NAME: "QA-GKE-EU"
+  QA_APPS_EU_DIR: EnvQA/7-Apps-EU
+  QA_APPS_EU_TF_STATE_NAME: "QA-Apps-EU"
 #  QA_CLOUD_RUN_DIR: EnvQA/6-CloudRun
 #  QA_CLOUD_RUN_TF_STATE_NAME: "QA-CloudRun"
 
@@ -789,6 +791,56 @@ QA-6-GKE-Destroy:
       when: manual
   tags:
     - g1
+
+
+
+#============================#
+# QA - Apps                  #
+#============================#
+QA-7-Apps-EU-Plan:
+  extends: .plan.with.var.file
+  variables:
+    TF_ROOT: ${QA_APPS_EU_DIR}
+    TF_STATE_NAME: ${QA_APPS_EU_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+  rules:
+    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
+
+QA-7-Apps-EU-Apply:
+  extends: .apply.with.var.file
+  needs: [QA-7-Apps-EU-Plan]
+  variables:
+    TF_ROOT: ${QA_APPS_EU_DIR}
+    TF_STATE_NAME: ${QA_APPS_EU_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+  rules:
+    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
+
+QA-7-Apps-EU-Destroy:
+  extends: .destroy.with.var.file
+  needs: [QA-7-Apps-EU-Plan]
+  variables:
+    TF_ROOT: ${QA_APPS_EU_DIR}
+    TF_STATE_NAME: ${QA_APPS_EU_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+  rules:
+    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
+
 
 
 
