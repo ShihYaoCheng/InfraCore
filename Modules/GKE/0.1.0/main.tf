@@ -125,7 +125,7 @@ module "gke" {
       machine_type = "e2-standard-2"
 
       # Configuration required by cluster autoscaler to adjust the size of the node pool to the current cluster usage
-      autoscaling = true # Default = true
+      autoscaling = var.GKE-EnableScale-e2-standard-2 # Default = true
       # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
       node_count  = var.GKE-NodeCount-e2-standard-2
       # Minimum number of nodes in the NodePool. Must be >=0 and <= max_count. Should be used when autoscaling is true
