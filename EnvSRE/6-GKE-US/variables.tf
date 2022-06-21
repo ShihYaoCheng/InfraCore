@@ -3,7 +3,7 @@
 #============================
 variable "ProjectName" {
   type = string
-  default = "cqi-sk-sre"
+  default = "cqi-sk-test"
 }
 
 variable "GCPProjectID" {
