@@ -3,7 +3,7 @@
 #============================
 variable "ProjectName" {
   type = string
-  default = "cqi-sk-sre"
+  default = "cqi-sk-test"
 }
 
 variable "GCPProjectID" {
@@ -20,7 +20,7 @@ variable "GCPRegion" {
 
 variable "GCPZone" {
   type        = string
-  default     = "asia-east1-b"
+  default     = "asia-east1-a"
   description = "cloud provider zone."
 }
 

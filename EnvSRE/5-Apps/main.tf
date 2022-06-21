@@ -7,7 +7,7 @@ module "Applications" {
   GCPZone      = var.GCPZone
 
   ExternalDNS_Enable          = true
-  DomainName                  = "sre.origingaia.com"
+  DomainName                  = "test.origingaia.com"
   CreateProductionCertificate = false
   GodaddyAPIKey               = var.GodaddyAPIKey
   GodaddyAPISecret            = var.GodaddyAPISecret

@@ -3,7 +3,7 @@
 #============================
 variable "ProjectName" {
   type = string
-  default = "cqi-sk-sre"
+  default = "cqi-sk-test"
 }
 
 variable "GCPProjectID" {
@@ -11,7 +11,7 @@ variable "GCPProjectID" {
   default = "stellar-38931"
 }
 
-// https://cloud.google.com/compute/docs/regions-zones
+# https://cloud.google.com/compute/docs/regions-zones
 variable "GCPRegion" {
   type        = string
   default     = "asia-east1"
@@ -20,6 +20,6 @@ variable "GCPRegion" {
 
 variable "GCPZone" {
   type        = string
-  default     = "asia-east1-b"
+  default     = "asia-east1-a"
   description = "cloud provider zone."
 }
