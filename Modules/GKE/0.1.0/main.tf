@@ -78,6 +78,11 @@ module "gke" {
 
   # https://avd.aquasec.com/misconfig/google/gke/avd-gcp-0057/
   node_metadata = "GKE_METADATA_SERVER"
+
+  node_pools_tags = {
+    all = ["gke-worker-node"]
+  }
+
   node_pools    = [
     {
       name         = "pool-e2-highcpu-2"
