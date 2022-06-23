@@ -2,7 +2,7 @@
   backend "http" {}
 }
 
-// https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference
 provider "google" {
   project = var.GCPProjectID // assign default value.
   region  = var.GCPRegion    // assign default value.
@@ -12,12 +12,12 @@ provider "google" {
 data "google_client_config" "default" {}
 
 data "google_storage_bucket_object_content" "GKE-API" {
-  bucket = var.ProjectName
+  bucket = local.ProjectName
   name   = "GKE-${var.GCPRegion}.api"
 }
 
 data "google_storage_bucket_object_content" "GKE-CA" {
-  bucket = var.ProjectName
+  bucket = local.ProjectName
   name   = "GKE-${var.GCPRegion}.ca"
 }
 
