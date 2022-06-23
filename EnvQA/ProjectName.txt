@@ -1,1 +1,1 @@
-cqi-sk-test
+cqi-sk-qa-test
