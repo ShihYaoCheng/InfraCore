@@ -779,7 +779,7 @@ QA-6-GKE-EU-Plan:
   tags:
     - g1
 
-QA-6-GKE-Apply:
+QA-6-GKE-EU-Apply:
   extends: .apply.without.var.file
   needs: [QA-6-GKE-EU-Plan]
   variables:
@@ -794,7 +794,7 @@ QA-6-GKE-Apply:
   tags:
     - g1
 
-QA-6-GKE-Destroy:
+QA-6-GKE-EU-Destroy:
   extends: .destroy.without.var.file
   needs: [QA-6-GKE-EU-Plan]
   variables:
