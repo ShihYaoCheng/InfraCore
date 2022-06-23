@@ -2,7 +2,7 @@
 module "vpc" {
   source  = "../../Modules/VPC/0.1.0"
 
-  ProjectName = "cqi-sk-dev"
+  ProjectName = file("../ProjectName.txt")
   GCPProjectID = var.GCPProjectID
   GCPRegion = var.GCPRegion
 }
