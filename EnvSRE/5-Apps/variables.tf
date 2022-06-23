@@ -1,9 +1,8 @@
 ﻿#============================
 # Project                   #
 #============================
-variable "ProjectName" {
-  type = string
-  default = "cqi-sk-test"
+locals {
+  ProjectName = file("../ProjectName.txt")
 }
 
 variable "GCPProjectID" {

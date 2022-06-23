@@ -2,7 +2,7 @@
 module "LoadBalancer" {
   source = "../../Modules/LoadBalancer/0.1.0"
 
-  ProjectName  = var.ProjectName
+  ProjectName  = file("../ProjectName.txt")
   GCPProjectID = var.GCPProjectID
   GCPRegion    = var.GCPRegion
   GCPZone      = var.GCPZone

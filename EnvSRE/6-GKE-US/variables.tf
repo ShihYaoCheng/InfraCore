@@ -1,11 +1,6 @@
 ﻿#============================
 # Project                   #
 #============================
-variable "ProjectName" {
-  type = string
-  default = "cqi-sk-test"
-}
-
 variable "GCPProjectID" {
   type    = string
   default = "stellar-38931"

@@ -2,7 +2,7 @@
 module "GKE-US" {
   source  = "../../Modules/GKE/0.1.0"
 
-  ProjectName = var.ProjectName
+  ProjectName = file("../ProjectName.txt")
 
   GCPProjectID = var.GCPProjectID
   GCPRegion = var.GCPRegion
