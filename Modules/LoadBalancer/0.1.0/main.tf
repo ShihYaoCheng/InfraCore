@@ -54,10 +54,16 @@ data "google_compute_network_endpoint_group" "NEG-TW-Battle" {
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_network_endpoint_group
-data "google_compute_network_endpoint_group" "NEG-US-Battle" {
+data "google_compute_network_endpoint_group" "NEG-EU-Battle" {
   name = "k8s-battle-battle-8080"
-  zone = "us-central1-a"
+  zone = "europe-west2-a"
 }
+
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_network_endpoint_group
+#data "google_compute_network_endpoint_group" "NEG-US-Battle" {
+#  name = "k8s-battle-battle-8080"
+#  zone = "us-central1-a"
+#}
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_backend_service
 resource "google_compute_backend_service" "default" {
@@ -75,7 +81,7 @@ resource "google_compute_backend_service" "default" {
     max_rate = 1000
   }
   backend {
-    group          = data.google_compute_network_endpoint_group.NEG-US-Battle.id
+    group          = data.google_compute_network_endpoint_group.NEG-EU-Battle.id
     balancing_mode = "RATE"
 
     # max_rate - (Optional) The max requests per second (RPS) of the group. 
