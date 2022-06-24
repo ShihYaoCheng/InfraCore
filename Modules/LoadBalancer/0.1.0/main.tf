@@ -97,6 +97,21 @@ resource "google_compute_backend_service" "default" {
 resource "google_compute_url_map" "default" {
   name            = var.ProjectName
   default_service = google_compute_backend_service.default.id
+  
+#  host_rule {
+#    hosts        = ["battle.origingaia.com"]
+#    path_matcher = "battle"
+#  }
+#  
+#  path_matcher {
+#    name = "battle"
+#    default_service = google_compute_backend_service.default.id
+#    
+#    path_rule {
+#      paths = ["/api/battle"]
+#      service = google_compute_backend_service.default.id
+#    }
+#  }
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_target_http_proxy
