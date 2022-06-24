@@ -17,7 +17,7 @@ module "Apps" {
   ArgoCD_AppFileBranchOrTag           = "v2.6.0C6"
   ArgoCD_AppNFTBranchOrTag            = "v2.6.0C2F1"
   ArgoCD_AppTableBranchOrTag          = "v2.6.0C6"
-  ArgoCD_AppUserBranchOrTag           = "v2.6.0C6"
+  ArgoCD_AppUserBranchOrTag           = "v2.6.0C6F1"
 
   AlertSlackChannel          = "alert-sk-qa"
   PrometheusStorageClassName = "ssd-delete"
