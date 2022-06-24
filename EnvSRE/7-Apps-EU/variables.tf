@@ -13,13 +13,13 @@ variable "GCPProjectID" {
 # https://cloud.google.com/compute/docs/regions-zones
 variable "GCPRegion" {
   type        = string
-  default     = "us-central1"
+  default     = "europe-west2"
   description = "cloud provider region."
 }
 
 variable "GCPZone" {
   type        = string
-  default     = "us-central1-a"
+  default     = "europe-west2-a"
   description = "cloud provider zone."
 }
 
