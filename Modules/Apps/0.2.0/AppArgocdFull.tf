@@ -152,6 +152,8 @@ resource "helm_release" "ArgoCDFull" {
 
 resource "helm_release" "ArgoCDFullResources" {
   depends_on = [helm_release.ArgoCDFull , helm_release.Traefik]
+
+  count = var.ArgoCD_Enable && var.ArgoCD_EnableAllApps ? 1 : 0
   
   name             = "argocd-full-resources"
   chart            = "${path.module}/Charts/argocd-res"
