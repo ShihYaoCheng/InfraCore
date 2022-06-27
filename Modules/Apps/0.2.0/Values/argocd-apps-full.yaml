@@ -2,6 +2,10 @@
 # https://github.com/argoproj/argo-helm/blob/argo-cd-3.26.5/charts/argo-cd/values.yaml
 # https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/application.yaml
 server:
+  # https://pet2cattle.com/2022/03/argocd-redirect-loop
+  # https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#ui-base-path
+  extraArgs: ${serverExtraArgs} 
+  
   # -- Deploy ArgoCD Applications within this helm release
   # @default -- `[]` (See [values.yaml])
   ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/

@@ -1,6 +1,6 @@
 ﻿# https://artifacthub.io/packages/helm/argo/argo-cd
-# https://github.com/argoproj/argo-helm/blob/master/charts/argo-cd/values.yaml
-# https://github.com/argoproj/argo-helm/blob/argo-cd-3.35.2/charts/argo-cd/values.yaml
+# https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/values.yaml
+# https://github.com/argoproj/argo-helm/blob/argo-cd-4.9.7/charts/argo-cd/values.yaml
 # helm upgrade --install argocd argo/argo-cd -n argocd --create-namespace
 # helm uninstall argocd -n argocd
 
@@ -13,7 +13,7 @@ resource "helm_release" "ArgoCDFull" {
 
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd"
-  version    = "~>4.9.1"
+  version    = "~>4.9.7"
 
   create_namespace = true
   namespace        = "argocd"
@@ -142,7 +142,30 @@ resource "helm_release" "ArgoCDFull" {
     templatefile("${path.module}/Values/argocd.yaml", {}),
     templatefile("${path.module}/Values/argocd-configs.yaml", {}),
     templatefile("${path.module}/Values/argocd-controller.yaml", {}),
-    templatefile("${path.module}/Values/argocd-apps-full.yaml", { enableSelfHeal = var.ArgoCD_EnableSelfHeal })
+    templatefile("${path.module}/Values/argocd-apps-full.yaml", 
+      { 
+        enableSelfHeal = var.ArgoCD_EnableSelfHeal,
+        serverExtraArgs = var.ArgoCD_EnableIngress ? "[--insecure, --basehref, /argocd]" : "[]"
+      })
   ]
 }
+
+resource "helm_release" "ArgoCDFullResources" {
+  depends_on = [helm_release.ArgoCDFull , helm_release.Traefik]
+  
+  name             = "argocd-full-resources"
+  chart            = "${path.module}/Charts/argocd-res"
+  namespace        = "argocd"
+
+  set {
+    name  = "ingress.enabled"
+    value = var.ArgoCD_EnableIngress
+  }
+
+  set {
+    name  = "ingress.useProdCert"
+    value = var.ArgoCD_UseProdCert
+  }
+}
+
 

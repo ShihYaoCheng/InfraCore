@@ -144,6 +144,16 @@ variable "ArgoCD_EnableAllApps" {
   default = true
 }
 
+variable "ArgoCD_EnableIngress" {
+  type    = bool
+  default = false
+}
+
+variable "ArgoCD_UseProdCert" {
+  type    = bool
+  default = false
+}
+
 variable "ArgoCD_GitLabTokenName" {
   type        = string
   sensitive   = true
