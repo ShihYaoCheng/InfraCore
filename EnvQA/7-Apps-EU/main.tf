@@ -21,8 +21,8 @@ module "Apps" {
   ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret
   ArgoCD_RepositoryHelmPathValueFiles = "{values-prod.yaml}"
   ArgoCD_AppBackstageBranchOrTag      = ""
-  ArgoCD_AppBattleBranchOrTag         = "v2.6.0C6"
-  ArgoCD_AppFileBranchOrTag           = "v2.6.0C6"
+  ArgoCD_AppBattleBranchOrTag         = "v2.6.0C7"
+  ArgoCD_AppFileBranchOrTag           = "v2.6.0C7"
   ArgoCD_AppNFTBranchOrTag            = ""
   ArgoCD_AppTableBranchOrTag          = ""
   ArgoCD_AppUserBranchOrTag           = ""
