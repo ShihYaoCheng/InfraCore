@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "Apps" {
-  source = "../../Modules/Apps/0.1.0"
+  source = "../../Modules/Apps/0.2.0"
 
   ProjectName  = local.ProjectName
   GCPProjectID = var.GCPProjectID
@@ -9,6 +9,11 @@ module "Apps" {
   DomainName                  = "dev.ponponsnake.com"
   CreateProductionCertificate = true
 
+  ArgoCD_Enable                       = true
+  ArgoCD_EnableSelfHeal               = true
+  ArgoCD_EnableAllApps                = true
+  ArgoCD_EnableIngress                = true
+  ArgoCD_UseProdCert                  = true
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret
   ArgoCD_RepositoryHelmPathValueFiles = "{values-dev.yaml}"
