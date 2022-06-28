@@ -131,27 +131,27 @@ variable "CloudSQLProxy_Enable" {
 # helm uninstall user -n user
 variable "ArgoCD_Enable" {
   type    = bool
-  default = true
+#  default = true
 }
 
 variable "ArgoCD_EnableSelfHeal" {
   type    = bool
-  default = true
+#  default = true
 }
 
 variable "ArgoCD_EnableAllApps" {
   type    = bool
-  default = true
+#  default = true
 }
 
 variable "ArgoCD_EnableIngress" {
   type    = bool
-  default = false
+#  default = false
 }
 
 variable "ArgoCD_UseProdCert" {
   type    = bool
-  default = false
+#  default = false
 }
 
 variable "ArgoCD_GitLabTokenName" {
