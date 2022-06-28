@@ -142,10 +142,18 @@ resource "helm_release" "ArgoCDFull" {
     templatefile("${path.module}/Values/argocd.yaml", {}),
     templatefile("${path.module}/Values/argocd-configs.yaml", {}),
     templatefile("${path.module}/Values/argocd-controller.yaml", {}),
+    templatefile("${path.module}/Values/ArgoCD-Projects.yaml", 
+      {
+        syncWindowCronTime = var.ArgoCD_SyncWindowCronTime
+      }),
+    templatefile("${path.module}/Values/ArgoCD-Server.yaml", 
+      {
+        serverExtraArgs = var.ArgoCD_EnableIngress ? "[--insecure, --basehref, /argocd]" : "[]"
+      }),
     templatefile("${path.module}/Values/argocd-apps-full.yaml", 
       { 
         enableSelfHeal = var.ArgoCD_EnableSelfHeal,
-        serverExtraArgs = var.ArgoCD_EnableIngress ? "[--insecure, --basehref, /argocd]" : "[]"
+        serverExtraArgs = "[]"
       })
   ]
 }
