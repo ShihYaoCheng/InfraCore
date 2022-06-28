@@ -14,7 +14,7 @@ server:
     # [0]
     - name: battle
       namespace: argocd
-      project: default
+      project: sk
       source:
         repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppBattle.git
         targetRevision: main
@@ -33,6 +33,7 @@ server:
           prune: true
           selfHeal: ${enableSelfHeal}
         syncOptions:
+          # https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/#prune-last
           - PruneLast=true
         #          - CreateNamespace=true
         # The retry feature is available since v1.7
@@ -46,7 +47,7 @@ server:
     # [1]
     - name: file
       namespace: argocd
-      project: default
+      project: sk
       source:
         repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppFile.git
         targetRevision: main
@@ -78,7 +79,7 @@ server:
     # [2]
     - name: table
       namespace: argocd
-      project: default
+      project: sk
       source:
         repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppTable.git
         targetRevision: main
@@ -110,7 +111,7 @@ server:
     # [3]
     - name: user
       namespace: argocd
-      project: default
+      project: sk
       source:
         repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppUser.git
         targetRevision: main
@@ -141,7 +142,7 @@ server:
     # [4]
     - name: backstage
       namespace: argocd
-      project: default
+      project: sk
       source:
         repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppBackstage.git
         targetRevision: main
@@ -172,7 +173,7 @@ server:
     # [5]
     - name: nft
       namespace: argocd
-      project: default
+      project: sk
       source:
         repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppNFT.git
         targetRevision: main
