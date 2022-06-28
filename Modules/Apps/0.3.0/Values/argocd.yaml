@@ -13,3 +13,9 @@ applicationSet:
     requests:
       cpu: 10m
 
+global:
+  networkPolicy:
+    # -- Create NetworkPolicy objects for all components
+    create: true
+    # -- Default deny all ingress traffic 
+    defaultDenyIngress: false
