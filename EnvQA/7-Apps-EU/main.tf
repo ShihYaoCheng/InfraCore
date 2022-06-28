@@ -17,6 +17,8 @@ module "Apps" {
   ArgoCD_Enable                       = true
   ArgoCD_EnableSelfHeal               = true
   ArgoCD_EnableAllApps                = false
+  ArgoCD_EnableIngress                = false
+  ArgoCD_UseProdCert                  = false
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret
   ArgoCD_RepositoryHelmPathValueFiles = "{values-prod.yaml}"

@@ -9,6 +9,11 @@ module "Apps" {
   DomainName                  = "v2.6.0.ponponsnake.com"
   CreateProductionCertificate = true
 
+  ArgoCD_Enable                       = true
+  ArgoCD_EnableSelfHeal               = true
+  ArgoCD_EnableAllApps                = true
+  ArgoCD_EnableIngress                = true
+  ArgoCD_UseProdCert                  = true
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret
   ArgoCD_RepositoryHelmPathValueFiles = "{values-prod.yaml}"
