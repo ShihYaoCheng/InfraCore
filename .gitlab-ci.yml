@@ -324,6 +324,8 @@ variables:
   PROD_REVIEW_GKE_TF_STATE_NAME: "Prod-Review-GKE"
   PROD_REVIEW_APPS_DIR: EnvProdReview/5-Apps
   PROD_REVIEW_APPS_TF_STATE_NAME: "Prod-Review-Apps"
+  PROD_REVIEW_GKE_GLOBAL_DIR: EnvProdReview/6-GKE-Global
+  PROD_REVIEW_GKE_GLOBAL_TF_STATE_NAME: "Prod-Review-GKE-Global"
 
 #  PROD_VPC_DIR: EnvProd/1-VPC
 #  PROD_VPC_TF_STATE_NAME: "Prod-VPC"
@@ -1178,52 +1180,52 @@ Prod-Review-5-Apps-Destroy:
 #============================#
 # QA - GKE(EU)               #
 #============================#
-#QA-6-GKE-EU-Plan:
-#  extends: .plan.without.var.file
-#  variables:
-#    TF_ROOT: ${QA_GKE_EU_DIR}
-#    TF_STATE_NAME: ${QA_GKE_EU_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+Prod-Review-6-GKE-Global-Plan:
+  extends: .plan.without.var.file
+  variables:
+    TF_ROOT: ${PROD_REVIEW_GKE_GLOBAL_DIR}
+    TF_STATE_NAME: ${PROD_REVIEW_GKE_GLOBAL_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
-#  tags:
-#    - g1
-#
-#QA-6-GKE-EU-Apply:
-#  extends: .apply.without.var.file
-#  needs: [QA-6-GKE-EU-Plan]
-#  variables:
-#    TF_ROOT: ${QA_GKE_EU_DIR}
-#    TF_STATE_NAME: ${QA_GKE_EU_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  tags:
+    - g1
+
+Prod-Review-6-GKE-Global-Apply:
+  extends: .apply.without.var.file
+  needs: [Prod-Review-6-GKE-Global-Plan]
+  variables:
+    TF_ROOT: ${PROD_REVIEW_GKE_GLOBAL_DIR}
+    TF_STATE_NAME: ${PROD_REVIEW_GKE_GLOBAL_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
-#  tags:
-#    - g1
-#
-#QA-6-GKE-EU-Destroy:
-#  extends: .destroy.without.var.file
-#  needs: [QA-6-GKE-EU-Plan]
-#  variables:
-#    TF_ROOT: ${QA_GKE_EU_DIR}
-#    TF_STATE_NAME: ${QA_GKE_EU_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  tags:
+    - g1
+
+Prod-Review-6-GKE-Global-Destroy:
+  extends: .destroy.without.var.file
+  needs: [Prod-Review-6-GKE-Global-Plan]
+  variables:
+    TF_ROOT: ${PROD_REVIEW_GKE_GLOBAL_DIR}
+    TF_STATE_NAME: ${PROD_REVIEW_GKE_GLOBAL_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
-#  tags:
-#    - g1
-#
-#
-#
+  tags:
+    - g1
+
+
+
 ##============================#
 ## QA - Apps(EU)              #
 ##============================#
