@@ -14,23 +14,23 @@ stages:
 include:
   - local: ".gitlab-ci-template.yml"
 
-TrivyScan-EnvSRE:
-  extends: .TrivyScanTemplate
-  variables:
-    SCAN_PATH: EnvSRE
-    REPORT_FILE: ReportSRE.txt
-  
-TrivyScan-Tools:
-  extends: .TrivyScanTemplate
-  variables:
-    SCAN_PATH: tools
-    REPORT_FILE: ReportTools.txt
-
-TrivyScan-Modules:
-  extends: .TrivyScanTemplate
-  variables:
-    SCAN_PATH: Modules
-    REPORT_FILE: ReportModules.txt
+#TrivyScan-EnvSRE:
+#  extends: .TrivyScanTemplate
+#  variables:
+#    SCAN_PATH: EnvSRE
+#    REPORT_FILE: ReportSRE.txt
+#  
+#TrivyScan-Tools:
+#  extends: .TrivyScanTemplate
+#  variables:
+#    SCAN_PATH: tools
+#    REPORT_FILE: ReportTools.txt
+#
+#TrivyScan-Modules:
+#  extends: .TrivyScanTemplate
+#  variables:
+#    SCAN_PATH: Modules
+#    REPORT_FILE: ReportModules.txt
 
 
 
