@@ -18,12 +18,3 @@ variable "GCPZone" {
   description = "cloud provider zone."
 }
 
-#============================
-# CloudSQL                  #
-#============================
-variable "CloudSQLAdminPassword" {
-  type = string
-  sensitive = true
-}
-
-
