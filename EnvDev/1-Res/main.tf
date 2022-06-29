@@ -6,6 +6,6 @@
   # which means the bucket name has been used by another user, you should use another name.
   ProjectName = file("../ProjectName.txt")
 
-  GCPProjectID = var.GCPProjectID
+  GCPProjectID = local.ProjectID
   GCPRegion = var.GCPRegion
 }

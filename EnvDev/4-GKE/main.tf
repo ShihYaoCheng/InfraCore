@@ -4,10 +4,10 @@ module "gke" {
 
   ProjectName = file("../ProjectName.txt")
   
-  GCPProjectID = var.GCPProjectID
+  GCPProjectID = local.ProjectID
   GCPRegion = var.GCPRegion
   GCPZone = var.GCPZone
-  GKE-Zones = ["asia-east1-a"]
+  GKE-Zones = [var.GCPZone]
   
   GKE-EnableScale-e2-standard-2 = false
   GKE-NodeCount-e2-standard-2 = 0

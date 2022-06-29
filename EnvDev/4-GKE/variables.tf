@@ -1,10 +1,11 @@
-﻿//============================== Project ==============================
-variable "GCPProjectID" {
-  type    = string
-  default = "stellar-38931"
+﻿#============================
+# Project                   #
+#============================
+locals {
+  ProjectID = file("../ProjectID.txt")
 }
 
-// https://cloud.google.com/compute/docs/regions-zones
+# https://cloud.google.com/compute/docs/regions-zones
 variable "GCPRegion" {
   type        = string
   default     = "asia-east1"
