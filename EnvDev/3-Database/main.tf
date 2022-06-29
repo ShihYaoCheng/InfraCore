@@ -15,4 +15,5 @@
   CloudSQLEnableHighlyAvailable = false
   CloudSQLAllowDeletion = true
   CloudSQLMachine = "db-f1-micro"
+  IPExpirationTime = "720h" # 720h = 30 days.
 }
