@@ -12,8 +12,8 @@ module "gke" {
   name       = var.ProjectName
   region     = var.GCPRegion
 
-  network           = var.GKE-VPCName != "" ? var.GKE-VPCName : var.ProjectName
-  subnetwork        = var.GKE-VPCName != "" ? var.GKE-VPCName : var.ProjectName
+  network           = var.ProjectName
+  subnetwork        = var.ProjectName
   // module.vpc.subnets_secondary_ranges[x], access subnet.
   // module.vpc.subnets_secondary_ranges[x][x], access subnet - secondary.
   ip_range_pods     = ""
@@ -84,44 +84,44 @@ module "gke" {
   }
 
   node_pools    = [
-    {
-      name         = "pool-e2-highcpu-2"
-      # https://cloud.google.com/compute/docs/general-purpose-machines#e2-high-cpu
-      # e2-highcpu-2, CPU=2, Memory=2G
-      # e2-highcpu-4, CPU=4, Memory=4G
-      machine_type = "e2-highcpu-2"
-
-      autoscaling = false # Default = true
-      # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
-      node_count  = var.GKE-NodeCount-e2-high-cpu-2
-
-      disk_size_gb = 60
-      disk_type    = "pd-standard"
-
-      auto_repair  = true
-      auto_upgrade = true
-
-      enable_secure_boot = true
-    },
-    {
-      name         = "pool-e2-highcpu-4"
-      # https://cloud.google.com/compute/docs/general-purpose-machines#e2-high-cpu
-      # e2-highcpu-2, CPU=2, Memory=2G
-      # e2-highcpu-4, CPU=4, Memory=4G
-      machine_type = "e2-highcpu-4"
-
-      autoscaling = false # Default = true
-      # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
-      node_count  = var.GKE-NodeCount-e2-high-cpu-4
-
-      disk_size_gb = 60
-      disk_type    = "pd-standard"
-
-      auto_repair  = true
-      auto_upgrade = true
-
-      enable_secure_boot = true
-    },
+#    {
+#      name         = "pool-e2-highcpu-2"
+#      # https://cloud.google.com/compute/docs/general-purpose-machines#e2-high-cpu
+#      # e2-highcpu-2, CPU=2, Memory=2G
+#      # e2-highcpu-4, CPU=4, Memory=4G
+#      machine_type = "e2-highcpu-2"
+#
+#      autoscaling = false # Default = true
+#      # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
+#      node_count  = var.GKE-NodeCount-e2-high-cpu-2
+#
+#      disk_size_gb = 60
+#      disk_type    = "pd-standard"
+#
+#      auto_repair  = true
+#      auto_upgrade = true
+#
+#      enable_secure_boot = true
+#    },
+#    {
+#      name         = "pool-e2-highcpu-4"
+#      # https://cloud.google.com/compute/docs/general-purpose-machines#e2-high-cpu
+#      # e2-highcpu-2, CPU=2, Memory=2G
+#      # e2-highcpu-4, CPU=4, Memory=4G
+#      machine_type = "e2-highcpu-4"
+#
+#      autoscaling = false # Default = true
+#      # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
+#      node_count  = var.GKE-NodeCount-e2-high-cpu-4
+#
+#      disk_size_gb = 60
+#      disk_type    = "pd-standard"
+#
+#      auto_repair  = true
+#      auto_upgrade = true
+#
+#      enable_secure_boot = true
+#    },
     {
       name         = "pool-e2-standard-2"
       # https://cloud.google.com/compute/docs/general-purpose-machines#e2_limitations
@@ -154,7 +154,7 @@ module "gke" {
       # e2-standard-4, CPU=4, Memory=16G
       machine_type = "e2-standard-4"
 
-      autoscaling = false # Default = true
+      autoscaling = var.GKE-EnableScale-e2-standard-4 # Default = true
       # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
       node_count  = var.GKE-NodeCount-e2-standard-4
 
@@ -166,26 +166,26 @@ module "gke" {
 
       enable_secure_boot = true
     },
-    {
-      name         = "pool-e2-medium"
-      # https://cloud.google.com/compute/docs/general-purpose-machines#e2_limitations
-      # e2-medium sustains 2 vCPUs, each at 50% of CPU time totaling 100% vCPU time.
-      # e2-medium, CPU=2, Memory=4G
-      machine_type = "e2-medium"
-
-      autoscaling = false # Default = true
-      # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
-      node_count  = var.GKE-NodeCount-e2-medium
-
-      disk_size_gb = 60
-      # Type of the disk attached to each node (e.g. 'pd-standard' or 'pd-ssd')
-      disk_type    = "pd-standard"
-
-      auto_repair  = true
-      auto_upgrade = true
-
-      enable_secure_boot = true
-    }
+#    {
+#      name         = "pool-e2-medium"
+#      # https://cloud.google.com/compute/docs/general-purpose-machines#e2_limitations
+#      # e2-medium sustains 2 vCPUs, each at 50% of CPU time totaling 100% vCPU time.
+#      # e2-medium, CPU=2, Memory=4G
+#      machine_type = "e2-medium"
+#
+#      autoscaling = false # Default = true
+#      # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
+#      node_count  = var.GKE-NodeCount-e2-medium
+#
+#      disk_size_gb = 60
+#      # Type of the disk attached to each node (e.g. 'pd-standard' or 'pd-ssd')
+#      disk_type    = "pd-standard"
+#
+#      auto_repair  = true
+#      auto_upgrade = true
+#
+#      enable_secure_boot = true
+#    }
   ]
 }
 

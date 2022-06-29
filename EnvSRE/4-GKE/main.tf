@@ -11,5 +11,7 @@ module "gke" {
 
   GKE-EnableScale-e2-standard-2 = false
   GKE-NodeCount-e2-standard-2 = 0
+  GKE-EnableScale-e2-standard-4 = false
+  GKE-NodeCount-e2-standard-4 = 1
 }
 

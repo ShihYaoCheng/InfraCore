@@ -10,7 +10,7 @@ variable "GCPProjectID" {
 #  default = "stellar-38931"
 }
 
-// https://cloud.google.com/compute/docs/regions-zones
+# https://cloud.google.com/compute/docs/regions-zones
 variable "GCPRegion" {
   type        = string
 #  default     = "asia-east1"
@@ -26,50 +26,50 @@ variable "GCPZone" {
 #============================
 # GKE                       #
 #============================
-variable "GKE-VPCName" {
-  type = string
-  default = ""
-}
-
 variable "GKE-Zones" {
   type = list(string)
 #  default = ["asia-east1-a"]
 }
 
-variable "GKE-NodeCount-e2-high-cpu-2" {
-  type = number
-  default = 0
-  description = "USD 41.82"
-}
-
-variable "GKE-NodeCount-e2-high-cpu-4" {
-  type = number
-  default = 0
-  description = "USD 83.63"
-}
+#variable "GKE-NodeCount-e2-high-cpu-2" {
+#  type = number
+##  default = 0
+#  description = "USD 41.82"
+#}
+#
+#variable "GKE-NodeCount-e2-high-cpu-4" {
+#  type = number
+##  default = 0
+#  description = "USD 83.63"
+#}
 
 variable "GKE-EnableScale-e2-standard-2" {
   type = bool
-  default = true
+#  default = true
 }
 
 variable "GKE-NodeCount-e2-standard-2" {
   type = number
-  default = 0
+#  default = 0
   description = "USD 56.64"
+}
+
+variable "GKE-EnableScale-e2-standard-4" {
+  type = bool
+  #  default = true
 }
 
 variable "GKE-NodeCount-e2-standard-4" {
   type = number
-  default = 1
+#  default = 1
   description = "USD 113.28"
 }
 
-variable "GKE-NodeCount-e2-medium" {
-  type = number
-  default = 0
-  description = "USD 28.32"
-}
+#variable "GKE-NodeCount-e2-medium" {
+#  type = number
+##  default = 0
+#  description = "USD 28.32"
+#}
 
 #variable "GKE-AutoScaling-MinCPU" {
 #  type = number
