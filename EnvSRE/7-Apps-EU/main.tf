@@ -3,7 +3,7 @@ module "Applications" {
   source = "../../Modules/Apps/0.3.0"
 
   ProjectName  = local.ProjectName
-  GCPProjectID = var.GCPProjectID
+  GCPProjectID = local.ProjectID
   GCPZone      = var.GCPZone
 
   ExternalDNS_Enable          = false

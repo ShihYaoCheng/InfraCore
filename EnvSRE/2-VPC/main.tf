@@ -4,7 +4,7 @@ module "vpc" {
 
   ProjectName = file("../ProjectName.txt")
 
-  GCPProjectID = var.GCPProjectID
+  GCPProjectID = local.ProjectID
   GCPRegion = var.GCPRegion
 }
 

@@ -4,7 +4,7 @@ module "GKE-US" {
 
   ProjectName = file("../ProjectName.txt")
 
-  GCPProjectID = var.GCPProjectID
+  GCPProjectID = local.ProjectID
   GCPRegion = var.GCPRegion
   GCPZone = var.GCPZone
   GKE-Zones = [var.GCPZone]

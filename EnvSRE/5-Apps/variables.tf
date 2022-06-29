@@ -3,11 +3,7 @@
 #============================
 locals {
   ProjectName = file("../ProjectName.txt")
-}
-
-variable "GCPProjectID" {
-  type    = string
-  default = "stellar-38931"
+  ProjectID = trimspace(file("../ProjectID.txt"))
 }
 
 # https://cloud.google.com/compute/docs/regions-zones

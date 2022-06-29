@@ -2,7 +2,7 @@
   source  = "../../Modules/Database/0.1.0"
 
   ProjectName = file("../ProjectName.txt")
-  GCPProjectID = var.GCPProjectID
+  GCPProjectID = local.ProjectID
   GCPRegion = var.GCPRegion
   GCPZone = var.GCPZone
   
