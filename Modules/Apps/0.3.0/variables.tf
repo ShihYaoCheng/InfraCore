@@ -105,6 +105,17 @@ variable "Velero_Enable" {
   default = false
 }
 
+variable "Velero_BackupSchedule" {
+  type = string
+  default = "0 1 * * *"
+}
+
+variable "Velero_BackupScheduleTTL" {
+  type = string
+  default = "720h" 
+  description = "How long the backup file will be deleted. 720h = 30d"
+}
+
 #============================
 # Cert-Manager              #
 #============================

@@ -30,7 +30,7 @@ resource "helm_release" "Velero" {
   name             = "velero"
   repository       = "https://vmware-tanzu.github.io/helm-charts"
   chart            = "velero"
-  version          = "~>2.29.4"
+  version          = "~>2.30.0"
   namespace        = "velero"
   create_namespace = true
 
@@ -38,6 +38,8 @@ resource "helm_release" "Velero" {
     templatefile("${path.module}/Values/velero.yaml",
       {
         bucket-name = "${var.ProjectName}-velero",
+        backupSchedule = var.Velero_BackupSchedule,
+        backupScheduleTTL = var.Velero_BackupScheduleTTL
       })
   ]
 }

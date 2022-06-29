@@ -8,7 +8,8 @@ dnsPolicy: ClusterFirst
 # is required. If the value is a string then it is evaluated as a template.
 initContainers:
  - name: velero-plugin-for-gcp
-   image: velero/velero-plugin-for-gcp:v1.4.0
+   # https://hub.docker.com/r/velero/velero-plugin-for-gcp/tags
+   image: velero/velero-plugin-for-gcp:v1.5.0
    imagePullPolicy: IfNotPresent
    volumeMounts:
      - mountPath: /target
@@ -85,7 +86,7 @@ configuration:
   logLevel: info
 
   # Set log-format for Velero pod. Default: text. Other option: json.
-  logFormat: text
+  logFormat: json
 
   # Comma separated list of velero feature flags. default: empty
   # features: EnableCSI
@@ -150,15 +151,20 @@ deployRestic: false
 #       includedNamespaces:
 #       - foo
 schedules:
-   general:
+   default:
      disabled: false
-     schedule: "0 */8 * * *"
+#     schedule: "0 */8 * * *"
+     schedule: '${backupSchedule}'
      useOwnerReferencesInBackup: false
      template:
-       ttl: "720h"
+       ttl: ${backupScheduleTTL}
        includedNamespaces:
+       - backstage
+       - battle
+       - file
+       - nft
+       - table
        - user
-       - token
 
 # Velero ConfigMaps.
 # Eg:
