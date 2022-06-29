@@ -2,7 +2,8 @@
 # Project                   #
 #============================
 locals {
-  ProjectID = file("../ProjectID.txt")
+  ProjectID             = file("../ProjectID.txt")
+  CloudSQLAdminPassword = "admin1234"
 }
 
 # https://cloud.google.com/compute/docs/regions-zones
