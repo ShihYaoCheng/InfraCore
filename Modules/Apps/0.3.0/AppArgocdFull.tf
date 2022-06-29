@@ -152,8 +152,7 @@ resource "helm_release" "ArgoCDFull" {
       }),
     templatefile("${path.module}/Values/argocd-apps-full.yaml", 
       { 
-        enableSelfHeal = var.ArgoCD_EnableSelfHeal,
-        serverExtraArgs = "[]"
+        enableSelfHeal = var.ArgoCD_EnableSelfHeal
       })
   ]
 }
