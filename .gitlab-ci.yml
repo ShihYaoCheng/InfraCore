@@ -980,7 +980,7 @@ Prod-Review-1-Res-Destroy:
   extends: .destroy.without.var.file
   needs: [Prod-Review-1-Res-Plan]
   variables:
-    TF_ROOT: ${PROD_VPC_DIR}
+    TF_ROOT: ${PROD_REVIEW_RES_DIR}
     TF_STATE_NAME: ${PROD_REVIEW_RES_TF_STATE_NAME}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
