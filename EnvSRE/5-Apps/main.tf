@@ -6,19 +6,31 @@ module "Applications" {
   GCPProjectID = local.ProjectID
   GCPZone      = var.GCPZone
 
-  ExternalDNS_Enable          = true
-  DomainName                  = "test.origingaia.com"
-  CreateProductionCertificate = false
-  GodaddyAPIKey               = var.GodaddyAPIKey
-  GodaddyAPISecret            = var.GodaddyAPISecret
+  ExternalDNS_Enable = true
+  DomainName         = "test.origingaia.com"
+  GodaddyAPIKey      = var.GodaddyAPIKey
+  GodaddyAPISecret   = var.GodaddyAPISecret
+
+  CertManager_Enable         = true
+  CertManager_CreateProdCert = false
+
+  Prometheus_Enable            = true
+  Prometheus_AlertSlackChannel = "alert-sk-sre"
+  Prometheus_StorageClassName  = "ssd-delete"
+  Prometheus_StorageSize       = "20Gi"
+  Prometheus_Retention         = "1d"
+  Grafana_AdminPassword        = "gra4422"
+
+  CloudSQLProxy_Enable = true
 
   ArgoCD_Enable                       = true
   ArgoCD_EnableSelfHeal               = false
   ArgoCD_EnableAllApps                = true
   ArgoCD_EnableIngress                = true
-  ArgoCD_UseProdCert                  = false
+  ArgoCD_IngressUseProdCert           = false
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret
+  ArgoCD_SyncWindowCronTime           = "* * * * *"
   ArgoCD_RepositoryHelmPathValueFiles = "{values-sre.yaml}"
   ArgoCD_AppFileBranchOrTag           = "main"
   ArgoCD_AppTableBranchOrTag          = "main"
@@ -26,12 +38,6 @@ module "Applications" {
   ArgoCD_AppBackstageBranchOrTag      = "main"
   ArgoCD_AppBattleBranchOrTag         = "main"
   ArgoCD_AppNFTBranchOrTag            = "main"
-
-  AlertSlackChannel          = "alert-sk-sre"
-  PrometheusStorageClassName = "ssd-delete"
-  PrometheusStorageSize      = "20Gi"
-  PrometheusRetention        = "1d"
-  GrafanaAdminPassword       = "gra4422"
 }
 
 

@@ -19,11 +19,11 @@ resource "helm_release" "Prometheus" {
   values = [
     templatefile("${path.module}/Values/prometheus-stack.yaml",
     {
-      slackChannel = var.AlertSlackChannel,
-      prometheusStorageClassName = var.PrometheusStorageClassName,
-      prometheusStorageSize = var.PrometheusStorageSize,
-      prometheusRetention = var.PrometheusRetention,
-      grafanaAdminPassword = var.GrafanaAdminPassword
+      slackChannel = var.Prometheus_AlertSlackChannel,
+      prometheusStorageClassName = var.Prometheus_StorageClassName,
+      prometheusStorageSize = var.Prometheus_StorageSize,
+      prometheusRetention = var.Prometheus_Retention,
+      grafanaAdminPassword = var.Grafana_AdminPassword
     }),
 
     templatefile("${path.module}/Values/prometheus-stack-alerts.yaml", {})
@@ -39,6 +39,6 @@ resource "helm_release" "PrometheusResources" {
   
   set {
     name  = "grafana.ingress.useProductionCert"
-    value = var.CreateProductionCertificate
+    value = var.CertManager_CreateProdCert
   }
 }

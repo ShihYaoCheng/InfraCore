@@ -173,7 +173,7 @@ resource "helm_release" "ArgoCDFullResources" {
 
   set {
     name  = "ingress.useProdCert"
-    value = var.ArgoCD_UseProdCert
+    value = var.ArgoCD_IngressUseProdCert
   }
 }
 

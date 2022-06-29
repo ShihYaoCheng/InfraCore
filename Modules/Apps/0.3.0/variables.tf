@@ -21,7 +21,7 @@ variable "GCPZone" {
 #============================
 variable "ExternalDNS_Enable" {
   type        = bool
-  default     = false
+#  default     = false
   description = "Only used for SRE environment.(It create/destroy kubernetes everyday) The Godaddy will overwrite A Record added by other Kubernetes."
 }
 
@@ -32,17 +32,15 @@ variable "DomainName" {
 
 variable "GodaddyAPIKey" {
   type      = string
-  default   = "godaddy-api-key"
+#  default   = "godaddy-api-key"
   sensitive = true
 }
 
 variable "GodaddyAPISecret" {
   type      = string
-  default   = "godaddy-api-secret"
+#  default   = "godaddy-api-secret"
   sensitive = true
 }
-
-
 
 
 #============================
@@ -53,33 +51,30 @@ variable "Prometheus_Enable" {
   default = true
 }
 
-variable "AlertSlackChannel" {
+variable "Prometheus_AlertSlackChannel" {
   type = string
 }
 
-variable "PrometheusStorageClassName" {
+variable "Prometheus_StorageClassName" {
   type = string
   #  default = "ssd-retain"
 }
 
-variable "PrometheusStorageSize" {
+variable "Prometheus_StorageSize" {
   type = string
   #  default = "100Gi"
 }
 
-variable "PrometheusRetention" {
+variable "Prometheus_Retention" {
   type = string
-  default = "90d"
+#  default = "90d"
 }
 
-variable "GrafanaAdminPassword" {
+variable "Grafana_AdminPassword" {
   type = string
 }
 
-variable "CreateProductionCertificate" {
-  type    = bool
-  default = false
-}
+
 
 #============================
 # Loki                      #
@@ -121,15 +116,21 @@ variable "Velero_BackupScheduleTTL" {
 #============================
 variable "CertManager_Enable" {
   type = bool
-  default = true
+#  default = true
 }
+
+variable "CertManager_CreateProdCert" {
+  type    = bool
+  #  default = false
+}
+
 
 #============================
 # CloudSQL Proxy            #
 #============================
 variable "CloudSQLProxy_Enable" {
   type = bool
-  default = true
+#  default = true
 }
 
 
@@ -160,14 +161,14 @@ variable "ArgoCD_EnableIngress" {
 #  default = false
 }
 
-variable "ArgoCD_UseProdCert" {
+variable "ArgoCD_IngressUseProdCert" {
   type    = bool
 #  default = false
 }
 
 variable "ArgoCD_SyncWindowCronTime" {
   type = string
-  default = "* * * * *"
+#  default = "* * * * *"
   description = "cron format: minute(0~59), hour(0~23), day of the month(1~31), month(1~12),day of the week (0~6)(Sunday to Saturday; 7 is also Sunday on some systems)"
 }
 

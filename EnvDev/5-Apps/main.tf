@@ -6,14 +6,29 @@ module "Apps" {
   GCPProjectID = local.ProjectID
   GCPZone      = var.GCPZone
 
-  DomainName                  = "dev.ponponsnake.com"
-  CreateProductionCertificate = true
+  ExternalDNS_Enable = false
+  DomainName         = "dev.ponponsnake.com"
+  GodaddyAPIKey      = ""
+  GodaddyAPISecret   = ""
+
+  CertManager_Enable         = true
+  CertManager_CreateProdCert = true
+
+  CloudSQLProxy_Enable = true
+
+  Prometheus_Enable            = true
+  Prometheus_StorageClassName  = "ssd-delete"
+  Prometheus_StorageSize       = "100Gi"
+  Prometheus_Retention         = "60d"
+  Prometheus_AlertSlackChannel = "alert-sk-dev"
+  Grafana_AdminPassword        = "gra4422"
 
   ArgoCD_Enable                       = true
   ArgoCD_EnableSelfHeal               = true
   ArgoCD_EnableAllApps                = true
   ArgoCD_EnableIngress                = true
-  ArgoCD_UseProdCert                  = true
+  ArgoCD_IngressUseProdCert           = true
+  ArgoCD_SyncWindowCronTime           = "* * * * *"
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret
   ArgoCD_RepositoryHelmPathValueFiles = "{values-dev.yaml}"
@@ -23,14 +38,6 @@ module "Apps" {
   ArgoCD_AppNFTBranchOrTag            = "main"
   ArgoCD_AppTableBranchOrTag          = "main"
   ArgoCD_AppUserBranchOrTag           = "main"
-
-  PrometheusStorageClassName = "ssd-delete"
-  PrometheusStorageSize      = "100Gi"
-  PrometheusRetention        = "60d"
-  GrafanaAdminPassword       = "gra4422"
-  AlertSlackChannel          = "alert-sk-dev"
-
-  Velero_Enable = false
 }
 
 
