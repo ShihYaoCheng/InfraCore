@@ -6,13 +6,15 @@
   GCPRegion    = var.GCPRegion
   GCPZone      = var.GCPZone
 
-  CloudSQLAdminPassword             = local.CloudSQLAdminPassword
-  CloudSQLBackstagePassword         = "backstage1234"
-  CloudSQLUserPassword              = "user1234"
+  CloudSQLAdminPassword     = local.CloudSQLAdminPassword
+  CloudSQLBackstagePassword = "backstage1234"
+  CloudSQLUserPassword      = "user1234"
+
+  CloudSQLMachine                   = "db-g1-small"
+  CloudSQLEnableDiskAutoResize      = false
   CloudSQLEnableAutoBackup          = false
   CloudSQLEnablePointInTimeRecovery = false
-  CloudSQLEnableDiskAutoResize      = false
   CloudSQLEnableHighlyAvailable     = false
   CloudSQLAllowDeletion             = true
-  CloudSQLMachine                   = "db-g1-small"
+  IPExpirationTime                  = "720h" # 30 days.
 }

@@ -9,7 +9,7 @@ variable "GCPProjectID" {
   type = string
 }
 
-// https://cloud.google.com/compute/docs/regions-zones
+# https://cloud.google.com/compute/docs/regions-zones
 variable "GCPRegion" {
   type        = string
   description = "cloud provider region."
@@ -32,32 +32,32 @@ variable "GCPZone" {
 # db-custom-1-3840(1 vCPU, 3840MB)
 variable "CloudSQLMachine" {
   type = string
-  default = "db-n1-standard-1"
+#  default = "db-n1-standard-1"
 }
 
 variable "CloudSQLEnableDiskAutoResize" {
   type = bool
-  default = true
+#  default = true
 }
 
 variable "CloudSQLEnableAutoBackup" {
   type = bool
-  default = true
+#  default = true
 }
 
 variable "CloudSQLEnablePointInTimeRecovery" {
   type = bool
-  default = true
+#  default = true
 }
 
 variable "CloudSQLEnableHighlyAvailable" {
   type = bool
-  default = false
+#  default = false
 }
 
 variable "CloudSQLAllowDeletion" {
   type = bool
-  default = false
+#  default = false
 }
 
 locals {
@@ -67,7 +67,7 @@ locals {
 # https://www.terraform.io/language/functions/timeadd
 variable "IPExpirationTime" {
   type = string
-  default = "120h"
+#  default = "120h"
   description = "120h = 5 days."
 }
 
