@@ -328,6 +328,8 @@ variables:
   PROD_REVIEW_GKE_GLOBAL_TF_STATE_NAME: "Prod-Review-GKE-Global"
   PROD_REVIEW_APPS_GLOBAL_DIR: EnvProdReview/7-Apps-Global
   PROD_REVIEW_APPS_GLOBAL_TF_STATE_NAME: "Prod-Review-Apps-Global"
+  PROD_REVIEW_LB_DIR: EnvProdReview/8-LoadBalancer
+  PROD_REVIEW_LB_TF_STATE_NAME: "Prod-Review-LB"
 
 #  PROD_VPC_DIR: EnvProd/1-VPC
 #  PROD_VPC_TF_STATE_NAME: "Prod-VPC"
@@ -1275,321 +1277,43 @@ Prod-Review-7-Apps-Global-Destroy:
 #      when: manual
 
 
-##============================#
-## QA - LoadBalancer          #
-##============================#
-#QA-8-LB-Plan:
-#  extends: .plan.without.var.file
-#  variables:
-#    TF_ROOT: ${QA_LB_DIR}
-#    TF_STATE_NAME: ${QA_LB_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#QA-8-LB-Apply:
-#  extends: .apply.without.var.file
-#  needs: [QA-8-LB-Plan]
-#  variables:
-#    TF_ROOT: ${QA_LB_DIR}
-#    TF_STATE_NAME: ${QA_LB_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#QA-8-LB-Destroy:
-#  extends: .destroy.without.var.file
-#  needs: [QA-8-LB-Plan]
-#  variables:
-#    TF_ROOT: ${QA_LB_DIR}
-#    TF_STATE_NAME: ${QA_LB_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
+#==============================#
+# Prod(Review) - LoadBalancer  #
+#==============================#
+Prod-Review-8-LB-Plan:
+  extends: .plan.without.var.file
+  variables:
+    TF_ROOT: ${PROD_REVIEW_LB_DIR}
+    TF_STATE_NAME: ${PROD_REVIEW_LB_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
 
+Prod-Review-8-LB-Apply:
+  extends: .apply.without.var.file
+  needs: [Prod-Review-8-LB-Plan]
+  variables:
+    TF_ROOT: ${PROD_REVIEW_LB_DIR}
+    TF_STATE_NAME: ${PROD_REVIEW_LB_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
+#  rules:
+#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+#      when: manual
 
-
-
-
-
-
-
-
-
-
-#
-#
-#
-##======================================#
-## Prod(Europe West2) - Resources       #
-##======================================#
-#Prod-2-Res-Plan-EU:
-#  extends: .plan.without.var.file
-#  variables:
-#    TF_ROOT: ${PROD_EUROPE_RES_DIR}
-#    TF_STATE_NAME: ${PROD_EUROPE_RES_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#Prod-2-Res-Apply-EU:
-#  extends: .apply.without.var.file
-#  needs: [Prod-2-Res-Plan-EU]
-#  variables:
-#    TF_ROOT: ${PROD_EUROPE_RES_DIR}
-#    TF_STATE_NAME: ${PROD_EUROPE_RES_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#Prod-2-Res-Destroy-EU:
-#  extends: .destroy.without.var.file
-#  needs: [Prod-2-Res-Plan-EU]
-#  variables:
-#    TF_ROOT: ${PROD_EUROPE_RES_DIR}
-#    TF_STATE_NAME: ${PROD_EUROPE_RES_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-##================================#
-## Prod(Europe West2) - GKE       #
-##================================#
-#Prod-3-GKE-Plan-EU:
-#  extends: .plan.without.var.file
-#  variables:
-#    TF_ROOT: ${PROD_EUROPE_GKE_DIR}
-#    TF_STATE_NAME: ${PROD_EUROPE_GKE_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#Prod-3-GKE-Apply-EU:
-#  extends: .apply.without.var.file
-#  needs: [Prod-3-GKE-Plan-EU]
-#  variables:
-#    TF_ROOT: ${PROD_EUROPE_GKE_DIR}
-#    TF_STATE_NAME: ${PROD_EUROPE_GKE_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#Prod-3-GKE-Destroy-EU:
-#  extends: .destroy.without.var.file
-#  needs: [Prod-3-GKE-Plan-EU]
-#  variables:
-#    TF_ROOT: ${PROD_EUROPE_GKE_DIR}
-#    TF_STATE_NAME: ${PROD_EUROPE_GKE_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-##=============================#
-## Prod(Europe West2) - Apps   #
-##=============================#
-#Prod-4-OP-Plan-EU:
-#  extends: .plan.with.var.file
-#  variables:
-#    TF_ROOT: ${PROD_APPS_DIR_EU}
-#    TF_STATE_NAME: ${PROD_APPS_TF_STATE_NAME_EU}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#    - cd ${TF_ROOT}
-#    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#Prod-4-OP-Apply-EU:
-#  extends: .apply.with.var.file
-#  needs: [Prod-4-OP-Plan-EU]
-#  variables:
-#    TF_ROOT: ${PROD_APPS_DIR_EU}
-#    TF_STATE_NAME: ${PROD_APPS_TF_STATE_NAME_EU}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#    - cd ${TF_ROOT}
-#    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#Prod-4-OP-Destroy-EU:
-#  extends: .destroy.with.var.file
-#  needs: [Prod-4-OP-Plan-EU]
-#  variables:
-#    TF_ROOT: ${PROD_APPS_DIR_EU}
-#    TF_STATE_NAME: ${PROD_APPS_TF_STATE_NAME_EU}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#    - cd ${TF_ROOT}
-#    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#
-#
-#
-#
-#
-#
-#
-##================================#
-## Prod(US Central1) - Resources  #
-##================================#
-#Prod-2-Res-Plan-US:
-#  extends: .plan.without.var.file
-#  variables:
-#    TF_ROOT: ${PROD_US_RES_DIR}
-#    TF_STATE_NAME: ${PROD_US_RES_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#Prod-2-Res-Apply-US:
-#  extends: .apply.without.var.file
-#  needs: [Prod-2-Res-Plan-US]
-#  variables:
-#    TF_ROOT: ${PROD_US_RES_DIR}
-#    TF_STATE_NAME: ${PROD_US_RES_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#Prod-2-Res-Destroy-US:
-#  extends: .destroy.without.var.file
-#  needs: [Prod-2-Res-Plan-US]
-#  variables:
-#    TF_ROOT: ${PROD_US_RES_DIR}
-#    TF_STATE_NAME: ${PROD_US_RES_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-##=========================#
-## Prod(US Central1) - GKE #
-##=========================#
-#Prod-3-GKE-Plan-US:
-#  extends: .plan.without.var.file
-#  variables:
-#    TF_ROOT: ${PROD_US_GKE_DIR}
-#    TF_STATE_NAME: ${PROD_US_GKE_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#Prod-3-GKE-Apply-US:
-#  extends: .apply.without.var.file
-#  needs: [Prod-3-GKE-Plan-US]
-#  variables:
-#    TF_ROOT: ${PROD_US_GKE_DIR}
-#    TF_STATE_NAME: ${PROD_US_GKE_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#Prod-3-GKE-Destroy-US:
-#  extends: .destroy.without.var.file
-#  needs: [Prod-3-GKE-Plan-US]
-#  variables:
-#    TF_ROOT: ${PROD_US_GKE_DIR}
-#    TF_STATE_NAME: ${PROD_US_GKE_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-##==========================#
-## Prod(US Central1) - Apps #
-##==========================#
-#Prod-4-OP-Plan-US:
-#  extends: .plan.with.var.file
-#  variables:
-#    TF_ROOT: ${PROD_APPS_DIR_US}
-#    TF_STATE_NAME: ${PROD_APPS_TF_STATE_NAME_US}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#    - cd ${TF_ROOT}
-#    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#Prod-4-OP-Apply-US:
-#  extends: .apply.with.var.file
-#  needs: [Prod-4-OP-Plan-US]
-#  variables:
-#    TF_ROOT: ${PROD_APPS_DIR_US}
-#    TF_STATE_NAME: ${PROD_APPS_TF_STATE_NAME_US}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#    - cd ${TF_ROOT}
-#    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#Prod-4-OP-Destroy-US:
-#  extends: .destroy.with.var.file
-#  needs: [Prod-4-OP-Plan-US]
-#  variables:
-#    TF_ROOT: ${PROD_APPS_DIR_US}
-#    TF_STATE_NAME: ${PROD_APPS_TF_STATE_NAME_US}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#    - cd ${TF_ROOT}
-#    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+Prod-Review-8-LB-Destroy:
+  extends: .destroy.without.var.file
+  needs: [Prod-Review-8-LB-Plan]
+  variables:
+    TF_ROOT: ${PROD_REVIEW_LB_DIR}
+    TF_STATE_NAME: ${PROD_REVIEW_LB_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
