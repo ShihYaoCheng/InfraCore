@@ -316,6 +316,8 @@ variables:
   
   PROD_REVIEW_RES_DIR: EnvProdReview/1-Res
   PROD_REVIEW_RES_TF_STATE_NAME: "Prod-Review-Res"
+  PROD_REVIEW_VPC_DIR: EnvProdReview/2-VPC
+  PROD_REVIEW_VPC_TF_STATE_NAME: "Prod-Review-VPC"
 
 #  PROD_VPC_DIR: EnvProd/1-VPC
 #  PROD_VPC_TF_STATE_NAME: "Prod-VPC"
@@ -970,6 +972,50 @@ Prod-Review-1-Res-Destroy:
     TF_STATE_NAME: ${PROD_REVIEW_RES_TF_STATE_NAME}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  rules:
+    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
+
+
+
+
+#============================#
+# Prod(Review) - VPC         #
+#============================#
+Prod-Review-2-VPC-Plan:
+  extends: .plan.without.var.file
+  variables:
+    TF_ROOT: ${PROD_REVIEW_VPC_DIR}
+    TF_STATE_NAME: ${PROD_REVIEW_VPC_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  rules:
+    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
+
+Prod-Review-2-VPC-Apply:
+  extends: .apply.without.var.file
+  needs: [Prod-Review-2-VPC-Plan]
+  variables:
+    TF_ROOT: ${PROD_REVIEW_VPC_DIR}
+    TF_STATE_NAME: ${PROD_REVIEW_VPC_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  rules:
+    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
+
+Prod-Review-2-VPC-Destroy:
+  extends: .destroy.without.var.file
+  needs: [Prod-Review-2-VPC-Plan]
+  variables:
+    TF_ROOT: ${PROD_REVIEW_VPC_DIR}
+    TF_STATE_NAME: ${PROD_REVIEW_VPC_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
@@ -977,51 +1023,7 @@ Prod-Review-1-Res-Destroy:
 
 
 
-#
-##============================#
-## Prod(Review) - VPC         #
-##============================#
-#Prod-1-VPC-Plan:
-#  extends: .plan.without.var.file
-#  variables:
-#    TF_ROOT: ${PROD_VPC_DIR}
-#    TF_STATE_NAME: ${PROD_VPC_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#Prod-1-VPC-Apply:
-#  extends: .apply.without.var.file
-#  needs: [Prod-1-VPC-Plan]
-#  variables:
-#    TF_ROOT: ${PROD_VPC_DIR}
-#    TF_STATE_NAME: ${PROD_VPC_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#Prod-1-VPC-Destroy:
-#  extends: .destroy.without.var.file
-#  needs: [Prod-1-VPC-Plan]
-#  variables:
-#    TF_ROOT: ${PROD_VPC_DIR}
-#    TF_STATE_NAME: ${PROD_VPC_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#
-#
-#
+
 #
 #
 #
