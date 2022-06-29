@@ -24,8 +24,8 @@ module "CloudSQLWorkloadIdentity" {
   location     = var.GCPZone
 
   name         = "cloud-sql-proxy"
-  gcp_sa_name = "${var.ProjectName}-cloud-sql-proxy"
-  k8s_sa_name = "cloud-sql-proxy"
+  gcp_sa_name = "${var.ProjectName}-sql-proxy"
+  k8s_sa_name = "sql-proxy"
 
   namespace    = "cloud-sql"
   roles        = ["roles/cloudsql.client"]
