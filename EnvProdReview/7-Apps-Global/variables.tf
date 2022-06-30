@@ -3,8 +3,16 @@
 #============================
 locals {
   Settings = jsondecode(file("../Settings.json"))
+  
   ProjectID = local.Settings["Project"]["ID"]
   ProjectName = local.Settings["Project"]["Name"]
+
+  AppBackstage = local.Settings["AppsVersion"]["Backstage"]
+  AppBattle = local.Settings["AppsVersion"]["Battle"]
+  AppFile = local.Settings["AppsVersion"]["File"]
+  AppNFT = local.Settings["AppsVersion"]["NFT"]
+  AppTable = local.Settings["AppsVersion"]["Table"]
+  AppUser = local.Settings["AppsVersion"]["User"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones

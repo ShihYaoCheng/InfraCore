@@ -32,12 +32,12 @@ module "Applications" {
   ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret
   ArgoCD_SyncWindowCronTime           = "* * * * *"
   ArgoCD_RepositoryHelmPathValueFiles = "{values-prod.yaml}"
-  ArgoCD_AppBackstageBranchOrTag      = "v2.6.0C6"
-  ArgoCD_AppBattleBranchOrTag         = "v2.6.0C7F2"
-  ArgoCD_AppFileBranchOrTag           = "v2.6.0C7"
-  ArgoCD_AppNFTBranchOrTag            = "v2.6.0C2F1"
-  ArgoCD_AppTableBranchOrTag          = "v2.6.0C6"
-  ArgoCD_AppUserBranchOrTag           = "v2.6.0C6F1"
+  ArgoCD_AppBackstageBranchOrTag      = local.AppBackstage
+  ArgoCD_AppBattleBranchOrTag         = local.AppBattle
+  ArgoCD_AppFileBranchOrTag           = local.AppFile
+  ArgoCD_AppNFTBranchOrTag            = local.AppNFT
+  ArgoCD_AppTableBranchOrTag          = local.AppTable
+  ArgoCD_AppUserBranchOrTag           = local.AppUser
 }
 
 
