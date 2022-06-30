@@ -11,6 +11,11 @@ resource "kubernetes_namespace_v1" "CloudSQL" {
   }
 }
 
+locals {
+  GCP_SA_NAME = "${var.ProjectName}-sql-proxy"
+  K8S_SA_NAME = "sql-proxy"
+}
+
 # https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest/submodules/workload-identity
 module "CloudSQLWorkloadIdentity" {
   count = var.CloudSQLProxy_Enable ? 1 : 0
@@ -24,8 +29,8 @@ module "CloudSQLWorkloadIdentity" {
   location     = var.GCPZone
 
   name         = "cloud-sql-proxy"
-  gcp_sa_name = "${var.ProjectName}-sql-proxy"
-  k8s_sa_name = "sql-proxy"
+  gcp_sa_name = local.GCP_SA_NAME
+  k8s_sa_name = local.K8S_SA_NAME
 
   namespace    = "cloud-sql"
   roles        = ["roles/cloudsql.client"]
@@ -42,6 +47,11 @@ resource "helm_release" "CloudSQLProxy" {
   set {
     name  = "proxy.connectionName"
     value = data.google_storage_bucket_object_content.CloudSQLConnectionName[0].content
+  }
+  
+  set {
+    name  = "proxy.serviceAccountName"
+    value = local.K8S_SA_NAME
   }
 }
 
