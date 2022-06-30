@@ -4,7 +4,7 @@ module "LoadBalancer" {
 
   ProjectName  = local.ProjectName
   
-  LoadBalancerDomainName = "global.origingaia.com"
+  LoadBalancerDomainName = "global.v2.7.0.ponponsnake.com"
 }
 
 
