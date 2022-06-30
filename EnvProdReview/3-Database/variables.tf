@@ -2,7 +2,10 @@
 # Project                   #
 #============================
 locals {
-  ProjectID             = file("../ProjectID.txt")
+  Settings = jsondecode(file("../Settings.json"))
+  ProjectID = local.Settings["Project"]["ID"]
+  ProjectName = local.Settings["Project"]["Name"]
+  
   CloudSQLAdminPassword = "admin1234"
 }
 

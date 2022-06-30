@@ -2,7 +2,8 @@
 module "LoadBalancer" {
   source = "../../Modules/LoadBalancer/0.2.0"
 
-  ProjectName  = file("../ProjectName.txt")
+  ProjectName  = local.ProjectName
+  
   LoadBalancerDomainName = "global.origingaia.com"
 }
 

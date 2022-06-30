@@ -1,7 +1,7 @@
 ﻿module "database" {
   source  = "../../Modules/Database/0.1.0"
 
-  ProjectName = file("../ProjectName.txt")
+  ProjectName = local.ProjectName
   GCPProjectID = local.ProjectID
   GCPRegion = var.GCPRegion
   GCPZone = var.GCPZone
