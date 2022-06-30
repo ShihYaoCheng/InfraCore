@@ -9,6 +9,7 @@ resource "google_compute_firewall" "default" {
     ports    = ["8080"]
   }
 
+  # https://cloud.google.com/load-balancing/docs/https/troubleshooting-ext-https-lbs#load_balanced_traffic_does_not_have_the_source_address_of_the_original_client
   source_ranges = ["130.211.0.0/22", "35.191.0.0/16"]
   target_tags   = ["gke-worker-node"]
 }
