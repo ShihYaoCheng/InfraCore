@@ -17,9 +17,9 @@ module "Applications" {
   CloudSQLProxy_Enable = false
 
   Prometheus_Enable            = true
-  Prometheus_AlertSlackChannel = "alert-sk-prod-review"
+  Prometheus_AlertSlackChannel = "alert-sk-prod-qa"
   Prometheus_StorageClassName  = "ssd-delete"
-  Prometheus_StorageSize       = "60Gi"
+  Prometheus_StorageSize       = "100Gi"
   Prometheus_Retention         = "30d"
   Grafana_AdminPassword        = "gra4422"
 
