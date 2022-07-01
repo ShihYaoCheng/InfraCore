@@ -7,27 +7,27 @@ module "Applications" {
   GCPZone      = var.GCPZone
 
   ExternalDNS_Enable = false
-  DomainName         = "v2.7.0.ponponsnake.com"
+  DomainName         = ""
   GodaddyAPIKey      = ""
   GodaddyAPISecret   = ""
 
-  CertManager_Enable         = true
-  CertManager_CreateProdCert = true
+  CertManager_Enable         = false
+  CertManager_CreateProdCert = false
+
+  CloudSQLProxy_Enable = false
 
   Prometheus_Enable            = true
-  Prometheus_AlertSlackChannel = "alert-sk-prod-qa"
+  Prometheus_AlertSlackChannel = "alert-sk-prod-review"
   Prometheus_StorageClassName  = "ssd-delete"
-  Prometheus_StorageSize       = "100Gi"
+  Prometheus_StorageSize       = "60Gi"
   Prometheus_Retention         = "30d"
   Grafana_AdminPassword        = "gra4422"
 
-  CloudSQLProxy_Enable = true
-
   ArgoCD_Enable                       = true
   ArgoCD_EnableSelfHeal               = true
-  ArgoCD_EnableAllApps                = true
-  ArgoCD_EnableIngress                = true
-  ArgoCD_IngressUseProdCert           = true
+  ArgoCD_EnableAllApps                = false
+  ArgoCD_EnableIngress                = false
+  ArgoCD_IngressUseProdCert           = false
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret
   ArgoCD_SyncWindowCronTime           = "* * * * *"

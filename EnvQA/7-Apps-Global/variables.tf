@@ -2,12 +2,17 @@
 # Project                   #
 #============================
 locals {
-  ProjectName = file("../ProjectName.txt")
-}
+  Settings = jsondecode(file("../Settings.json"))
+  
+  ProjectID = local.Settings["Project"]["ID"]
+  ProjectName = local.Settings["Project"]["Name"]
 
-variable "GCPProjectID" {
-  type    = string
-  default = "cqi-operation"
+  AppBackstage = local.Settings["AppsVersion"]["Backstage"]
+  AppBattle = local.Settings["AppsVersion"]["Battle"]
+  AppFile = local.Settings["AppsVersion"]["File"]
+  AppNFT = local.Settings["AppsVersion"]["NFT"]
+  AppTable = local.Settings["AppsVersion"]["Table"]
+  AppUser = local.Settings["AppsVersion"]["User"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones
@@ -36,12 +41,4 @@ variable "ArgoCD_GitLabTokenSecret" {
   type        = string
   sensitive   = true
   description = "Deploy token"
-}
-
-#============================
-# Grafana                   #
-#============================
-variable "GrafanaAdminPassword" {
-  type      = string
-  sensitive = true
 }

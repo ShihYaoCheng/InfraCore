@@ -1,18 +1,21 @@
 ﻿module "database" {
-  source  = "../../Modules/Database/0.1.0"
+  source = "../../Modules/Database/0.1.0"
 
-  ProjectName = file("../ProjectName.txt")
-  GCPProjectID = var.GCPProjectID
-  GCPRegion = var.GCPRegion
-  GCPZone = var.GCPZone
+  ProjectName  = local.ProjectName
   
-  CloudSQLAdminPassword = "admin1234"
+  GCPProjectID = local.ProjectID
+  GCPRegion    = var.GCPRegion
+  GCPZone      = var.GCPZone
+
+  CloudSQLAdminPassword     = local.CloudSQLAdminPassword
   CloudSQLBackstagePassword = "backstage1234"
-  CloudSQLUserPassword = "user1234"
-  CloudSQLEnableAutoBackup = false
+  CloudSQLUserPassword      = "user1234"
+
+  CloudSQLMachine                   = "db-g1-small"
+  CloudSQLEnableDiskAutoResize      = false
+  CloudSQLEnableAutoBackup          = false
   CloudSQLEnablePointInTimeRecovery = false
-  CloudSQLEnableDiskAutoResize = false
-  CloudSQLEnableHighlyAvailable = false
-  CloudSQLAllowDeletion = true
-  CloudSQLMachine = "db-n1-standard-1"
+  CloudSQLEnableHighlyAvailable     = false
+  CloudSQLAllowDeletion             = true
+  IPExpirationTime                  = "720h" # 30 days.
 }

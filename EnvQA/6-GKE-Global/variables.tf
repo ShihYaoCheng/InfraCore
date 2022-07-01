@@ -1,9 +1,10 @@
 ﻿#============================
 # Project                   #
 #============================
-variable "GCPProjectID" {
-  type    = string
-  default = "cqi-operation"
+locals {
+  Settings = jsondecode(file("../Settings.json"))
+  ProjectID = local.Settings["Project"]["ID"]
+  ProjectName = local.Settings["Project"]["Name"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones

@@ -1,8 +1,18 @@
 # https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "LoadBalancer" {
-  source = "../../Modules/LoadBalancer/0.1.0"
+  source = "../../Modules/LoadBalancer/0.2.0"
 
-  ProjectName  = file("../ProjectName.txt")
+  ProjectName  = local.ProjectName
+  
+  LoadBalancerDomainName = "global.v2.7.0.ponponsnake.com"
+
+  ZoneTW = "asia-east1-a"
+  ZoneEU = "europe-west2-a"
+
+  providers = {
+    kubernetes.tw = kubernetes.tw
+    kubernetes.eu = kubernetes.eu
+  }
 }
 
 
