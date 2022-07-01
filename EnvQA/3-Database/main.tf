@@ -1,4 +1,4 @@
-﻿module "DB" {
+﻿module "database" {
   source = "../../Modules/Database/0.1.0"
 
   ProjectName  = local.ProjectName
