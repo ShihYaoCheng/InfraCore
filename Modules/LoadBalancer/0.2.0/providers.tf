@@ -10,5 +10,13 @@
       source = "hashicorp/google"
       version = "~>4.24.0"
     }
+
+    # https://registry.terraform.io/providers/hashicorp/kubernetes/latest
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+      version = "2.11.0"
+
+      configuration_aliases = [ kubernetes.tw, kubernetes.eu ]
+    }
   }
 }

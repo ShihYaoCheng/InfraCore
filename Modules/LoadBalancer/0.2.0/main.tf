@@ -40,16 +40,47 @@ resource "google_compute_health_check" "default" {
   }
 }
 
+# https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/service
+# https://www.terraform.io/language/meta-arguments/resource-provider
+# permission: Kubernetes Engine Viewer.
+data "kubernetes_service" "BattleTW" {
+  metadata {
+    name = "battle"
+    namespace = "battle"
+  }
+
+  provider = kubernetes.tw
+}
+
+#data "google_storage_bucket_object_content" "NEGBattle-TW" {
+#  bucket = var.ProjectName
+#  name   = "NEGBattleName-${var.NEGZone-TW}"
+#}
+
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_network_endpoint_group
-data "google_compute_network_endpoint_group" "NEG-TW-Battle" {
-  name = "k8s-battle-battle-8080"
-  zone = "asia-east1-a"
+data "google_compute_network_endpoint_group" "NEGBattle-TW" {
+  name = jsondecode(data.kubernetes_service.BattleTW.metadata[0].annotations["cloud.google.com/neg-status"])["network_endpoint_groups"]["80"]
+  zone = var.ZoneTW
+}
+
+#data "google_storage_bucket_object_content" "NEGBattle-EU" {
+#  bucket = var.ProjectName
+#  name   = "NEGBattleName-${var.NEGZone-EU}"
+#}
+
+data "kubernetes_service" "BattleEU" {
+  metadata {
+    name = "battle"
+    namespace = "battle"
+  }
+
+  provider = kubernetes.eu
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_network_endpoint_group
-data "google_compute_network_endpoint_group" "NEG-EU-Battle" {
-  name = "k8s-battle-battle-8080"
-  zone = "europe-west2-a"
+data "google_compute_network_endpoint_group" "NEGBattle-EU" {
+  name = jsondecode(data.kubernetes_service.BattleEU.metadata[0].annotations["cloud.google.com/neg-status"])["network_endpoint_groups"]["80"]
+  zone = var.ZoneEU
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_backend_service
@@ -58,7 +89,7 @@ resource "google_compute_backend_service" "battle" {
 
   protocol = "HTTP"
   backend {
-    group          = data.google_compute_network_endpoint_group.NEG-TW-Battle.id
+    group          = data.google_compute_network_endpoint_group.NEGBattle-TW.id
     balancing_mode = "RATE"
 
     # max_rate - (Optional) The max requests per second (RPS) of the group. 
@@ -68,7 +99,7 @@ resource "google_compute_backend_service" "battle" {
     max_rate = 1000
   }
   backend {
-    group          = data.google_compute_network_endpoint_group.NEG-EU-Battle.id
+    group          = data.google_compute_network_endpoint_group.NEGBattle-EU.id
     balancing_mode = "RATE"
     max_rate = 1000
   }
@@ -81,16 +112,44 @@ resource "google_compute_backend_service" "battle" {
   }
 }
 
-# https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_network_endpoint_group
-data "google_compute_network_endpoint_group" "NEG-TW-File" {
-  name = "k8s-file-file-8080"
-  zone = "asia-east1-a"
+#data "google_storage_bucket_object_content" "NEGFile-TW" {
+#  bucket = var.ProjectName
+#  name   = "NEGFileName-${var.NEGZone-TW}"
+#}
+
+data "kubernetes_service" "FileTW" {
+  metadata {
+    name = "file"
+    namespace = "file"
+  }
+
+  provider = kubernetes.tw
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_network_endpoint_group
-data "google_compute_network_endpoint_group" "NEG-EU-File" {
-  name = "k8s-file-file-8080"
-  zone = "europe-west2-a"
+data "google_compute_network_endpoint_group" "NEGFile-TW" {
+  name = jsondecode(data.kubernetes_service.FileTW.metadata[0].annotations["cloud.google.com/neg-status"])["network_endpoint_groups"]["80"]
+  zone = var.ZoneTW
+}
+
+#data "google_storage_bucket_object_content" "NEGFile-EU" {
+#  bucket = var.ProjectName
+#  name   = "NEGFileName-${var.NEGZone-EU}"
+#}
+
+data "kubernetes_service" "FileEU" {
+  metadata {
+    name = "file"
+    namespace = "file"
+  }
+
+  provider = kubernetes.eu
+}
+
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_network_endpoint_group
+data "google_compute_network_endpoint_group" "NEGFile-EU" {
+  name = jsondecode(data.kubernetes_service.FileEU.metadata[0].annotations["cloud.google.com/neg-status"])["network_endpoint_groups"]["80"]
+  zone = var.ZoneEU
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_backend_service
@@ -100,7 +159,7 @@ resource "google_compute_backend_service" "file" {
   protocol = "HTTP"
   
   backend {
-    group          = data.google_compute_network_endpoint_group.NEG-TW-File.id
+    group          = data.google_compute_network_endpoint_group.NEGFile-TW.id
     balancing_mode = "RATE"
 
     # max_rate - (Optional) The max requests per second (RPS) of the group. 
@@ -111,7 +170,7 @@ resource "google_compute_backend_service" "file" {
   }
   
   backend {
-    group          = data.google_compute_network_endpoint_group.NEG-EU-File.id
+    group          = data.google_compute_network_endpoint_group.NEGFile-EU.id
     balancing_mode = "RATE"
     max_rate = 1000
   }

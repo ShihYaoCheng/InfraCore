@@ -3,8 +3,16 @@ module "LoadBalancer" {
   source = "../../Modules/LoadBalancer/0.2.0"
 
   ProjectName = local.ProjectName
-  
+
   LoadBalancerDomainName = "global.origingaia.com"
+
+  ZoneTW = "asia-east1-a"
+  ZoneEU = "europe-west2-a"
+  
+  providers = {
+    kubernetes.tw = kubernetes.tw
+    kubernetes.eu = kubernetes.eu
+  }
 }
 
 

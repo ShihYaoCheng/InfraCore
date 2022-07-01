@@ -10,3 +10,12 @@ variable "LoadBalancerDomainName" {
   type = string
 #  default = "global.origingaia.com"
 }
+
+variable "ZoneTW" {
+  type = string
+}
+
+variable "ZoneEU" {
+  type = string
+}
+
