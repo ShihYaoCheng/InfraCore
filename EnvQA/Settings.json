@@ -5,11 +5,11 @@
   },
   "AppsVersion": 
   {
-    "Backstage": "v2.6.0C6",
-    "Battle": "v2022.07.01",
-    "File": "v2022.07.1",
+    "Backstage": "v2.6.0C8",
+    "Battle": "v2.6.0C8",
+    "File": "v2.6.0C8F1",
     "NFT": "v2.6.0C2F1",
-    "Table": "v2.6.0C6",
-    "User": "v2.6.0C6F1"
+    "Table": "v2.6.0C8",
+    "User": "v2.6.0C8"
   }
 }
