@@ -5,6 +5,14 @@ module "LoadBalancer" {
   ProjectName  = local.ProjectName
   
   LoadBalancerDomainName = "global.v2.7.0.ponponsnake.com"
+
+  ZoneTW = "asia-east1-a"
+  ZoneEU = "europe-west2-a"
+
+  providers = {
+    kubernetes.tw = kubernetes.tw
+    kubernetes.eu = kubernetes.eu
+  }
 }
 
 
