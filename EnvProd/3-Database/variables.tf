@@ -5,8 +5,6 @@ locals {
   Settings = jsondecode(file("../Settings.json"))
   ProjectID = local.Settings["Project"]["ID"]
   ProjectName = local.Settings["Project"]["Name"]
-  
-  CloudSQLAdminPassword = "admin1234"
 }
 
 # https://cloud.google.com/compute/docs/regions-zones
@@ -22,3 +20,17 @@ variable "GCPZone" {
   description = "cloud provider zone."
 }
 
+variable "CloudSQLAdminPassword" {
+  type = string
+  sensitive = true
+}
+
+variable "CloudSQLBackstagePassword" {
+  type = string
+  sensitive = true
+}
+
+variable "CloudSQLUserPassword" {
+  type = string
+  sensitive = true
+}

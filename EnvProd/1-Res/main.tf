@@ -1,4 +1,4 @@
-﻿module "res" {
+﻿module "Resource" {
   source  = "../../Modules/Resources/0.1.0"
 
   ProjectName = local.ProjectName
