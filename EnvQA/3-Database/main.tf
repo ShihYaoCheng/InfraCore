@@ -11,7 +11,7 @@
   CloudSQLBackstagePassword = "backstage1234"
   CloudSQLUserPassword      = "user1234"
 
-  CloudSQLMachine                   = "db-g1-small"
+  CloudSQLMachine                   = "db-n1-standard-1"
   CloudSQLEnableDiskAutoResize      = false
   CloudSQLEnableAutoBackup          = false
   CloudSQLEnablePointInTimeRecovery = false
