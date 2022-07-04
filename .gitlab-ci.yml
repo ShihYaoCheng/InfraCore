@@ -14,23 +14,23 @@ stages:
 include:
   - local: ".gitlab-ci-template.yml"
 
-TrivyScan-EnvSRE:
-  extends: .TrivyScanTemplate
-  variables:
-    SCAN_PATH: EnvSRE
-    REPORT_FILE: ReportSRE.txt
-
-TrivyScan-Tools:
-  extends: .TrivyScanTemplate
-  variables:
-    SCAN_PATH: tools
-    REPORT_FILE: ReportTools.txt
-
-TrivyScan-Modules:
-  extends: .TrivyScanTemplate
-  variables:
-    SCAN_PATH: Modules
-    REPORT_FILE: ReportModules.txt
+#TrivyScan-EnvSRE:
+#  extends: .TrivyScanTemplate
+#  variables:
+#    SCAN_PATH: EnvSRE
+#    REPORT_FILE: ReportSRE.txt
+#
+#TrivyScan-Tools:
+#  extends: .TrivyScanTemplate
+#  variables:
+#    SCAN_PATH: tools
+#    REPORT_FILE: ReportTools.txt
+#
+#TrivyScan-Modules:
+#  extends: .TrivyScanTemplate
+#  variables:
+#    SCAN_PATH: Modules
+#    REPORT_FILE: ReportModules.txt
 
 
 
@@ -1280,9 +1280,9 @@ Prod-1-Res-Plan:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  rules:
-    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-      when: manual
+#  rules:
+#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+#      when: manual
 
 Prod-1-Res-Apply:
   extends: .apply.without.var.file
@@ -1293,9 +1293,9 @@ Prod-1-Res-Apply:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  rules:
-    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-      when: manual
+#  rules:
+#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+#      when: manual
 
 Prod-1-Res-Destroy:
   extends: .destroy.without.var.file
@@ -1306,9 +1306,9 @@ Prod-1-Res-Destroy:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  rules:
-    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-      when: manual
+#  rules:
+#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+#      when: manual
 
 
 
@@ -1324,9 +1324,9 @@ Prod-2-VPC-Plan:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  rules:
-    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-      when: manual
+#  rules:
+#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+#      when: manual
 
 Prod-2-VPC-Apply:
   extends: .apply.without.var.file
@@ -1337,9 +1337,9 @@ Prod-2-VPC-Apply:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  rules:
-    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-      when: manual
+#  rules:
+#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+#      when: manual
 
 Prod-2-VPC-Destroy:
   extends: .destroy.without.var.file
@@ -1350,9 +1350,9 @@ Prod-2-VPC-Destroy:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  rules:
-    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-      when: manual
+#  rules:
+#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+#      when: manual
 
 
 #============================#
@@ -1368,9 +1368,9 @@ Prod-3-DB-Plan:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_DB_SA_BASE64 | base64 -d)
     - cd ${TF_ROOT}
     - cat $PROD_DB_TF_VAR_FILE_BASE64 | base64 -d > var_file 
-  rules:
-    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-      when: manual
+#  rules:
+#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+#      when: manual
   tags:
     - g1
 
@@ -1385,9 +1385,9 @@ Prod-3-DB-Apply:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_DB_SA_BASE64 | base64 -d)
     - cd ${TF_ROOT}
     - cat $PROD_DB_TF_VAR_FILE_BASE64 | base64 -d > var_file
-  rules:
-    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-      when: manual
+#  rules:
+#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+#      when: manual
   tags:
     - g1
 
@@ -1403,9 +1403,9 @@ Prod-3-DB-Destroy:
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_DB_SA_BASE64 | base64 -d)
     - cd ${TF_ROOT}
     - cat $PROD_DB_TF_VAR_FILE_BASE64 | base64 -d > var_file     
-  rules:
-    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-      when: manual
+#  rules:
+#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+#      when: manual
   tags:
     - g1
 
