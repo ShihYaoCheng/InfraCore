@@ -344,6 +344,8 @@ variables:
   PROD_APPS_TF_STATE_NAME: "Prod-Apps"
   PROD_GKE_GLOBAL_DIR: EnvProd/6-GKE-Global
   PROD_GKE_GLOBAL_TF_STATE_NAME: "Prod-GKE-Global"
+  PROD_APPS_GLOBAL_DIR: EnvProd/7-Apps-Global
+  PROD_APPS_GLOBAL_TF_STATE_NAME: "Prod-Apps-Global"
 
 
 # TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/sre-infra
@@ -1562,54 +1564,54 @@ Prod-6-GKE-Global-Destroy:
     - g1
 
 
-##=============================#
-## Prod(Review) - Apps(Global) #
-##=============================#
-#Prod-Review-7-Apps-Global-Plan:
-#  extends: .plan.with.var.file
-#  variables:
-#    TF_ROOT: ${PROD_REVIEW_APPS_GLOBAL_DIR}
-#    TF_STATE_NAME: ${PROD_REVIEW_APPS_GLOBAL_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#    - cd ${TF_ROOT}
-#    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+#=============================#
+# Prod - Apps(Global)          #
+#=============================#
+Prod-7-Apps-Global-Plan:
+  extends: .plan.with.var.file
+  variables:
+    TF_ROOT: ${PROD_APPS_GLOBAL_DIR}
+    TF_STATE_NAME: ${PROD_APPS_GLOBAL_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
-#
-#Prod-Review-7-Apps-Global-Apply:
-#  extends: .apply.with.var.file
-#  needs: [Prod-Review-7-Apps-Global-Plan]
-#  variables:
-#    TF_ROOT: ${PROD_REVIEW_APPS_GLOBAL_DIR}
-#    TF_STATE_NAME: ${PROD_REVIEW_APPS_GLOBAL_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#    - cd ${TF_ROOT}
-#    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+
+Prod-7-Apps-Global-Apply:
+  extends: .apply.with.var.file
+  needs: [Prod-7-Apps-Global-Plan]
+  variables:
+    TF_ROOT: ${PROD_APPS_GLOBAL_DIR}
+    TF_STATE_NAME: ${PROD_APPS_GLOBAL_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
-#
-#Prod-Review-7-Apps-Global-Destroy:
-#  extends: .destroy.with.var.file
-#  needs: [Prod-Review-7-Apps-Global-Plan]
-#  variables:
-#    TF_ROOT: ${PROD_REVIEW_APPS_GLOBAL_DIR}
-#    TF_STATE_NAME: ${PROD_REVIEW_APPS_GLOBAL_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#    - cd ${TF_ROOT}
-#    - cat $PROD_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+
+Prod-7-Apps-Global-Destroy:
+  extends: .destroy.with.var.file
+  needs: [Prod-7-Apps-Global-Plan]
+  variables:
+    TF_ROOT: ${PROD_APPS_GLOBAL_DIR}
+    TF_STATE_NAME: ${PROD_APPS_GLOBAL_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
-#
-#
+
+
 ##==============================#
 ## Prod(Review) - LoadBalancer  #
 ##==============================#
