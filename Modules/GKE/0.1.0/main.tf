@@ -14,8 +14,8 @@ module "gke" {
 
   network           = var.ProjectName
   subnetwork        = var.ProjectName
-  // module.vpc.subnets_secondary_ranges[x], access subnet.
-  // module.vpc.subnets_secondary_ranges[x][x], access subnet - secondary.
+  # module.vpc.subnets_secondary_ranges[x], access subnet.
+  # module.vpc.subnets_secondary_ranges[x][x], access subnet - secondary.
   ip_range_pods     = ""
   ip_range_services = ""
 
@@ -26,7 +26,7 @@ module "gke" {
 #  kubernetes_version = "1.23.5-gke.1501"
 #  kubernetes_version = "1.22.8-gke.200"
 
-  // Optional.
+  # Optional.
   #  regional = var.GKERegional # Default = true
   regional = false
   zones    = var.GKE-Zones
@@ -136,7 +136,7 @@ module "gke" {
       # Minimum number of nodes in the NodePool. Must be >=0 and <= max_count. Should be used when autoscaling is true
       min_count = 0 # default: 1.
       # Maximum number of nodes in the NodePool. Must be >= min_count
-      max_count = 1 # default: 100.
+      max_count = var.GKE-MaxCount-e2-standard-2 # default: 100.
 
       disk_size_gb = 60
       disk_type    = "pd-standard"
@@ -157,6 +157,11 @@ module "gke" {
       autoscaling = var.GKE-EnableScale-e2-standard-4 # Default = true
       # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
       node_count  = var.GKE-NodeCount-e2-standard-4
+
+      # Minimum number of nodes in the NodePool. Must be >=0 and <= max_count. Should be used when autoscaling is true
+      min_count = 0 # default: 1.
+      # Maximum number of nodes in the NodePool. Must be >= min_count
+      max_count = var.GKE-MaxCount-e2-standard-4 # default: 100.
 
       disk_size_gb = 60
       disk_type    = "pd-standard"

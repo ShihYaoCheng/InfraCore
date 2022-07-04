@@ -13,5 +13,8 @@ module "GKE-EU" {
   GKE-NodeCount-e2-standard-2 = 1
   GKE-EnableScale-e2-standard-4 = false
   GKE-NodeCount-e2-standard-4 = 0
+
+  GKE-MaxCount-e2-standard-2 = 1
+  GKE-MaxCount-e2-standard-4 = 1
 }
 

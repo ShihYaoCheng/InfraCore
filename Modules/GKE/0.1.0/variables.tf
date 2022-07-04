@@ -45,23 +45,27 @@ variable "GKE-Zones" {
 
 variable "GKE-EnableScale-e2-standard-2" {
   type = bool
-#  default = true
+}
+
+variable "GKE-MaxCount-e2-standard-2" {
+  type = number
 }
 
 variable "GKE-NodeCount-e2-standard-2" {
   type = number
-#  default = 0
   description = "USD 56.64"
 }
 
 variable "GKE-EnableScale-e2-standard-4" {
   type = bool
-  #  default = true
+}
+
+variable "GKE-MaxCount-e2-standard-4" {
+  type = number
 }
 
 variable "GKE-NodeCount-e2-standard-4" {
   type = number
-#  default = 1
   description = "USD 113.28"
 }
 
