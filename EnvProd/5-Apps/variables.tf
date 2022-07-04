@@ -43,7 +43,7 @@ variable "ArgoCD_GitLabTokenSecret" {
   description = "Deploy token"
 }
 
-variable "GrafanaPassword" {
+variable "GrafanaAdminPassword" {
   type        = string
   sensitive   = true
 }
