@@ -346,7 +346,7 @@ variables:
   PROD_GKE_GLOBAL_TF_STATE_NAME: "Prod-GKE-Global"
   PROD_APPS_GLOBAL_DIR: EnvProd/7-Apps-Global
   PROD_APPS_GLOBAL_TF_STATE_NAME: "Prod-Apps-Global"
-  PROD_LB_DIR: EnvProd/7-LoadBalancer
+  PROD_LB_DIR: EnvProd/8-LoadBalancer
   PROD_LB_TF_STATE_NAME: "Prod-LB"
 
 
