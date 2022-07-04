@@ -17,11 +17,11 @@ module "Applications" {
   CloudSQLProxy_Enable = false
 
   Prometheus_Enable            = true
-  Prometheus_AlertSlackChannel = "alert-sk-prod-review"
-  Prometheus_StorageClassName  = "ssd-delete"
-  Prometheus_StorageSize       = "60Gi"
-  Prometheus_Retention         = "30d"
-  Grafana_AdminPassword        = "gra4422"
+  Prometheus_AlertSlackChannel = "alert-sk-prod"
+  Prometheus_StorageClassName  = "ssd-retain"
+  Prometheus_StorageSize       = "500Gi"
+  Prometheus_Retention         = "90d"
+  Grafana_AdminPassword        = var.GrafanaPassword
 
   ArgoCD_Enable                       = true
   ArgoCD_EnableSelfHeal               = true

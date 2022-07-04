@@ -17,8 +17,8 @@ module "Applications" {
   Prometheus_Enable            = true
   Prometheus_AlertSlackChannel = "alert-sk-prod"
   Prometheus_StorageClassName  = "ssd-retain"
-  Prometheus_StorageSize       = "200Gi"
-  Prometheus_Retention         = "60d"
+  Prometheus_StorageSize       = "800Gi"
+  Prometheus_Retention         = "90d"
   Grafana_AdminPassword        = var.GrafanaPassword
 
   CloudSQLProxy_Enable = true
