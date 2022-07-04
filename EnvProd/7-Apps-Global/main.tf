@@ -21,7 +21,7 @@ module "Applications" {
   Prometheus_StorageClassName  = "ssd-retain"
   Prometheus_StorageSize       = "500Gi"
   Prometheus_Retention         = "90d"
-  Grafana_AdminPassword        = var.GrafanaPassword
+  Grafana_AdminPassword        = var.GrafanaAdminPassword
 
   ArgoCD_Enable                       = true
   ArgoCD_EnableSelfHeal               = true
