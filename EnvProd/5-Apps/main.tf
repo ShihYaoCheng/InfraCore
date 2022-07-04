@@ -7,7 +7,7 @@ module "Applications" {
   GCPZone      = var.GCPZone
 
   ExternalDNS_Enable = false
-  DomainName         = "v2.7.0.ponponsnake.com"
+  DomainName         = "prod.ponponsnake.com"
   GodaddyAPIKey      = ""
   GodaddyAPISecret   = ""
 
@@ -15,11 +15,11 @@ module "Applications" {
   CertManager_CreateProdCert = true
 
   Prometheus_Enable            = true
-  Prometheus_AlertSlackChannel = "alert-sk-prod-review"
-  Prometheus_StorageClassName  = "ssd-delete"
-  Prometheus_StorageSize       = "60Gi"
-  Prometheus_Retention         = "30d"
-  Grafana_AdminPassword        = "gra4422"
+  Prometheus_AlertSlackChannel = "alert-sk-prod"
+  Prometheus_StorageClassName  = "ssd-retain"
+  Prometheus_StorageSize       = "200Gi"
+  Prometheus_Retention         = "60d"
+  Grafana_AdminPassword        = var.GrafanaPassword
 
   CloudSQLProxy_Enable = true
 
