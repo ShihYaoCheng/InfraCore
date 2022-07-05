@@ -1,0 +1,35 @@
+﻿# https://artifacthub.io/packages/helm/ingress-nginx/ingress-nginx
+controller:
+  service:
+    annotations:
+      # The external-dns add A record to godaddy.
+#        external-dns.alpha.kubernetes.io/hostname: sre.origingaia.com, dev.origingaia.com
+      external-dns.alpha.kubernetes.io/hostname: ${env-domain-name}
+      cert-manager.io/issue-temporary-certificate: "true"
+      acme.cert-manager.io/http01-edit-in-place: "true"
+
+  extraArgs:
+    # If namespace is not specified, the default namespace is used.
+#    default-ssl-certificate: "cert-manager/cert.staging"
+    default-ssl-certificate: ${tls-certificate}
+
+  # https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/
+  metrics:
+    port: 10254
+    # if this port is changed, change healthz-port: in extraArgs: accordingly
+    enabled: true
+
+    podAnnotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "10254"
+
+#    service:
+#      annotations:
+#        prometheus.io/scrape: "true"
+#        prometheus.io/port: "10254"
+#
+#      servicePort: 10254
+#      type: ClusterIP
+
+    serviceMonitor:
+      enabled: true

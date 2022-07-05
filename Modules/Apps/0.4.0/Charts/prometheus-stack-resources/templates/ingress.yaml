@@ -1,0 +1,32 @@
+﻿apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: strip-grafana
+spec:
+  stripPrefix:
+    prefixes:
+      - /grafana/
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ig-grafana
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: PathPrefix(`/grafana/`)
+      middlewares:
+        - name: strip-grafana
+      services:
+        - kind: Service
+          name: prometheus-grafana
+          port: http-web
+  tls:
+    {{- if .Values.grafana.ingress.useProductionCert }}
+    secretName: cert.prod
+    {{- else }}
+    secretName: cert.staging
+    {{- end }}
