@@ -1,3 +1,5 @@
+# https://github.com/robusta-dev/robusta/blob/master/helm/robusta/values.yaml
+
 sinksConfig:
 - slack_sink:
     name: main_slack_sink
@@ -22,6 +24,29 @@ customPlaybooks:
           fields_to_monitor: ["spec.replicas"]
 
 enablePlatformPlaybooks: true
+
+platformPlaybooks:
+  - triggers:
+      - on_kubernetes_warning_event_create:
+          exclude: ["NodeSysctlChange"]
+    actions:
+      - event_report: {}
+      - event_resource_events: {}
+  - triggers:
+      - on_deployment_all_changes: {}
+      - on_daemonset_all_changes: {}
+      - on_statefulset_all_changes: {}
+    actions:
+      - resource_babysitter: {}
+  - triggers:
+      - on_configmap_all_changes: {}
+    actions:
+      - resource_babysitter:
+          fields_to_monitor: ["ConfigMap.data"]
+          ignored_namespaces: ["kube-system"] # kube-system configmaps updated a lot (spammy)
+
+
+
 
 kube-prometheus-stack:
   coreDns:
