@@ -19,9 +19,9 @@ resource "helm_release" "Traefik" {
 }
 
 resource "helm_release" "TraefikResources" {
-  count = var.Prometheus_Enable ? 1 : 0
+#  count = var.Prometheus_Enable ? 1 : 0
   
-  depends_on = [helm_release.Traefik, helm_release.Prometheus]
+  depends_on = [helm_release.Traefik, helm_release.Robusta]
 
   name             = "traefik-resources"
   chart            = "${path.module}/Charts/traefik-resources"

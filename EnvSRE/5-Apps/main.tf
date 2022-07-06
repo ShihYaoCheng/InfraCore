@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "Applications" {
-  source = "../../Modules/Apps/0.3.0"
+  source = "../../Modules/Apps/0.4.0"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
@@ -14,12 +14,15 @@ module "Applications" {
   CertManager_Enable         = true
   CertManager_CreateProdCert = false
 
-  Prometheus_Enable            = true
-  Prometheus_AlertSlackChannel = "alert-sk-sre"
+#  Prometheus_Enable            = true
   Prometheus_StorageClassName  = "ssd-delete"
   Prometheus_StorageSize       = "20Gi"
   Prometheus_Retention         = "1d"
   Grafana_AdminPassword        = "gra4422"
+
+  Robusta_ClusterName                 = "sre-tw"
+  Robusta_SlackAPIKey                 = var.Robusta_SlackAPIKey
+  Robusta_SlackChannel                = "alert-sk-sre"
 
   CloudSQLProxy_Enable = true
 

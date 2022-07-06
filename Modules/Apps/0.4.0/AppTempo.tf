@@ -7,7 +7,7 @@
 resource "helm_release" "Tempo" {
   count = var.Tempo_Enable ? 1 : 0
   
-  depends_on = [helm_release.Prometheus]
+  depends_on = [helm_release.Robusta]
 
   name             = "tempo"
   repository       = "https://grafana.github.io/helm-charts"

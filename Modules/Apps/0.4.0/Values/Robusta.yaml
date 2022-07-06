@@ -1,12 +1,10 @@
-globalConfig:
-  signing_key: c9edf771-05a1-4ef1-86a6-80c1dbf4efea
-  account_id: 6c0bf882-a938-42fc-918c-fd8dfc76dcb1
 sinksConfig:
 - slack_sink:
     name: main_slack_sink
-    slack_channel: robusta-test
-    api_key: xoxb-2412477657683-3736814710695-jwG7w7PjLkJnOWnmclmVTUni
-clusterName: gke_stellar-38931_asia-east1-a_cqi-sk-test
+#    slack_channel: alert-sk-sre
+    slack_channel: ${slackChannel}
+    api_key: ${slackAPIKey}
+clusterName: ${clusterName}
 
 enablePrometheusStack: true
 enableServiceMonitors: true
@@ -35,7 +33,7 @@ kube-prometheus-stack:
   kubeScheduler:
     enabled: false
   grafana:
-    adminPassword: admin1234
+    adminPassword: ${grafanaAdminPassword}
     
     ## Timezone for the default dashboards
     ## Other options are: browser or a specific timezone, i.e. Europe/Luxembourg
@@ -217,9 +215,8 @@ kube-prometheus-stack:
       replicas: 1
       
       ## How long to retain metrics
-      #    retention: 90d
-#      retention: ${prometheusRetention}
-      retention: 90d
+      # retention: 90d
+      retention: ${prometheusRetention}
       
       ## Prometheus StorageSpec for persistent data
       ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/user-guides/storage.md
@@ -227,12 +224,12 @@ kube-prometheus-stack:
       storageSpec:
         volumeClaimTemplate:
           spec:
-#            storageClassName: ${prometheusStorageClassName}
+            storageClassName: ${prometheusStorageClassName}
             accessModes: [ "ReadWriteOnce" ]
             resources:
               requests:
-#                storage: ${prometheusStorageSize}
-                storage: 60Gi
+                storage: ${prometheusStorageSize}
+#                storage: 60Gi
 
 rsa:
   prv: '-----BEGIN RSA PRIVATE KEY-----

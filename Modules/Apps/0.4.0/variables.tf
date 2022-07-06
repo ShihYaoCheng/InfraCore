@@ -46,14 +46,14 @@ variable "GodaddyAPISecret" {
 #============================
 # Prometheus                #
 #============================
-variable "Prometheus_Enable" {
-  type = bool
-  default = true
-}
+#variable "Prometheus_Enable" {
+#  type = bool
+#  default = true
+#}
 
-variable "Prometheus_AlertSlackChannel" {
-  type = string
-}
+#variable "Prometheus_AlertSlackChannel" {
+#  type = string
+#}
 
 variable "Prometheus_StorageClassName" {
   type = string
@@ -74,7 +74,21 @@ variable "Grafana_AdminPassword" {
   type = string
 }
 
+#============================
+# Robusta                   #
+#============================
+variable "Robusta_SlackChannel" {
+  type = string
+}
 
+variable "Robusta_SlackAPIKey" {
+  type      = string
+  sensitive = true
+}
+
+variable "Robusta_ClusterName" {
+  type = string
+}
 
 #============================
 # Loki                      #

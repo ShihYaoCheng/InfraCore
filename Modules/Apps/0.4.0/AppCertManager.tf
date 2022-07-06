@@ -2,7 +2,7 @@
 # helm upgrade --install cert-manager jetstack/cert-manager -n cert-manager --create-namespace --set installCRDs=true
 resource "helm_release" "CertManager" {
   count      = var.CertManager_Enable ? 1 : 0
-  depends_on = [helm_release.Prometheus]
+  depends_on = [helm_release.Robusta]
 
   name             = "cert-manager"
   repository       = "https://charts.jetstack.io"

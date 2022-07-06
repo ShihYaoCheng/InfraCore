@@ -2,8 +2,8 @@
 # Project                   #
 #============================
 locals {
-  Settings = jsondecode(file("../Settings.json"))
-  ProjectID = local.Settings["Project"]["ID"]
+  Settings    = jsondecode(file("../Settings.json"))
+  ProjectID   = local.Settings["Project"]["ID"]
   ProjectName = local.Settings["Project"]["Name"]
 }
 
@@ -47,3 +47,12 @@ variable "ArgoCD_GitLabTokenSecret" {
   sensitive   = true
   description = "Deploy token"
 }
+
+#============================
+# ArgoCD                    #
+#============================
+variable "Robusta_SlackAPIKey" {
+  type      = string
+  sensitive = true
+}
+

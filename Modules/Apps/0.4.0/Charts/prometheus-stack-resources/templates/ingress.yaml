@@ -22,7 +22,7 @@ spec:
         - name: strip-grafana
       services:
         - kind: Service
-          name: prometheus-grafana
+          name: robusta-grafana
           port: http-web
   tls:
     {{- if .Values.grafana.ingress.useProductionCert }}

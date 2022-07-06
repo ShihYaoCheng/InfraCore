@@ -5,7 +5,7 @@
 # helm uninstall argocd -n argocd
 
 resource "helm_release" "ArgoCDFull" {
-  depends_on = [helm_release.Prometheus]
+  depends_on = [helm_release.Robusta]
 
   count = var.ArgoCD_Enable && var.ArgoCD_EnableAllApps ? 1 : 0
 

@@ -52,3 +52,11 @@ metadata:
   labels:
     kubed: sync
     pod-security.kubernetes.io/enforce: baseline
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: robusta
+  labels:
+    kubed: sync
+    pod-security.kubernetes.io/enforce: baseline

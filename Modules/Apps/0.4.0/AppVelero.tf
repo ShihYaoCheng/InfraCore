@@ -25,7 +25,7 @@ resource "helm_release" "VeleroResourcesPre" {
 resource "helm_release" "Velero" {
   count = var.Velero_Enable ? 1 : 0
   
-  depends_on = [helm_release.Prometheus, helm_release.VeleroResourcesPre]
+  depends_on = [helm_release.Robusta, helm_release.VeleroResourcesPre]
 
   name             = "velero"
   repository       = "https://vmware-tanzu.github.io/helm-charts"

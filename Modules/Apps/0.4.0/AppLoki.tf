@@ -25,7 +25,7 @@ resource "helm_release" "LokiResourcesPre" {
 resource "helm_release" "Loki" {
   count = var.Loki_Enable ? 1 : 0
   
-  depends_on = [helm_release.LokiResourcesPre, helm_release.Prometheus]
+  depends_on = [helm_release.LokiResourcesPre, helm_release.Robusta]
 
   name             = "loki"
   repository       = "https://grafana.github.io/helm-charts"
