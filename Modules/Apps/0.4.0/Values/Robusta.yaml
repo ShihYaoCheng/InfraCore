@@ -19,11 +19,11 @@ customPlaybooks:
   - triggers:
       - on_deployment_update: {}
     actions:
-      - resource_babysitter:
-          omitted_fields: []
-          fields_to_monitor: ["spec.replicas"]
+      - deployment_status_enricher: {}
+      - deployment_events_enricher: {}
+          
 
-enablePlatformPlaybooks: true
+enablePlatformPlaybooks: false # noisy.
 
 platformPlaybooks:
   - triggers:
