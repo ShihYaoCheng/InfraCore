@@ -49,7 +49,7 @@ variable "ArgoCD_GitLabTokenSecret" {
 }
 
 #============================
-# ArgoCD                    #
+# Robusta                   #
 #============================
 variable "Robusta_SlackAPIKey" {
   type      = string
