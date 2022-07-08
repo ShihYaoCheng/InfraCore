@@ -16,11 +16,9 @@ module "Apps" {
 
   CloudSQLProxy_Enable = true
 
-  Prometheus_Enable            = true
   Prometheus_StorageClassName  = "ssd-delete"
   Prometheus_StorageSize       = "100Gi"
   Prometheus_Retention         = "60d"
-  Prometheus_AlertSlackChannel = "alert-sk-dev"
   Grafana_AdminPassword        = "gra4422"
 
   Robusta_ClusterName  = "sk-dev"
