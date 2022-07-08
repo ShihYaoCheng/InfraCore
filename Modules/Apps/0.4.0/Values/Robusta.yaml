@@ -3,7 +3,6 @@
 sinksConfig:
 - slack_sink:
     name: main_slack_sink
-#    slack_channel: alert-sk-sre
     slack_channel: ${slackChannel}
     api_key: ${slackAPIKey}
 clusterName: ${clusterName}
@@ -15,12 +14,16 @@ disableCloudRouting: true
 runner:
   sendAdditionalTelemetry: false
 
+# https://docs.robusta.dev/master/catalog/triggers/kubernetes.html
 customPlaybooks:
   - triggers:
-      - on_deployment_update: {}
+      - on_pod_create:  
+          labels_selector: trigger=argocd
+      - on_pod_update: 
+          labels_selector: trigger=argocd
     actions:
-      - deployment_status_enricher: {}
-      - deployment_events_enricher: {}
+      - logs_enricher: {}
+      - pod_events_enricher: {}
           
 
 enablePlatformPlaybooks: false # noisy.

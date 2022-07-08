@@ -14,7 +14,6 @@ module "Applications" {
   CertManager_Enable         = true
   CertManager_CreateProdCert = false
 
-#  Prometheus_Enable            = true
   Prometheus_StorageClassName  = "ssd-delete"
   Prometheus_StorageSize       = "20Gi"
   Prometheus_Retention         = "1d"
@@ -22,7 +21,7 @@ module "Applications" {
 
   Robusta_ClusterName                 = "sre-tw"
   Robusta_SlackAPIKey                 = var.Robusta_SlackAPIKey
-  Robusta_SlackChannel                = "alert-sk-sre"
+  Robusta_SlackChannel                = "sk-sre-info"
 
   CloudSQLProxy_Enable = true
 
