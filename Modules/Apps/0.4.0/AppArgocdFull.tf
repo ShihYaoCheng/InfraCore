@@ -49,32 +49,32 @@ resource "helm_release" "ArgoCDFull" {
   # [0] Battle service.
   set {
     name  = "server.additionalApplications[0].source.helm.valueFiles"
-    value = var.ArgoCD_RepositoryHelmPathValueFiles
+    value = var.ArgoCD_BattleHelmValueFiles
   }
   # [1] File service.
   set {
     name  = "server.additionalApplications[1].source.helm.valueFiles"
-    value = var.ArgoCD_RepositoryHelmPathValueFiles
+    value = var.ArgoCD_FileHelmValueFiles
   }
   # [2] Table service.
   set {
     name  = "server.additionalApplications[2].source.helm.valueFiles"
-    value = var.ArgoCD_RepositoryHelmPathValueFiles
+    value = var.ArgoCD_TableHelmValueFiles
   }
   # [3] User service.
   set {
     name  = "server.additionalApplications[3].source.helm.valueFiles"
-    value = var.ArgoCD_RepositoryHelmPathValueFiles
+    value = var.ArgoCD_UserHelmValueFiles
   }
   # [4] Backstage
   set {
     name  = "server.additionalApplications[4].source.helm.valueFiles"
-    value = var.ArgoCD_RepositoryHelmPathValueFiles
+    value = var.ArgoCD_BackstageHelmValueFiles
   }
   # [5] NFT
   set {
     name  = "server.additionalApplications[5].source.helm.valueFiles"
-    value = var.ArgoCD_RepositoryHelmPathValueFiles
+    value = var.ArgoCD_NFTHelmValueFiles
   }
 
 

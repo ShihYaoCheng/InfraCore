@@ -33,13 +33,18 @@ module "Apps" {
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret
   ArgoCD_SyncWindowCronTime           = "* * * * *"
-  ArgoCD_RepositoryHelmPathValueFiles = local.HelmPathValueFiles
   ArgoCD_AppBackstageBranchOrTag      = local.AppBackstage
   ArgoCD_AppBattleBranchOrTag         = local.AppBattle
   ArgoCD_AppFileBranchOrTag           = local.AppFile
   ArgoCD_AppNFTBranchOrTag            = local.AppNFT
   ArgoCD_AppTableBranchOrTag          = local.AppTable
   ArgoCD_AppUserBranchOrTag           = local.AppUser
+  ArgoCD_BackstageHelmValueFiles      = local.BackstageHelmValueFiles
+  ArgoCD_BattleHelmValueFiles         = local.BattleHelmValueFiles
+  ArgoCD_FileHelmValueFiles           = local.FileHelmValueFiles
+  ArgoCD_NFTHelmValueFiles            = local.NFTHelmValueFiles
+  ArgoCD_TableHelmValueFiles          = local.TableHelmValueFiles
+  ArgoCD_UserHelmValueFiles           = local.UserHelmValueFiles
 }
 
 

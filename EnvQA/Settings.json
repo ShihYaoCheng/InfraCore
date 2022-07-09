@@ -12,5 +12,13 @@
     "Table": "main",
     "User": "main"
   },
-  "HelmPathValueFiles": "{values-qa-v2.6.x.yaml}"
+  "HelmPathValueFiles": 
+  {
+    "Backstage": "{values-prod.yaml}",
+    "Battle": "{values-qa-v2.6.x.yaml}",
+    "File": "{values-qa-v2.6.x.yaml}",
+    "NFT": "{values-prod.yaml}",
+    "Table": "{values-qa-v2.6.x.yaml}",
+    "User": "{values-qa-v2.6.x.yaml}"
+  }
 }

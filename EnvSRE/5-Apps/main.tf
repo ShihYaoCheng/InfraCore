@@ -33,13 +33,18 @@ module "Applications" {
   ArgoCD_GitLabTokenName              = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret            = var.ArgoCD_GitLabTokenSecret
   ArgoCD_SyncWindowCronTime           = "* * * * *"
-  ArgoCD_RepositoryHelmPathValueFiles = "{values-sre.yaml}"
   ArgoCD_AppFileBranchOrTag           = "main"
   ArgoCD_AppTableBranchOrTag          = "main"
   ArgoCD_AppUserBranchOrTag           = "main"
   ArgoCD_AppBackstageBranchOrTag      = "main"
   ArgoCD_AppBattleBranchOrTag         = "main"
   ArgoCD_AppNFTBranchOrTag            = "main"
+  ArgoCD_BackstageHelmValueFiles      = "{values-sre.yaml}"
+  ArgoCD_BattleHelmValueFiles         = "{values-sre.yaml}"
+  ArgoCD_FileHelmValueFiles           = "{values-sre.yaml}"
+  ArgoCD_NFTHelmValueFiles            = "{values-sre.yaml}"
+  ArgoCD_TableHelmValueFiles          = "{values-sre.yaml}"
+  ArgoCD_UserHelmValueFiles           = "{values-sre.yaml}"
 }
 
 

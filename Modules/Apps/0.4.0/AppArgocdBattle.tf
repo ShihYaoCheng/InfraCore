@@ -33,14 +33,13 @@ resource "helm_release" "ArgoCDBattle" {
   # [0] Battle service.
   set {
     name  = "server.additionalApplications[0].source.helm.valueFiles"
-    value = var.ArgoCD_RepositoryHelmPathValueFiles
+    value = var.ArgoCD_BattleHelmValueFiles
   }
   # [1] File service.
   set {
     name  = "server.additionalApplications[1].source.helm.valueFiles"
-    value = var.ArgoCD_RepositoryHelmPathValueFiles
+    value = var.ArgoCD_FileHelmValueFiles
   }
-  # [2] Table service.
 
 
   #============================#
