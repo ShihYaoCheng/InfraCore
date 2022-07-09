@@ -15,16 +15,21 @@ runner:
   sendAdditionalTelemetry: false
 
 # https://docs.robusta.dev/master/catalog/triggers/kubernetes.html
+# https://docs.robusta.dev/master/catalog/actions/event-enrichment.html
 customPlaybooks:
   - triggers:
-      - on_pod_create:  
+      - on_deployment_all_changes:
           labels_selector: trigger=argocd
-      - on_pod_update: 
-          labels_selector: trigger=argocd
+#      - on_deployment_create: {}
+#        labels_selector: trigger=argocd
+#      - on_deployment_update: {}
+#        labels_selector: trigger=argocd
+#      - on_deployment_delete: {}
+#        labels_selector: trigger=argocd
     actions:
-      - logs_enricher: {}
-      - pod_events_enricher: {}
-          
+      - deployment_status_enricher: {}
+      - deployment_events_enricher: {}
+
 
 enablePlatformPlaybooks: false # noisy.
 
