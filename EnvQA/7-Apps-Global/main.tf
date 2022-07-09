@@ -21,7 +21,7 @@ module "Apps" {
   Prometheus_Retention         = "30d"
   Grafana_AdminPassword        = "gra4422"
 
-  Robusta_ClusterName  = "sk-qa"
+  Robusta_ClusterName  = "sk-qa-eu"
   Robusta_SlackAPIKey  = var.Robusta_SlackAPIKey
   Robusta_SlackChannel = "sk-qa-info"
   
