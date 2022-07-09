@@ -14,7 +14,12 @@ locals {
   AppTable = local.Settings["AppsVersion"]["Table"]
   AppUser = local.Settings["AppsVersion"]["User"]
 
-  HelmPathValueFiles = local.Settings["HelmPathValueFiles"]
+  BackstageHelmValueFiles = local.Settings["HelmPathValueFiles"]["Backstage"]
+  BattleHelmValueFiles = local.Settings["HelmPathValueFiles"]["Battle"]
+  FileHelmValueFiles = local.Settings["HelmPathValueFiles"]["File"]
+  NFTHelmValueFiles = local.Settings["HelmPathValueFiles"]["NFT"]
+  TableHelmValueFiles = local.Settings["HelmPathValueFiles"]["Table"]
+  UserHelmValueFiles = local.Settings["HelmPathValueFiles"]["User"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones

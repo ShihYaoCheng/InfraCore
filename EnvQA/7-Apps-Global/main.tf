@@ -40,6 +40,12 @@ module "Apps" {
   ArgoCD_AppNFTBranchOrTag            = local.AppNFT
   ArgoCD_AppTableBranchOrTag          = local.AppTable
   ArgoCD_AppUserBranchOrTag           = local.AppUser
+  ArgoCD_BackstageHelmValueFiles      = local.BackstageHelmValueFiles
+  ArgoCD_BattleHelmValueFiles         = local.BattleHelmValueFiles
+  ArgoCD_FileHelmValueFiles           = local.FileHelmValueFiles
+  ArgoCD_NFTHelmValueFiles            = local.NFTHelmValueFiles
+  ArgoCD_TableHelmValueFiles          = local.TableHelmValueFiles
+  ArgoCD_UserHelmValueFiles           = local.UserHelmValueFiles
 }
 
 
