@@ -12,5 +12,5 @@
     "Table": "main",
     "User": "main"
   },
-  "HelmPathValueFiles": "{values-v2.6.x.yaml}"
+  "HelmPathValueFiles": "{values-qa-v2.6.x.yaml}"
 }
