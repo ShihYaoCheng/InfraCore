@@ -10,11 +10,11 @@ module "gke" {
   GKE-Zones = [var.GCPZone]
   
   GKE-EnableScale-e2-standard-2 = false
-  GKE-NodeCount-e2-standard-2 = 1
+  GKE-NodeCount-e2-standard-2 = 2
   GKE-EnableScale-e2-standard-4 = false
   GKE-NodeCount-e2-standard-4 = 0
 
-  GKE-MaxCount-e2-standard-2 = 1
+  GKE-MaxCount-e2-standard-2 = 2
   GKE-MaxCount-e2-standard-4 = 1
 }
 
