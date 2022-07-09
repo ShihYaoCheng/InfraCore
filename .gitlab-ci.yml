@@ -544,8 +544,8 @@ Dev-5-Apps-Destroy:
 QA-1-Res-Plan:
   extends: .plan.without.var.file
   variables:
-    TF_ROOT: ${QA_RES_DIR}
-    TF_STATE_NAME: ${QA_RES_TF_STATE_NAME}
+    TF_ROOT: $QA_RES_DIR
+    TF_STATE_NAME: $QA_RES_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -557,8 +557,8 @@ QA-1-Res-Apply:
   extends: .apply.without.var.file
   needs: [QA-1-Res-Plan]
   variables:
-    TF_ROOT: ${QA_RES_DIR}
-    TF_STATE_NAME: ${QA_RES_TF_STATE_NAME}
+    TF_ROOT: $QA_RES_DIR
+    TF_STATE_NAME: $QA_RES_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -570,8 +570,8 @@ QA-1-Res-Destroy:
   extends: .destroy.without.var.file
   needs: [QA-1-Res-Plan]
   variables:
-    TF_ROOT: ${QA_RES_DIR}
-    TF_STATE_NAME: ${QA_RES_TF_STATE_NAME}
+    TF_ROOT: $QA_RES_DIR
+    TF_STATE_NAME: $QA_RES_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_RES_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -585,8 +585,8 @@ QA-1-Res-Destroy:
 QA-2-VPC-Plan:
   extends: .plan.without.var.file
   variables:
-    TF_ROOT: ${QA_VPC_DIR}
-    TF_STATE_NAME: ${QA_VPC_TF_STATE_NAME}
+    TF_ROOT: $QA_VPC_DIR
+    TF_STATE_NAME: $QA_VPC_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -598,8 +598,8 @@ QA-2-VPC-Apply:
   extends: .apply.without.var.file
   needs: [QA-2-VPC-Plan]
   variables:
-    TF_ROOT: ${QA_VPC_DIR}
-    TF_STATE_NAME: ${QA_VPC_TF_STATE_NAME}
+    TF_ROOT: $QA_VPC_DIR
+    TF_STATE_NAME: $QA_VPC_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -611,8 +611,8 @@ QA-2-VPC-Destroy:
   extends: .destroy.without.var.file
   needs: [QA-2-VPC-Plan]
   variables:
-    TF_ROOT: ${QA_VPC_DIR}
-    TF_STATE_NAME: ${QA_VPC_TF_STATE_NAME}
+    TF_ROOT: $QA_VPC_DIR
+    TF_STATE_NAME: $QA_VPC_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_VPC_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -626,8 +626,8 @@ QA-2-VPC-Destroy:
 QA-3-DB-Plan:
   extends: .plan.without.var.file
   variables:
-    TF_ROOT: ${QA_DB_DIR}
-    TF_STATE_NAME: ${QA_DB_TF_STATE_NAME}
+    TF_ROOT: $QA_DB_DIR
+    TF_STATE_NAME: $QA_DB_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_DB_SA_BASE64 | base64 -d)
@@ -641,8 +641,8 @@ QA-3-DB-Apply:
   extends: .apply.without.var.file
   needs: [QA-3-DB-Plan]
   variables:
-    TF_ROOT: ${QA_DB_DIR}
-    TF_STATE_NAME: ${QA_DB_TF_STATE_NAME}
+    TF_ROOT: $QA_DB_DIR
+    TF_STATE_NAME: $QA_DB_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_DB_SA_BASE64 | base64 -d)
@@ -656,8 +656,8 @@ QA-3-DB-Destroy:
   extends: .destroy.without.var.file
   needs: [QA-3-DB-Plan]
   variables:
-    TF_ROOT: ${QA_DB_DIR}
-    TF_STATE_NAME: ${QA_DB_TF_STATE_NAME}
+    TF_ROOT: $QA_DB_DIR
+    TF_STATE_NAME: $QA_DB_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_DB_SA_BASE64 | base64 -d)
@@ -673,8 +673,8 @@ QA-3-DB-Destroy:
 QA-4-GKE-Plan:
   extends: .plan.without.var.file
   variables:
-    TF_ROOT: ${QA_GKE_DIR}
-    TF_STATE_NAME: ${QA_GKE_TF_STATE_NAME}
+    TF_ROOT: $QA_GKE_DIR
+    TF_STATE_NAME: $QA_GKE_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -688,8 +688,8 @@ QA-4-GKE-Apply:
   extends: .apply.without.var.file
   needs: [QA-4-GKE-Plan]
   variables:
-    TF_ROOT: ${QA_GKE_DIR}
-    TF_STATE_NAME: ${QA_GKE_TF_STATE_NAME}
+    TF_ROOT: $QA_GKE_DIR
+    TF_STATE_NAME: $QA_GKE_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -703,8 +703,8 @@ QA-4-GKE-Destroy:
   extends: .destroy.without.var.file
   needs: [QA-4-GKE-Plan]
   variables:
-    TF_ROOT: ${QA_GKE_DIR}
-    TF_STATE_NAME: ${QA_GKE_TF_STATE_NAME}
+    TF_ROOT: $QA_GKE_DIR
+    TF_STATE_NAME: $QA_GKE_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -720,12 +720,12 @@ QA-4-GKE-Destroy:
 QA-5-Apps-Plan:
   extends: .plan.with.var.file
   variables:
-    TF_ROOT: ${QA_APPS_DIR}
-    TF_STATE_NAME: ${QA_APPS_TF_STATE_NAME}
+    TF_ROOT: $QA_APPS_DIR
+    TF_STATE_NAME: $QA_APPS_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
-    - cd ${TF_ROOT}
+    - cd $TF_ROOT
     - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
@@ -735,12 +735,12 @@ QA-5-Apps-Apply:
   extends: .apply.with.var.file
   needs: [QA-5-Apps-Plan]
   variables:
-    TF_ROOT: ${QA_APPS_DIR}
-    TF_STATE_NAME: ${QA_APPS_TF_STATE_NAME}
+    TF_ROOT: $QA_APPS_DIR
+    TF_STATE_NAME: $QA_APPS_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
-    - cd ${TF_ROOT}
+    - cd $TF_ROOT
     - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
@@ -750,12 +750,12 @@ QA-5-Apps-Destroy:
   extends: .destroy.with.var.file
   needs: [QA-5-Apps-Plan]
   variables:
-    TF_ROOT: ${QA_APPS_DIR}
-    TF_STATE_NAME: ${QA_APPS_TF_STATE_NAME}
+    TF_ROOT: $QA_APPS_DIR
+    TF_STATE_NAME: $QA_APPS_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
-    - cd ${TF_ROOT}
+    - cd $TF_ROOT
     - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
@@ -768,8 +768,8 @@ QA-5-Apps-Destroy:
 QA-6-GKE-Global-Plan:
   extends: .plan.without.var.file
   variables:
-    TF_ROOT: ${QA_GKE_GLOBAL_DIR}
-    TF_STATE_NAME: ${QA_GKE_GLOBAL_TF_STATE_NAME}
+    TF_ROOT: $QA_GKE_GLOBAL_DIR
+    TF_STATE_NAME: $QA_GKE_GLOBAL_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -783,8 +783,8 @@ QA-6-GKE-Global-Apply:
   extends: .apply.without.var.file
   needs: [QA-6-GKE-Global-Plan]
   variables:
-    TF_ROOT: ${QA_GKE_GLOBAL_DIR}
-    TF_STATE_NAME: ${QA_GKE_GLOBAL_TF_STATE_NAME}
+    TF_ROOT: $QA_GKE_GLOBAL_DIR
+    TF_STATE_NAME: $QA_GKE_GLOBAL_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -798,8 +798,8 @@ QA-6-GKE-Global-Destroy:
   extends: .destroy.without.var.file
   needs: [QA-6-GKE-Global-Plan]
   variables:
-    TF_ROOT: ${QA_GKE_GLOBAL_DIR}
-    TF_STATE_NAME: ${QA_GKE_GLOBAL_TF_STATE_NAME}
+    TF_ROOT: $QA_GKE_GLOBAL_DIR
+    TF_STATE_NAME: $QA_GKE_GLOBAL_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -865,8 +865,8 @@ QA-7-Apps-Global-Destroy:
 QA-8-LB-Plan:
   extends: .plan.without.var.file
   variables:
-    TF_ROOT: ${QA_LB_DIR}
-    TF_STATE_NAME: ${QA_LB_TF_STATE_NAME}
+    TF_ROOT: $QA_LB_DIR
+    TF_STATE_NAME: $QA_LB_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
@@ -878,8 +878,8 @@ QA-8-LB-Apply:
   extends: .apply.without.var.file
   needs: [QA-8-LB-Plan]
   variables:
-    TF_ROOT: ${QA_LB_DIR}
-    TF_STATE_NAME: ${QA_LB_TF_STATE_NAME}
+    TF_ROOT: $QA_LB_DIR
+    TF_STATE_NAME: $QA_LB_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
@@ -891,8 +891,8 @@ QA-8-LB-Destroy:
   extends: .destroy.without.var.file
   needs: [QA-8-LB-Plan]
   variables:
-    TF_ROOT: ${QA_LB_DIR}
-    TF_STATE_NAME: ${QA_LB_TF_STATE_NAME}
+    TF_ROOT: $QA_LB_DIR
+    TF_STATE_NAME: $QA_LB_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
