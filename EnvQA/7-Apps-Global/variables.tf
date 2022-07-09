@@ -13,6 +13,8 @@ locals {
   AppNFT = local.Settings["AppsVersion"]["NFT"]
   AppTable = local.Settings["AppsVersion"]["Table"]
   AppUser = local.Settings["AppsVersion"]["User"]
+
+  HelmPathValueFiles = local.Settings["HelmPathValueFiles"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones
