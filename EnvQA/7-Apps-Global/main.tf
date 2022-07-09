@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "Apps" {
-  source = "../../Modules/Apps/0.3.0"
+  source = "../../Modules/Apps/0.4.0"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
@@ -23,6 +23,10 @@ module "Apps" {
   Prometheus_Retention         = "30d"
   Grafana_AdminPassword        = "gra4422"
 
+  Robusta_ClusterName  = "sk-qa"
+  Robusta_SlackAPIKey  = var.Robusta_SlackAPIKey
+  Robusta_SlackChannel = "sk-qa-info"
+  
   ArgoCD_Enable                       = true
   ArgoCD_EnableSelfHeal               = true
   ArgoCD_EnableAllApps                = false

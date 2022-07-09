@@ -42,3 +42,12 @@ variable "ArgoCD_GitLabTokenSecret" {
   sensitive   = true
   description = "Deploy token"
 }
+
+#============================
+# Robusta                   #
+#============================
+variable "Robusta_SlackAPIKey" {
+  type      = string
+  sensitive = true
+}
+
