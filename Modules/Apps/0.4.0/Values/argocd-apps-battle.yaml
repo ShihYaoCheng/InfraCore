@@ -9,7 +9,7 @@ server:
     # [0]
     - name: battle
       namespace: argocd
-      project: default
+      project: sk
       source:
         repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppBattle.git
         targetRevision: main
@@ -41,7 +41,7 @@ server:
     # [1]
     - name: file
       namespace: argocd
-      project: default
+      project: sk
       source:
         repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppFile.git
         targetRevision: main
