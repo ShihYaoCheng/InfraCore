@@ -14,8 +14,6 @@ module "Apps" {
   CertManager_Enable         = true
   CertManager_CreateProdCert = true
 
-  Prometheus_Enable            = true
-  Prometheus_AlertSlackChannel = "alert-sk-prod-qa"
   Prometheus_StorageClassName  = "ssd-delete"
   Prometheus_StorageSize       = "100Gi"
   Prometheus_Retention         = "30d"

@@ -16,8 +16,6 @@ module "Apps" {
 
   CloudSQLProxy_Enable = false
 
-  Prometheus_Enable            = true
-  Prometheus_AlertSlackChannel = "alert-sk-prod-qa"
   Prometheus_StorageClassName  = "ssd-delete"
   Prometheus_StorageSize       = "100Gi"
   Prometheus_Retention         = "30d"
