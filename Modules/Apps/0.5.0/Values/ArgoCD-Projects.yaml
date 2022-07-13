@@ -21,6 +21,7 @@
     - server: '*'
       namespace: '*'
   
+    # https://argo-cd.readthedocs.io/en/stable/user-guide/sync_windows/
     syncWindows:
     - kind: allow
       # UTC time.
