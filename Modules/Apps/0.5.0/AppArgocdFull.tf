@@ -144,7 +144,7 @@ resource "helm_release" "ArgoCDFull" {
     templatefile("${path.module}/Values/argocd-controller.yaml", {}),
     templatefile("${path.module}/Values/ArgoCD-Projects.yaml", 
       {
-        syncWindowCronTime = var.ArgoCD_SyncWindowCronTime
+        syncWindowCronTime = var.ArgoCD_SyncWindowUTCTime
       }),
     templatefile("${path.module}/Values/ArgoCD-Server.yaml", 
       {
