@@ -162,7 +162,7 @@ resource "helm_release" "ArgoCDFullResources" {
 
   count = var.ArgoCD_Enable && var.ArgoCD_EnableAllApps ? 1 : 0
   
-  name             = "argocd-full-resources"
+  name             = "argocd-resources"
   chart            = "${path.module}/Charts/argocd-res"
   namespace        = "argocd"
 

@@ -81,3 +81,22 @@ resource "helm_release" "ArgoCDBattle" {
   ]
 }
 
+resource "helm_release" "ArgoCDBattleResources" {
+  depends_on = [helm_release.ArgoCDBattle , helm_release.Traefik]
+
+  count = var.ArgoCD_Enable && !var.ArgoCD_EnableAllApps ? 1 : 0
+
+  name             = "argocd-resources"
+  chart            = "${path.module}/Charts/argocd-res"
+  namespace        = "argocd"
+
+  set {
+    name  = "ingress.enabled"
+    value = var.ArgoCD_EnableIngress
+  }
+
+  set {
+    name  = "ingress.useProdCert"
+    value = var.ArgoCD_IngressUseProdCert
+  }
+}

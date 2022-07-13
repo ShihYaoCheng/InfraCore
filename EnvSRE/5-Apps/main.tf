@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "Applications" {
-  source = "../../Modules/Apps/0.4.0"
+  source = "../../Modules/Apps/0.5.0"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
@@ -19,9 +19,9 @@ module "Applications" {
   Prometheus_Retention         = "1d"
   Grafana_AdminPassword        = "gra4422"
 
-  Robusta_ClusterName                 = "sre-tw"
-  Robusta_SlackAPIKey                 = var.Robusta_SlackAPIKey
-  Robusta_SlackChannel                = "sk-sre-info"
+  Robusta_ClusterName  = "sre-tw"
+  Robusta_SlackAPIKey  = var.Robusta_SlackAPIKey
+  Robusta_SlackChannel = "sk-sre-info"
 
   CloudSQLProxy_Enable = true
 
