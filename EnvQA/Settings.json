@@ -15,10 +15,10 @@
   "HelmPathValueFiles": 
   {
     "Backstage": "{values-prod.yaml}",
-    "Battle": "{values-qa-v2.6.x.yaml}",
-    "File": "{values-qa-v2.6.x.yaml}",
+    "Battle": "{values-qa-v2.7.0.yaml}",
+    "File": "{values-qa-v2.7.0.yaml}",
     "NFT": "{values-prod.yaml}",
-    "Table": "{values-qa-v2.6.x.yaml}",
-    "User": "{values-qa-v2.6.x.yaml}"
+    "Table": "{values-qa-v2.7.0.yaml}",
+    "User": "{values-qa-v2.7.0.yaml}"
   }
 }
