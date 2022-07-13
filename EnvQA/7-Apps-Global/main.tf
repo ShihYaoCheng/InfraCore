@@ -7,12 +7,12 @@ module "Apps" {
   GCPZone      = var.GCPZone
 
   ExternalDNS_Enable = false
-  DomainName         = ""
+  DomainName         = "eu.v2.7.0.ponponsnake.com"
   GodaddyAPIKey      = ""
   GodaddyAPISecret   = ""
 
-  CertManager_Enable         = false
-  CertManager_CreateProdCert = false
+  CertManager_Enable         = true
+  CertManager_CreateProdCert = true
 
   CloudSQLProxy_Enable = false
 
