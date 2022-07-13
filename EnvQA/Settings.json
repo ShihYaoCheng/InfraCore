@@ -1,5 +1,6 @@
 {
-  "Project": {
+  "Project": 
+  {
     "ID": "cqi-operation",
     "Name": "cqi-sk-qa"
   },
@@ -20,5 +21,11 @@
     "NFT": "{values-prod.yaml}",
     "Table": "{values-qa-v2.7.0.yaml}",
     "User": "{values-qa-v2.7.0.yaml}"
+  },
+  "DomainNames": 
+  {
+    "TW": "v2.7.0.ponponsnake.com",
+    "EU": "eu.v2.7.0.ponponsnake.com",
+    "LoadBalancer": "global.v2.7.0.ponponsnake.com"
   }
 }
