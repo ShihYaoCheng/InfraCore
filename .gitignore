@@ -37,3 +37,4 @@ terraform.rc
 /.idea/sonarlint/issuestore/
 /tools/EnvProductionVariablesBase64.txt
 /tools/devVariables.txt
+/.idea/.idea.InfraCore.dir/.idea/sonarlint/issuestore/
