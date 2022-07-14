@@ -1,5 +1,10 @@
 # https://github.com/robusta-dev/robusta/blob/master/helm/robusta/values.yaml
 
+# https://docs.robusta.dev/master/catalog/triggers/webhook.html
+#globalConfig:
+#  account_id: ""       # your official Robusta account_id
+#  signing_key: ""      # a secret key used to verify that webhook callers are allowed to trigger playbooks
+
 sinksConfig:
 - slack_sink:
     name: main_slack_sink
@@ -16,20 +21,14 @@ runner:
 
 # https://docs.robusta.dev/master/catalog/triggers/kubernetes.html
 # https://docs.robusta.dev/master/catalog/actions/event-enrichment.html
+# https://docs.robusta.dev/master/catalog/actions/change-tracking.html
 customPlaybooks:
   - triggers:
       - on_deployment_all_changes:
           labels_selector: trigger=argocd
-#      - on_deployment_create: {}
-#        labels_selector: trigger=argocd
-#      - on_deployment_update: {}
-#        labels_selector: trigger=argocd
-#      - on_deployment_delete: {}
-#        labels_selector: trigger=argocd
     actions:
       - deployment_status_enricher: {}
       - deployment_events_enricher: {}
-
 
 enablePlatformPlaybooks: false # noisy.
 
