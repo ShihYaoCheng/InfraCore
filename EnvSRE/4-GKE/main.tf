@@ -13,8 +13,10 @@ module "GKE-TW" {
   GKE-NodeCount-e2-standard-2 = 0
   GKE-EnableScale-e2-standard-4 = false
   GKE-NodeCount-e2-standard-4 = 1
-
   GKE-MaxCount-e2-standard-2 = 1
   GKE-MaxCount-e2-standard-4 = 1
+
+  GKE-APIName = local.GKE-API-TW
+  GKE-CAName  = local.GKE-CA-TW
 }
 

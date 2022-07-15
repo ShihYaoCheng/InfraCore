@@ -2,5 +2,15 @@
   "Project": {
     "ID": "stellar-38931",
     "Name": "cqi-sk-test"
+  },
+  "GKE": {
+    "TW": {
+      "APIName": "GKE-API-TW",
+      "CAName": "GKE-CA-TW"  
+    },
+    "EU": {
+      "APIName": "GKE-API-EU",
+      "CAName": "GKE-CA-EU"
+    }
   }
 }

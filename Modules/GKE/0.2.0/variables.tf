@@ -31,6 +31,14 @@ variable "GKE-Zones" {
 #  default = ["asia-east1-a"]
 }
 
+variable "GKE-APIName" {
+  type = string
+}
+
+variable "GKE-CAName" {
+  type = string
+}
+
 #variable "GKE-NodeCount-e2-high-cpu-2" {
 #  type = number
 ##  default = 0
