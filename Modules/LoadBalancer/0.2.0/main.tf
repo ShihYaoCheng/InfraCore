@@ -45,7 +45,7 @@ resource "google_compute_health_check" "default" {
 # permission: Kubernetes Engine Viewer.
 data "kubernetes_service" "BattleTW" {
   metadata {
-    name = "battle"
+    name      = "battle"
     namespace = "battle"
   }
 
@@ -70,7 +70,7 @@ data "google_compute_network_endpoint_group" "NEGBattle-TW" {
 
 data "kubernetes_service" "BattleEU" {
   metadata {
-    name = "battle"
+    name      = "battle"
     namespace = "battle"
   }
 
@@ -87,7 +87,16 @@ data "google_compute_network_endpoint_group" "NEGBattle-EU" {
 resource "google_compute_backend_service" "battle" {
   name = "${var.ProjectName}-battle"
 
+  # (Optional) The protocol this BackendService uses to communicate with backends. 
+  # The default is HTTP. NOTE: HTTP2 is only valid for beta HTTP/2 load balancer types and 
+  # may result in errors if used with the GA API. 
+  # Possible values are HTTP, HTTPS, HTTP2, TCP, SSL, and GRPC.
   protocol = "HTTP"
+
+  # (Optional) How many seconds to wait for the backend before considering it a failed request. 
+  # Default is 30 seconds. Valid range is [1, 86400].
+  timeout_sec = 330
+  
   backend {
     group          = data.google_compute_network_endpoint_group.NEGBattle-TW.id
     balancing_mode = "RATE"
@@ -101,13 +110,13 @@ resource "google_compute_backend_service" "battle" {
   backend {
     group          = data.google_compute_network_endpoint_group.NEGBattle-EU.id
     balancing_mode = "RATE"
-    max_rate = 1000
+    max_rate       = 1000
   }
 
   health_checks = [google_compute_health_check.default.id]
 
   log_config {
-    enable = true
+    enable      = true
     sample_rate = 1
   }
 }
@@ -119,7 +128,7 @@ resource "google_compute_backend_service" "battle" {
 
 data "kubernetes_service" "FileTW" {
   metadata {
-    name = "file"
+    name      = "file"
     namespace = "file"
   }
 
@@ -139,7 +148,7 @@ data "google_compute_network_endpoint_group" "NEGFile-TW" {
 
 data "kubernetes_service" "FileEU" {
   metadata {
-    name = "file"
+    name      = "file"
     namespace = "file"
   }
 
@@ -156,8 +165,16 @@ data "google_compute_network_endpoint_group" "NEGFile-EU" {
 resource "google_compute_backend_service" "file" {
   name = "${var.ProjectName}-file"
 
+  # (Optional) The protocol this BackendService uses to communicate with backends. 
+  # The default is HTTP. NOTE: HTTP2 is only valid for beta HTTP/2 load balancer types and 
+  # may result in errors if used with the GA API. 
+  # Possible values are HTTP, HTTPS, HTTP2, TCP, SSL, and GRPC.
   protocol = "HTTP"
-  
+
+  # (Optional) How many seconds to wait for the backend before considering it a failed request. 
+  # Default is 30 seconds. Valid range is [1, 86400].
+  timeout_sec = 30
+
   backend {
     group          = data.google_compute_network_endpoint_group.NEGFile-TW.id
     balancing_mode = "RATE"
@@ -168,16 +185,16 @@ resource "google_compute_backend_service" "file" {
     # as appropriate for group type, must be set.
     max_rate = 1000
   }
-  
+
   backend {
     group          = data.google_compute_network_endpoint_group.NEGFile-EU.id
     balancing_mode = "RATE"
-    max_rate = 1000
+    max_rate       = 1000
   }
   health_checks = [google_compute_health_check.default.id]
-  
+
   log_config {
-    enable = true
+    enable      = true
     sample_rate = 1
   }
 }
@@ -186,23 +203,23 @@ resource "google_compute_backend_service" "file" {
 resource "google_compute_url_map" "default" {
   name            = var.ProjectName
   default_service = google_compute_backend_service.battle.id
-  
+
   host_rule {
     hosts        = [var.LoadBalancerDomainName]
     path_matcher = "global"
   }
 
   path_matcher {
-    name = "global"
+    name            = "global"
     default_service = google_compute_backend_service.battle.id
 
     path_rule {
-      paths = ["/api/battle/*"]
+      paths   = ["/api/battle/*"]
       service = google_compute_backend_service.battle.id
     }
 
     path_rule {
-      paths = ["/api/file/*"]
+      paths   = ["/api/file/*"]
       service = google_compute_backend_service.file.id
     }
   }
