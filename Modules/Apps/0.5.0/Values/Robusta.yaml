@@ -29,6 +29,7 @@ customPlaybooks:
     actions:
       - deployment_status_enricher: {}
       - deployment_events_enricher: {}
+      - resource_babysitter: {}
 
 enablePlatformPlaybooks: false # noisy.
 
