@@ -13,4 +13,4 @@ godaddy:
 image:
   name: k8s.gcr.io/external-dns/external-dns
   # https://github.com/kubernetes-sigs/external-dns/releases
-  tag: v0.10.2
+  tag: v0.12.0

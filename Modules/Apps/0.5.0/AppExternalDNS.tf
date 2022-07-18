@@ -1,6 +1,5 @@
-﻿// https://artifacthub.io/packages/helm/bitnami/external-dns
-// It doesn't support godaddy.
-
+﻿# https://artifacthub.io/packages/helm/bitnami/external-dns
+# It doesn't support godaddy.
 resource "helm_release" "ExternalDNS" {
   count = var.ExternalDNS_Enable ? 1 : 0
 
