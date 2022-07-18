@@ -5,6 +5,10 @@ variable "ProjectName" {
   type = string
 }
 
+variable "UniqueName" {
+  type        = string
+}
+
 variable "GCPProjectID" {
   type    = string
   #  default = "stellar-38931"

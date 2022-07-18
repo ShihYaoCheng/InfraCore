@@ -8,6 +8,8 @@ locals {
 
   GKE-API-TW = local.Settings["GKE"]["TW"]["APIName"]
   GKE-CA-TW = local.Settings["GKE"]["TW"]["CAName"]
+  GKE-API-TW-Rel = local.Settings["GKE"]["TW-Rel"]["APIName"]
+  GKE-CA-TW-Rel = local.Settings["GKE"]["TW-Rel"]["CAName"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones

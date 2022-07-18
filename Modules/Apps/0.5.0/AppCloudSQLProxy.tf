@@ -12,7 +12,7 @@ resource "kubernetes_namespace_v1" "CloudSQL" {
 }
 
 locals {
-  GCP_SA_NAME = "${var.ProjectName}-sql-proxy"
+  GCP_SA_NAME = lower("${var.UniqueName}-sql-proxy")
   K8S_SA_NAME = "sql-proxy"
 }
 

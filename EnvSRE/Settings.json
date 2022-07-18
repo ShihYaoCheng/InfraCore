@@ -8,6 +8,10 @@
       "APIName": "GKE-API-TW",
       "CAName": "GKE-CA-TW"  
     },
+    "TW-Rel": {
+      "APIName": "GKE-API-TW-Rel",
+      "CAName": "GKE-CA-TW-Rel"
+    },
     "EU": {
       "APIName": "GKE-API-EU",
       "CAName": "GKE-CA-EU"

@@ -5,9 +5,9 @@ module "GKE-TW" {
   ProjectName = local.ProjectName
 
   GCPProjectID = local.ProjectID
-  GCPRegion = var.GCPRegion
-  GCPZone = var.GCPZone
-  GKE-Zones = [var.GCPZone]
+  GCPRegion = local.GCPRegion
+  GCPZone = local.GCPZone
+  GKE-Zones = [local.GCPZone]
 
   GKE-EnableScale-e2-standard-2 = false
   GKE-NodeCount-e2-standard-2 = 0
@@ -20,3 +20,23 @@ module "GKE-TW" {
   GKE-CAName  = local.GKE-CA-TW
 }
 
+module "GKE-Release" {
+  source  = "../../Modules/GKE/0.2.0"
+
+  ProjectName = local.ProjectName
+
+  GCPProjectID = local.ProjectID
+  GCPRegion = local.GCPRegion
+  GCPZone = "asia-east1-b"
+  GKE-Zones = ["asia-east1-b"]
+
+  GKE-EnableScale-e2-standard-2 = false
+  GKE-NodeCount-e2-standard-2 = 0
+  GKE-EnableScale-e2-standard-4 = false
+  GKE-NodeCount-e2-standard-4 = 1
+  GKE-MaxCount-e2-standard-2 = 1
+  GKE-MaxCount-e2-standard-4 = 1
+
+  GKE-APIName = local.GKE-API-TW-Rel
+  GKE-CAName  = local.GKE-CA-TW-Rel
+}
