@@ -8,6 +8,9 @@ provider "google" {
 
 data "google_client_config" "default" {}
 
+#===========================================================================#
+#                               Dev                                         #
+#===========================================================================#
 data "google_storage_bucket_object_content" "GKE-API" {
   bucket = local.ProjectName
   name   = local.GKE-API-TW
@@ -35,31 +38,33 @@ provider "kubernetes" {
 }
 
 
-
-data "google_storage_bucket_object_content" "GKE-API-Rel" {
-  bucket = local.ProjectName
-  name   = local.GKE-API-TW-Rel
-}
-
-data "google_storage_bucket_object_content" "GKE-CA-Rel" {
-  bucket = local.ProjectName
-  name   = local.GKE-CA-TW-Rel
-}
-
-provider "helm" {
-  alias = "rel"
-  
-  kubernetes {
-    host                   = "https://${data.google_storage_bucket_object_content.GKE-API-Rel.content}"
-    token                  = data.google_client_config.default.access_token
-    cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.GKE-CA-Rel.content)
-  }
-}
-
-provider "kubernetes" {
-  alias = "rel"
-  host = "https://${data.google_storage_bucket_object_content.GKE-API-Rel.content}"
-  token = data.google_client_config.default.access_token
-  cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.GKE-CA-Rel.content)
-}
+#===========================================================================#
+#                             Release                                       #
+#===========================================================================#
+#data "google_storage_bucket_object_content" "GKE-API-Rel" {
+#  bucket = local.ProjectName
+#  name   = local.GKE-API-TW-Rel
+#}
+#
+#data "google_storage_bucket_object_content" "GKE-CA-Rel" {
+#  bucket = local.ProjectName
+#  name   = local.GKE-CA-TW-Rel
+#}
+#
+#provider "helm" {
+#  alias = "rel"
+#  
+#  kubernetes {
+#    host                   = "https://${data.google_storage_bucket_object_content.GKE-API-Rel.content}"
+#    token                  = data.google_client_config.default.access_token
+#    cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.GKE-CA-Rel.content)
+#  }
+#}
+#
+#provider "kubernetes" {
+#  alias = "rel"
+#  host = "https://${data.google_storage_bucket_object_content.GKE-API-Rel.content}"
+#  token = data.google_client_config.default.access_token
+#  cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.GKE-CA-Rel.content)
+#}
 
