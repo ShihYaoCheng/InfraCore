@@ -2,12 +2,12 @@
 module "gke" {
   source  = "../../Modules/GKE/0.1.0"
 
-  ProjectName = file("../ProjectName.txt")
+  ProjectName = local.ProjectName
   
   GCPProjectID = local.ProjectID
-  GCPRegion = var.GCPRegion
-  GCPZone = var.GCPZone
-  GKE-Zones = [var.GCPZone]
+  GCPRegion = local.GCPRegion
+  GCPZone = local.GCPZone
+  GKE-Zones = [local.GCPZone]
   
   GKE-EnableScale-e2-standard-2 = false
   GKE-MaxCount-e2-standard-2 = 1

@@ -3,8 +3,9 @@ module "Apps" {
   source = "../../Modules/Apps/0.5.0"
 
   ProjectName  = local.ProjectName
+  UniqueName   = "Taiwan-Dev"
   GCPProjectID = local.ProjectID
-  GCPZone      = var.GCPZone
+  GCPZone      = local.GCPZone
 
   ExternalDNS_Enable = false
   DomainName         = "dev.ponponsnake.com"
