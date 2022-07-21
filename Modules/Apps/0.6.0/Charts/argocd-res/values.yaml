@@ -5,6 +5,10 @@ ingress:
 apps:
   selfHeal: true
   battle:
-    enabled: false
+    enabled: true
+    branchOrTag: main
+    valueFiles: []
+  file:
+    enabled: true
     branchOrTag: main
     valueFiles: []
