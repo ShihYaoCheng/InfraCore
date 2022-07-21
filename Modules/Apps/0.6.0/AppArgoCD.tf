@@ -202,4 +202,19 @@ resource "helm_release" "ArgoCDFullResources" {
     name  = "apps.file.valueFiles"
     value = var.ArgoCD_FileHelmValueFiles
   }
+
+  set {
+    name  = "apps.table.enabled"
+    value = true
+  }
+
+  set {
+    name  = "apps.table.branchOrTag"
+    value = var.ArgoCD_AppTableBranchOrTag
+  }
+
+  set {
+    name  = "apps.table.valueFiles"
+    value = var.ArgoCD_TableHelmValueFiles
+  }
 }

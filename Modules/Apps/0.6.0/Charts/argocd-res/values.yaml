@@ -12,3 +12,7 @@ apps:
     enabled: true
     branchOrTag: main
     valueFiles: []
+  table:
+    enabled: true
+    branchOrTag: main
+    valueFiles: [ ]
