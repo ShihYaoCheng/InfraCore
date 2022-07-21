@@ -1,3 +1,10 @@
 ingress:
   enabled: false
   useProdCert: false
+  
+apps:
+  selfHeal: true
+  battle:
+    enabled: false
+    branchOrTag: main
+    valueFiles: []
