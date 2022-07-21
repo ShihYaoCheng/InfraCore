@@ -20,18 +20,6 @@ resource "helm_release" "ArgoCDFull" {
 
   # Branch or Tag.
 #  set {
-#    name  = "server.additionalApplications[1].source.targetRevision"
-#    value = var.ArgoCD_AppFileBranchOrTag
-#  }
-#  set {
-#    name  = "server.additionalApplications[2].source.targetRevision"
-#    value = var.ArgoCD_AppTableBranchOrTag
-#  }
-#  set {
-#    name  = "server.additionalApplications[3].source.targetRevision"
-#    value = var.ArgoCD_AppUserBranchOrTag
-#  }
-#  set {
 #    name  = "server.additionalApplications[4].source.targetRevision"
 #    value = var.ArgoCD_AppBackstageBranchOrTag
 #  }
@@ -42,22 +30,6 @@ resource "helm_release" "ArgoCDFull" {
 
   # Helm Value File.
   # https://stackoverflow.com/questions/53846273/helm-passing-array-values-through-set
-  # [0] Battle service.
-#  # [1] File service.
-#  set {
-#    name  = "server.additionalApplications[1].source.helm.valueFiles"
-#    value = var.ArgoCD_FileHelmValueFiles
-#  }
-#  # [2] Table service.
-#  set {
-#    name  = "server.additionalApplications[2].source.helm.valueFiles"
-#    value = var.ArgoCD_TableHelmValueFiles
-#  }
-#  # [3] User service.
-#  set {
-#    name  = "server.additionalApplications[3].source.helm.valueFiles"
-#    value = var.ArgoCD_UserHelmValueFiles
-#  }
 #  # [4] Backstage
 #  set {
 #    name  = "server.additionalApplications[4].source.helm.valueFiles"
@@ -216,5 +188,20 @@ resource "helm_release" "ArgoCDFullResources" {
   set {
     name  = "apps.table.valueFiles"
     value = var.ArgoCD_TableHelmValueFiles
+  }
+
+  set {
+    name  = "apps.user.enabled"
+    value = true
+  }
+
+  set {
+    name  = "apps.user.branchOrTag"
+    value = var.ArgoCD_AppUserBranchOrTag
+  }
+
+  set {
+    name  = "apps.user.valueFiles"
+    value = var.ArgoCD_UserHelmValueFiles
   }
 }

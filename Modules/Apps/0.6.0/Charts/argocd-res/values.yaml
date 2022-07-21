@@ -15,4 +15,8 @@ apps:
   table:
     enabled: true
     branchOrTag: main
-    valueFiles: [ ]
+    valueFiles: []
+  user:
+    enabled: true
+    branchOrTag: main
+    valueFiles: []
