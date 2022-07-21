@@ -19,63 +19,63 @@ resource "helm_release" "ArgoCDFull" {
   namespace        = "argocd"
 
   # Branch or Tag.
-  set {
-    name  = "server.additionalApplications[0].source.targetRevision"
-    value = var.ArgoCD_AppBattleBranchOrTag
-  }
-  set {
-    name  = "server.additionalApplications[1].source.targetRevision"
-    value = var.ArgoCD_AppFileBranchOrTag
-  }
-  set {
-    name  = "server.additionalApplications[2].source.targetRevision"
-    value = var.ArgoCD_AppTableBranchOrTag
-  }
-  set {
-    name  = "server.additionalApplications[3].source.targetRevision"
-    value = var.ArgoCD_AppUserBranchOrTag
-  }
-  set {
-    name  = "server.additionalApplications[4].source.targetRevision"
-    value = var.ArgoCD_AppBackstageBranchOrTag
-  }
-  set {
-    name  = "server.additionalApplications[5].source.targetRevision"
-    value = var.ArgoCD_AppNFTBranchOrTag
-  }
+#  set {
+#    name  = "server.additionalApplications[0].source.targetRevision"
+#    value = var.ArgoCD_AppBattleBranchOrTag
+#  }
+#  set {
+#    name  = "server.additionalApplications[1].source.targetRevision"
+#    value = var.ArgoCD_AppFileBranchOrTag
+#  }
+#  set {
+#    name  = "server.additionalApplications[2].source.targetRevision"
+#    value = var.ArgoCD_AppTableBranchOrTag
+#  }
+#  set {
+#    name  = "server.additionalApplications[3].source.targetRevision"
+#    value = var.ArgoCD_AppUserBranchOrTag
+#  }
+#  set {
+#    name  = "server.additionalApplications[4].source.targetRevision"
+#    value = var.ArgoCD_AppBackstageBranchOrTag
+#  }
+#  set {
+#    name  = "server.additionalApplications[5].source.targetRevision"
+#    value = var.ArgoCD_AppNFTBranchOrTag
+#  }
 
   # Helm Value File.
   # https://stackoverflow.com/questions/53846273/helm-passing-array-values-through-set
   # [0] Battle service.
-  set {
-    name  = "server.additionalApplications[0].source.helm.valueFiles"
-    value = var.ArgoCD_BattleHelmValueFiles
-  }
-  # [1] File service.
-  set {
-    name  = "server.additionalApplications[1].source.helm.valueFiles"
-    value = var.ArgoCD_FileHelmValueFiles
-  }
-  # [2] Table service.
-  set {
-    name  = "server.additionalApplications[2].source.helm.valueFiles"
-    value = var.ArgoCD_TableHelmValueFiles
-  }
-  # [3] User service.
-  set {
-    name  = "server.additionalApplications[3].source.helm.valueFiles"
-    value = var.ArgoCD_UserHelmValueFiles
-  }
-  # [4] Backstage
-  set {
-    name  = "server.additionalApplications[4].source.helm.valueFiles"
-    value = var.ArgoCD_BackstageHelmValueFiles
-  }
-  # [5] NFT
-  set {
-    name  = "server.additionalApplications[5].source.helm.valueFiles"
-    value = var.ArgoCD_NFTHelmValueFiles
-  }
+#  set {
+#    name  = "server.additionalApplications[0].source.helm.valueFiles"
+#    value = var.ArgoCD_BattleHelmValueFiles
+#  }
+#  # [1] File service.
+#  set {
+#    name  = "server.additionalApplications[1].source.helm.valueFiles"
+#    value = var.ArgoCD_FileHelmValueFiles
+#  }
+#  # [2] Table service.
+#  set {
+#    name  = "server.additionalApplications[2].source.helm.valueFiles"
+#    value = var.ArgoCD_TableHelmValueFiles
+#  }
+#  # [3] User service.
+#  set {
+#    name  = "server.additionalApplications[3].source.helm.valueFiles"
+#    value = var.ArgoCD_UserHelmValueFiles
+#  }
+#  # [4] Backstage
+#  set {
+#    name  = "server.additionalApplications[4].source.helm.valueFiles"
+#    value = var.ArgoCD_BackstageHelmValueFiles
+#  }
+#  # [5] NFT
+#  set {
+#    name  = "server.additionalApplications[5].source.helm.valueFiles"
+#    value = var.ArgoCD_NFTHelmValueFiles
+#  }
 
 
 
@@ -175,6 +175,24 @@ resource "helm_release" "ArgoCDFullResources" {
     name  = "ingress.useProdCert"
     value = var.ArgoCD_IngressUseProdCert
   }
+
+  set {
+    name  = "apps.selfHeal"
+    value = var.ArgoCD_EnableSelfHeal
+  }
+
+  set {
+    name  = "apps.battle.enabled"
+    value = false
+  }
+
+  set {
+    name  = "apps.battle.branchOrTag"
+    value = var.ArgoCD_AppBattleBranchOrTag
+  }
+
+  set {
+    name  = "apps.battle.valueFiles"
+    value = var.ArgoCD_BattleHelmValueFiles
+  }
 }
-
-

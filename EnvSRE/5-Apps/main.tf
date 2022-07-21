@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "Apps-Dev" {
-  source = "../../Modules/Apps/0.5.0"
+  source = "../../Modules/Apps/0.6.0"
 
   ProjectName  = local.ProjectName
   UniqueName   = "Taiwan-Dev"
