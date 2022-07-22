@@ -39,6 +39,12 @@ variable "GKE-CAName" {
   type = string
 }
 
+variable "GKE-Labels" {
+  type = map(string)
+  default = {}
+#  default = {"name"="sre"}
+}
+
 #variable "GKE-NodeCount-e2-high-cpu-2" {
 #  type = number
 ##  default = 0

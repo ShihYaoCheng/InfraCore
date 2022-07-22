@@ -7,6 +7,7 @@
   GCPRegion = local.GCPRegion
   GCPZone = "asia-east1-a"
   GKE-Zones = ["asia-east1-a"]
+  GKE-Labels = {"Name"="Dev"}
   
   GKE-EnableScale-e2-standard-2 = false
   GKE-MaxCount-e2-standard-2 = 1
@@ -28,6 +29,7 @@ module "GKE-TW-Rel" {
   GCPRegion = local.GCPRegion
   GCPZone = "asia-east1-b"
   GKE-Zones = ["asia-east1-b"]
+  GKE-Labels = {"Name"="Release"}
 
   GKE-EnableScale-e2-standard-2 = false
   GKE-MaxCount-e2-standard-2 = 1

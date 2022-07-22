@@ -11,6 +11,9 @@ module "GKE" {
   project_id = var.GCPProjectID
   name       = var.ProjectName
   region     = var.GCPRegion
+  
+  # Optional
+  cluster_resource_labels = var.GKE-Labels
 
   network           = var.ProjectName
   subnetwork        = var.ProjectName
