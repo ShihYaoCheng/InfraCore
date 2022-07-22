@@ -1,5 +1,5 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
-module "Apps-Dev" {
+module "AppsDev" {
   source = "../../Modules/Apps/0.6.0"
 
   ProjectName  = local.ProjectName
@@ -58,7 +58,7 @@ module "Apps-Dev" {
   }
 }
 
-#module "Apps-Rel" {
+#module "AppsRel" {
 #  source = "../../Modules/Apps/0.5.0"
 #
 #  ProjectName  = local.ProjectName
