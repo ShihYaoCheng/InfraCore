@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "Applications" {
-  source = "../../Modules/Apps/0.5.0"
+  source = "../../Modules/Apps/0.6.0"
 
   ProjectName  = local.ProjectName
   UniqueName   = "Europe"
@@ -34,6 +34,12 @@ module "Applications" {
   ArgoCD_GitLabTokenName         = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret       = var.ArgoCD_GitLabTokenSecret
   ArgoCD_SyncWindowTaipeiTime    = "* * * * *"
+  ArgoCD_EnableAppBackstage      = false
+  ArgoCD_EnableAppBattle         = true
+  ArgoCD_EnableAppFile           = true
+  ArgoCD_EnableAppNFT            = false
+  ArgoCD_EnableAppTable          = false
+  ArgoCD_EnableAppUser           = false
   ArgoCD_AppFileBranchOrTag      = "main"
   ArgoCD_AppTableBranchOrTag     = "main"
   ArgoCD_AppUserBranchOrTag      = "main"

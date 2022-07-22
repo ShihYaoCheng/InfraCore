@@ -169,9 +169,28 @@ variable "ArgoCD_EnableSelfHeal" {
 #  default = true
 }
 
-variable "ArgoCD_EnableAllApps" {
-  type    = bool
-#  default = true
+variable "ArgoCD_EnableAppBattle" {
+  type = bool
+}
+
+variable "ArgoCD_EnableAppBackstage" {
+  type = bool
+}
+
+variable "ArgoCD_EnableAppFile" {
+  type = bool
+}
+
+variable "ArgoCD_EnableAppNFT" {
+  type = bool
+}
+
+variable "ArgoCD_EnableAppTable" {
+  type = bool
+}
+
+variable "ArgoCD_EnableAppUser" {
+  type = bool
 }
 
 variable "ArgoCD_EnableIngress" {
@@ -204,11 +223,6 @@ variable "ArgoCD_GitLabTokenSecret" {
 
 # https://stackoverflow.com/questions/53846273/helm-passing-array-values-through-set
 # https://helm.sh/docs/intro/using_helm/#the-format-and-limitations-of---set
-#variable "ArgoCD_RepositoryHelmPathValueFiles" {
-#  type        = string
-#  description = "Sample: {values-sre.yaml}"
-#}
-
 variable "ArgoCD_BackstageHelmValueFiles" {
   type        = string
   description = "Sample: {values-sre.yaml}"

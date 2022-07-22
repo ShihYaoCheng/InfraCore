@@ -28,12 +28,17 @@ module "Apps-Dev" {
 
   ArgoCD_Enable                  = true
   ArgoCD_EnableSelfHeal          = false
-  ArgoCD_EnableAllApps           = true
   ArgoCD_EnableIngress           = true
   ArgoCD_IngressUseProdCert      = false
   ArgoCD_GitLabTokenName         = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret       = var.ArgoCD_GitLabTokenSecret
   ArgoCD_SyncWindowTaipeiTime    = "* * * * *"
+  ArgoCD_EnableAppBackstage      = true
+  ArgoCD_EnableAppBattle         = true
+  ArgoCD_EnableAppFile           = true
+  ArgoCD_EnableAppNFT            = true
+  ArgoCD_EnableAppTable          = true
+  ArgoCD_EnableAppUser           = true
   ArgoCD_AppFileBranchOrTag      = "main"
   ArgoCD_AppTableBranchOrTag     = "main"
   ArgoCD_AppUserBranchOrTag      = "main"

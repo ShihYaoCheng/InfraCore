@@ -20,3 +20,11 @@ apps:
     enabled: true
     branchOrTag: main
     valueFiles: []
+  backstage:
+    enabled: true
+    branchOrTag: main
+    valueFiles: []
+  nft:
+    enabled: true
+    branchOrTag: main
+    valueFiles: []
