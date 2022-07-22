@@ -1,5 +1,5 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
-module "Applications" {
+module "AppsEu" {
   source = "../../Modules/Apps/0.6.0"
 
   ProjectName  = local.ProjectName
@@ -28,7 +28,6 @@ module "Applications" {
 
   ArgoCD_Enable                  = true
   ArgoCD_EnableSelfHeal          = false
-  ArgoCD_EnableAllApps           = false
   ArgoCD_EnableIngress           = true
   ArgoCD_IngressUseProdCert      = false
   ArgoCD_GitLabTokenName         = var.ArgoCD_GitLabTokenName
