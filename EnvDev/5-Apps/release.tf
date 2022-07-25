@@ -40,10 +40,10 @@ module "Apps-Rel" {
   ArgoCD_AppNFTBranchOrTag       = "main"
   ArgoCD_AppTableBranchOrTag     = "main"
   ArgoCD_AppUserBranchOrTag      = "main"
-  ArgoCD_BackstageHelmValueFiles = "{values-v2.7.0.yaml}"
+  ArgoCD_BackstageHelmValueFiles = "{values-dev.yaml}"
   ArgoCD_BattleHelmValueFiles    = "{values-v2.7.0.yaml}"
   ArgoCD_FileHelmValueFiles      = "{values-v2.7.0.yaml}"
-  ArgoCD_NFTHelmValueFiles       = "{values-v2.7.0.yaml}"
+  ArgoCD_NFTHelmValueFiles       = "{values-dev.yaml}"
   ArgoCD_TableHelmValueFiles     = "{values-v2.7.0.yaml}"
   ArgoCD_UserHelmValueFiles      = "{values-v2.7.0.yaml}"
 
