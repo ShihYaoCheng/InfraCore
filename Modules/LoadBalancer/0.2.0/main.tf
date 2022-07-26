@@ -95,7 +95,7 @@ resource "google_compute_backend_service" "battle" {
 
   # (Optional) How many seconds to wait for the backend before considering it a failed request. 
   # Default is 30 seconds. Valid range is [1, 86400].
-  timeout_sec = 330
+  timeout_sec = 360
   
   backend {
     group          = data.google_compute_network_endpoint_group.NEGBattle-TW.id
@@ -173,7 +173,7 @@ resource "google_compute_backend_service" "file" {
 
   # (Optional) How many seconds to wait for the backend before considering it a failed request. 
   # Default is 30 seconds. Valid range is [1, 86400].
-  timeout_sec = 30
+  timeout_sec = 360
 
   backend {
     group          = data.google_compute_network_endpoint_group.NEGFile-TW.id
