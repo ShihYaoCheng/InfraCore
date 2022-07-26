@@ -3,6 +3,7 @@ module "Apps" {
   source = "../../Modules/Apps/0.5.0"
 
   ProjectName  = local.ProjectName
+  UniqueName   = "tw"
   GCPProjectID = local.ProjectID
   GCPZone      = var.GCPZone
 
