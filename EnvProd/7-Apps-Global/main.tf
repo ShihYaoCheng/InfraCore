@@ -12,8 +12,8 @@ module "AppsEU" {
   GodaddyAPIKey      = ""
   GodaddyAPISecret   = ""
 
-  CertManager_Enable         = false
-  CertManager_CreateProdCert = false
+  CertManager_Enable         = true
+  CertManager_CreateProdCert = true
 
   CloudSQLProxy_Enable = false
 
