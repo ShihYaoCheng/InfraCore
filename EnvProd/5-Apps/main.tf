@@ -15,7 +15,7 @@ module "AppsTw" {
   CertManager_Enable         = true
   CertManager_CreateProdCert = true
 
-  Robusta_ClusterName  = "sk-prod"
+  Robusta_ClusterName  = "sk-prod-tw"
   Robusta_SlackAPIKey  = var.Robusta_SlackAPIKey
   Robusta_SlackChannel = "sk-prod-info"
 
