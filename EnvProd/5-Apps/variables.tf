@@ -20,6 +20,8 @@ locals {
   NFTHelmValueFiles = local.Settings["HelmPathValueFiles"]["NFT"]
   TableHelmValueFiles = local.Settings["HelmPathValueFiles"]["Table"]
   UserHelmValueFiles = local.Settings["HelmPathValueFiles"]["User"]
+
+  DomainNameTW = local.Settings["DomainNames"]["TW"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones

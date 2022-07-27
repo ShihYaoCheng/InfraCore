@@ -8,7 +8,7 @@ module "AppsTw" {
   GCPZone      = var.GCPZone
 
   ExternalDNS_Enable = false
-  DomainName         = "prod.ponponsnake.com"
+  DomainName         = local.DomainNameTW
   GodaddyAPIKey      = ""
   GodaddyAPISecret   = ""
 

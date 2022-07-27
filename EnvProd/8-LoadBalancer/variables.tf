@@ -5,6 +5,8 @@ locals {
   Settings = jsondecode(file("../Settings.json"))
   ProjectID = local.Settings["Project"]["ID"]
   ProjectName = local.Settings["Project"]["Name"]
+
+  DomainNameLoadBalancer = local.Settings["DomainNames"]["LoadBalancer"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones

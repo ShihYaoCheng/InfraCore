@@ -4,7 +4,7 @@ module "LoadBalancer" {
 
   ProjectName  = local.ProjectName
   
-  LoadBalancerDomainName = "global.prod.ponponsnake.com"
+  LoadBalancerDomainName = local.DomainNameLoadBalancer
 
   ZoneTW = "asia-east1-a"
   ZoneEU = "europe-west2-a"
