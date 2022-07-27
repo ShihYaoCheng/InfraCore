@@ -21,7 +21,6 @@ module "AppsEU" {
   Robusta_SlackAPIKey  = var.Robusta_SlackAPIKey
   Robusta_SlackChannel = "sk-prod-info"
 
-  Prometheus_Enable           = true
   Prometheus_StorageClassName = "ssd-retain"
   Prometheus_StorageSize      = "500Gi"
   Prometheus_Retention        = "90d"
