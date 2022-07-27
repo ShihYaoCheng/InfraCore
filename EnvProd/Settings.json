@@ -11,5 +11,15 @@
     "NFT": "v2.6.0C2F1",
     "Table": "v2.6.0C6",
     "User": "v2.6.0C6F1"
+  },
+  "GKE": {
+    "TW": {
+      "APIName": "GKE-API-TW",
+      "CAName": "GKE-CA-TW"
+    },
+    "EU": {
+      "APIName": "GKE-API-EU",
+      "CAName": "GKE-CA-EU"
+    }
   }
 }
