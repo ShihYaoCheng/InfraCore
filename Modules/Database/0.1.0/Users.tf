@@ -1,5 +1,4 @@
-﻿
-#=====================================================================================#
+﻿#=====================================================================================#
 #                                Backstage                                            #
 #=====================================================================================#
 # https://registry.terraform.io/providers/winebarrel/mysql/latest/docs/resources/user
@@ -42,8 +41,9 @@ resource "mysql_grant" "cqi-user" {
 #=====================================================================================#
 resource "mysql_user" "cqi-user-rel" {
   count = var.CloudSQLCreateReleaseUserAndDB ? 1 : 0
+
+  depends_on = [module.CloudSQL, mysql_database.UserRel]
   
-  depends_on         = [module.CloudSQL]
   user               = "cqi-user-rel"
   host               = "%" // allow any host to connected. Default: localhost(allow localhost connected only).
   plaintext_password = var.CloudSQLUserPassword
@@ -51,10 +51,12 @@ resource "mysql_user" "cqi-user-rel" {
 
 resource "mysql_grant" "cqi-user-rel" {
   count = var.CloudSQLCreateReleaseUserAndDB ? 1 : 0
-  
+
   depends_on = [module.CloudSQL]
+
   user       = mysql_user.cqi-user-rel[count.index].user
   host       = mysql_user.cqi-user-rel[count.index].host
-  database   = "UserRel"
+#  database   = "UserRel"
+  database   = mysql_database.UserRel[count.index].name
   privileges = ["ALL PRIVILEGES"]
 }

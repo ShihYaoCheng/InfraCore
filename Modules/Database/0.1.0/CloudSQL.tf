@@ -74,7 +74,7 @@ module "CloudSQL" {
     "authorized_networks" : [
       { 
         value = "${chomp(data.http.MyIP.body)}/32"
-        expiration_time = timeadd(timestamp(), var.IPExpirationTime)
+#        expiration_time = timeadd(timestamp(), var.IPExpirationTime)
       }],
     "ipv4_enabled" : true,
     "private_network" : null,
