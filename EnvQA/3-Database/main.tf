@@ -1,8 +1,8 @@
 ﻿module "database" {
   source = "../../Modules/Database/0.1.0"
 
-  ProjectName  = local.ProjectName
-  
+  ProjectName = local.ProjectName
+
   GCPProjectID = local.ProjectID
   GCPRegion    = var.GCPRegion
   GCPZone      = var.GCPZone
@@ -17,5 +17,5 @@
   CloudSQLEnablePointInTimeRecovery = false
   CloudSQLEnableHighlyAvailable     = false
   CloudSQLAllowDeletion             = true
-  IPExpirationTime                  = "720h" # 30 days.
+  CloudSQLCreateReleaseUserAndDB    = false
 }
