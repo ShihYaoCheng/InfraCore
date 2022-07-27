@@ -88,4 +88,6 @@ variable "CloudSQLBackstagePassword" {
   sensitive = true
 }
 
-
+variable "CloudSQLCreateReleaseUserAndDB" {
+  type = bool
+}

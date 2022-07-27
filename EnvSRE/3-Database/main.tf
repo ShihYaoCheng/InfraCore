@@ -16,4 +16,5 @@
   CloudSQLAllowDeletion = true
   CloudSQLMachine = "db-g1-small"
   IPExpirationTime = "720h" # 720h = 30 days.
+  CloudSQLCreateReleaseUserAndDB = false
 }

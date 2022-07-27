@@ -41,6 +41,8 @@ resource "mysql_grant" "cqi-user" {
 #                                User(Release)                                        #
 #=====================================================================================#
 resource "mysql_user" "cqi-user-rel" {
+  count = var.CloudSQLCreateReleaseUserAndDB ? 1 : 0
+  
   depends_on         = [module.CloudSQL]
   user               = "cqi-user-rel"
   host               = "%" // allow any host to connected. Default: localhost(allow localhost connected only).
@@ -48,9 +50,11 @@ resource "mysql_user" "cqi-user-rel" {
 }
 
 resource "mysql_grant" "cqi-user-rel" {
+  count = var.CloudSQLCreateReleaseUserAndDB ? 1 : 0
+  
   depends_on = [module.CloudSQL]
-  user       = mysql_user.cqi-user-rel.user
-  host       = mysql_user.cqi-user-rel.host
+  user       = mysql_user.cqi-user-rel[count.index].user
+  host       = mysql_user.cqi-user-rel[count.index].host
   database   = "UserRel"
   privileges = ["ALL PRIVILEGES"]
 }

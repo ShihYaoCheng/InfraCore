@@ -7,6 +7,8 @@ resource "mysql_database" "User" {
 }
 
 resource "mysql_database" "UserRel" {
+  count = var.CloudSQLCreateReleaseUserAndDB ? 1 : 0
+
   depends_on            = [module.CloudSQL]
   name                  = "UserRel"
   default_character_set = "utf8mb4"
