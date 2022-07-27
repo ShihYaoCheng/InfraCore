@@ -17,5 +17,5 @@
   CloudSQLEnablePointInTimeRecovery = true
   CloudSQLEnableHighlyAvailable     = true
   CloudSQLAllowDeletion             = false
-  IPExpirationTime                  = "1440h" # 60 days.
+  CloudSQLCreateReleaseUserAndDB = false
 }
