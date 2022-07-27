@@ -4,26 +4,24 @@
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference
 provider "google" {
-  project = local.ProjectID // assign default value.
-  region  = var.GCPRegion    // assign default value.
-  zone    = var.GCPZone      // assign default value.
+  project = local.ProjectID # assign default value.
+  region  = var.GCPRegion   # assign default value.
+  zone    = var.GCPZone     # assign default value.
 }
 
 data "google_client_config" "default" {}
 
 data "google_storage_bucket_object_content" "GKE-API" {
   bucket = local.ProjectName
-  name   = "GKE-${var.GCPRegion}.api"
+  name   = local.GKE-API-EU
 }
 
 data "google_storage_bucket_object_content" "GKE-CA" {
   bucket = local.ProjectName
-  name   = "GKE-${var.GCPRegion}.ca"
+  name   = local.GKE-CA-EU
 }
 
 provider "helm" {
-  debug = true
-
   kubernetes {
     host                   = "https://${data.google_storage_bucket_object_content.GKE-API.content}"
     token                  = data.google_client_config.default.access_token

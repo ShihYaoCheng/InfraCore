@@ -13,12 +13,12 @@ data "google_client_config" "default" {}
 
 data "google_storage_bucket_object_content" "GKE-API-TW" {
   bucket = local.ProjectName
-  name   = "GKE-asia-east1.api"
+  name   = local.GKE-API-TW
 }
 
 data "google_storage_bucket_object_content" "GKE-CA-TW" {
   bucket = local.ProjectName
-  name   = "GKE-asia-east1.ca"
+  name   = local.GKE-CA-TW
 }
 
 provider "kubernetes" {
@@ -31,12 +31,12 @@ provider "kubernetes" {
 # permission: Storage Object Viewer
 data "google_storage_bucket_object_content" "GKE-API-EU" {
   bucket = local.ProjectName
-  name   = "GKE-europe-west2.api"
+  name   = local.GKE-API-EU
 }
 
 data "google_storage_bucket_object_content" "GKE-CA-EU" {
   bucket = local.ProjectName
-  name   = "GKE-europe-west2.ca"
+  name   = local.GKE-CA-EU
 }
 
 provider "kubernetes" {
