@@ -12,6 +12,21 @@
     "Table": "v2.6.0C6",
     "User": "v2.6.0C6F1"
   },
+  "HelmPathValueFiles":
+  {
+    "Backstage": "{values-prod.yaml}",
+    "Battle": "{values-qa-v2.7.0.yaml}",
+    "File": "{values-qa-v2.7.0.yaml}",
+    "NFT": "{values-prod.yaml}",
+    "Table": "{values-qa-v2.7.0.yaml}",
+    "User": "{values-qa-v2.7.0.yaml}"
+  },
+  "DomainNames":
+  {
+    "TW": "v2.7.0.ponponsnake.com",
+    "EU": "eu.v2.7.0.ponponsnake.com",
+    "LoadBalancer": "global.v2.7.0.ponponsnake.com"
+  },
   "GKE": {
     "TW": {
       "APIName": "GKE-API-TW",

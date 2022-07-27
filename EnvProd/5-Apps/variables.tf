@@ -13,6 +13,13 @@ locals {
   AppNFT = local.Settings["AppsVersion"]["NFT"]
   AppTable = local.Settings["AppsVersion"]["Table"]
   AppUser = local.Settings["AppsVersion"]["User"]
+
+  BackstageHelmValueFiles = local.Settings["HelmPathValueFiles"]["Backstage"]
+  BattleHelmValueFiles = local.Settings["HelmPathValueFiles"]["Battle"]
+  FileHelmValueFiles = local.Settings["HelmPathValueFiles"]["File"]
+  NFTHelmValueFiles = local.Settings["HelmPathValueFiles"]["NFT"]
+  TableHelmValueFiles = local.Settings["HelmPathValueFiles"]["Table"]
+  UserHelmValueFiles = local.Settings["HelmPathValueFiles"]["User"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones
@@ -46,4 +53,12 @@ variable "ArgoCD_GitLabTokenSecret" {
 variable "GrafanaAdminPassword" {
   type        = string
   sensitive   = true
+}
+
+#============================
+# Robusta                   #
+#============================
+variable "Robusta_SlackAPIKey" {
+  type      = string
+  sensitive = true
 }
