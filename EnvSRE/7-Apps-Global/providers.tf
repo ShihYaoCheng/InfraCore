@@ -10,13 +10,11 @@ data "google_client_config" "default" {}
 
 data "google_storage_bucket_object_content" "GKE-API" {
   bucket = local.ProjectName
-#  name   = "GKE-${var.GCPRegion}.api"
   name   = local.GKE-API-EU
 }
 
 data "google_storage_bucket_object_content" "GKE-CA" {
   bucket = local.ProjectName
-#  name   = "GKE-${var.GCPRegion}.ca"
   name   = local.GKE-CA-EU
 }
 

@@ -6,6 +6,9 @@ locals {
   
   ProjectID = local.Settings["Project"]["ID"]
   ProjectName = local.Settings["Project"]["Name"]
+
+  GKE-API-TW = local.Settings["GKE"]["TW"]["APIName"]
+  GKE-CA-TW = local.Settings["GKE"]["TW"]["CAName"]
   
   AppBackstage = local.Settings["AppsVersion"]["Backstage"]
   AppBattle = local.Settings["AppsVersion"]["Battle"]
