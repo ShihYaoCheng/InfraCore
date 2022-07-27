@@ -5,7 +5,7 @@ module "AppsTw" {
   ProjectName  = local.ProjectName
   UniqueName   = "tw"
   GCPProjectID = local.ProjectID
-  GCPZone      = var.GCPZone
+  GCPZone      = local.GCPZone
 
   ExternalDNS_Enable = false
   DomainName         = local.DomainNameTW

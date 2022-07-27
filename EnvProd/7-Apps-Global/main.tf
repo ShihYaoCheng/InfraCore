@@ -5,7 +5,7 @@ module "AppsEU" {
   ProjectName  = local.ProjectName
   UniqueName   = "eu"
   GCPProjectID = local.ProjectID
-  GCPZone      = var.GCPZone
+  GCPZone      = local.GCPZone
 
   ExternalDNS_Enable = false
   DomainName         = local.DomainNameEU

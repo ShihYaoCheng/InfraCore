@@ -25,20 +25,23 @@ locals {
   UserHelmValueFiles = local.Settings["HelmPathValueFiles"]["User"]
 
   DomainNameTW = local.Settings["DomainNames"]["TW"]
+
+  GCPRegion = "asia-east1"
+  GCPZone = "asia-east1-a"
 }
 
 # https://cloud.google.com/compute/docs/regions-zones
-variable "GCPRegion" {
-  type        = string
-  default     = "asia-east1"
-  description = "cloud provider region."
-}
-
-variable "GCPZone" {
-  type        = string
-  default     = "asia-east1-a"
-  description = "cloud provider zone."
-}
+#variable "GCPRegion" {
+#  type        = string
+#  default     = "asia-east1"
+#  description = "cloud provider region."
+#}
+#
+#variable "GCPZone" {
+#  type        = string
+#  default     = "asia-east1-a"
+#  description = "cloud provider zone."
+#}
 
 #============================
 # ArgoCD                    #
