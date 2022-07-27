@@ -27,5 +27,15 @@
     "TW": "v2.7.0.ponponsnake.com",
     "EU": "eu.v2.7.0.ponponsnake.com",
     "LoadBalancer": "global.v2.7.0.ponponsnake.com"
+  },
+  "GKE": {
+    "TW": {
+      "APIName": "GKE-API-TW",
+      "CAName": "GKE-CA-TW"
+    },
+    "EU": {
+      "APIName": "GKE-API-EU",
+      "CAName": "GKE-CA-EU"
+    }
   }
 }
