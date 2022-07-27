@@ -5,26 +5,26 @@
   },
   "AppsVersion": 
   {
-    "Backstage": "v2.6.0C6",
-    "Battle": "v2022.07.01",
-    "File": "v2022.07.1",
-    "NFT": "v2.6.0C2F1",
-    "Table": "v2.6.0C6",
-    "User": "v2.6.0C6F1"
+    "Backstage": "v2.6.0C8F1",
+    "Battle": "v2.6.0C10F1",
+    "File": "v2.6.0C10F1",
+    "NFT": "v2.6.0C2F2",
+    "Table": "v2.6.0C9F1",
+    "User": "v2.6.0C9F2"
   },
   "HelmPathValueFiles":
   {
     "Backstage": "{values-prod.yaml}",
-    "Battle": "{values-qa-v2.7.0.yaml}",
-    "File": "{values-qa-v2.7.0.yaml}",
+    "Battle": "{values-prod.yaml}",
+    "File": "{values-prod.yaml}",
     "NFT": "{values-prod.yaml}",
-    "Table": "{values-qa-v2.7.0.yaml}",
-    "User": "{values-qa-v2.7.0.yaml}"
+    "Table": "{values-prod.yaml}",
+    "User": "{values-prod.yaml}"
   },
   "DomainNames":
   {
-    "TW": "v2.7.0.ponponsnake.com",
-    "EU": "eu.v2.7.0.ponponsnake.com",
+    "TW": "open.v2.7.0.ponponsnake.com",
+    "EU": "open.eu.v2.7.0.ponponsnake.com",
     "LoadBalancer": "global.v2.7.0.ponponsnake.com"
   },
   "GKE": {
