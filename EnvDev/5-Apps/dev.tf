@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "Apps" {
-  source = "../../Modules/Apps/0.6.0"
+  source = "../../Modules/Apps/1.0.0"
 
   ProjectName  = local.ProjectName
   UniqueName   = "TW-Dev"
@@ -26,13 +26,14 @@ module "Apps" {
   Robusta_SlackAPIKey  = var.Robusta_SlackAPIKey
   Robusta_SlackChannel = "sk-dev-info"
 
-  ArgoCD_Enable                  = true
-  ArgoCD_EnableSelfHeal          = true
-  ArgoCD_EnableIngress           = true
-  ArgoCD_IngressUseProdCert      = true
-  ArgoCD_SyncWindowTaipeiTime    = "* * * * *"
-  ArgoCD_GitLabTokenName         = var.ArgoCD_GitLabTokenName
-  ArgoCD_GitLabTokenSecret       = var.ArgoCD_GitLabTokenSecret
+  ArgoCD_Enable               = true
+  ArgoCD_EnableSelfHeal       = true
+  ArgoCD_EnableIngress        = true
+  ArgoCD_IngressUseProdCert   = true
+  ArgoCD_SyncWindowTaipeiTime = "* * * * *"
+  ArgoCD_GitLabTokenName      = var.ArgoCD_GitLabTokenName
+  ArgoCD_GitLabTokenSecret    = var.ArgoCD_GitLabTokenSecret
+
   ArgoCD_EnableAppBackstage      = true
   ArgoCD_EnableAppBattle         = true
   ArgoCD_EnableAppFile           = true
@@ -51,6 +52,9 @@ module "Apps" {
   ArgoCD_NFTHelmValueFiles       = "{values-dev.yaml}"
   ArgoCD_TableHelmValueFiles     = "{values-dev.yaml}"
   ArgoCD_UserHelmValueFiles      = "{values-dev.yaml}"
+
+  ArgoCD_BackstageSqlPassword = "backstage1234"
+  ArgoCD_UserSqlPassword      = "user1234"
 
   providers = {
     helm       = helm.dev
