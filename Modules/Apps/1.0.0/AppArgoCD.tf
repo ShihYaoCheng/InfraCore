@@ -166,6 +166,10 @@ resource "helm_release" "ArgoCDResource" {
     name  = "apps.user.valueFiles"
     value = var.ArgoCD_UserHelmValueFiles
   }
+  set {
+    name  = "apps.user.sqlPassword"
+    value = var.ArgoCD_UserSqlPassword
+  }
 
   set {
     name  = "apps.backstage.enabled"
@@ -178,6 +182,10 @@ resource "helm_release" "ArgoCDResource" {
   set {
     name  = "apps.backstage.valueFiles"
     value = var.ArgoCD_BackstageHelmValueFiles
+  }
+  set {
+    name  = "apps.backstage.sqlPassword"
+    value = var.ArgoCD_BackstageSqlPassword
   }
 
   set {

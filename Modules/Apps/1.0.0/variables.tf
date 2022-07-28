@@ -223,6 +223,11 @@ variable "ArgoCD_GitLabTokenSecret" {
 
 # https://stackoverflow.com/questions/53846273/helm-passing-array-values-through-set
 # https://helm.sh/docs/intro/using_helm/#the-format-and-limitations-of---set
+variable "ArgoCD_BackstageSqlPassword" {
+  type        = string
+  sensitive   = true
+}
+
 variable "ArgoCD_BackstageHelmValueFiles" {
   type        = string
   description = "Sample: {values-sre.yaml}"
@@ -246,6 +251,11 @@ variable "ArgoCD_NFTHelmValueFiles" {
 variable "ArgoCD_TableHelmValueFiles" {
   type        = string
   description = "Sample: {values-sre.yaml}"
+}
+
+variable "ArgoCD_UserSqlPassword" {
+  type        = string
+  sensitive   = true
 }
 
 variable "ArgoCD_UserHelmValueFiles" {

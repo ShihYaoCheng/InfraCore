@@ -15,6 +15,9 @@ spec:
       # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
       version: v3
       valueFiles: {{ .Values.apps.backstage.valueFiles }}
+      parameters: 
+        - name: cloudSQL.userPassword
+          value: {{ .Values.apps.backstage.sqlPassword }}
   destination:
     server: https://kubernetes.default.svc
     namespace: backstage

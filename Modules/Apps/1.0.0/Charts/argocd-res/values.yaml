@@ -20,10 +20,12 @@ apps:
     enabled: true
     branchOrTag: main
     valueFiles: []
+    sqlPassword: ""
   backstage:
     enabled: true
     branchOrTag: main
     valueFiles: []
+    sqlPassword: "" 
   nft:
     enabled: true
     branchOrTag: main
