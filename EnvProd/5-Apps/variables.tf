@@ -63,6 +63,16 @@ variable "GrafanaAdminPassword" {
   sensitive   = true
 }
 
+variable "BackstageSqlPassword" {
+  type        = string
+  sensitive   = true
+}
+
+variable "UserSqlPassword" {
+  type        = string
+  sensitive   = true
+}
+
 #============================
 # Robusta                   #
 #============================

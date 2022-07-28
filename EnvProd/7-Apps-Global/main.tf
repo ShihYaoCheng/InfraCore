@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "AppsEU" {
-  source = "../../Modules/Apps/0.6.0"
+  source = "../../Modules/Apps/1.0.0"
 
   ProjectName  = local.ProjectName
   UniqueName   = "eu"
@@ -26,13 +26,14 @@ module "AppsEU" {
   Prometheus_Retention        = "90d"
   Grafana_AdminPassword       = var.GrafanaAdminPassword
 
-  ArgoCD_Enable                  = true
-  ArgoCD_EnableSelfHeal          = true
-  ArgoCD_EnableIngress           = true
-  ArgoCD_IngressUseProdCert      = true
-  ArgoCD_GitLabTokenName         = var.ArgoCD_GitLabTokenName
-  ArgoCD_GitLabTokenSecret       = var.ArgoCD_GitLabTokenSecret
-  ArgoCD_SyncWindowTaipeiTime    = "* * * * *"
+  ArgoCD_Enable               = true
+  ArgoCD_EnableSelfHeal       = true
+  ArgoCD_EnableIngress        = true
+  ArgoCD_IngressUseProdCert   = true
+  ArgoCD_GitLabTokenName      = var.ArgoCD_GitLabTokenName
+  ArgoCD_GitLabTokenSecret    = var.ArgoCD_GitLabTokenSecret
+  ArgoCD_SyncWindowTaipeiTime = "* * * * *"
+  
   ArgoCD_EnableAppBackstage      = false
   ArgoCD_EnableAppBattle         = true
   ArgoCD_EnableAppFile           = true
@@ -51,6 +52,9 @@ module "AppsEU" {
   ArgoCD_NFTHelmValueFiles       = local.NFTHelmValueFiles
   ArgoCD_TableHelmValueFiles     = local.TableHelmValueFiles
   ArgoCD_UserHelmValueFiles      = local.UserHelmValueFiles
+
+  ArgoCD_BackstageSqlPassword = ""
+  ArgoCD_UserSqlPassword      = ""
 }
 
 
