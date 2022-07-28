@@ -25,7 +25,7 @@
   {
     "TW": "open.v2.7.0.ponponsnake.com",
     "EU": "open.eu.v2.7.0.ponponsnake.com",
-    "LoadBalancer": "global.v2.7.0.ponponsnake.com"
+    "LoadBalancer": "open.global.v2.7.0.ponponsnake.com"
   },
   "GKE": {
     "TW": {
