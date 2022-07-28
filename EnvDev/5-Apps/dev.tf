@@ -49,7 +49,7 @@ module "Apps" {
   ArgoCD_BackstageHelmValueFiles = "{values-main.yaml}"
   ArgoCD_BattleHelmValueFiles    = "{values-dev.yaml}"
   ArgoCD_FileHelmValueFiles      = "{values-dev.yaml}"
-  ArgoCD_NFTHelmValueFiles       = "{values-dev.yaml}"
+  ArgoCD_NFTHelmValueFiles       = "{values-main.yaml}"
   ArgoCD_TableHelmValueFiles     = "{values-dev.yaml}"
   ArgoCD_UserHelmValueFiles      = "{values-dev.yaml}"
 
