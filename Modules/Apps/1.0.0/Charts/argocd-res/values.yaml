@@ -1,0 +1,30 @@
+ingress:
+  enabled: false
+  useProdCert: false
+  
+apps:
+  selfHeal: true
+  battle:
+    enabled: true
+    branchOrTag: main
+    valueFiles: []
+  file:
+    enabled: true
+    branchOrTag: main
+    valueFiles: []
+  table:
+    enabled: true
+    branchOrTag: main
+    valueFiles: []
+  user:
+    enabled: true
+    branchOrTag: main
+    valueFiles: []
+  backstage:
+    enabled: true
+    branchOrTag: main
+    valueFiles: []
+  nft:
+    enabled: true
+    branchOrTag: main
+    valueFiles: []
