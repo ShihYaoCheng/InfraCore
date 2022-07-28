@@ -1,9 +1,9 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "AppsEu" {
-  source = "../../Modules/Apps/0.6.0"
+  source = "../../Modules/Apps/1.0.0"
 
   ProjectName  = local.ProjectName
-  UniqueName   = "Europe"
+  UniqueName   = "eu"
   GCPProjectID = local.ProjectID
   GCPZone      = var.GCPZone
 
@@ -51,6 +51,9 @@ module "AppsEu" {
   ArgoCD_NFTHelmValueFiles       = "{values-sre.yaml}"
   ArgoCD_TableHelmValueFiles     = "{values-sre.yaml}"
   ArgoCD_UserHelmValueFiles      = "{values-sre.yaml}"
+
+  ArgoCD_BackstageSqlPassword = "backstage1234"
+  ArgoCD_UserSqlPassword      = "user1234"
 }
 
 
