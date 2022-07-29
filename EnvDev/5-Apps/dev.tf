@@ -51,7 +51,7 @@ module "Apps" {
   ArgoCD_FileHelmValueFiles      = "{values-main.yaml}"
   ArgoCD_NFTHelmValueFiles       = "{values-main.yaml}"
   ArgoCD_TableHelmValueFiles     = "{values-main.yaml}"
-  ArgoCD_UserHelmValueFiles      = "{values-dev.yaml}"
+  ArgoCD_UserHelmValueFiles      = "{values-main.yaml}"
 
   ArgoCD_BackstageSqlPassword = "backstage1234"
   ArgoCD_UserSqlPassword      = "user1234"
