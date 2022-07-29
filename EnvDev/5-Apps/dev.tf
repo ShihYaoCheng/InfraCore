@@ -47,7 +47,7 @@ module "Apps" {
   ArgoCD_AppTableBranchOrTag     = "main"
   ArgoCD_AppUserBranchOrTag      = "main"
   ArgoCD_BackstageHelmValueFiles = "{values-main.yaml}"
-  ArgoCD_BattleHelmValueFiles    = "{values-dev.yaml}"
+  ArgoCD_BattleHelmValueFiles    = "{values-main.yaml}"
   ArgoCD_FileHelmValueFiles      = "{values-main.yaml}"
   ArgoCD_NFTHelmValueFiles       = "{values-main.yaml}"
   ArgoCD_TableHelmValueFiles     = "{values-main.yaml}"

@@ -16,7 +16,7 @@
   "HelmPathValueFiles": 
   {
     "Backstage": "{values-prod.yaml}",
-    "Battle": "{values-qa-v2.7.0.yaml}",
+    "Battle": "{values-v2.7.0-qa.yaml}",
     "File": "{values-v2.7.0-qa.yaml}",
     "NFT": "{values-beta-qa.yaml}",
     "Table": "{values-v2.7.0-qa.yaml}",
