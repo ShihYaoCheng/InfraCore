@@ -32,7 +32,7 @@ module "Apps" {
   ArgoCD_IngressUseProdCert   = true
   ArgoCD_GitLabTokenName      = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret    = var.ArgoCD_GitLabTokenSecret
-  ArgoCD_SyncWindowTaipeiTime = "* 1 * * 1-5"
+  ArgoCD_SyncWindowTaipeiTime = "* 2 * * 1-5"
 
   ArgoCD_EnableAppBackstage      = false
   ArgoCD_EnableAppBattle         = true

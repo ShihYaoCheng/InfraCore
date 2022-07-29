@@ -20,7 +20,7 @@ module "Apps" {
   Prometheus_Retention        = "30d"
   Grafana_AdminPassword       = "gra4422"
 
-  Robusta_ClusterName  = "sk-qa"
+  Robusta_ClusterName  = "sk-qa-tw"
   Robusta_SlackAPIKey  = var.Robusta_SlackAPIKey
   Robusta_SlackChannel = "sk-qa-info"
 
@@ -32,7 +32,7 @@ module "Apps" {
   ArgoCD_IngressUseProdCert   = true
   ArgoCD_GitLabTokenName      = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret    = var.ArgoCD_GitLabTokenSecret
-  ArgoCD_SyncWindowTaipeiTime = "* 1 * * 1-5"
+  ArgoCD_SyncWindowTaipeiTime = "* 2 * * 1-5"
 
   ArgoCD_EnableAppBackstage      = true
   ArgoCD_EnableAppBattle         = true
