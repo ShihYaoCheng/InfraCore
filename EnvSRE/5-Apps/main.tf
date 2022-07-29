@@ -47,7 +47,7 @@ module "AppsDev" {
   ArgoCD_AppNFTBranchOrTag       = "main"
   ArgoCD_BackstageHelmValueFiles = "{values-sre.yaml}"
   ArgoCD_BattleHelmValueFiles    = "{values-sre.yaml}"
-  ArgoCD_FileHelmValueFiles      = "{values-sre.yaml\\, values-neg-template.yaml}"
+  ArgoCD_FileHelmValueFiles      = "{values-sre.yaml\\, template-values-neg.yaml}"
   ArgoCD_NFTHelmValueFiles       = "{values-sre.yaml}"
   ArgoCD_TableHelmValueFiles     = "{values-sre.yaml}"
   ArgoCD_UserHelmValueFiles      = "{values-sre.yaml}"
