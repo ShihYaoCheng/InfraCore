@@ -19,7 +19,7 @@
     "Battle": "{values-qa-v2.7.0.yaml}",
     "File": "{values-qa-v2.7.0.yaml}",
     "NFT": "{values-beta-qa.yaml}",
-    "Table": "{values-qa-v2.7.0.yaml}",
+    "Table": "{values-v2.7.0-qa.yaml}",
     "User": "{values-qa-v2.7.0.yaml}"
   },
   "DomainNames": 
