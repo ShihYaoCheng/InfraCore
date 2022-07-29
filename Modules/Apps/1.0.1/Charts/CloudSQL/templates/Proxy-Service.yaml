@@ -1,0 +1,10 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.proxy.serviceName }}
+spec:
+  selector:
+    app: cloud-sql-proxy
+  ports:
+    - port: 3306
+  type: ClusterIP
