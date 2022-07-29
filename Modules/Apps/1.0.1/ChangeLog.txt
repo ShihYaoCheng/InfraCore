@@ -1,2 +1,1 @@
-﻿Add ArgoCD_BackstageSqlPassword and ArgoCD_UserSqlPassword variables that allow the operator 
-set the password in the production environment.
+﻿Move backstage to default project of the ArgoCD. 
