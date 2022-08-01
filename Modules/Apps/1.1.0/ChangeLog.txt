@@ -1,1 +1,2 @@
-﻿Add Official website to ArgoCD Application.
+﻿1. Add Official website to ArgoCD Application.
+2. Refactor, move the repository of the ArgoCD to helm chart.

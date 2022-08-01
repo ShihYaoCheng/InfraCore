@@ -2,6 +2,10 @@ ingress:
   enabled: false
   useProdCert: false
   
+repository:
+  userName: ""
+  password: ""
+  
 apps:
   selfHeal: true
   battle:
