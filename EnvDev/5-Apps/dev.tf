@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "Apps" {
-  source = "../../Modules/Apps/1.0.1"
+  source = "../../Modules/Apps/1.1.0"
 
   ProjectName  = local.ProjectName
   UniqueName   = "TW-Dev"
@@ -34,24 +34,29 @@ module "Apps" {
   ArgoCD_GitLabTokenName      = var.ArgoCD_GitLabTokenName
   ArgoCD_GitLabTokenSecret    = var.ArgoCD_GitLabTokenSecret
 
-  ArgoCD_EnableAppBackstage      = true
-  ArgoCD_EnableAppBattle         = true
-  ArgoCD_EnableAppFile           = true
-  ArgoCD_EnableAppNFT            = true
-  ArgoCD_EnableAppTable          = true
-  ArgoCD_EnableAppUser           = true
-  ArgoCD_AppBackstageBranchOrTag = "main"
-  ArgoCD_AppBattleBranchOrTag    = "main"
-  ArgoCD_AppFileBranchOrTag      = "main"
-  ArgoCD_AppNFTBranchOrTag       = "main"
-  ArgoCD_AppTableBranchOrTag     = "main"
-  ArgoCD_AppUserBranchOrTag      = "main"
-  ArgoCD_BackstageHelmValueFiles = "{values-main.yaml}"
-  ArgoCD_BattleHelmValueFiles    = "{values-main.yaml}"
-  ArgoCD_FileHelmValueFiles      = "{values-main.yaml}"
-  ArgoCD_NFTHelmValueFiles       = "{values-main.yaml}"
-  ArgoCD_TableHelmValueFiles     = "{values-main.yaml}"
-  ArgoCD_UserHelmValueFiles      = "{values-main.yaml}"
+  ArgoCD_EnableAppBackstage   = true
+  ArgoCD_EnableAppBattle      = true
+  ArgoCD_EnableAppFile        = true
+  ArgoCD_EnableAppNFT         = true
+  ArgoCD_EnableAppTable       = true
+  ArgoCD_EnableAppUser        = true
+  ArgoCD_EnableAppOfficialWeb = true
+
+  ArgoCD_AppBackstageBranchOrTag   = "main"
+  ArgoCD_AppBattleBranchOrTag      = "main"
+  ArgoCD_AppFileBranchOrTag        = "main"
+  ArgoCD_AppNFTBranchOrTag         = "main"
+  ArgoCD_AppTableBranchOrTag       = "main"
+  ArgoCD_AppUserBranchOrTag        = "main"
+  ArgoCD_AppOfficialWebBranchOrTag = "main"
+
+  ArgoCD_BackstageHelmValueFiles   = "{values-main.yaml}"
+  ArgoCD_BattleHelmValueFiles      = "{values-main.yaml}"
+  ArgoCD_FileHelmValueFiles        = "{values-main.yaml}"
+  ArgoCD_NFTHelmValueFiles         = "{values-main.yaml}"
+  ArgoCD_TableHelmValueFiles       = "{values-main.yaml}"
+  ArgoCD_UserHelmValueFiles        = "{values-main.yaml}"
+  ArgoCD_OfficialWebHelmValueFiles = "{values-main.yaml}"
 
   ArgoCD_BackstageSqlPassword = "backstage1234"
   ArgoCD_UserSqlPassword      = "user1234"
