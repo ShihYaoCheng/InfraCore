@@ -48,6 +48,14 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
+  name: official-web
+  labels:
+    kubed: sync
+    pod-security.kubernetes.io/enforce: restricted
+---
+apiVersion: v1
+kind: Namespace
+metadata:
   name: monitoring
   labels:
     kubed: sync
