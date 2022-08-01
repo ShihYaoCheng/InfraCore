@@ -26,6 +26,11 @@ apps:
     branchOrTag: main
     valueFiles: []
     sqlPassword: "" 
+  officialWeb:
+    enabled: true
+    branchOrTag: main
+    valueFiles: [ ]
+    sqlPassword: ""
   nft:
     enabled: true
     branchOrTag: main
