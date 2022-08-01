@@ -1,0 +1,37 @@
+﻿{{- if .Values.apps.file.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: file
+  namespace: argocd
+spec:
+  project: sk
+  source:
+    repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppFile.git
+    targetRevision: {{ .Values.apps.file.branchOrTag }}
+    path: chart
+    helm:
+      # Optional Helm version to template with. If omitted it will fall back to look at the 'apiVersion' in Chart.yaml
+      # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
+      version: v3
+      valueFiles: {{ .Values.apps.file.valueFiles }}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: file
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: {{ .Values.apps.selfHeal }}
+    syncOptions:
+      # https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/#prune-last
+      - PruneLast=true
+    # - CreateNamespace=true
+    # The retry feature is available since v1.7
+    retry:
+      limit: -1 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+      backoff:
+        duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: 2 # a factor to multiply the base duration after each failed retry
+        maxDuration: 3m # the maximum amount of time allowed for the backoff strategy
+          
+{{- end }}
