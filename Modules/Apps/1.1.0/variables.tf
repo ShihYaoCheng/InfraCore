@@ -177,6 +177,10 @@ variable "ArgoCD_EnableAppBackstage" {
   type = bool
 }
 
+variable "ArgoCD_EnableAppOfficialWeb" {
+  type = bool
+}
+
 variable "ArgoCD_EnableAppFile" {
   type = bool
 }
@@ -233,6 +237,11 @@ variable "ArgoCD_BackstageHelmValueFiles" {
   description = "Sample: {values-sre.yaml}"
 }
 
+variable "ArgoCD_OfficialWebHelmValueFiles" {
+  type        = string
+  description = "Sample: {values-sre.yaml}"
+}
+
 variable "ArgoCD_BattleHelmValueFiles" {
   type        = string
   description = "Sample: {values-sre.yaml}"
@@ -276,6 +285,10 @@ variable "ArgoCD_AppUserBranchOrTag" {
 }
 
 variable "ArgoCD_AppBackstageBranchOrTag" {
+  type = string
+}
+
+variable "ArgoCD_AppOfficialWebBranchOrTag" {
   type = string
 }
 

@@ -76,6 +76,15 @@ resource "helm_release" "ArgoCD" {
     value = var.ArgoCD_GitLabTokenSecret
   }
 
+  set_sensitive {
+    name  = "configs.repositories.sk-official-web.username"
+    value = var.ArgoCD_GitLabTokenName
+  }
+  set_sensitive {
+    name  = "configs.repositories.sk-official-web.password"
+    value = var.ArgoCD_GitLabTokenSecret
+  }
+
   # https://stackoverflow.com/questions/64696721/how-do-i-pass-variables-to-a-yaml-file-in-heml-tf
   values = [
     templatefile("${path.module}/Values/argocd.yaml", {}),
@@ -185,6 +194,23 @@ resource "helm_release" "ArgoCDResource" {
   }
   set {
     name  = "apps.backstage.sqlPassword"
+    value = var.ArgoCD_BackstageSqlPassword
+  }
+
+  set {
+    name  = "apps.officialWeb.enabled"
+    value = var.ArgoCD_EnableAppOfficialWeb
+  }
+  set {
+    name  = "apps.officialWeb.branchOrTag"
+    value = var.ArgoCD_AppOfficialWebBranchOrTag
+  }
+  set {
+    name  = "apps.officialWeb.valueFiles"
+    value = var.ArgoCD_OfficialWebHelmValueFiles
+  }
+  set {
+    name  = "apps.officialWeb.sqlPassword"
     value = var.ArgoCD_BackstageSqlPassword
   }
 

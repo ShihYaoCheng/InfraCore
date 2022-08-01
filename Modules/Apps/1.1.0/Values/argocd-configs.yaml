@@ -41,6 +41,12 @@ configs:
       type: git
       password: my-password
       username: my-username
+    sk-official-web:
+      url: https://gitlab.com/GameSnake/SRE/ArgoCDAppOfficialWebsite.git
+      name: sk-official-web
+      type: git
+      password: my-password
+      username: my-username
     
     #  repositories: { }
     # istio-helm-repo:
