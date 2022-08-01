@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "Apps" {
-  source = "../../Modules/Apps/1.0.1"
+  source = "../../Modules/Apps/1.1.0"
 
   ProjectName  = local.ProjectName
   UniqueName   = "eu"
@@ -34,24 +34,29 @@ module "Apps" {
   ArgoCD_GitLabTokenSecret    = var.ArgoCD_GitLabTokenSecret
   ArgoCD_SyncWindowTaipeiTime = "* 2 * * 1-5"
 
-  ArgoCD_EnableAppBackstage      = false
-  ArgoCD_EnableAppBattle         = true
-  ArgoCD_EnableAppFile           = true
-  ArgoCD_EnableAppNFT            = false
-  ArgoCD_EnableAppTable          = false
-  ArgoCD_EnableAppUser           = false
-  ArgoCD_AppBackstageBranchOrTag = local.AppBackstage
-  ArgoCD_AppBattleBranchOrTag    = local.AppBattle
-  ArgoCD_AppFileBranchOrTag      = local.AppFile
-  ArgoCD_AppNFTBranchOrTag       = local.AppNFT
-  ArgoCD_AppTableBranchOrTag     = local.AppTable
-  ArgoCD_AppUserBranchOrTag      = local.AppUser
-  ArgoCD_BackstageHelmValueFiles = local.BackstageHelmValueFiles
-  ArgoCD_BattleHelmValueFiles    = local.BattleHelmValueFiles
-  ArgoCD_FileHelmValueFiles      = local.FileHelmValueFiles
-  ArgoCD_NFTHelmValueFiles       = local.NFTHelmValueFiles
-  ArgoCD_TableHelmValueFiles     = local.TableHelmValueFiles
-  ArgoCD_UserHelmValueFiles      = local.UserHelmValueFiles
+  ArgoCD_EnableAppBackstage   = false
+  ArgoCD_EnableAppBattle      = true
+  ArgoCD_EnableAppFile        = true
+  ArgoCD_EnableAppNFT         = false
+  ArgoCD_EnableAppTable       = false
+  ArgoCD_EnableAppUser        = false
+  ArgoCD_EnableAppOfficialWeb = false
+
+  ArgoCD_AppBackstageBranchOrTag   = local.AppBackstage
+  ArgoCD_AppBattleBranchOrTag      = local.AppBattle
+  ArgoCD_AppFileBranchOrTag        = local.AppFile
+  ArgoCD_AppNFTBranchOrTag         = local.AppNFT
+  ArgoCD_AppTableBranchOrTag       = local.AppTable
+  ArgoCD_AppUserBranchOrTag        = local.AppUser
+  ArgoCD_AppOfficialWebBranchOrTag = ""
+
+  ArgoCD_BackstageHelmValueFiles   = local.BackstageHelmValueFiles
+  ArgoCD_BattleHelmValueFiles      = local.BattleHelmValueFiles
+  ArgoCD_FileHelmValueFiles        = local.FileHelmValueFiles
+  ArgoCD_NFTHelmValueFiles         = local.NFTHelmValueFiles
+  ArgoCD_TableHelmValueFiles       = local.TableHelmValueFiles
+  ArgoCD_UserHelmValueFiles        = local.UserHelmValueFiles
+  ArgoCD_OfficialWebHelmValueFiles = ""
 
   ArgoCD_BackstageSqlPassword = "backstage1234"
   ArgoCD_UserSqlPassword      = "user1234"

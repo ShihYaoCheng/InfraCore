@@ -11,7 +11,8 @@
     "File": "main",
     "NFT": "main",
     "Table": "main",
-    "User": "main"
+    "User": "main",
+    "OfficialWeb": "main"
   },
   "HelmPathValueFiles": 
   {
@@ -20,7 +21,8 @@
     "File": "{values-v2.7.0-qa.yaml}",
     "NFT": "{values-beta-qa.yaml}",
     "Table": "{values-v2.7.0-qa.yaml}",
-    "User": "{values-v2.7.0-qa.yaml}"
+    "User": "{values-v2.7.0-qa.yaml}",
+    "OfficialWeb": "{values-beta-qa.yaml}"
   },
   "DomainNames": 
   {
