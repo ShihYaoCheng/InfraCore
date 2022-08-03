@@ -6,8 +6,8 @@ module "LoadBalancer" {
 
   LoadBalancerDomainName = "global.origingaia.com"
 
-  ZoneTW = "asia-east1-a"
-  ZoneEU = "europe-west2-a"
+  ZoneTW = "asia-east1-c"
+  ZoneEU = "europe-west2-c"
   
   providers = {
     kubernetes.tw = kubernetes.tw

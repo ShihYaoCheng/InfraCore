@@ -5,9 +5,10 @@ module "GKE-EU" {
   ProjectName = local.ProjectName
 
   GCPProjectID = local.ProjectID
-  GCPRegion = var.GCPRegion
-  GCPZone = var.GCPZone
-  GKE-Zones = [var.GCPZone]
+  GCPRegion = local.GCPRegion
+  GCPZone = local.GCPZone
+  GKE-Zones = [local.GCPZone]
+  GKE-Labels = {"name"="sre"}
   
   GKE-EnableScale-e2-standard-2 = false
   GKE-NodeCount-e2-standard-2 = 0

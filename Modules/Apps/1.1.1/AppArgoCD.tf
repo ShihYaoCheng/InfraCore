@@ -13,77 +13,10 @@ resource "helm_release" "ArgoCD" {
 
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd"
-  version    = "~>4.9.16"
+  version    = "~>4.10.4"
 
   create_namespace = true
   namespace        = "argocd"
-
-  #============================#
-  # Set repository credentials #
-  #============================#
-  # https://github.com/helm/helm/issues/1987
-#  set_sensitive {
-#    name  = "configs.repositories.sk-table.username"
-#    value = var.ArgoCD_GitLabTokenName
-#  }
-#  set_sensitive {
-#    name  = "configs.repositories.sk-table.password"
-#    value = var.ArgoCD_GitLabTokenSecret
-#  }
-#
-#  set_sensitive {
-#    name  = "configs.repositories.sk-file.username"
-#    value = var.ArgoCD_GitLabTokenName
-#  }
-#  set_sensitive {
-#    name  = "configs.repositories.sk-file.password"
-#    value = var.ArgoCD_GitLabTokenSecret
-#  }
-#
-#  set_sensitive {
-#    name  = "configs.repositories.sk-user.username"
-#    value = var.ArgoCD_GitLabTokenName
-#  }
-#  set_sensitive {
-#    name  = "configs.repositories.sk-user.password"
-#    value = var.ArgoCD_GitLabTokenSecret
-#  }
-#
-#  set_sensitive {
-#    name  = "configs.repositories.sk-backstage.username"
-#    value = var.ArgoCD_GitLabTokenName
-#  }
-#  set_sensitive {
-#    name  = "configs.repositories.sk-backstage.password"
-#    value = var.ArgoCD_GitLabTokenSecret
-#  }
-#
-#  set_sensitive {
-#    name  = "configs.repositories.sk-battle.username"
-#    value = var.ArgoCD_GitLabTokenName
-#  }
-#  set_sensitive {
-#    name  = "configs.repositories.sk-battle.password"
-#    value = var.ArgoCD_GitLabTokenSecret
-#  }
-#
-#  set_sensitive {
-#    name  = "configs.repositories.sk-nft.username"
-#    value = var.ArgoCD_GitLabTokenName
-#  }
-#  set_sensitive {
-#    name  = "configs.repositories.sk-nft.password"
-#    value = var.ArgoCD_GitLabTokenSecret
-#  }
-#
-#  set_sensitive {
-#    name  = "configs.repositories.sk-official-web.username"
-#    value = var.ArgoCD_GitLabTokenName
-#  }
-#  set_sensitive {
-#    name  = "configs.repositories.sk-official-web.password"
-#    value = var.ArgoCD_GitLabTokenSecret
-#  }
 
   # https://stackoverflow.com/questions/64696721/how-do-i-pass-variables-to-a-yaml-file-in-heml-tf
   values = [

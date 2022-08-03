@@ -14,7 +14,7 @@ locals {
 
   # https://cloud.google.com/compute/docs/regions-zones
   GCPRegion = "asia-east1"
-  GCPZone = "asia-east1-a"
+  GCPZone = "asia-east1-c"
 }
 
 # https://cloud.google.com/compute/docs/regions-zones

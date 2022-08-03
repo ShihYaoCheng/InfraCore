@@ -5,10 +5,10 @@
   required_version = "~> 1.0.11"
 
   required_providers {
-    // https://registry.terraform.io/providers/hashicorp/google/latest
+    # https://registry.terraform.io/providers/hashicorp/google/latest
     google = {
       source = "hashicorp/google"
-      version = "~>4.16.0"
+      version = "~>4.31.0"
     }
   }
 }

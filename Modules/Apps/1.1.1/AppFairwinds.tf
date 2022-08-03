@@ -7,7 +7,7 @@ resource "helm_release" "Goldilocks" {
   name             = "goldilocks"
   repository       = "https://charts.fairwinds.com/stable"
   chart            = "goldilocks"
-  version          = "~>6.1.2"
+  version          = "~>6.1.4"
   create_namespace = true
   namespace        = "fairwinds"
 
@@ -26,7 +26,7 @@ resource "helm_release" "Polaris" {
   name             = "polaris"
   repository       = "https://charts.fairwinds.com/stable"
   chart            = "polaris"
-  version          = "~>5.1.0"
+  version          = "~>5.4.1"
   create_namespace = true
   namespace        = "fairwinds"
   
@@ -50,7 +50,7 @@ resource "helm_release" "RBACManager" {
   name             = "rbac-manager"
   repository       = "https://charts.fairwinds.com/stable"
   chart            = "rbac-manager"
-  version          = "~>1.11.1"
+  version          = "~>1.12.0"
   create_namespace = true
   namespace        = "fairwinds"
   

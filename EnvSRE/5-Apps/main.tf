@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "AppsDev" {
-  source = "../../Modules/Apps/1.1.0"
+  source = "../../Modules/Apps/1.1.1"
 
   ProjectName  = local.ProjectName
   UniqueName   = "tw-dev"
@@ -51,7 +51,7 @@ module "AppsDev" {
   ArgoCD_AppOfficialWebBranchOrTag = "main"
 
   ArgoCD_BackstageHelmValueFiles   = "{values-sre.yaml}"
-  ArgoCD_BattleHelmValueFiles      = "{values-sre.yaml}"
+  ArgoCD_BattleHelmValueFiles      = "{values-sre.yaml\\, template-values-neg.yaml}"
   ArgoCD_FileHelmValueFiles        = "{values-sre.yaml\\, template-values-neg.yaml}"
   ArgoCD_NFTHelmValueFiles         = "{values-sre.yaml}"
   ArgoCD_TableHelmValueFiles       = "{values-sre.yaml}"
