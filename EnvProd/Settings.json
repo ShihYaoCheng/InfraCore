@@ -10,7 +10,8 @@
     "File": "v2.6.0C10F1",
     "NFT": "v2.6.0C2F2",
     "Table": "v2.6.0C9F1",
-    "User": "v2.6.0C9F2"
+    "User": "v2.6.0C9F2",
+    "OfficialWeb": "main"
   },
   "HelmPathValueFiles":
   {
@@ -19,7 +20,8 @@
     "File": "{values-prod.yaml}",
     "NFT": "{values-prod.yaml}",
     "Table": "{values-prod.yaml}",
-    "User": "{values-prod.yaml}"
+    "User": "{values-prod.yaml}",
+    "OfficialWeb": "{values-v1.0.0.yaml}"
   },
   "DomainNames":
   {

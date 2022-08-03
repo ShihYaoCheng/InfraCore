@@ -16,6 +16,7 @@ locals {
   AppNFT = local.Settings["AppsVersion"]["NFT"]
   AppTable = local.Settings["AppsVersion"]["Table"]
   AppUser = local.Settings["AppsVersion"]["User"]
+  AppOfficialWeb = local.Settings["AppsVersion"]["OfficialWeb"]
 
   BackstageHelmValueFiles = local.Settings["HelmPathValueFiles"]["Backstage"]
   BattleHelmValueFiles = local.Settings["HelmPathValueFiles"]["Battle"]
@@ -23,6 +24,7 @@ locals {
   NFTHelmValueFiles = local.Settings["HelmPathValueFiles"]["NFT"]
   TableHelmValueFiles = local.Settings["HelmPathValueFiles"]["Table"]
   UserHelmValueFiles = local.Settings["HelmPathValueFiles"]["User"]
+  OfficialWebHelmValueFiles = local.Settings["HelmPathValueFiles"]["OfficialWeb"]
 
   DomainNameEU = local.Settings["DomainNames"]["EU"]
 
