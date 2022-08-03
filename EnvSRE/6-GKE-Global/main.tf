@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "GKE-EU" {
-  source  = "../../Modules/GKE/0.2.0"
+  source  = "../../Modules/GKE/0.3.0"
 
   ProjectName = local.ProjectName
 
