@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "Apps-Rel" {
-  source = "../../Modules/Apps/1.1.0"
+  source = "../../Modules/Apps/1.2.0"
 
   ProjectName  = local.ProjectName
   UniqueName   = "TW-Rel"
@@ -22,9 +22,10 @@ module "Apps-Rel" {
   Prometheus_Retention        = "60d"
   Grafana_AdminPassword       = "gra4422"
 
-  Robusta_ClusterName  = "sk-rel"
-  Robusta_SlackAPIKey  = var.Robusta_SlackAPIKey
-  Robusta_SlackChannel = "sk-rel-info"
+  Robusta_ClusterName           = "sk-rel"
+  Robusta_SlackAPIKey           = var.Robusta_SlackAPIKey
+  Robusta_SlackChannel          = "sk-rel-info"
+  Robusta_NotifyDeploymentEvent = false
 
   ArgoCD_Enable               = true
   ArgoCD_EnableSelfHeal       = true
