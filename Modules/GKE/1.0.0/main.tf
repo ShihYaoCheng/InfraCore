@@ -87,44 +87,6 @@ module "GKE" {
   }
 
   node_pools    = [
-#    {
-#      name         = "pool-e2-highcpu-2"
-#      # https://cloud.google.com/compute/docs/general-purpose-machines#e2-high-cpu
-#      # e2-highcpu-2, CPU=2, Memory=2G
-#      # e2-highcpu-4, CPU=4, Memory=4G
-#      machine_type = "e2-highcpu-2"
-#
-#      autoscaling = false # Default = true
-#      # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
-#      node_count  = var.GKE-NodeCount-e2-high-cpu-2
-#
-#      disk_size_gb = 60
-#      disk_type    = "pd-standard"
-#
-#      auto_repair  = true
-#      auto_upgrade = true
-#
-#      enable_secure_boot = true
-#    },
-#    {
-#      name         = "pool-e2-highcpu-4"
-#      # https://cloud.google.com/compute/docs/general-purpose-machines#e2-high-cpu
-#      # e2-highcpu-2, CPU=2, Memory=2G
-#      # e2-highcpu-4, CPU=4, Memory=4G
-#      machine_type = "e2-highcpu-4"
-#
-#      autoscaling = false # Default = true
-#      # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
-#      node_count  = var.GKE-NodeCount-e2-high-cpu-4
-#
-#      disk_size_gb = 60
-#      disk_type    = "pd-standard"
-#
-#      auto_repair  = true
-#      auto_upgrade = true
-#
-#      enable_secure_boot = true
-#    },
     {
       name         = "pool-e2-standard-2"
       # https://cloud.google.com/compute/docs/general-purpose-machines#e2_limitations
@@ -133,13 +95,13 @@ module "GKE" {
       machine_type = "e2-standard-2"
 
       # Configuration required by cluster autoscaler to adjust the size of the node pool to the current cluster usage
-      autoscaling = var.GKE-EnableScale-e2-standard-2 # Default = true
+      autoscaling = var.GKE-NodePoolScale-2C8G # Default = true
       # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
-      node_count  = var.GKE-NodeCount-e2-standard-2
+      node_count  = var.GKE-NodeNum-2C8G
       # Minimum number of nodes in the NodePool. Must be >=0 and <= max_count. Should be used when autoscaling is true
       min_count = 0 # default: 1.
       # Maximum number of nodes in the NodePool. Must be >= min_count
-      max_count = var.GKE-MaxCount-e2-standard-2 # default: 100.
+      max_count = var.GKE-MaxNum-2C8G # default: 100.
 
       disk_size_gb = 60
       disk_type    = "pd-standard"
@@ -149,6 +111,8 @@ module "GKE" {
       auto_upgrade = true
 
       enable_secure_boot = true
+      
+      spot = var.GKE-CheapNodePool-2C8G
     },
     {
       name         = "pool-e2-standard-4"
@@ -157,14 +121,14 @@ module "GKE" {
       # e2-standard-4, CPU=4, Memory=16G
       machine_type = "e2-standard-4"
 
-      autoscaling = var.GKE-EnableScale-e2-standard-4 # Default = true
+      autoscaling = var.GKE-NodePoolScale-4C16G # Default = true
       # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
-      node_count  = var.GKE-NodeCount-e2-standard-4
+      node_count  = var.GKE-NodeNum-4C16G
 
       # Minimum number of nodes in the NodePool. Must be >=0 and <= max_count. Should be used when autoscaling is true
       min_count = 0 # default: 1.
       # Maximum number of nodes in the NodePool. Must be >= min_count
-      max_count = var.GKE-MaxCount-e2-standard-4 # default: 100.
+      max_count = var.GKE-MaxNum-4C16G # default: 100.
 
       disk_size_gb = 60
       disk_type    = "pd-standard"
@@ -173,27 +137,9 @@ module "GKE" {
       auto_upgrade = true
 
       enable_secure_boot = true
-    },
-#    {
-#      name         = "pool-e2-medium"
-#      # https://cloud.google.com/compute/docs/general-purpose-machines#e2_limitations
-#      # e2-medium sustains 2 vCPUs, each at 50% of CPU time totaling 100% vCPU time.
-#      # e2-medium, CPU=2, Memory=4G
-#      machine_type = "e2-medium"
-#
-#      autoscaling = false # Default = true
-#      # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
-#      node_count  = var.GKE-NodeCount-e2-medium
-#
-#      disk_size_gb = 60
-#      # Type of the disk attached to each node (e.g. 'pd-standard' or 'pd-ssd')
-#      disk_type    = "pd-standard"
-#
-#      auto_repair  = true
-#      auto_upgrade = true
-#
-#      enable_secure_boot = true
-#    }
+
+      spot = var.GKE-CheapNodePool-4C16G
+    }
   ]
 }
 

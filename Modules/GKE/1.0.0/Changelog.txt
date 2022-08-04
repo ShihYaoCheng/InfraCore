@@ -1,1 +1,1 @@
-﻿Upgrade to latest version.
+﻿Add Spot VM.

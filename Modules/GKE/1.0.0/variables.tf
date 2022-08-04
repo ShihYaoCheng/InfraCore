@@ -45,66 +45,36 @@ variable "GKE-Labels" {
 #  default = {"name"="sre"}
 }
 
-#variable "GKE-NodeCount-e2-high-cpu-2" {
-#  type = number
-##  default = 0
-#  description = "USD 41.82"
-#}
-#
-#variable "GKE-NodeCount-e2-high-cpu-4" {
-#  type = number
-##  default = 0
-#  description = "USD 83.63"
-#}
-
-variable "GKE-EnableScale-e2-standard-2" {
+variable "GKE-CheapNodePool-2C8G" {
   type = bool
 }
 
-variable "GKE-MaxCount-e2-standard-2" {
+variable "GKE-NodePoolScale-2C8G" {
+  type = bool
+}
+
+variable "GKE-MaxNum-2C8G" {
   type = number
 }
 
-variable "GKE-NodeCount-e2-standard-2" {
+variable "GKE-NodeNum-2C8G" {
   type = number
   description = "USD 56.64"
 }
 
-variable "GKE-EnableScale-e2-standard-4" {
+variable "GKE-CheapNodePool-4C16G" {
   type = bool
 }
 
-variable "GKE-MaxCount-e2-standard-4" {
+variable "GKE-NodePoolScale-4C16G" {
+  type = bool
+}
+
+variable "GKE-MaxNum-4C16G" {
   type = number
 }
 
-variable "GKE-NodeCount-e2-standard-4" {
+variable "GKE-NodeNum-4C16G" {
   type = number
   description = "USD 113.28"
 }
-
-#variable "GKE-NodeCount-e2-medium" {
-#  type = number
-##  default = 0
-#  description = "USD 28.32"
-#}
-
-#variable "GKE-AutoScaling-MinCPU" {
-#  type = number
-#  default = 1
-#}
-#
-#variable "GKE-AutoScaling-MaxCPU" {
-#  type = number
-#  default = 6
-#}
-#
-#variable "GKE-AutoScaling-MinMemoryGB" {
-#  type = number
-#  default = 5
-#}
-#
-#variable "GKE-AutoScaling-MaxMemoryGB" {
-#  type = number
-#  default = 20
-#}
