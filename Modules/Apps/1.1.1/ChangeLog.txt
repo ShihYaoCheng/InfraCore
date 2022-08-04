@@ -1,6 +1,5 @@
-﻿Upgrade all apps to the latest version.
-
-
+﻿1. Add variable: Robusta_NotifyDeploymentEvent.
+2. Upgrade all apps to the latest version.
 Error Message:
 In the last 30 days, API clients in your cluster attempted to call APIs that were removed in Kubernetes 1.22. These APIs are no longer available. Functionality that depends on these APIs might be broken.
 

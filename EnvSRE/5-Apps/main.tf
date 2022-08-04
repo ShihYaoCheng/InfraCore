@@ -23,6 +23,7 @@ module "AppsDev" {
   Robusta_ClusterName  = "sre-tw-dev"
   Robusta_SlackAPIKey  = var.Robusta_SlackAPIKey
   Robusta_SlackChannel = "sk-sre-info"
+  Robusta_NotifyDeploymentEvent = true
 
   CloudSQLProxy_Enable = true
 

@@ -50,15 +50,6 @@ variable "GodaddyAPISecret" {
 #============================
 # Prometheus                #
 #============================
-#variable "Prometheus_Enable" {
-#  type = bool
-#  default = true
-#}
-
-#variable "Prometheus_AlertSlackChannel" {
-#  type = string
-#}
-
 variable "Prometheus_StorageClassName" {
   type = string
   #  default = "ssd-retain"
@@ -92,6 +83,10 @@ variable "Robusta_SlackAPIKey" {
 
 variable "Robusta_ClusterName" {
   type = string
+}
+
+variable "Robusta_NotifyDeploymentEvent" {
+  type = bool
 }
 
 #============================

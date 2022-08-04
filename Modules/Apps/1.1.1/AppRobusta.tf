@@ -19,8 +19,13 @@ resource "helm_release" "Robusta" {
       prometheusStorageClassName = var.Prometheus_StorageClassName,
       prometheusStorageSize = var.Prometheus_StorageSize,
       prometheusRetention = var.Prometheus_Retention
-    })
+    }),
+    
+    var.Robusta_NotifyDeploymentEvent 
+    ? templatefile("${path.module}/Values/Robusta-CustomPlaybook.yaml", {}) 
+    : templatefile("${path.module}/Values/Robusta-CustomPlaybook-Empty.yaml", {})
   ]
+  
 }
 
 resource "helm_release" "PrometheusResources" {
