@@ -18,6 +18,9 @@ enableServiceMonitors: true
 disableCloudRouting: true
 runner:
   sendAdditionalTelemetry: false
+  resources:
+    requests:
+      cpu: 10m
 
 # https://docs.robusta.dev/master/catalog/triggers/kubernetes.html
 # https://docs.robusta.dev/master/catalog/actions/event-enrichment.html
@@ -55,6 +58,16 @@ platformPlaybooks:
 
 
 
+grafanaRenderer:
+  resources:
+    requests:
+      cpu: 10m
+
+kubewatch:
+  resources:
+    requests:
+      cpu: 10m
+
 
 kube-prometheus-stack:
   coreDns:
@@ -65,6 +78,15 @@ kube-prometheus-stack:
     enabled: false
   kubeScheduler:
     enabled: false
+  prometheusOperator:
+    resources:
+      requests:
+        cpu: 10m
+  alertmanager:
+    alertmanagerSpec:
+      resources:
+        requests:
+          cpu: 10m
   grafana:
     adminPassword: ${grafanaAdminPassword}
     
@@ -222,7 +244,7 @@ kube-prometheus-stack:
     prometheusSpec:
       resources:
         requests:
-          cpu: 100m
+          cpu: 10m
       # Select all ServiceMonitor and PodMonitor without any label filter.
       
       ## If true, a nil or {} value for prometheus.prometheusSpec.serviceMonitorSelector will cause the
