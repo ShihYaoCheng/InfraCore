@@ -232,7 +232,7 @@ kube-prometheus-stack:
     prometheusSpec:
       resources:
         requests:
-          cpu: 10m
+          cpu: 80m
       # Select all ServiceMonitor and PodMonitor without any label filter.
       
       ## If true, a nil or {} value for prometheus.prometheusSpec.serviceMonitorSelector will cause the
