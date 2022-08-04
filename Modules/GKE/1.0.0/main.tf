@@ -25,7 +25,9 @@ module "GKE" {
   create_service_account = false // avoid ImagePullBack.
 
   release_channel    = null // null(default), UNSPECIFIED, RAPID, REGULAR, STABLE.
-  kubernetes_version = "1.23.6-gke.2200"
+#  kubernetes_version = "1.24.2-gke.1900"
+  kubernetes_version = "1.23.8-gke.1900"
+#  kubernetes_version = "1.23.6-gke.2200"
 #  kubernetes_version = "1.23.5-gke.1501"
 #  kubernetes_version = "1.22.8-gke.200"
 
