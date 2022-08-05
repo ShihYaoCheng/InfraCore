@@ -7,21 +7,21 @@
   "AppsVersion": 
   {
     "Backstage": "main",
-    "Battle": "main",
-    "File": "main",
+    "Battle": "v2.7.0F31",
+    "File": "v2.7.0F31",
     "NFT": "main",
-    "Table": "main",
-    "User": "main",
+    "Table": "v2.7.0F31",
+    "User": "v2.7.0F31",
     "OfficialWeb": "main"
   },
   "HelmPathValueFiles": 
   {
     "Backstage": "{values-prod.yaml}",
-    "Battle": "{values-v2.7.0-qa.yaml}",
-    "File": "{values-v2.7.0-qa.yaml}",
+    "Battle": "{values-prod.yaml}",
+    "File": "{values-prod.yaml}",
     "NFT": "{values-beta-qa.yaml}",
-    "Table": "{values-v2.7.0-qa.yaml}",
-    "User": "{values-v2.7.0-qa.yaml}",
+    "Table": "{values-prod.yaml}",
+    "User": "{values-prod.yaml}",
     "OfficialWeb": "{values-beta-qa.yaml}"
   },
   "DomainNames": 
