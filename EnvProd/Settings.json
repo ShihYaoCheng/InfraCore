@@ -6,11 +6,11 @@
   "AppsVersion": 
   {
     "Backstage": "v2.6.0C8F1",
-    "Battle": "v2.6.0C10F1",
-    "File": "v2.6.0C10F1",
+    "Battle": "v2.7.0F31",
+    "File": "v2.7.0F31",
     "NFT": "v2.6.0C2F2",
-    "Table": "v2.6.0C9F1",
-    "User": "v2.6.0C9F2",
+    "Table": "v2.7.0F31",
+    "User": "v2.7.0F31",
     "OfficialWeb": "main"
   },
   "HelmPathValueFiles":
