@@ -20,7 +20,7 @@ runner:
   sendAdditionalTelemetry: false
   resources:
     requests:
-      cpu: 10m
+      cpu: 120m
 
 enablePlatformPlaybooks: false # noisy.
 
