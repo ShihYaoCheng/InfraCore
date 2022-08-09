@@ -1,0 +1,16 @@
+{
+  "Project": {
+    "ID": "stellar-38931",
+    "Name": "cqi-sk-dev"
+  },
+  "GKE": {
+    "TW-Dev": {
+      "APIName": "GKE-API-TW-Dev",
+      "CAName": "GKE-CA-TW-Dev"  
+    },
+    "TW-Rel": {
+      "APIName": "GKE-API-TW-Rel",
+      "CAName": "GKE-CA-TW-Rel"
+    }
+  }
+}
