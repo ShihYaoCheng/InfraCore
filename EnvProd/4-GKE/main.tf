@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "gke" {
-  source = "../../Modules/GKE/0.2.0"
+  source = "../../Modules/GKE/1.0.0"
 
   ProjectName = local.ProjectName
 
@@ -9,14 +9,17 @@ module "gke" {
   GCPZone      = local.GCPZone
   GKE-Zones    = [local.GCPZone]
 
-  GKE-EnableScale-e2-standard-2 = false
-  GKE-MaxCount-e2-standard-2    = 0
-  GKE-NodeCount-e2-standard-2   = 0
-  GKE-EnableScale-e2-standard-4 = true
-  GKE-MaxCount-e2-standard-4    = 2
-  GKE-NodeCount-e2-standard-4   = 1
-
   GKE-APIName = local.GKE-API-TW
   GKE-CAName  = local.GKE-CA-TW
+
+  GKE-CheapNodePool-2C8G  = false
+  GKE-NodePoolScale-2C8G  = false
+  GKE-MaxNum-2C8G         = 0
+  GKE-NodeNum-2C8G        = 0
+  
+  GKE-CheapNodePool-4C16G = false
+  GKE-NodePoolScale-4C16G = true
+  GKE-MaxNum-4C16G        = 2
+  GKE-NodeNum-4C16G       = 1
 }
 

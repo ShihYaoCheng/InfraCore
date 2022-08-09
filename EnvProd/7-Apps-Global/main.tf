@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "AppsEU" {
-  source = "../../Modules/Apps/1.1.0"
+  source = "../../Modules/Apps/1.2.0"
 
   ProjectName  = local.ProjectName
   UniqueName   = "eu"
@@ -17,9 +17,10 @@ module "AppsEU" {
 
   CloudSQLProxy_Enable = false
 
-  Robusta_ClusterName  = "sk-prod-eu"
-  Robusta_SlackAPIKey  = var.Robusta_SlackAPIKey
-  Robusta_SlackChannel = "sk-prod-info"
+  Robusta_ClusterName           = "sk-prod-eu"
+  Robusta_SlackAPIKey           = var.Robusta_SlackAPIKey
+  Robusta_SlackChannel          = "sk-prod-info"
+  Robusta_NotifyDeploymentEvent = true
 
   Prometheus_StorageClassName = "ssd-retain"
   Prometheus_StorageSize      = "500Gi"
