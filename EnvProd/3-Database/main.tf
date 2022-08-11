@@ -1,8 +1,8 @@
 ﻿module "DB" {
   source = "../../Modules/Database/0.1.0"
 
-  ProjectName  = local.ProjectName
-  
+  ProjectName = local.ProjectName
+
   GCPProjectID = local.ProjectID
   GCPRegion    = var.GCPRegion
   GCPZone      = var.GCPZone
@@ -11,11 +11,12 @@
   CloudSQLBackstagePassword = var.CloudSQLBackstagePassword
   CloudSQLUserPassword      = var.CloudSQLUserPassword
 
-  CloudSQLMachine                   = "db-n1-standard-2"
+#  CloudSQLMachine                   = "db-n1-standard-2"
+  CloudSQLMachine                   = "db-g1-small"
   CloudSQLEnableDiskAutoResize      = true
   CloudSQLEnableAutoBackup          = true
   CloudSQLEnablePointInTimeRecovery = true
   CloudSQLEnableHighlyAvailable     = true
   CloudSQLAllowDeletion             = false
-  CloudSQLCreateReleaseUserAndDB = false
+  CloudSQLCreateReleaseUserAndDB    = false
 }
