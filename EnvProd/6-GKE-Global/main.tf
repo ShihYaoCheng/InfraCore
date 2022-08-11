@@ -12,14 +12,14 @@ module "GKE-US" {
   GKE-APIName = local.GKE-API-EU
   GKE-CAName  = local.GKE-CA-EU
 
-  GKE-CheapNodePool-2C8G  = false
+  GKE-CheapNodePool-2C8G  = true
   GKE-NodePoolScale-2C8G  = false
   GKE-MaxNum-2C8G         = 0
   GKE-NodeNum-2C8G        = 0
 
-  GKE-CheapNodePool-4C16G = false
+  GKE-CheapNodePool-4C16G = true
   GKE-NodePoolScale-4C16G = true
   GKE-MaxNum-4C16G        = 2
-  GKE-NodeNum-4C16G       = 1
+  GKE-NodeNum-4C16G       = 2
 }
 

@@ -12,13 +12,13 @@ module "GKE-TW" {
 
   GKE-CheapNodePool-2C8G = true
   GKE-NodePoolScale-2C8G = false
-  GKE-MaxNum-2C8G = 1
-  GKE-NodeNum-2C8G = 1
+  GKE-MaxNum-2C8G = 0
+  GKE-NodeNum-2C8G = 0
 
   GKE-CheapNodePool-4C16G = true
   GKE-NodePoolScale-4C16G = false
-  GKE-MaxNum-4C16G = 1
-  GKE-NodeNum-4C16G = 1
+  GKE-MaxNum-4C16G = 2
+  GKE-NodeNum-4C16G = 2
 
   GKE-APIName = local.GKE-API-TW
   GKE-CAName  = local.GKE-CA-TW
