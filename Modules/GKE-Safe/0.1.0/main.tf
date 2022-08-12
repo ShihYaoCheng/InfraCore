@@ -18,8 +18,10 @@ module "GKE-SafeCluster" {
 
   regional = false # default = true, control plane run on multiple zones.
   zones = [var.GCPZone] # worker node run on multiple zones.
-  release_channel = null
-  kubernetes_version = "1.23.7-gke.1400"
+  # Accepted values are `UNSPECIFIED`, `RAPID`, `REGULAR` and `STABLE`. Defaults to `REGULAR`.
+  release_channel = "STABLE"
+#  kubernetes_version = "1.23.7-gke.1400"
+  # (Taipei) From 12:00 AM to 4:00 AM.
   maintenance_start_time = "16:00" # UTC.
 
   disable_default_snat = false
