@@ -56,7 +56,7 @@ module "Apps-Rel" {
   ArgoCD_FileHelmValueFiles        = "{values-v2.8.0.yaml\\, TemplateValuesEnableIngress.yaml}"
   ArgoCD_NFTHelmValueFiles         = "{values-beta.yaml}"
   ArgoCD_TableHelmValueFiles       = "{values-v2.8.0.yaml}"
-  ArgoCD_UserHelmValueFiles        = "{values-v2.8.0.yaml\\, TemplateDeployName-Release.yaml}"
+  ArgoCD_UserHelmValueFiles        = "{values-v2.8.0.yaml\\, TemplateEnvName-Release.yaml}"
   ArgoCD_OfficialWebHelmValueFiles = "{values-beta.yaml}"
 
   ArgoCD_BackstageSqlPassword = "backstage1234"
