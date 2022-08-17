@@ -46,11 +46,13 @@ resource "helm_release" "Polaris" {
 # https://github.com/FairwindsOps/rbac-manager
 # https://github.com/FairwindsOps/charts/tree/master/stable/rbac-manager
 # RBAC Manager is designed to simplify authorization in Kubernetes.
+# helm upgrade --install rbac-manager fairwinds-stable/rbac-manager -n rbac-manager --create-namespace
+# helm uninstall rbac-manager -n rbac-manager
 resource "helm_release" "RBACManager" {
   name             = "rbac-manager"
   repository       = "https://charts.fairwinds.com/stable"
   chart            = "rbac-manager"
-  version          = "~>1.12.0"
+  version          = "~>1.13.1"
   create_namespace = true
   namespace        = "fairwinds"
   
