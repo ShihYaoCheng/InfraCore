@@ -1,0 +1,63 @@
+﻿# https://ealenn.github.io/Echo-Server/
+# https://raw.githubusercontent.com/Ealenn/Echo-Server/master/docs/examples/echo.kube.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: echo
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo
+  namespace: echo
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: echo-server
+  template:
+    metadata:
+      labels:
+        app: echo-server
+    spec:
+      containers:
+        - image: ealen/echo-server:latest
+          imagePullPolicy: IfNotPresent
+          name: echo-server
+          ports:
+            - containerPort: 80
+          env:
+            - name: PORT
+              value: "80"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: echo
+  namespace: echo
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  type: ClusterIP
+  selector:
+    app: echo-server
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ig-echo
+  namespace: echo
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: PathPrefix(`/echo`)
+      services:
+        - kind: Service
+          name: echo
+          port: 80
+  tls: {}
