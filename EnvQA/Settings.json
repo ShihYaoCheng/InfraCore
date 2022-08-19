@@ -22,7 +22,7 @@
     "NFT": "{values-beta.yaml}",
     "Table": "{values-v2.8.0.yaml}",
     "User": "{values-v2.8.0.yaml}",
-    "OfficialWeb": "{values-beta-qa.yaml}"
+    "OfficialWeb": "{values-beta.yaml}"
   },
   "DomainNames": 
   {
