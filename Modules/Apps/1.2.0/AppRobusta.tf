@@ -1,6 +1,10 @@
 ﻿# https://github.com/robusta-dev/robusta/blob/master/helm/robusta/values.yaml
 # helm upgrade --install robusta robusta/robusta -f ./Values/Robusta.yaml -n robusta --create-namespace
 # helm uninstall robusta -n robusta
+# https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+# https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+# https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack#kube-prometheus-stack
+# https://github.com/prometheus-operator/kube-prometheus
 resource "helm_release" "Robusta" {
   depends_on = [helm_release.Configuration]
   
