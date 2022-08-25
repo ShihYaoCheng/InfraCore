@@ -448,7 +448,7 @@ Dev-5-Apps-Plan:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
     - cd ${TF_ROOT}
-    - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+    - cat $DEV_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
 
 Dev-5-Apps-Apply:
   extends: .apply.with.var.file
@@ -460,7 +460,7 @@ Dev-5-Apps-Apply:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
     - cd ${TF_ROOT}
-    - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+    - cat $DEV_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
 
 Dev-5-Apps-Destroy:
   extends: .destroy.with.var.file
@@ -472,7 +472,7 @@ Dev-5-Apps-Destroy:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
     - cd ${TF_ROOT}
-    - cat $DEV_TERRAFORM_VAR_FILE_BASE64 | base64 -d > var_file
+    - cat $DEV_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
 
 
 
