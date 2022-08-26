@@ -2,11 +2,11 @@
   url = "http://ipv4.icanhazip.com"
 }
 
-# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest/submodules/safer-cluster
-# https://github.com/terraform-google-modules/terraform-google-kubernetes-engine/tree/v22.1.0/modules/safer-cluster
-module "GKE-SafeCluster" {
-  source  = "terraform-google-modules/kubernetes-engine/google//modules/safer-cluster"
-  version = "22.1.0"
+# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest/submodules/private-cluster
+# https://github.com/terraform-google-modules/terraform-google-kubernetes-engine/tree/v23.0.0/modules/private-cluster
+module "GKE-PrivateCluster" {
+  source  = "terraform-google-modules/kubernetes-engine/google//modules/private-cluster"
+  version = "23.0.0"
 
   name              = var.ProjectName
   network           = var.ProjectName
@@ -25,19 +25,21 @@ module "GKE-SafeCluster" {
   maintenance_start_time = "16:00" # UTC.
 
   disable_default_snat = false
-  enable_private_endpoint = false
-  enable_intranode_visibility = true
-  enable_pod_security_policy = false
-  enable_network_egress_export = true
-  enable_resource_consumption_export = true
-  enable_shielded_nodes = true
-  enable_vertical_pod_autoscaling = false
-  filestore_csi_driver = false
-  http_load_balancing = true
+#  enable_private_endpoint = false
+  deploy_using_private_endpoint = false
+  enable_private_nodes = true
+#  enable_intranode_visibility = true
+#  enable_pod_security_policy = false
+#  enable_network_egress_export = true
+#  enable_resource_consumption_export = true
+#  enable_shielded_nodes = true
+#  enable_vertical_pod_autoscaling = false
+#  filestore_csi_driver = false
+#  http_load_balancing = true
 
   cluster_resource_labels = {"name"="sre"}
   description = "just for test"
-  
+
 
   # https://cloud.google.com/kubernetes-engine/docs/how-to/authorized-networks
   # https://avd.aquasec.com/misconfig/google/gke/avd-gcp-0061/
