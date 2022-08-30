@@ -17,7 +17,7 @@ module "Apps-Rel" {
 
   CloudSQLProxy_Enable = true
 
-  Prometheus_StorageClassName = "ssd-delete"
+  Prometheus_StorageClassName = "standard"
   Prometheus_StorageSize      = "100Gi"
   Prometheus_Retention        = "60d"
   Grafana_AdminPassword       = "gra4422"
