@@ -26,6 +26,11 @@ variable "GCPZone" {
 #============================
 # GKE                       #
 #============================
+variable "GKE-ControlPlaneCIDR" {
+  type = string
+#  default = "10.0.0.0/28"
+}
+
 variable "GKE-Zones" {
   type = list(string)
 #  default = ["asia-east1-a"]

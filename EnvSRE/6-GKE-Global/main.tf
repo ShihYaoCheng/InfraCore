@@ -7,9 +7,10 @@ module "GKE-EU" {
   GCPProjectID = local.ProjectID
   GCPRegion = local.GCPRegion
   GCPZone = local.GCPZone
+
+  GKE-ControlPlaneCIDR = "10.0.0.16/28"
   GKE-Zones = [local.GCPZone]
   GKE-Labels = {"name"="sre"}
-  
   GKE-APIName = local.GKE-API-EU
   GKE-CAName  = local.GKE-CA-EU
 

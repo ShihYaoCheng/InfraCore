@@ -10,6 +10,7 @@ module "GKE-TW" {
   GKE-Zones = [local.GCPZone]
   GKE-Labels = {"name"="sre"}
 
+  GKE-ControlPlaneCIDR = "10.0.0.0/28"
   GKE-CheapNodePool-2C8G = true
   GKE-NodePoolScale-2C8G = false
   GKE-MaxNum-2C8G = 0

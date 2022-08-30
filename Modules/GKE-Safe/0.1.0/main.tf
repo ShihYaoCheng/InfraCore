@@ -15,6 +15,7 @@ module "GKE-PrivateCluster" {
   subnetwork        = var.ProjectName
   ip_range_pods     = ""
   ip_range_services = ""
+  master_ipv4_cidr_block = var.GKE-ControlPlaneCIDR
 
   regional = false # default = true, control plane run on multiple zones.
   zones = [var.GCPZone] # worker node run on multiple zones.
@@ -50,7 +51,6 @@ module "GKE-PrivateCluster" {
     all = ["gke-worker-node"]
   }
 
-  remove_default_node_pool = true
   initial_node_count = 0
   node_pools    = [
     {
@@ -69,11 +69,7 @@ module "GKE-PrivateCluster" {
       # Maximum number of nodes in the NodePool. Must be >= min_count
       max_count = var.GKE-MaxNum-2C8G # default: 100.
 
-      disk_size_gb = 60
-      disk_type    = "pd-standard"
-
       auto_repair  = true
-      # Whether the nodes will be automatically upgraded
       auto_upgrade = true
 
       enable_secure_boot = true
@@ -91,13 +87,11 @@ module "GKE-PrivateCluster" {
       # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
       node_count  = var.GKE-NodeNum-4C16G
 
-      # Minimum number of nodes in the NodePool. Must be >=0 and <= max_count. Should be used when autoscaling is true
+      # Minimum number of nodes in the NodePool. Must be >=0 and <= max_count. 
+      # Should be used when autoscaling is true
       min_count = 0 # default: 1.
       # Maximum number of nodes in the NodePool. Must be >= min_count
       max_count = var.GKE-MaxNum-4C16G # default: 100.
-
-      disk_size_gb = 60
-      disk_type    = "pd-standard"
 
       auto_repair  = true
       auto_upgrade = true
