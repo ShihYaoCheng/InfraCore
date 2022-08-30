@@ -102,7 +102,7 @@ variable "Loki_Enable" {
 #============================
 variable "Tempo_Enable" {
   type = bool
-  default = true
+  default = false
 }
 
 #============================

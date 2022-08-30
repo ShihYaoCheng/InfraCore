@@ -112,15 +112,15 @@ kube-prometheus-stack:
         # Controls whether a client verifies the server’s certificate chain and host name.
         tlsSkipVerify: true
       version: 1
-    - name: Tempo
-      type: tempo
-      access: proxy
-      url: http://tempo.tempo:3100
-      basicAuth: false
-      editable: false
-      jsonData:
-        tlsSkipVerify: true
-      version: 1
+#    - name: Tempo
+#      type: tempo
+#      access: proxy
+#      url: http://tempo.tempo:3100
+#      basicAuth: false
+#      editable: false
+#      jsonData:
+#        tlsSkipVerify: true
+#      version: 1
       
     ## Configure grafana dashboard providers
     ## ref: http://docs.grafana.org/administration/provisioning/#dashboards
