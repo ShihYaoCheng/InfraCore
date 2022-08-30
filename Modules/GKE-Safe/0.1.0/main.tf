@@ -40,6 +40,8 @@ module "GKE-PrivateCluster" {
   cluster_resource_labels = {"name"="sre"}
   description = "just for test"
 
+  grant_registry_access = true
+
 
   # https://cloud.google.com/kubernetes-engine/docs/how-to/authorized-networks
   # https://avd.aquasec.com/misconfig/google/gke/avd-gcp-0061/
