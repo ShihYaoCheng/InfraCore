@@ -20,27 +20,21 @@ module "GKE-PrivateCluster" {
   zones = [var.GCPZone] # worker node run on multiple zones.
   # Accepted values are `UNSPECIFIED`, `RAPID`, `REGULAR` and `STABLE`. Defaults to `REGULAR`.
   release_channel = "STABLE"
-#  kubernetes_version = "1.23.7-gke.1400"
+  kubernetes_version = "1.23.7-gke.1400"
   # (Taipei) From 12:00 AM to 4:00 AM.
   maintenance_start_time = "16:00" # UTC.
 
   disable_default_snat = false
-#  enable_private_endpoint = false
+  enable_private_endpoint = false
+  enable_network_egress_export = true
+  enable_shielded_nodes = true
+  enable_vertical_pod_autoscaling = false
+
   deploy_using_private_endpoint = false
   enable_private_nodes = true
-#  enable_intranode_visibility = true
-#  enable_pod_security_policy = false
-#  enable_network_egress_export = true
-#  enable_resource_consumption_export = true
-#  enable_shielded_nodes = true
-#  enable_vertical_pod_autoscaling = false
-#  filestore_csi_driver = false
-#  http_load_balancing = true
-
+  grant_registry_access = true
   cluster_resource_labels = {"name"="sre"}
   description = "just for test"
-
-  grant_registry_access = true
 
 
   # https://cloud.google.com/kubernetes-engine/docs/how-to/authorized-networks
@@ -56,6 +50,7 @@ module "GKE-PrivateCluster" {
     all = ["gke-worker-node"]
   }
 
+  remove_default_node_pool = true
   initial_node_count = 0
   node_pools    = [
     {
