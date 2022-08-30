@@ -1,5 +1,5 @@
 ﻿module "GKE-TW-Dev" {
-  source  = "../../Modules/GKE/1.0.0"
+  source  = "../../Modules/GKE-Safe/0.1.0"
 
   ProjectName = local.ProjectName
   
@@ -8,7 +8,8 @@
   GCPZone = "asia-east1-a"
   GKE-Zones = ["asia-east1-a"]
   GKE-Labels = {"name"="dev"}
-  
+
+  GKE-ControlPlaneCIDR = "10.0.0.0/28"
   GKE-APIName = local.GKE-API-TW-Dev
   GKE-CAName  = local.GKE-CA-TW-Dev
 
