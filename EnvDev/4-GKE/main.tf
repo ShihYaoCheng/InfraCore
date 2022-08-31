@@ -25,7 +25,7 @@
 }
 
 module "GKE-TW-Rel" {
-  source  = "../../Modules/GKE/1.0.0"
+  source  = "../../Modules/GKE-Safe/0.1.0"
 
   ProjectName = local.ProjectName
 
@@ -35,6 +35,7 @@ module "GKE-TW-Rel" {
   GKE-Zones = ["asia-east1-b"]
   GKE-Labels = {"name"="release"}
 
+  GKE-ControlPlaneCIDR = "10.0.0.16/28"
   GKE-APIName = local.GKE-API-TW-Rel
   GKE-CAName  = local.GKE-CA-TW-Rel
 
