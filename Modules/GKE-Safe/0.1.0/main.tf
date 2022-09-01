@@ -34,7 +34,7 @@ module "GKE-PrivateCluster" {
   deploy_using_private_endpoint = false
   enable_private_nodes = true
   grant_registry_access = true
-  cluster_resource_labels = {"name"="sre"}
+  cluster_resource_labels = var.GKE-Labels
   description = "just for test"
 
 
