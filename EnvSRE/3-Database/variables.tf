@@ -23,9 +23,9 @@ variable "GCPZone" {
 #============================
 # CloudSQL                  #
 #============================
-variable "CloudSQLAdminPassword" {
-  type = string
-  sensitive = true
+locals {
+  CloudSQLAdminPassword = "sql-password"
 }
+
 
 
