@@ -1,1 +1,1 @@
-﻿Install Sloth.
+﻿Add SLO rules.
