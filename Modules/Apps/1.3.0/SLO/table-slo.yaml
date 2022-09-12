@@ -1,0 +1,30 @@
+---
+version: "prometheus/v1"
+service: "table"
+labels:
+  project: "sk"
+slos:
+  # We allow failing (5xx and 429) 1 request every 1000 requests (99.9%).
+  - name: "requests-availability"
+    objective: 90
+    sli:
+      events:
+#        error_query: sum(rate(http_server_duration_ms_count{job="myservice",code=~"(5..|429)"}[{{.window}}]))
+        error_query: sum(rate(http_server_duration_ms_count{service="table", http_status_code=~"5..|429"}[{{.window}}]))
+#        total_query: sum(rate(http_request_duration_seconds_count{job="myservice"}[{{.window}}]))
+        total_query: sum(rate(http_server_duration_ms_count{service="table"}[{{.window}}]))
+    alerting:
+      name: TableHighErrorRate
+      labels:
+        category: "availability"
+      annotations:
+        # Overwrite default Sloth SLO alert summmary on ticket and page alerts.
+        summary: "High error rate on 'table' requests responses"
+      page_alert:
+        labels:
+          severity: sre-team
+          routing_key: sre-team
+      ticket_alert:
+        labels:
+          severity: "slack"
+          slack_channel: "#sk-sre-info"

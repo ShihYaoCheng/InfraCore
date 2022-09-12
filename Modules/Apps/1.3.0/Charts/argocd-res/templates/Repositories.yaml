@@ -1,0 +1,89 @@
+﻿apiVersion: v1
+kind: Secret
+metadata:
+  name: table
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  type: git
+  url: https://gitlab.com/GameSnake/SRE/ArgoCDAppTable.git
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: file
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  type: git
+  url: https://gitlab.com/GameSnake/SRE/ArgoCDAppFile.git
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: user
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  type: git
+  url: https://gitlab.com/GameSnake/SRE/ArgoCDAppUser.git
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: backstage
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  type: git
+  url: https://gitlab.com/GameSnake/SRE/ArgoCDAppBackstage.git
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: battle
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  type: git
+  url: https://gitlab.com/GameSnake/SRE/ArgoCDAppBattle.git
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nft
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  type: git
+  url: https://gitlab.com/GameSnake/SRE/ArgoCDAppNFT.git
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: official-web
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  type: git
+  url: https://gitlab.com/GameSnake/SRE/ArgoCDAppOfficialWebsite.git  
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: private-repo-creds
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repo-creds
+stringData:
+  type: git
+  url: https://gitlab.com/GameSnake/SRE
+  username: {{ .Values.repository.userName }}
+  password: {{ .Values.repository.password }}

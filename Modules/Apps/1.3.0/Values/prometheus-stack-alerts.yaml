@@ -1,0 +1,849 @@
+﻿# https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+# https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+# https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+
+## Provide custom recording or alerting rules to be deployed into the cluster.
+# https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/
+# https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
+
+
+## Create default rules for monitoring the cluster
+defaultRules:
+  rules:
+    kubeProxy: false
+  create: true
+#  rules:
+#    alertmanager: true
+#    etcd: false
+#    general: false
+#    k8s: false
+#    kubeApiserver: false
+#    kubeApiserverAvailability: false
+#    kubeApiserverError: false
+#    kubeApiserverSlos: false
+#    kubelet: false
+#    kubePrometheusGeneral: false
+#    kubePrometheusNodeAlerting: false
+#    kubePrometheusNodeRecording: false
+#    kubernetesAbsent: false
+#    kubernetesApps: false
+#    kubernetesResources: false
+#    kubernetesStorage: false
+#    kubernetesSystem: false
+#    kubeScheduler: false
+#    kubeStateMetrics: false
+#    network: false
+#    node: false
+#    prometheus: true
+#    prometheusOperator: true
+#    time: false
+
+
+## Provide custom recording or alerting rules to be deployed into the cluster.
+##
+#additionalPrometheusRulesMap: {}
+#  rule-name:
+#    groups:
+#    - name: my_group
+#      rules:
+#      - record: my_record
+#        expr: 100 * my_record
+
+additionalPrometheusRulesMap:
+  apps-rule:
+    groups:
+    - name: traefik
+      rules:
+        - alert: TraefikHighHttp4xxErrorRateService
+          expr: sum(rate(traefik_service_requests_total{code=~"4.*"}[3m])) by (service) / sum(rate(traefik_service_requests_total[3m])) by (service) * 100 > 5
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: Traefik high HTTP 4xx error rate service (instance {{ $labels.instance }})
+            description: "Traefik service 4xx error rate is above 5%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        - alert: TraefikHighHttp5xxErrorRateService
+          expr: sum(rate(traefik_service_requests_total{code=~"5.*"}[3m])) by (service) / sum(rate(traefik_service_requests_total[3m])) by (service) * 100 > 5
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: Traefik high HTTP 5xx error rate service (instance {{ $labels.instance }})
+            description: "Traefik service 5xx error rate is above 5%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+    - name: cert-manager
+      rules:
+        - alert: CertManagerAbsent
+          annotations:
+            description: New certificates will not be able to be minted, and existing ones can't be renewed until cert-manager is back.
+            runbook_url: https://gitlab.com/uneeq-oss/cert-manager-mixin/-/blob/master/RUNBOOK.md#certmanagerabsent
+            summary: Cert Manager has dissapeared from Prometheus service discovery.
+          expr: absent(up{job="cert-manager"})
+          for: 10m
+          labels:
+            severity: critical
+
+    - name: sealed-secrets
+      rules:
+        - alert: SealedSecretsUnsealErrorHigh
+          annotations:
+            description: High number of errors during unsealing Sealed Secrets in {{ $labels.namespace
+              }} namespace.
+            runbook_url: https://github.com/bitnami-labs/sealed-secrets
+            summary: Sealed Secrets Unseal Error High
+          expr: |
+            sum by (reason, namespace) (rate(sealed_secrets_controller_unseal_requests_total{}[5m])) > 0
+          labels:
+            severity: warning
+
+    # https://github.com/grafana/tempo/blob/main/operations/tempo-mixin/yamls/rules.yaml
+    - "name": "tempo_rules"
+      "rules":
+        - "expr": "histogram_quantile(0.99, sum(rate(tempo_request_duration_seconds_bucket[1m])) by (le, cluster, namespace, job, route))"
+          "record": "cluster_namespace_job_route:tempo_request_duration_seconds:99quantile"
+        - "expr": "histogram_quantile(0.50, sum(rate(tempo_request_duration_seconds_bucket[1m])) by (le, cluster, namespace, job, route))"
+          "record": "cluster_namespace_job_route:tempo_request_duration_seconds:50quantile"
+        - "expr": "sum(rate(tempo_request_duration_seconds_sum[1m])) by (cluster, namespace, job, route) / sum(rate(tempo_request_duration_seconds_count[1m])) by (cluster, namespace, job, route)"
+          "record": "cluster_namespace_job_route:tempo_request_duration_seconds:avg"
+        - "expr": "sum(rate(tempo_request_duration_seconds_bucket[1m])) by (le, cluster, namespace, job, route)"
+          "record": "cluster_namespace_job_route:tempo_request_duration_seconds_bucket:sum_rate"
+        - "expr": "sum(rate(tempo_request_duration_seconds_sum[1m])) by (cluster, namespace, job, route)"
+          "record": "cluster_namespace_job_route:tempo_request_duration_seconds_sum:sum_rate"
+        - "expr": "sum(rate(tempo_request_duration_seconds_count[1m])) by (cluster, namespace, job, route)"
+          "record": "cluster_namespace_job_route:tempo_request_duration_seconds_count:sum_rate"
+
+      # https://github.com/grafana/tempo/blob/main/operations/tempo-mixin/yamls/alerts.yaml
+    - "name": "tempo_alerts"
+      "rules":
+        - "alert": "TempoRequestErrors"
+          "annotations":
+            "message": |
+              {{ $labels.job }} {{ $labels.route }} is experiencing {{ printf "%.2f" $value }}% errors.
+            "runbook_url": "https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoRequestErrors"
+          "expr": |
+            100 * sum(rate(tempo_request_duration_seconds_count{status_code=~"5.."}[1m])) by (cluster, namespace, job, route)
+              /
+            sum(rate(tempo_request_duration_seconds_count[1m])) by (cluster, namespace, job, route)
+              > 10
+          "for": "15m"
+          "labels":
+            "severity": "critical"
+        - "alert": "TempoRequestLatency"
+          "annotations":
+            "message": |
+              {{ $labels.job }} {{ $labels.route }} is experiencing {{ printf "%.2f" $value }}s 99th percentile latency.
+            "runbook_url": "https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoRequestLatency"
+          "expr": |
+            cluster_namespace_job_route:tempo_request_duration_seconds:99quantile{route!~"metrics|/frontend.Frontend/Process|debug_pprof"} > 3
+          "for": "15m"
+          "labels":
+            "severity": "critical"
+        - "alert": "TempoCompactorUnhealthy"
+          "annotations":
+            "message": "There are {{ printf \"%f\" $value }} unhealthy compactor(s)."
+            "runbook_url": "https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoCompactorUnhealthy"
+          "expr": |
+            max by (cluster, namespace) (cortex_ring_members{state="Unhealthy", name="compactor", namespace=~".*"}) > 0
+          "for": "15m"
+          "labels":
+            "severity": "critical"
+        - "alert": "TempoDistributorUnhealthy"
+          "annotations":
+            "message": "There are {{ printf \"%f\" $value }} unhealthy distributor(s)."
+            "runbook_url": "https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoDistributorUnhealthy"
+          "expr": |
+            max by (cluster, namespace) (cortex_ring_members{state="Unhealthy", name="distributor", namespace=~".*"}) > 0
+          "for": "15m"
+          "labels":
+            "severity": "warning"
+        - "alert": "TempoCompactionsFailing"
+          "annotations":
+            "message": "Greater than 2 compactions have failed in the past hour."
+            "runbook_url": "https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoCompactionsFailing"
+          "expr": |
+            sum by (cluster, namespace) (increase(tempodb_compaction_errors_total{}[1h])) > 2 and
+            sum by (cluster, namespace) (increase(tempodb_compaction_errors_total{}[5m])) > 0
+          "for": "5m"
+          "labels":
+            "severity": "critical"
+        - "alert": "TempoIngesterFlushesFailing"
+          "annotations":
+            "message": "Greater than 2 flushes have failed in the past hour."
+            "runbook_url": "https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoIngesterFlushesFailing"
+          "expr": |
+            sum by (cluster, namespace) (increase(tempo_ingester_failed_flushes_total{}[1h])) > 2 and
+            sum by (cluster, namespace) (increase(tempo_ingester_failed_flushes_total{}[5m])) > 0
+          "for": "5m"
+          "labels":
+            "severity": "critical"
+        - "alert": "TempoPollsFailing"
+          "annotations":
+            "message": "Greater than 2 polls have failed in the past hour."
+            "runbook_url": "https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoPollsFailing"
+          "expr": |
+            sum by (cluster, namespace) (increase(tempodb_blocklist_poll_errors_total{}[1h])) > 2 and
+            sum by (cluster, namespace) (increase(tempodb_blocklist_poll_errors_total{}[5m])) > 0
+          "labels":
+            "severity": "critical"
+        - "alert": "TempoTenantIndexFailures"
+          "annotations":
+            "message": "Greater than 2 tenant index failures in the past hour."
+            "runbook_url": "https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoTenantIndexFailures"
+          "expr": |
+            sum by (cluster, namespace) (increase(tempodb_blocklist_tenant_index_errors_total{}[1h])) > 2 and
+            sum by (cluster, namespace) (increase(tempodb_blocklist_tenant_index_errors_total{}[5m])) > 0
+          "labels":
+            "severity": "critical"
+        - "alert": "TempoNoTenantIndexBuilders"
+          "annotations":
+            "message": "No tenant index builders for tenant {{ $labels.tenant }}. Tenant index will quickly become stale."
+            "runbook_url": "https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoNoTenantIndexBuilders"
+          "expr": |
+            sum by (cluster, namespace, tenant) (tempodb_blocklist_tenant_index_builder{}) == 0 and
+            max by (cluster, namespace) (tempodb_blocklist_length{}) > 0
+          "for": "5m"
+          "labels":
+            "severity": "critical"
+        - "alert": "TempoTenantIndexTooOld"
+          "annotations":
+            "message": "Tenant index age is 600 seconds old for tenant {{ $labels.tenant }}."
+            "runbook_url": "https://github.com/grafana/tempo/tree/main/operations/tempo-mixin/runbook.md#TempoTenantIndexTooOld"
+          "expr": |
+            max by (cluster, namespace, tenant) (tempodb_blocklist_tenant_index_age_seconds{}) > 600
+          "for": "5m"
+          "labels":
+            "severity": "critical"
+
+    - name: certificates
+      rules:
+        - alert: CertManagerCertExpirySoon
+          annotations:
+            dashboard_url: https://grafana.example.com/d/TvuRo2iMk/cert-manager
+            description: The domain that this cert covers will be unavailable after {{ $value
+              | humanizeDuration }}. Clients using endpoints that this cert protects will
+              start to fail in {{ $value | humanizeDuration }}.
+            runbook_url: https://gitlab.com/uneeq-oss/cert-manager-mixin/-/blob/master/RUNBOOK.md#certmanagercertexpirysoon
+            summary: The cert `{{ $labels.name }}` is {{ $value | humanizeDuration }} from
+              expiry, it should have renewed over a week ago.
+          expr: |
+            avg by (exported_namespace, namespace, name) (
+              certmanager_certificate_expiration_timestamp_seconds - time()
+            ) < (21 * 24 * 3600) # 21 days in seconds
+          for: 1h
+          labels:
+            severity: warning
+        - alert: CertManagerCertNotReady
+          annotations:
+            dashboard_url: https://grafana.example.com/d/TvuRo2iMk/cert-manager
+            description: This certificate has not been ready to serve traffic for at least
+              10m. If the cert is being renewed or there is another valid cert, the ingress
+              controller _may_ be able to serve that instead.
+            runbook_url: https://gitlab.com/uneeq-oss/cert-manager-mixin/-/blob/master/RUNBOOK.md#certmanagercertnotready
+            summary: The cert `{{ $labels.name }}` is not ready to serve traffic.
+          expr: |
+            max by (name, exported_namespace, namespace, condition) (
+              certmanager_certificate_ready_status{condition!="True"} == 1
+            )
+          for: 10m
+          labels:
+            severity: critical
+        - alert: CertManagerHittingRateLimits
+          annotations:
+            dashboard_url: https://grafana.example.com/d/TvuRo2iMk/cert-manager
+            description: Depending on the rate limit, cert-manager may be unable to generate
+              certificates for up to a week.
+            runbook_url: https://gitlab.com/uneeq-oss/cert-manager-mixin/-/blob/master/RUNBOOK.md#certmanagerhittingratelimits
+            summary: Cert manager hitting LetsEncrypt rate limits.
+          expr: |
+            sum by (host) (
+              rate(certmanager_http_acme_client_request_count{status="429"}[5m])
+            ) > 0
+          for: 5m
+          labels:
+            severity: critical
+
+    - name: argocd
+      rules:
+        - alert: ArgoAppMissing
+          expr: absent(argocd_app_info)
+#            for: 15m
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "[ArgoCD] No reported applications"
+            description: >
+              ArgoCD has not reported any applications data for the past 15 minutes which
+              means that it must be down or not functioning properly.  This needs to be
+              resolved for this cloud to continue to maintain state.
+        - alert: ArgoAppNotSynced
+          expr: argocd_app_info{sync_status!="Synced"} == 1
+#          for: 12h
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "[{{`{{$labels.name}}`}}] Application not synchronized"
+            description: >
+              The application [{{`{{$labels.name}}`}} has not been synchronized for over
+              12 hours which means that the state of this cloud has drifted away from the
+              state inside Git.
+
+    # https://monitoring.mixins.dev/loki/
+    - name: loki_alerts
+      rules:
+        - alert: LokiRequestErrors
+          annotations:
+            message: |
+              {{ $labels.job }} {{ $labels.route }} is experiencing {{ printf "%.2f" $value }}% errors.
+          expr: |
+            100 * sum(rate(loki_request_duration_seconds_count{status_code=~"5.."}[1m])) by (namespace, job, route)
+              /
+            sum(rate(loki_request_duration_seconds_count[1m])) by (namespace, job, route)
+              > 10
+          for: 15m
+          labels:
+            severity: critical
+        - alert: LokiRequestPanics
+          annotations:
+            message: |
+              {{ $labels.job }} is experiencing {{ printf "%.2f" $value }}% increase of panics.
+          expr: |
+            sum(increase(loki_panic_total[10m])) by (namespace, job) > 0
+          labels:
+            severity: critical
+        - alert: LokiRequestLatency
+          annotations:
+            message: |
+              {{ $labels.job }} {{ $labels.route }} is experiencing {{ printf "%.2f" $value }}s 99th percentile latency.
+          expr: |
+            namespace_job_route:loki_request_duration_seconds:99quantile{route!~"(?i).*tail.*"} > 1
+          for: 15m
+          labels:
+            severity: critical
+        - alert: LokiTooManyCompactorsRunning
+          annotations:
+            message: |
+              {{ $labels.namespace }} has had {{ printf "%.0f" $value }} compactors running for more than 5m. Only one compactor should run at a time.
+          expr: |
+            sum(loki_boltdb_shipper_compactor_running) by (namespace) > 1
+          for: 5m
+          labels:
+
+    # https://monitoring.mixins.dev/promtail/
+    - name: promtail_alerts
+      rules:
+        - alert: PromtailRequestsErrors
+          annotations:
+            message: |
+              {{ $labels.job }} {{ $labels.route }} is experiencing {{ printf "%.2f" $value }}% errors.
+          expr: |
+            100 * sum(rate(promtail_request_duration_seconds_count{status_code=~"5..|failed"}[1m])) by (namespace, job, route, instance)
+              /
+            sum(rate(promtail_request_duration_seconds_count[1m])) by (namespace, job, route, instance)
+              > 10
+          for: 15m
+          labels:
+            severity: critical
+        - alert: PromtailRequestLatency
+          annotations:
+            message: |
+              {{ $labels.job }} {{ $labels.route }} is experiencing {{ printf "%.2f" $value }}s 99th percentile latency.
+          expr: |
+            job_status_code_namespace:promtail_request_duration_seconds:99quantile > 1
+          for: 15m
+          labels:
+            severity: critical
+        - alert: PromtailFileLagging
+          annotations:
+            message: |
+              {{ $labels.instance }} {{ $labels.job }} {{ $labels.path }} has been lagging by more than 10 seconds for more than 15m.
+          expr: |
+            promtail_stream_lag_seconds > 10
+          for: 15m
+          labels:
+            severity: warning
+        - alert: PromtailFileMissing
+          annotations:
+            message: |
+              {{ $labels.instance }} {{ $labels.job }} {{ $labels.path }} matches the glob but is not being tailed.
+          expr: |
+            promtail_file_bytes_total unless promtail_read_bytes_total
+          for: 15m
+          labels:
+            severity: critical
+
+#    - name: mysql
+#      rules:
+#        - alert: MysqlDown
+#          expr: mysql_up == 0
+#          for: 3m
+#          labels:
+#            severity: critical
+#          annotations:
+#            summary: MySQL down (instance {{ $labels.instance }})
+#            description: "MySQL instance is down on {{ $labels.instance }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+#        - alert: MysqlTooManyConnections(>80%)
+#          expr: avg by (instance) (rate(mysql_global_status_threads_connected[1m])) / avg by (instance) (mysql_global_variables_max_connections) * 100 > 80
+#          for: 2m
+#          labels:
+#            severity: warning
+#          annotations:
+#            summary: MySQL too many connections (> 80%) (instance {{ $labels.instance }})
+#            description: "More than 80% of MySQL connections are in use on {{ $labels.instance }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+#        - alert: MysqlHighThreadsRunning
+#          expr: avg by (instance) (rate(mysql_global_status_threads_running[1m])) / avg by (instance) (mysql_global_variables_max_connections) * 100 > 60
+#          for: 2m
+#          labels:
+#            severity: warning
+#          annotations:
+#            summary: MySQL high threads running (instance {{ $labels.instance }})
+#            description: "More than 60% of MySQL connections are in running state on {{ $labels.instance }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+#        - alert: MysqlSlaveIoThreadNotRunning
+#          expr: mysql_slave_status_master_server_id > 0 and ON (instance) mysql_slave_status_slave_io_running == 0
+#          for: 0m
+#          labels:
+#            severity: critical
+#          annotations:
+#            summary: MySQL Slave IO thread not running (instance {{ $labels.instance }})
+#            description: "MySQL Slave IO thread not running on {{ $labels.instance }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+#        - alert: MysqlSlaveSqlThreadNotRunning
+#          expr: mysql_slave_status_master_server_id > 0 and ON (instance) mysql_slave_status_slave_sql_running == 0
+#          for: 0m
+#          labels:
+#            severity: critical
+#          annotations:
+#            summary: MySQL Slave SQL thread not running (instance {{ $labels.instance }})
+#            description: "MySQL Slave SQL thread not running on {{ $labels.instance }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+#        - alert: MysqlSlaveReplicationLag
+#          expr: mysql_slave_status_master_server_id > 0 and ON (instance) (mysql_slave_status_seconds_behind_master - mysql_slave_status_sql_delay) > 30
+#          for: 1m
+#          labels:
+#            severity: critical
+#          annotations:
+#            summary: MySQL Slave replication lag (instance {{ $labels.instance }})
+#            description: "MySQL replication lag on {{ $labels.instance }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+#        - alert: MysqlSlowQueries
+#          expr: increase(mysql_global_status_slow_queries[1m]) > 0
+#          for: 2m
+#          labels:
+#            severity: warning
+#          annotations:
+#            summary: MySQL slow queries (instance {{ $labels.instance }})
+#            description: "MySQL server mysql has some new slow query.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+#        - alert: MysqlInnodbLogWaits
+#          expr: rate(mysql_global_status_innodb_log_waits[15m]) > 10
+#          for: 0m
+#          labels:
+#            severity: warning
+#          annotations:
+#            summary: MySQL InnoDB log waits (instance {{ $labels.instance }})
+#            description: "MySQL innodb log writes stalling\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+#        - alert: MysqlRestarted
+#          expr: mysql_global_status_uptime < 60
+#          for: 0m
+#          labels:
+#            severity: info
+#          annotations:
+#            summary: MySQL restarted (instance {{ $labels.instance }})
+#            description: "MySQL has just been restarted, less than one minute ago on {{ $labels.instance }}.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+
+    - name: sloth-slo-sli-recordings-traefik-requests-availability
+      rules:
+        - record: slo:sli_error:ratio_rate5m
+          expr: |
+            (sum by (service) (rate(traefik_service_requests_total{code=~"(5..|429)"}[5m])))
+            /
+            (sum by (service) (rate(traefik_service_requests_total{}[5m])))
+          labels:
+            owner: game-dz
+            sloth_id: traefik-requests-availability
+            sloth_service: traefik
+            sloth_slo: requests-availability
+            sloth_window: 5m
+        - record: slo:sli_error:ratio_rate30m
+          expr: |
+            (sum by (service) (rate(traefik_service_requests_total{code=~"(5..|429)"}[30m])))
+            /
+            (sum by (service) (rate(traefik_service_requests_total{}[30m])))
+          labels:
+            owner: game-dz
+            sloth_id: traefik-requests-availability
+            sloth_service: traefik
+            sloth_slo: requests-availability
+            sloth_window: 30m
+        - record: slo:sli_error:ratio_rate1h
+          expr: |
+            (sum by (service) (rate(traefik_service_requests_total{code=~"(5..|429)"}[1h])))
+            /
+            (sum by (service) (rate(traefik_service_requests_total{}[1h])))
+          labels:
+            owner: game-dz
+            sloth_id: traefik-requests-availability
+            sloth_service: traefik
+            sloth_slo: requests-availability
+            sloth_window: 1h
+        - record: slo:sli_error:ratio_rate2h
+          expr: |
+            (sum by (service) (rate(traefik_service_requests_total{code=~"(5..|429)"}[2h])))
+            /
+            (sum by (service) (rate(traefik_service_requests_total{}[2h])))
+          labels:
+            owner: game-dz
+            sloth_id: traefik-requests-availability
+            sloth_service: traefik
+            sloth_slo: requests-availability
+            sloth_window: 2h
+        - record: slo:sli_error:ratio_rate6h
+          expr: |
+            (sum by (service) (rate(traefik_service_requests_total{code=~"(5..|429)"}[6h])))
+            /
+            (sum by (service) (rate(traefik_service_requests_total{}[6h])))
+          labels:
+            owner: game-dz
+            sloth_id: traefik-requests-availability
+            sloth_service: traefik
+            sloth_slo: requests-availability
+            sloth_window: 6h
+        - record: slo:sli_error:ratio_rate1d
+          expr: |
+            (sum by (service) (rate(traefik_service_requests_total{code=~"(5..|429)"}[1d])))
+            /
+            (sum by (service) (rate(traefik_service_requests_total{}[1d])))
+          labels:
+            owner: game-dz
+            sloth_id: traefik-requests-availability
+            sloth_service: traefik
+            sloth_slo: requests-availability
+            sloth_window: 1d
+        - record: slo:sli_error:ratio_rate3d
+          expr: |
+            (sum by (service) (rate(traefik_service_requests_total{code=~"(5..|429)"}[3d])))
+            /
+            (sum by (service) (rate(traefik_service_requests_total{}[3d])))
+          labels:
+            owner: game-dz
+            sloth_id: traefik-requests-availability
+            sloth_service: traefik
+            sloth_slo: requests-availability
+            sloth_window: 3d
+        - record: slo:sli_error:ratio_rate30d
+          expr: |
+            sum_over_time(slo:sli_error:ratio_rate5m{sloth_id="traefik-requests-availability", sloth_service="traefik", sloth_slo="requests-availability"}[30d])
+            / ignoring (sloth_window)
+            count_over_time(slo:sli_error:ratio_rate5m{sloth_id="traefik-requests-availability", sloth_service="traefik", sloth_slo="requests-availability"}[30d])
+          labels:
+            sloth_window: 30d
+    - name: sloth-slo-meta-recordings-traefik-requests-availability
+      rules:
+        - record: slo:objective:ratio
+          expr: vector(0.9)
+          labels:
+            owner: game-dz
+            sloth_id: traefik-requests-availability
+            sloth_service: traefik
+            sloth_slo: requests-availability
+        - record: slo:error_budget:ratio
+          expr: vector(1-0.9)
+          labels:
+            owner: game-dz
+            sloth_id: traefik-requests-availability
+            sloth_service: traefik
+            sloth_slo: requests-availability
+        - record: slo:time_period:days
+          expr: vector(30)
+          labels:
+            owner: game-dz
+            sloth_id: traefik-requests-availability
+            sloth_service: traefik
+            sloth_slo: requests-availability
+        - record: slo:current_burn_rate:ratio
+          expr: |
+            slo:sli_error:ratio_rate5m{sloth_id="traefik-requests-availability", sloth_service="traefik", sloth_slo="requests-availability"}
+            / on(sloth_id, sloth_slo, sloth_service) group_left
+            slo:error_budget:ratio{sloth_id="traefik-requests-availability", sloth_service="traefik", sloth_slo="requests-availability"}
+          labels:
+            owner: game-dz
+            sloth_id: traefik-requests-availability
+            sloth_service: traefik
+            sloth_slo: requests-availability
+        - record: slo:period_burn_rate:ratio
+          expr: |
+            slo:sli_error:ratio_rate30d{sloth_id="traefik-requests-availability", sloth_service="traefik", sloth_slo="requests-availability"}
+            / on(sloth_id, sloth_slo, sloth_service) group_left
+            slo:error_budget:ratio{sloth_id="traefik-requests-availability", sloth_service="traefik", sloth_slo="requests-availability"}
+          labels:
+            owner: game-dz
+            sloth_id: traefik-requests-availability
+            sloth_service: traefik
+            sloth_slo: requests-availability
+        - record: slo:period_error_budget_remaining:ratio
+          expr: 1 - slo:period_burn_rate:ratio{sloth_id="traefik-requests-availability",
+            sloth_service="traefik", sloth_slo="requests-availability"}
+          labels:
+            owner: game-dz
+            sloth_id: traefik-requests-availability
+            sloth_service: traefik
+            sloth_slo: requests-availability
+        - record: sloth_slo_info
+          expr: vector(1)
+          labels:
+            owner: game-dz
+            sloth_id: traefik-requests-availability
+            sloth_mode: cli-gen-prom
+            sloth_objective: "90"
+            sloth_service: traefik
+            sloth_slo: requests-availability
+            sloth_spec: prometheus/v1
+            sloth_version: v0.9.0
+    - name: sloth-slo-alerts-traefik-requests-availability
+      rules:
+        - alert: TraefikHighErrorRate
+          expr: |
+            (
+                (slo:sli_error:ratio_rate5m{sloth_id="traefik-requests-availability", sloth_service="traefik", sloth_slo="requests-availability"} > (14.4 * 0.1))
+                and ignoring (sloth_window)
+                (slo:sli_error:ratio_rate1h{sloth_id="traefik-requests-availability", sloth_service="traefik", sloth_slo="requests-availability"} > (14.4 * 0.1))
+            )
+            or ignoring (sloth_window)
+            (
+                (slo:sli_error:ratio_rate30m{sloth_id="traefik-requests-availability", sloth_service="traefik", sloth_slo="requests-availability"} > (6 * 0.1))
+                and ignoring (sloth_window)
+                (slo:sli_error:ratio_rate6h{sloth_id="traefik-requests-availability", sloth_service="traefik", sloth_slo="requests-availability"} > (6 * 0.1))
+            )
+          labels:
+            category: availability
+            severity: critical
+            sloth_severity: page
+          annotations:
+            summary: High error rate on traefik requests responses
+            title: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
+              burn rate is too fast.
+        - alert: TraefikHighErrorRate
+          expr: |
+            (
+                (slo:sli_error:ratio_rate2h{sloth_id="traefik-requests-availability", sloth_service="traefik", sloth_slo="requests-availability"} > (3 * 0.1))
+                and ignoring (sloth_window)
+                (slo:sli_error:ratio_rate1d{sloth_id="traefik-requests-availability", sloth_service="traefik", sloth_slo="requests-availability"} > (3 * 0.1))
+            )
+            or ignoring (sloth_window)
+            (
+                (slo:sli_error:ratio_rate6h{sloth_id="traefik-requests-availability", sloth_service="traefik", sloth_slo="requests-availability"} > (1 * 0.1))
+                and ignoring (sloth_window)
+                (slo:sli_error:ratio_rate3d{sloth_id="traefik-requests-availability", sloth_service="traefik", sloth_slo="requests-availability"} > (1 * 0.1))
+            )
+          labels:
+            category: availability
+            severity: slack
+            slack_channel: '#alerts'
+            sloth_severity: ticket
+          annotations:
+            summary: High error rate on traefik requests responses
+            title: (ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
+              burn rate is too fast.
+    - name: sloth-slo-sli-recordings-traefik-requests-latency
+      rules:
+        - record: slo:sli_error:ratio_rate5m
+          expr: "(( \n  sum(rate(traefik_service_request_duration_seconds_count{}[5m]))
+          \n  - \n  sum(rate(traefik_service_request_duration_seconds_bucket{le=\"0.3\"}[5m]))
+          \n)\n)\n/\n(sum(rate(traefik_service_request_duration_seconds_count{}[5m])))\n"
+          labels:
+            category: latency
+            owner: game-dz
+            sloth_id: traefik-requests-latency
+            sloth_service: traefik
+            sloth_slo: requests-latency
+            sloth_window: 5m
+        - record: slo:sli_error:ratio_rate30m
+          expr: "(( \n  sum(rate(traefik_service_request_duration_seconds_count{}[30m]))
+          \n  - \n  sum(rate(traefik_service_request_duration_seconds_bucket{le=\"0.3\"}[30m]))
+          \n)\n)\n/\n(sum(rate(traefik_service_request_duration_seconds_count{}[30m])))\n"
+          labels:
+            category: latency
+            owner: game-dz
+            sloth_id: traefik-requests-latency
+            sloth_service: traefik
+            sloth_slo: requests-latency
+            sloth_window: 30m
+        - record: slo:sli_error:ratio_rate1h
+          expr: "(( \n  sum(rate(traefik_service_request_duration_seconds_count{}[1h]))
+          \n  - \n  sum(rate(traefik_service_request_duration_seconds_bucket{le=\"0.3\"}[1h]))
+          \n)\n)\n/\n(sum(rate(traefik_service_request_duration_seconds_count{}[1h])))\n"
+          labels:
+            category: latency
+            owner: game-dz
+            sloth_id: traefik-requests-latency
+            sloth_service: traefik
+            sloth_slo: requests-latency
+            sloth_window: 1h
+        - record: slo:sli_error:ratio_rate2h
+          expr: "(( \n  sum(rate(traefik_service_request_duration_seconds_count{}[2h]))
+          \n  - \n  sum(rate(traefik_service_request_duration_seconds_bucket{le=\"0.3\"}[2h]))
+          \n)\n)\n/\n(sum(rate(traefik_service_request_duration_seconds_count{}[2h])))\n"
+          labels:
+            category: latency
+            owner: game-dz
+            sloth_id: traefik-requests-latency
+            sloth_service: traefik
+            sloth_slo: requests-latency
+            sloth_window: 2h
+        - record: slo:sli_error:ratio_rate6h
+          expr: "(( \n  sum(rate(traefik_service_request_duration_seconds_count{}[6h]))
+          \n  - \n  sum(rate(traefik_service_request_duration_seconds_bucket{le=\"0.3\"}[6h]))
+          \n)\n)\n/\n(sum(rate(traefik_service_request_duration_seconds_count{}[6h])))\n"
+          labels:
+            category: latency
+            owner: game-dz
+            sloth_id: traefik-requests-latency
+            sloth_service: traefik
+            sloth_slo: requests-latency
+            sloth_window: 6h
+        - record: slo:sli_error:ratio_rate1d
+          expr: "(( \n  sum(rate(traefik_service_request_duration_seconds_count{}[1d]))
+          \n  - \n  sum(rate(traefik_service_request_duration_seconds_bucket{le=\"0.3\"}[1d]))
+          \n)\n)\n/\n(sum(rate(traefik_service_request_duration_seconds_count{}[1d])))\n"
+          labels:
+            category: latency
+            owner: game-dz
+            sloth_id: traefik-requests-latency
+            sloth_service: traefik
+            sloth_slo: requests-latency
+            sloth_window: 1d
+        - record: slo:sli_error:ratio_rate3d
+          expr: "(( \n  sum(rate(traefik_service_request_duration_seconds_count{}[3d]))
+          \n  - \n  sum(rate(traefik_service_request_duration_seconds_bucket{le=\"0.3\"}[3d]))
+          \n)\n)\n/\n(sum(rate(traefik_service_request_duration_seconds_count{}[3d])))\n"
+          labels:
+            category: latency
+            owner: game-dz
+            sloth_id: traefik-requests-latency
+            sloth_service: traefik
+            sloth_slo: requests-latency
+            sloth_window: 3d
+        - record: slo:sli_error:ratio_rate30d
+          expr: |
+            sum_over_time(slo:sli_error:ratio_rate5m{sloth_id="traefik-requests-latency", sloth_service="traefik", sloth_slo="requests-latency"}[30d])
+            / ignoring (sloth_window)
+            count_over_time(slo:sli_error:ratio_rate5m{sloth_id="traefik-requests-latency", sloth_service="traefik", sloth_slo="requests-latency"}[30d])
+          labels:
+            sloth_window: 30d
+    - name: sloth-slo-meta-recordings-traefik-requests-latency
+      rules:
+        - record: slo:objective:ratio
+          expr: vector(0.9)
+          labels:
+            category: latency
+            owner: game-dz
+            sloth_id: traefik-requests-latency
+            sloth_service: traefik
+            sloth_slo: requests-latency
+        - record: slo:error_budget:ratio
+          expr: vector(1-0.9)
+          labels:
+            category: latency
+            owner: game-dz
+            sloth_id: traefik-requests-latency
+            sloth_service: traefik
+            sloth_slo: requests-latency
+        - record: slo:time_period:days
+          expr: vector(30)
+          labels:
+            category: latency
+            owner: game-dz
+            sloth_id: traefik-requests-latency
+            sloth_service: traefik
+            sloth_slo: requests-latency
+        - record: slo:current_burn_rate:ratio
+          expr: |
+            slo:sli_error:ratio_rate5m{sloth_id="traefik-requests-latency", sloth_service="traefik", sloth_slo="requests-latency"}
+            / on(sloth_id, sloth_slo, sloth_service) group_left
+            slo:error_budget:ratio{sloth_id="traefik-requests-latency", sloth_service="traefik", sloth_slo="requests-latency"}
+          labels:
+            category: latency
+            owner: game-dz
+            sloth_id: traefik-requests-latency
+            sloth_service: traefik
+            sloth_slo: requests-latency
+        - record: slo:period_burn_rate:ratio
+          expr: |
+            slo:sli_error:ratio_rate30d{sloth_id="traefik-requests-latency", sloth_service="traefik", sloth_slo="requests-latency"}
+            / on(sloth_id, sloth_slo, sloth_service) group_left
+            slo:error_budget:ratio{sloth_id="traefik-requests-latency", sloth_service="traefik", sloth_slo="requests-latency"}
+          labels:
+            category: latency
+            owner: game-dz
+            sloth_id: traefik-requests-latency
+            sloth_service: traefik
+            sloth_slo: requests-latency
+        - record: slo:period_error_budget_remaining:ratio
+          expr: 1 - slo:period_burn_rate:ratio{sloth_id="traefik-requests-latency", sloth_service="traefik",
+            sloth_slo="requests-latency"}
+          labels:
+            category: latency
+            owner: game-dz
+            sloth_id: traefik-requests-latency
+            sloth_service: traefik
+            sloth_slo: requests-latency
+        - record: sloth_slo_info
+          expr: vector(1)
+          labels:
+            category: latency
+            owner: game-dz
+            sloth_id: traefik-requests-latency
+            sloth_mode: cli-gen-prom
+            sloth_objective: "90"
+            sloth_service: traefik
+            sloth_slo: requests-latency
+            sloth_spec: prometheus/v1
+            sloth_version: v0.9.0
+    - name: sloth-slo-alerts-traefik-requests-latency
+      rules:
+        - alert: TraefikHighLatency
+          expr: |
+            (
+                (slo:sli_error:ratio_rate5m{sloth_id="traefik-requests-latency", sloth_service="traefik", sloth_slo="requests-latency"} > (14.4 * 0.1))
+                and ignoring (sloth_window)
+                (slo:sli_error:ratio_rate1h{sloth_id="traefik-requests-latency", sloth_service="traefik", sloth_slo="requests-latency"} > (14.4 * 0.1))
+            )
+            or ignoring (sloth_window)
+            (
+                (slo:sli_error:ratio_rate30m{sloth_id="traefik-requests-latency", sloth_service="traefik", sloth_slo="requests-latency"} > (6 * 0.1))
+                and ignoring (sloth_window)
+                (slo:sli_error:ratio_rate6h{sloth_id="traefik-requests-latency", sloth_service="traefik", sloth_slo="requests-latency"} > (6 * 0.1))
+            )
+          labels:
+            category: latency
+            severity: critical
+            sloth_severity: page
+          annotations:
+            runbook: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubeapilatencyhigh
+            summary: '{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn
+            rate is over expected.'
+            title: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
+              burn rate is too fast.
+        - alert: TraefikHighLatency
+          expr: |
+            (
+                (slo:sli_error:ratio_rate2h{sloth_id="traefik-requests-latency", sloth_service="traefik", sloth_slo="requests-latency"} > (3 * 0.1))
+                and ignoring (sloth_window)
+                (slo:sli_error:ratio_rate1d{sloth_id="traefik-requests-latency", sloth_service="traefik", sloth_slo="requests-latency"} > (3 * 0.1))
+            )
+            or ignoring (sloth_window)
+            (
+                (slo:sli_error:ratio_rate6h{sloth_id="traefik-requests-latency", sloth_service="traefik", sloth_slo="requests-latency"} > (1 * 0.1))
+                and ignoring (sloth_window)
+                (slo:sli_error:ratio_rate3d{sloth_id="traefik-requests-latency", sloth_service="traefik", sloth_slo="requests-latency"} > (1 * 0.1))
+            )
+          labels:
+            category: latency
+            severity: warning
+            sloth_severity: ticket
+          annotations:
+            runbook: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubeapilatencyhigh
+            summary: '{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn
+            rate is over expected.'
+            title: (ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
+              burn rate is too fast.
+
+
