@@ -23,11 +23,11 @@ variable "GCPZone" {
 #============================
 # External-DNS              #
 #============================
-variable "ExternalDNS_Enable" {
-  type        = bool
-#  default     = false
-  description = "Only used for SRE environment.(It create/destroy kubernetes everyday) The Godaddy will overwrite A Record added by other Kubernetes."
-}
+#variable "ExternalDNS_Enable" {
+#  type        = bool
+##  default     = false
+#  description = "Only used for SRE environment.(It create/destroy kubernetes everyday) The Godaddy will overwrite A Record added by other Kubernetes."
+#}
 
 variable "DomainName" {
   type = string

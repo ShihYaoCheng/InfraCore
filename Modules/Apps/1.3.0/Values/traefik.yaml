@@ -15,7 +15,6 @@ deployment:
 service:
   annotations:
 #    external-dns.alpha.kubernetes.io/hostname: sre.origingaia.com
-    external-dns.alpha.kubernetes.io/hostname: ${env-domain-name}
     cert-manager.io/issue-temporary-certificate: "true"
     acme.cert-manager.io/http01-edit-in-place: "true"
 

@@ -1,13 +1,12 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "AppsDev" {
-  source = "../../Modules/Apps/1.2.1"
+  source = "../../Modules/Apps/1.3.0"
 
   ProjectName  = local.ProjectName
   UniqueName   = "tw-dev"
   GCPProjectID = local.ProjectID
   GCPZone      = var.GCPZone
 
-  ExternalDNS_Enable = true
   DomainName         = "test.origingaia.com"
   GodaddyAPIKey      = var.GodaddyAPIKey
   GodaddyAPISecret   = var.GodaddyAPISecret

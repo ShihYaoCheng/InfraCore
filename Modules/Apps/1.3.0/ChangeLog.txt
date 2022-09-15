@@ -1,1 +1,1 @@
-﻿Add SLO rules.
+﻿Add DNS record with Godaddy API. 

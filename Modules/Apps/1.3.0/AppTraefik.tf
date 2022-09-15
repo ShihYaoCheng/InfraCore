@@ -10,12 +10,7 @@ resource "helm_release" "Traefik" {
   namespace        = "traefik"
 
   # https://stackoverflow.com/questions/64696721/how-do-i-pass-variables-to-a-yaml-file-in-heml-tf
-  values = [
-    templatefile("${path.module}/Values/traefik.yaml",
-    {
-      env-domain-name = var.ExternalDNS_Enable ? var.DomainName : ""
-    })
-  ]
+  values = [templatefile("${path.module}/Values/traefik.yaml", {})]
 }
 
 resource "helm_release" "TraefikResources" {
