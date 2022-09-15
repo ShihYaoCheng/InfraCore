@@ -22,7 +22,7 @@ module "AppsEU" {
   Robusta_SlackChannel          = "sk-prod-info"
   Robusta_NotifyDeploymentEvent = true
 
-  Prometheus_StorageClassName = "ssd-retain"
+  Prometheus_StorageClassName = "standard"
   Prometheus_StorageSize      = "500Gi"
   Prometheus_Retention        = "90d"
   Grafana_AdminPassword       = var.GrafanaAdminPassword
