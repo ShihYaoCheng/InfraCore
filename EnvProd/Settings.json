@@ -21,6 +21,7 @@
     "NFT": "{values-prod.yaml}",
     "Table": "{values-prod.yaml}",
     "User": "{values-prod.yaml}",
+//    "User": "{values-prod.yaml\\, Ingress-BlockPrivateAPI.yaml}",
     "OfficialWeb": "{values-v1.0.0.yaml}"
   },
   "DomainNames":
