@@ -26,9 +26,9 @@
   },
   "DomainNames": 
   {
-    "TW": "v2.8.0.ponponsnake.com",
-    "EU": "eu.v2.8.0.ponponsnake.com",
-    "LoadBalancer": "global.v2.8.0.ponponsnake.com"
+    "TW": "v2.9.0.ponponsnake.com",
+    "EU": "eu.v2.9.0.ponponsnake.com",
+    "LoadBalancer": "global.v2.9.0.ponponsnake.com"
   },
   "GKE": {
     "TW": {
