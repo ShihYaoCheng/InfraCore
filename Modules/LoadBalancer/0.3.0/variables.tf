@@ -6,11 +6,6 @@ variable "ProjectName" {
 #  default = "cqi-sk-test"
 }
 
-variable "LoadBalancerDomainName" {
-  type = string
-#  default = "global.origingaia.com"
-}
-
 variable "ZoneTW" {
   type = string
 }
@@ -19,3 +14,29 @@ variable "ZoneEU" {
   type = string
 }
 
+#============================
+# Godaddy                   #
+#============================
+locals {
+  GodaddyFQDN = "${var.GodaddySubDomainName}.${var.GodaddyDomainName}"
+}
+
+variable "GodaddyDomainName" {
+  type = string
+  #  default = "origingaia.com"
+}
+
+variable "GodaddySubDomainName" {
+  type = string
+  #  default = "dev"
+}
+
+variable "GodaddyAPIKey" {
+  type      = string
+  sensitive = true
+}
+
+variable "GodaddyAPISecret" {
+  type      = string
+  sensitive = true
+}

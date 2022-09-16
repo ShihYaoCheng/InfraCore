@@ -25,3 +25,15 @@ variable "GCPZone" {
   description = "cloud provider zone."
 }
 
+#============================
+# Godaddy                   #
+#============================
+variable "GodaddyAPIKey" {
+  type      = string
+  sensitive = true
+}
+
+variable "GodaddyAPISecret" {
+  type      = string
+  sensitive = true
+}

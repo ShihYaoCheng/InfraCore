@@ -205,7 +205,7 @@ resource "google_compute_url_map" "default" {
   default_service = google_compute_backend_service.battle.id
 
   host_rule {
-    hosts        = [var.LoadBalancerDomainName]
+    hosts        = [local.GodaddyFQDN]
     path_matcher = "global"
   }
 
