@@ -4,7 +4,7 @@ metadata:
   name: godaddy-{{uuidv4}}
 spec:
   activeDeadlineSeconds: 60
-  ttlSecondsAfterFinished: 3600
+  ttlSecondsAfterFinished: 60
   template:
     spec:
       containers:
@@ -17,15 +17,9 @@ spec:
               curl -X PATCH https://api.godaddy.com/v1/domains/{{.Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{.Values.ip | quote }}, "name": {{.Values.subDomainName | quote}}, "ttl": 600, "type": "A"}]'
           env:
             - name: GodaddyKey
-              valueFrom: 
-                secretKeyRef:
-                  key: key
-                  name: godaddy
+              value: {{ .Values.godaddy.key }} 
             - name: GodaddySecret
-              valueFrom:
-                secretKeyRef:
-                  key: secret
-                  name: godaddy
+              value: {{ .Values.godaddy.secret }}
       restartPolicy: Never  
       
 ---
