@@ -52,7 +52,7 @@ resource "helm_release" "CertManagerResources" {
 
   set {
     name  = "certificates.dnsName"
-    value = var.DomainName
+    value = local.GodaddyFQDN
   }
 }
 

@@ -26,7 +26,7 @@ variable "GCPZone" {
 }
 
 #============================
-# External-DNS              #
+# Godaddy                   #
 #============================
 variable "GodaddyAPIKey" {
   type      = string

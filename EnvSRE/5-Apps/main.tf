@@ -7,9 +7,10 @@ module "AppsDev" {
   GCPProjectID = local.ProjectID
   GCPZone      = var.GCPZone
 
-  DomainName         = "test.origingaia.com"
-  GodaddyAPIKey      = var.GodaddyAPIKey
-  GodaddyAPISecret   = var.GodaddyAPISecret
+  GodaddyDomainName    = "origingaia.com"
+  GodaddySubDomainName = "test"
+  GodaddyAPIKey        = var.GodaddyAPIKey
+  GodaddyAPISecret     = var.GodaddyAPISecret
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = false
@@ -19,9 +20,9 @@ module "AppsDev" {
   Prometheus_Retention        = "1d"
   Grafana_AdminPassword       = "gra4422"
 
-  Robusta_ClusterName  = "sre-tw-dev"
-  Robusta_SlackAPIKey  = var.Robusta_SlackAPIKey
-  Robusta_SlackChannel = "sk-sre-info"
+  Robusta_ClusterName           = "sre-tw-dev"
+  Robusta_SlackAPIKey           = var.Robusta_SlackAPIKey
+  Robusta_SlackChannel          = "sk-sre-info"
   Robusta_NotifyDeploymentEvent = true
 
   CloudSQLProxy_Enable = true

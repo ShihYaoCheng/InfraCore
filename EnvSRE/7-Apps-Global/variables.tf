@@ -24,6 +24,19 @@ variable "GCPZone" {
 }
 
 #============================
+# Godaddy                   #
+#============================
+variable "GodaddyAPIKey" {
+  type      = string
+  sensitive = true
+}
+
+variable "GodaddyAPISecret" {
+  type      = string
+  sensitive = true
+}
+
+#============================
 # ArgoCD                    #
 #============================
 variable "ArgoCD_GitLabTokenName" {

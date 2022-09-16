@@ -7,9 +7,10 @@ module "AppsEu" {
   GCPProjectID = local.ProjectID
   GCPZone      = var.GCPZone
 
-  DomainName         = "eu.test.origingaia.com"
-  GodaddyAPIKey      = ""
-  GodaddyAPISecret   = ""
+  GodaddyDomainName    = "origingaia.com"
+  GodaddySubDomainName = "eu.test"
+  GodaddyAPIKey        = var.GodaddyAPIKey
+  GodaddyAPISecret     = var.GodaddyAPISecret
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = false

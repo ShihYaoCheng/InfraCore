@@ -5,7 +5,7 @@ resource "helm_release" "Traefik" {
   name             = "traefik"
   repository       = "https://helm.traefik.io/traefik"
   chart            = "traefik"
-  version          = "~>10.24.0"
+  version          = "~>10.24.3"
   create_namespace = true
   namespace        = "traefik"
 
@@ -14,11 +14,51 @@ resource "helm_release" "Traefik" {
 }
 
 resource "helm_release" "TraefikResources" {
-#  count = var.Prometheus_Enable ? 1 : 0
-  
   depends_on = [helm_release.Traefik, helm_release.Robusta]
 
   name             = "traefik-resources"
   chart            = "${path.module}/Charts/traefik-resources"
   namespace        = "traefik"
+}
+
+data "kubernetes_service" "traefik" {
+  depends_on = [helm_release.Traefik]
+  metadata {
+    name = "traefik"
+    namespace = "traefik"
+  }
+}
+
+resource "helm_release" "Godaddy" {
+  depends_on = [helm_release.Traefik]
+
+  name             = "godaddy-traefik"
+  chart            = "${path.module}/Charts/Godaddy"
+#  namespace        = "traefik"
+  namespace        = "default"
+  
+  set {
+    name  = "domainName"
+    value = var.GodaddyDomainName
+  }
+
+  set {
+    name  = "subDomainName"
+    value = var.GodaddySubDomainName
+  }
+  
+  set {
+    name  = "ip"
+    value = data.kubernetes_service.traefik.status.0.load_balancer.0.ingress.0.ip
+  }
+  
+  set_sensitive {
+    name  = "godaddy.key"
+    value = var.GodaddyAPIKey
+  }
+
+  set_sensitive {
+    name  = "godaddy.secret"
+    value = var.GodaddyAPISecret
+  }
 }

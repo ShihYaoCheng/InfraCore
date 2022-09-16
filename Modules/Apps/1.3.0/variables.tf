@@ -21,28 +21,29 @@ variable "GCPZone" {
 }
 
 #============================
-# External-DNS              #
+# Godaddy                   #
 #============================
-#variable "ExternalDNS_Enable" {
-#  type        = bool
-##  default     = false
-#  description = "Only used for SRE environment.(It create/destroy kubernetes everyday) The Godaddy will overwrite A Record added by other Kubernetes."
-#}
+locals {
+  GodaddyFQDN = "${var.GodaddySubDomainName}.${var.GodaddyDomainName}"
+}
 
-variable "DomainName" {
+variable "GodaddyDomainName" {
   type = string
-  #  default = "sre.origingaia.com"
+  #  default = "origingaia.com"
+}
+
+variable "GodaddySubDomainName" {
+  type = string
+  #  default = "dev"
 }
 
 variable "GodaddyAPIKey" {
   type      = string
-#  default   = "godaddy-api-key"
   sensitive = true
 }
 
 variable "GodaddyAPISecret" {
   type      = string
-#  default   = "godaddy-api-secret"
   sensitive = true
 }
 

@@ -10,7 +10,7 @@ resource "helm_release" "Kubed" {
     # Set cluster-name to something meaningful to you, say, prod, prod-us-east, qa, etc.
     # so that you can distinguish notifications sent by kubed.
     name  = "config.clusterName"
-    value = var.DomainName
+    value = local.GodaddyFQDN
   }
 
   set {
