@@ -1,0 +1,79 @@
+﻿server:
+  # -- Deploy Argo CD Projects within this helm release 
+  # @default -- `[]` (See [values.yaml])
+  ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/
+  # https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/project.yaml
+  additionalProjects:
+  - name: sk
+  #   namespace: argocd
+  #   additionalLabels: {}
+  #   additionalAnnotations: {}
+  #   finalizers:
+  #   - resources-finalizer.argocd.argoproj.io
+    description: snake project
+    
+    # Allow manifests to deploy from any Git repos
+    sourceRepos:
+    - '*'
+  
+    # Only permit applications to deploy to the guestbook namespace in the same cluster
+    destinations:
+    - server: '*'
+      namespace: '*'
+  
+    # https://argo-cd.readthedocs.io/en/stable/user-guide/sync_windows/
+    # https://github.com/argoproj/argo-cd/blob/master/manifests/crds/appproject-crd.yaml
+    syncWindows:
+    - kind: allow
+      # UTC time.
+      schedule: '${syncWindowCronTime}'
+      duration: 1h
+      applications:
+      - '*'
+      namespaces:
+      - '*'
+      clusters:
+      - '*'  
+      manualSync: true
+      timeZone: Asia/Taipei
+      
+    
+  # - name: guestbook
+  #   namespace: argocd
+  #   additionalLabels: {}
+  #   additionalAnnotations: {}
+  #   finalizers:
+  #   - resources-finalizer.argocd.argoproj.io
+  #   description: Example Project
+  #   sourceRepos:
+  #   - '*'
+  #   destinations:
+  #   - namespace: guestbook
+  #     server: https://kubernetes.default.svc
+  #   clusterResourceWhitelist: []
+  #   clusterResourceBlacklist: []
+  #   namespaceResourceBlacklist:
+  #   - group: ''
+  #     kind: ResourceQuota
+  #   - group: ''
+  #     kind: LimitRange
+  #   - group: ''
+  #     kind: NetworkPolicy
+  #     orphanedResources: {}
+  #     roles: []
+  #   namespaceResourceWhitelist:
+  #   - group: 'apps'
+  #     kind: Deployment
+  #   - group: 'apps'
+  #     kind: StatefulSet
+  #   orphanedResources: {}
+  #   roles: []
+  #   syncWindows:
+  #   - kind: allow
+  #     schedule: '10 1 * * *'
+  #     duration: 1h
+  #     applications:
+  #     - '*-prod'
+  #     manualSync: true
+  #   signatureKeys:
+  #   - keyID: ABCDEF1234567890

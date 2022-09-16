@@ -1,0 +1,43 @@
+﻿apiVersion: batch/v1
+kind: Job
+metadata:
+  name: godaddy-{{uuidv4}}
+spec:
+  activeDeadlineSeconds: 60
+  ttlSecondsAfterFinished: 60
+  template:
+    spec:
+      containers:
+        - name: test
+          image: curlimages/curl
+          command: ["/bin/sh","-c"]
+          args:
+            - >
+              curl -X DELETE https://api.godaddy.com/v1/domains/{{.Values.domainName}}/records/A/{{.Values.subDomainName}} -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' && 
+              curl -X PATCH https://api.godaddy.com/v1/domains/{{.Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{.Values.ip | quote }}, "name": {{.Values.subDomainName | quote}}, "ttl": 600, "type": "A"}]'
+          env:
+            - name: GodaddyKey
+              value: {{ .Values.godaddy.key }} 
+            - name: GodaddySecret
+              value: {{ .Values.godaddy.secret }}
+      restartPolicy: Never  
+      
+---
+{{/*apiVersion: batch/v1*/}}
+{{/*kind: Job*/}}
+{{/*metadata:*/}}
+{{/*  name: godaddy*/}}
+{{/*spec:*/}}
+{{/*  activeDeadlineSeconds: 60*/}}
+{{/*  ttlSecondsAfterFinished: 3600*/}}
+{{/*  template:*/}}
+{{/*    spec:*/}}
+{{/*      containers:*/}}
+{{/*        - name: test*/}}
+{{/*          image: curlimages/curl*/}}
+{{/*          command: ["/bin/sh","-c"]*/}}
+{{/*          args:*/}}
+{{/*            - >*/}}
+{{/*              curl -X DELETE https://api.godaddy.com/v1/domains/origingaia.com/records/A/ass -H 'Authorization: sso-key dLDHTMRqNn3i_BGrKtXeXzd2woS1ZyfDqrp:CQr3FX2Vp3aJ4oWx1eZPk3' &&*/}}
+{{/*              curl -X PATCH https://api.godaddy.com/v1/domains/origingaia.com/records/ -H 'Authorization: sso-key dLDHTMRqNn3i_BGrKtXeXzd2woS1ZyfDqrp:CQr3FX2Vp3aJ4oWx1eZPk3' -H 'Content-Type: application/json' -d '[{"data": "10.1.1.10", "name": "ass", "ttl": 600, "type": "A"}]'*/}}
+{{/*      restartPolicy: Never*/}}  
