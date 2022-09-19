@@ -24,8 +24,8 @@ variable "GCPZone" {
 # Godaddy                   #
 #============================
 locals {
-  GodaddyFQDN1 = "${var.GodaddySubDomainName1}.${var.GodaddyDomainName}"
-  GodaddyFQDN2 = "${var.GodaddySubDomainName2}.${var.GodaddyDomainName}"
+  GodaddyFQDN1 = var.GodaddySubDomainName1 != "@" ? "${var.GodaddySubDomainName1}.${var.GodaddyDomainName}" : var.GodaddyDomainName
+  GodaddyFQDN2 = var.GodaddySubDomainName2 != "@" ? "${var.GodaddySubDomainName2}.${var.GodaddyDomainName}" : var.GodaddyDomainName
   GodaddyFQDNs = var.GodaddySubDomainName2 != "" ? "{${local.GodaddyFQDN1}\\, ${local.GodaddyFQDN2}}" : "{${local.GodaddyFQDN1}}"
 }
 

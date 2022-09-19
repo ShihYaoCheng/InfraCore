@@ -9,7 +9,7 @@ module "AppsDev" {
 
   GodaddyDomainName     = "origingaia.com"
   GodaddySubDomainName1 = "test"
-  GodaddySubDomainName2 = "www"
+  GodaddySubDomainName2 = "@"
   GodaddyAPIKey         = var.GodaddyAPIKey
   GodaddyAPISecret      = var.GodaddyAPISecret
 
