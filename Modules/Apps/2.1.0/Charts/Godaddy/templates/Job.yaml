@@ -13,10 +13,10 @@ spec:
           command: ["/bin/sh","-c"]
           args:
             - |
-              echo "{{.Values.domainName}}"
-              echo "{{.Values.subDomainName1}}"
-              echo "{{.Values.subDomainName2}}"
-              echo "{{.Values.ip}}"
+              echo "domainName: {{.Values.domainName}}"
+              echo "subDomainName1: {{.Values.subDomainName1}}"
+              echo "subDomainName2: {{.Values.subDomainName2}}"
+              echo "ip: {{.Values.ip}}"
               
               curl -X DELETE https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/A/{{ required "provide subDomainName1" .Values.subDomainName1}} -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)'
               curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": {{required "provide subDomainName1" .Values.subDomainName1 | quote}}, "ttl": 600, "type": "A"}]'
