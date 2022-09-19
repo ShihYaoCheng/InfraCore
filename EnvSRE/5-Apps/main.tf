@@ -18,7 +18,7 @@ module "AppsDev" {
   CertManager_Enable         = true
   CertManager_CreateProdCert = false
 
-  Prometheus_StorageClassName = "ssd-delete"
+  Prometheus_StorageClassName = "standard"
   Prometheus_StorageSize      = "20Gi"
   Prometheus_Retention        = "1d"
   Grafana_AdminPassword       = "gra4422"
