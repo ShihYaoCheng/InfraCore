@@ -24,7 +24,9 @@ variable "GCPZone" {
 # Godaddy                   #
 #============================
 locals {
-  GodaddyFQDN = "${var.GodaddySubDomainName}.${var.GodaddyDomainName}"
+  GodaddyFQDN1 = "${var.GodaddySubDomainName1}.${var.GodaddyDomainName}"
+  GodaddyFQDN2 = "${var.GodaddySubDomainName2}.${var.GodaddyDomainName}"
+  GodaddyFQDNs = var.GodaddySubDomainName2 != "" ? "{${local.GodaddyFQDN1}\\, ${local.GodaddyFQDN2}}" : "{${local.GodaddyFQDN1}}"
 }
 
 variable "GodaddyDomainName" {
@@ -32,9 +34,16 @@ variable "GodaddyDomainName" {
   #  default = "origingaia.com"
 }
 
-variable "GodaddySubDomainName" {
+variable "GodaddySubDomainName1" {
   type = string
   #  default = "dev"
+  description = "@ = empty"
+}
+
+variable "GodaddySubDomainName2" {
+  type = string
+  #  default = "@"
+  description = "@ = empty"
 }
 
 variable "GodaddyAPIKey" {

@@ -51,8 +51,8 @@ resource "helm_release" "CertManagerResources" {
   }
 
   set {
-    name  = "certificates.dnsName"
-    value = local.GodaddyFQDN
+    name  = "certificates.dnsNames"
+    value = local.GodaddyFQDNs
   }
 }
 
