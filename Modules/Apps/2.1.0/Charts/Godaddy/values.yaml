@@ -6,7 +6,8 @@
 domainName: ""
 
 # example: test.
-subDomainName: ""
+subDomainName1: ""
+subDomainName2: ""
 
 # example: 10.10.10.10
 ip: ""

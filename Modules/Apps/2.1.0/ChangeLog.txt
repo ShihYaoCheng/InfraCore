@@ -1,1 +1,1 @@
-﻿Add DNS record with Godaddy API. 
+﻿Feature: Add many of the A records to the same IP address.
