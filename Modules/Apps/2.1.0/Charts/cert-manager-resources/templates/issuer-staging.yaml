@@ -34,8 +34,9 @@ spec:
   secretTemplate:
     annotations:
       kubed.appscode.com/sync: "kubed=sync"
-  dnsNames:
-    - {{ required "you should provide a dnsName for staging certificate." .Values.certificates.dnsName }}
+  dnsNames: {{ required "you should provide dnsNames for staging certificate." .Values.certificates.dnsNames }}
+{{/*  dnsNames: ["test.origingaia.com", "test2.origingaia.com"]*/}}
+{{/*  dnsNames: [test.origingaia.com, test3.origingaia.com]*/}}
   issuerRef:
     name: acme-staging # issuer name.
     # We can reference ClusterIssuers by changing the kind here.

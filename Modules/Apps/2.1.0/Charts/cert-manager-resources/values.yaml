@@ -1,6 +1,6 @@
 
 certificates:
-  dnsName: ""
+  dnsNames: []
   staging:
     create: true
     email: ""
