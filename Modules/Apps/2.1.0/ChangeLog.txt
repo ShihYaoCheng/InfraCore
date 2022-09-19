@@ -1,1 +1,2 @@
-﻿Feature: Add many of the A records to the same IP address.
+﻿Feature1: Add many of the A records to the same IP address.
+Feature2: Add traefik redirect.

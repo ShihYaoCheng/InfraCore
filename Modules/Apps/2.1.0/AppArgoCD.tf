@@ -152,8 +152,12 @@ resource "helm_release" "ArgoCDResource" {
     value = var.ArgoCD_OfficialWebHelmValueFiles
   }
   set {
-    name  = "apps.officialWeb.sqlPassword"
-    value = var.ArgoCD_BackstageSqlPassword
+    name  = "apps.officialWeb.redirect.srcFQDN"
+    value = var.ArgoCD_OfficialWebRedirectSrcFQDN
+  }
+  set {
+    name  = "apps.officialWeb.redirect.destFQDN"
+    value = var.ArgoCD_OfficialWebRedirectDestFQDN
   }
 
   set {

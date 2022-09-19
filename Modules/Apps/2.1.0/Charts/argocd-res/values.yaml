@@ -33,8 +33,10 @@ apps:
   officialWeb:
     enabled: true
     branchOrTag: main
-    valueFiles: [ ]
-    sqlPassword: ""
+    valueFiles: []
+    redirect:
+      srcFQDN: ""
+      destFQDN: ""
   nft:
     enabled: true
     branchOrTag: main

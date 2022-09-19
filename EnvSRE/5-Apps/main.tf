@@ -12,6 +12,8 @@ module "AppsDev" {
   GodaddySubDomainName2 = "@"
   GodaddyAPIKey         = var.GodaddyAPIKey
   GodaddyAPISecret      = var.GodaddyAPISecret
+  ArgoCD_OfficialWebRedirectSrcFQDN = "origingaia.com"
+  ArgoCD_OfficialWebRedirectDestFQDN = "test.origingaia.com"
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = false
