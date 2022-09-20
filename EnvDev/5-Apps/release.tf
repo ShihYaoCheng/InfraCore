@@ -1,16 +1,20 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "Apps-Rel" {
-  source = "../../Modules/Apps/1.2.1"
+  source = "../../Modules/Apps/2.1.0"
 
   ProjectName  = local.ProjectName
   UniqueName   = "TW-Rel"
   GCPProjectID = local.ProjectID
   GCPZone      = "asia-east1-b"
 
-  ExternalDNS_Enable = false
-  DomainName         = "rel.ponponsnake.com"
-  GodaddyAPIKey      = ""
-  GodaddyAPISecret   = ""
+  GodaddyDomainName                  = "ponponsnake.com"
+  GodaddySubDomainName1              = "rel"
+  GodaddySubDomainName2              = ""
+  GodaddyAPIKey                      = var.GodaddyAPIKey
+  GodaddyAPISecret                   = var.GodaddyAPISecret
+  ArgoCD_OfficialWebRedirectEnabled  = false
+  ArgoCD_OfficialWebRedirectDestFQDN = ""
+  ArgoCD_OfficialWebRedirectSrcFQDN  = ""
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = true
