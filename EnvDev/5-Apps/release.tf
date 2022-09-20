@@ -56,11 +56,11 @@ module "Apps-Rel" {
   ArgoCD_AppOfficialWebBranchOrTag = "main"
 
   ArgoCD_BackstageHelmValueFiles   = "{values-main.yaml}"
-  ArgoCD_BattleHelmValueFiles      = "{values-v2.9.0.yaml\\, EnableIngress.yaml}"
-  ArgoCD_FileHelmValueFiles        = "{values-v2.9.0.yaml\\, EnableIngress.yaml}"
+  ArgoCD_BattleHelmValueFiles      = "{values-v2.9.1.yaml\\, EnableIngress.yaml}"
+  ArgoCD_FileHelmValueFiles        = "{values-v2.9.1.yaml\\, EnableIngress.yaml}"
   ArgoCD_NFTHelmValueFiles         = "{values-beta.yaml}"
-  ArgoCD_TableHelmValueFiles       = "{values-v2.9.0.yaml}"
-  ArgoCD_UserHelmValueFiles        = "{values-v2.9.0.yaml\\, SetServerName-Release.yaml}"
+  ArgoCD_TableHelmValueFiles       = "{values-v2.9.1.yaml}"
+  ArgoCD_UserHelmValueFiles        = "{values-v2.9.1.yaml\\, SetServerName-Release.yaml}"
   ArgoCD_OfficialWebHelmValueFiles = "{values-beta.yaml}"
 
   ArgoCD_BackstageSqlPassword = "backstage1234"
