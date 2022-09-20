@@ -7,11 +7,14 @@ module "AppsEu" {
   GCPProjectID = local.ProjectID
   GCPZone      = var.GCPZone
 
-  GodaddyDomainName    = "origingaia.com"
-  GodaddySubDomainName1 = "eu.test"
-  GodaddySubDomainName2 = ""
-  GodaddyAPIKey        = var.GodaddyAPIKey
-  GodaddyAPISecret     = var.GodaddyAPISecret
+  GodaddyDomainName                  = "origingaia.com"
+  GodaddySubDomainName1              = "eu.test"
+  GodaddySubDomainName2              = ""
+  GodaddyAPIKey                      = var.GodaddyAPIKey
+  GodaddyAPISecret                   = var.GodaddyAPISecret
+  ArgoCD_OfficialWebRedirectEnabled  = false
+  ArgoCD_OfficialWebRedirectSrcFQDN  = ""
+  ArgoCD_OfficialWebRedirectDestFQDN = ""
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = false

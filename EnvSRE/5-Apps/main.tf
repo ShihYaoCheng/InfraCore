@@ -7,12 +7,13 @@ module "AppsDev" {
   GCPProjectID = local.ProjectID
   GCPZone      = var.GCPZone
 
-  GodaddyDomainName     = "origingaia.com"
-  GodaddySubDomainName1 = "test"
-  GodaddySubDomainName2 = "@"
-  GodaddyAPIKey         = var.GodaddyAPIKey
-  GodaddyAPISecret      = var.GodaddyAPISecret
-  ArgoCD_OfficialWebRedirectSrcFQDN = "origingaia.com"
+  GodaddyDomainName                  = "origingaia.com"
+  GodaddySubDomainName1              = "test"
+  GodaddySubDomainName2              = "@"
+  GodaddyAPIKey                      = var.GodaddyAPIKey
+  GodaddyAPISecret                   = var.GodaddyAPISecret
+  ArgoCD_OfficialWebRedirectEnabled  = true
+  ArgoCD_OfficialWebRedirectSrcFQDN  = "origingaia.com"
   ArgoCD_OfficialWebRedirectDestFQDN = "test.origingaia.com"
 
   CertManager_Enable         = true

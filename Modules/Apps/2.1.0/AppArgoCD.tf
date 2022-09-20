@@ -152,6 +152,10 @@ resource "helm_release" "ArgoCDResource" {
     value = var.ArgoCD_OfficialWebHelmValueFiles
   }
   set {
+    name  = "apps.officialWeb.redirect.enabled"
+    value = var.ArgoCD_OfficialWebRedirectEnabled
+  }
+  set {
     name  = "apps.officialWeb.redirect.srcFQDN"
     value = var.ArgoCD_OfficialWebRedirectSrcFQDN
   }
