@@ -1,1 +1,5 @@
-﻿Add CloudNAT.
+﻿0.3.0
+Upgrade terraform to 1.2.9.
+
+0.2.0
+Add CloudNAT.
