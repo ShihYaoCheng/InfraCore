@@ -7,7 +7,7 @@ module "Apps" {
   GCPProjectID = local.ProjectID
   GCPZone      = "asia-east1-a"
 
-  GodaddyDomainName                  = "ponponsnake.com"
+  GodaddyDomainName                  = "origingaia.com"
   GodaddySubDomainName1              = "dev"
   GodaddySubDomainName2              = ""
   GodaddyAPIKey                      = var.GodaddyAPIKey
@@ -15,7 +15,6 @@ module "Apps" {
   ArgoCD_OfficialWebRedirectEnabled = false
   ArgoCD_OfficialWebRedirectDestFQDN = ""
   ArgoCD_OfficialWebRedirectSrcFQDN  = ""
-
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = true

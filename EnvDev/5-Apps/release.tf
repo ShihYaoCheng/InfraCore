@@ -7,7 +7,7 @@ module "Apps-Rel" {
   GCPProjectID = local.ProjectID
   GCPZone      = "asia-east1-b"
 
-  GodaddyDomainName                  = "ponponsnake.com"
+  GodaddyDomainName                  = "origingaia.com"
   GodaddySubDomainName1              = "rel"
   GodaddySubDomainName2              = ""
   GodaddyAPIKey                      = var.GodaddyAPIKey
