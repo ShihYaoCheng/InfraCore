@@ -21,7 +21,7 @@
     "File": "{values-v2.9.0.yaml\\, EnableNEG.yaml}",
     "NFT": "{values-beta.yaml}",
     "Table": "{values-v2.9.0.yaml}",
-    "User": "{values-v2.9.0.yaml\\, SetServerName-Beta.yaml\\, Ingress-BlockPrivateAPI.yaml}",
+    "User": "{values-v2.9.0.yaml\\, SetServerName-Beta.yaml\\, EnableIngressReliability.yaml}",
     "OfficialWeb": "{values-beta.yaml}"
   },
   "DomainNames": 
