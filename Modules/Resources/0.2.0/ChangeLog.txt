@@ -1,0 +1,2 @@
+﻿0.2.0
+Upgrade terraform required_version to 1.2.9.
