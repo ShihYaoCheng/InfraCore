@@ -1,0 +1,2 @@
+﻿1. Add Spot VM.
+2. Upgrade GKE to 1.23.8-gke.1900.
