@@ -1,0 +1,9 @@
+
+certificates:
+  dnsNames: []
+  staging:
+    create: true
+    email: ""
+  production:
+    create: false
+    email: ""
