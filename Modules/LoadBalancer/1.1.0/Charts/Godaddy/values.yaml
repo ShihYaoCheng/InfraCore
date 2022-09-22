@@ -1,0 +1,16 @@
+# helm upgrade --install godaddy ./Charts/Godaddy -n default
+# helm upgrade --install godaddy ./Charts/Godaddy -f ./Charts/values-sre.yaml -n default
+# helm uninstall godaddy -n default
+
+# example: origingaia.com
+domainName: ""
+
+# example: test.
+subDomainName: ""
+
+# example: 10.10.10.10
+ip: ""
+
+godaddy:
+  key: ""
+  secret: ""
