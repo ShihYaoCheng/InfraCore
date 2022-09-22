@@ -1,0 +1,6 @@
+﻿2.2.0
+The terraform upgrade to 1.2.9.
+
+2.1.0
+Feature1: Add many of the A records to the same IP address.
+Feature2: Add traefik redirect.
