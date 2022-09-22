@@ -1,1 +1,5 @@
-﻿DNS register automatically.
+﻿1.1.0
+The terraform upgrade to 1.2.9.
+
+1.0.0
+DNS register automatically.
