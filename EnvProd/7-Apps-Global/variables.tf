@@ -26,24 +26,25 @@ locals {
   UserHelmValueFiles = local.Settings["HelmPathValueFiles"]["User"]
   OfficialWebHelmValueFiles = local.Settings["HelmPathValueFiles"]["OfficialWeb"]
 
-  DomainNameEU = local.Settings["DomainNames"]["EU"]
+  DomainName = local.Settings["Domain"]["Name"]
+  SubDomainName = local.Settings["Domain"]["SubDomain"]["EU"]
 
   GCPRegion = "europe-west2"
   GCPZone = "europe-west2-a"
 }
 
-# https://cloud.google.com/compute/docs/regions-zones
-#variable "GCPRegion" {
-#  type        = string
-#  default     = "europe-west2"
-#  description = "cloud provider region."
-#}
-#
-#variable "GCPZone" {
-#  type        = string
-#  default     = "europe-west2-a"
-#  description = "cloud provider zone."
-#}
+#============================
+# Godaddy                   #
+#============================
+variable "GodaddyAPIKey" {
+  type      = string
+  sensitive = true
+}
+
+variable "GodaddyAPISecret" {
+  type      = string
+  sensitive = true
+}
 
 #============================
 # ArgoCD                    #

@@ -1,16 +1,20 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "AppsEU" {
-  source = "../../Modules/Apps/1.2.0"
+  source = "../../Modules/Apps/2.1.0"
 
   ProjectName  = local.ProjectName
   UniqueName   = "eu"
   GCPProjectID = local.ProjectID
   GCPZone      = local.GCPZone
 
-  ExternalDNS_Enable = false
-  DomainName         = local.DomainNameEU
-  GodaddyAPIKey      = ""
-  GodaddyAPISecret   = ""
+  GodaddyDomainName                  = local.DomainName
+  GodaddySubDomainName1              = local.SubDomainName
+  GodaddySubDomainName2              = ""
+  GodaddyAPIKey                      = var.GodaddyAPIKey
+  GodaddyAPISecret                   = var.GodaddyAPISecret
+  ArgoCD_OfficialWebRedirectEnabled  = false
+  ArgoCD_OfficialWebRedirectSrcFQDN  = ""
+  ArgoCD_OfficialWebRedirectDestFQDN = ""
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = true
