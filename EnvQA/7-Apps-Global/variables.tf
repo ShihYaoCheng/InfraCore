@@ -24,7 +24,8 @@ locals {
   TableHelmValueFiles = local.Settings["HelmPathValueFiles"]["Table"]
   UserHelmValueFiles = local.Settings["HelmPathValueFiles"]["User"]
 
-  DomainNameEU = local.Settings["DomainNames"]["EU"]
+  DomainName = local.Settings["Domain"]["Name"]
+  SubDomainName = local.Settings["Domain"]["SubDomain"]["EU"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones
@@ -53,6 +54,19 @@ variable "ArgoCD_GitLabTokenSecret" {
   type        = string
   sensitive   = true
   description = "Deploy token"
+}
+
+#============================
+# Godaddy                   #
+#============================
+variable "GodaddyAPIKey" {
+  type      = string
+  sensitive = true
+}
+
+variable "GodaddyAPISecret" {
+  type      = string
+  sensitive = true
 }
 
 #============================

@@ -11,7 +11,8 @@ locals {
   GKE-API-EU = local.Settings["GKE"]["EU"]["APIName"]
   GKE-CA-EU = local.Settings["GKE"]["EU"]["CAName"]
   
-  DomainNameLoadBalancer = local.Settings["DomainNames"]["LoadBalancer"]
+  DomainName = local.Settings["Domain"]["Name"]
+  SubDomainName = local.Settings["Domain"]["SubDomain"]["LoadBalancer"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones
@@ -27,5 +28,16 @@ variable "GCPZone" {
   description = "cloud provider zone."
 }
 
+#============================
+# Godaddy                   #
+#============================
+variable "GodaddyAPIKey" {
+  type      = string
+  sensitive = true
+}
 
+variable "GodaddyAPISecret" {
+  type      = string
+  sensitive = true
+}
 

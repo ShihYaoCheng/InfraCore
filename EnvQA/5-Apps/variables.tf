@@ -26,7 +26,8 @@ locals {
   UserHelmValueFiles = local.Settings["HelmPathValueFiles"]["User"]
   OfficialWebHelmValueFiles = local.Settings["HelmPathValueFiles"]["OfficialWeb"]
 
-  DomainNameTW = local.Settings["DomainNames"]["TW"]
+  DomainName = local.Settings["Domain"]["Name"]
+  SubDomainName = local.Settings["Domain"]["SubDomain"]["TW"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones
@@ -40,6 +41,19 @@ variable "GCPZone" {
   type        = string
   default     = "asia-east1-a"
   description = "cloud provider zone."
+}
+
+#============================
+# Godaddy                   #
+#============================
+variable "GodaddyAPIKey" {
+  type      = string
+  sensitive = true
+}
+
+variable "GodaddyAPISecret" {
+  type      = string
+  sensitive = true
 }
 
 #============================

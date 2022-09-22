@@ -24,11 +24,15 @@
     "User": "{values-v2.9.0.yaml\\, SetServerName-Beta.yaml\\, EnableIngressReliability.yaml}",
     "OfficialWeb": "{values-beta.yaml}"
   },
-  "DomainNames": 
+  "Domain": 
   {
-    "TW": "v2.9.0.ponponsnake.com",
-    "EU": "eu.v2.9.0.ponponsnake.com",
-    "LoadBalancer": "global.v2.9.0.ponponsnake.com"
+    "Name": "ponponsnake.com",
+    "SubDomain":
+    {
+      "TW": "v2.9.0",
+      "EU": "eu.v2.9.0",
+      "LoadBalancer":"global.v2.9.0" 
+    }
   },
   "GKE": {
     "TW": {
