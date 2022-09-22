@@ -809,19 +809,21 @@ QA-7-Apps-Global-Destroy:
 # QA - LoadBalancer          #
 #============================#
 QA-8-LB-Plan:
-  extends: .plan.without.var.file
+  extends: .plan.with.var.file
   variables:
     TF_ROOT: $QA_LB_DIR
     TF_STATE_NAME: $QA_LB_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_LB_TF_VAR_FILE_BASE64 | base64 -d > var_file
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
 
 QA-8-LB-Apply:
-  extends: .apply.without.var.file
+  extends: .apply.with.var.file
   needs: [QA-8-LB-Plan]
   variables:
     TF_ROOT: $QA_LB_DIR
@@ -829,12 +831,14 @@ QA-8-LB-Apply:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_LB_TF_VAR_FILE_BASE64 | base64 -d > var_file
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
 
 QA-8-LB-Destroy:
-  extends: .destroy.without.var.file
+  extends: .destroy.with.var.file
   needs: [QA-8-LB-Plan]
   variables:
     TF_ROOT: $QA_LB_DIR
@@ -842,6 +846,8 @@ QA-8-LB-Destroy:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_LB_TF_VAR_FILE_BASE64 | base64 -d > var_file
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
@@ -1200,19 +1206,21 @@ Prod-7-Apps-Global-Destroy:
 # Prod - LoadBalancer          #
 #==============================#
 Prod-8-LB-Plan:
-  extends: .plan.without.var.file
+  extends: .plan.with.var.file
   variables:
     TF_ROOT: ${PROD_LB_DIR}
     TF_STATE_NAME: ${PROD_LB_TF_STATE_NAME}
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_LB_TF_VAR_FILE_BASE64 | base64 -d > var_file
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
       when: manual
 
 Prod-8-LB-Apply:
-  extends: .apply.without.var.file
+  extends: .apply.with.var.file
   needs: [Prod-8-LB-Plan]
   variables:
     TF_ROOT: ${PROD_LB_DIR}
@@ -1220,12 +1228,14 @@ Prod-8-LB-Apply:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_LB_TF_VAR_FILE_BASE64 | base64 -d > var_file
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
       when: manual
 
 Prod-8-LB-Destroy:
-  extends: .destroy.without.var.file
+  extends: .destroy.with.var.file
   needs: [Prod-8-LB-Plan]
   variables:
     TF_ROOT: ${PROD_LB_DIR}
@@ -1233,6 +1243,8 @@ Prod-8-LB-Destroy:
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_LB_TF_VAR_FILE_BASE64 | base64 -d > var_file
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
       when: manual
