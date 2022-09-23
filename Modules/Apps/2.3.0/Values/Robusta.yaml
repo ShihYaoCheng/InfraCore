@@ -180,7 +180,7 @@ kube-prometheus-stack:
           gnetId: 11074
           revision: 9
           datasource: Prometheus
-        # https://grafana.com/grafana/dashboards/11454
+        # https://grafana.com/grafana/dashboards/11454-k8s-storage-volumes-cluster/
         k8s-storage-volume:
           gnetId: 11454
           revision: 14
