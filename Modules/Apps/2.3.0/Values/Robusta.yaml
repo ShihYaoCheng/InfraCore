@@ -196,16 +196,16 @@ kube-prometheus-stack:
           revision: 1
           datasource: Prometheus
         # https://grafana.com/grafana/dashboards/14348
-        sloth-slo-detail:
-          gnetId: 14348
-          revision: 5
-          datasource: Prometheus
-        # https://grafana.com/grafana/dashboards/14643
         # Error updating options: Datasource DS_PROMETHEUS was not found
-#        sloth-slo-high-level:
-#          gnetId: 14643
-#          revision: 2
+#        sloth-slo-detail:
+#          gnetId: 14348
+#          revision: 5
 #          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/14643-high-level-sloth-slos/
+        sloth-slo-high-level:
+          gnetId: 14643
+          revision: 2
+          datasource: Prometheus
         # https://grafana.com/grafana/dashboards/15175
         k8s:
           gnetId: 15175
