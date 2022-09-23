@@ -25,7 +25,7 @@
 }
 
 module "GKE-TW-Rel" {
-  source  = "../../Modules/GKE-Safe/0.1.0"
+  source  = "../../Modules/GKE-Safe/0.2.0"
 
   ProjectName = local.ProjectName
 
