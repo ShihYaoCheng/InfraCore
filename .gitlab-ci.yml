@@ -11,26 +11,26 @@ stages:
   - deploy
   - cleanup
 
-include:
-  - local: ".gitlab-ci-template.yml"
+#include:
+#  - local: ".gitlab-ci-template.yml"
 
-TrivyScan-EnvSRE:
-  extends: .TrivyScanTemplate
-  variables:
-    SCAN_PATH: EnvSRE
-    REPORT_FILE: ReportSRE.txt
-
-TrivyScan-Tools:
-  extends: .TrivyScanTemplate
-  variables:
-    SCAN_PATH: tools
-    REPORT_FILE: ReportTools.txt
-
-TrivyScan-Modules:
-  extends: .TrivyScanTemplate
-  variables:
-    SCAN_PATH: Modules
-    REPORT_FILE: ReportModules.txt
+#TrivyScan-EnvSRE:
+#  extends: .TrivyScanTemplate
+#  variables:
+#    SCAN_PATH: EnvSRE
+#    REPORT_FILE: ReportSRE.txt
+#
+#TrivyScan-Tools:
+#  extends: .TrivyScanTemplate
+#  variables:
+#    SCAN_PATH: tools
+#    REPORT_FILE: ReportTools.txt
+#
+#TrivyScan-Modules:
+#  extends: .TrivyScanTemplate
+#  variables:
+#    SCAN_PATH: Modules
+#    REPORT_FILE: ReportModules.txt
 
 
 
@@ -50,6 +50,8 @@ image:
   # https://gitlab.com/gitlab-org/terraform-images/container_registry/2018822
   name: registry.gitlab.com/gitlab-org/terraform-images/releases/1.0:v0.31.0
 #  name: registry.gitlab.com/gitlab-org/terraform-images/releases/1.0:latest
+  # https://gitlab.com/gitlab-org/terraform-images/container_registry/3083041
+#  name: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
 
 .plan:
   stage: plan
@@ -301,6 +303,7 @@ variables:
 #============================#
 Dev-1-Res-Plan:
   extends: .plan.without.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   variables:
     TF_ROOT: ${DEV_RES_DIR}
     TF_STATE_NAME: ${DEV_RES_TF_STATE_NAME}
@@ -310,6 +313,7 @@ Dev-1-Res-Plan:
 
 Dev-1-Res-Apply:
   extends: .apply.without.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   needs: [Dev-1-Res-Plan]
   variables:
     TF_ROOT: ${DEV_RES_DIR}
@@ -320,6 +324,7 @@ Dev-1-Res-Apply:
 
 Dev-1-Res-Destroy:
   extends: .destroy.without.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   needs: [Dev-1-Res-Plan]
   variables:
     TF_ROOT: ${DEV_RES_DIR}
@@ -333,6 +338,7 @@ Dev-1-Res-Destroy:
 #============================#
 Dev-2-VPC-Plan:
   extends: .plan.without.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   variables:
     TF_ROOT: ${DEV_VPC_DIR}
     TF_STATE_NAME: ${DEV_VPC_TF_STATE_NAME}
@@ -342,6 +348,7 @@ Dev-2-VPC-Plan:
 
 Dev-2-VPC-Apply:
   extends: .apply.without.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   needs: [Dev-2-VPC-Plan]
   variables:
     TF_ROOT: ${DEV_VPC_DIR}
@@ -352,6 +359,7 @@ Dev-2-VPC-Apply:
 
 Dev-2-VPC-Destroy:
   extends: .destroy.without.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   needs: [Dev-2-VPC-Plan]
   variables:
     TF_ROOT: ${DEV_VPC_DIR}
@@ -365,6 +373,7 @@ Dev-2-VPC-Destroy:
 #============================#
 Dev-3-Database-Plan:
   extends: .plan.without.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   variables:
     TF_ROOT: ${DEV_DB_DIR}
     TF_STATE_NAME: ${DEV_DB_TF_STATE_NAME}
@@ -376,6 +385,7 @@ Dev-3-Database-Plan:
 
 Dev-3-Database-Apply:
   extends: .apply.without.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   needs: [Dev-3-Database-Plan]
   variables:
     TF_ROOT: ${DEV_DB_DIR}
@@ -388,6 +398,7 @@ Dev-3-Database-Apply:
 
 Dev-3-Database-Destroy:
   extends: .destroy.without.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   needs: [Dev-3-Database-Plan]
   variables:
     TF_ROOT: ${DEV_DB_DIR}
@@ -403,6 +414,7 @@ Dev-3-Database-Destroy:
 #============================#
 Dev-4-GKE-Plan:
   extends: .plan.without.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   variables:
     TF_ROOT: ${DEV_GKE_DIR}
     TF_STATE_NAME: ${DEV_GKE_TF_STATE_NAME}
@@ -414,6 +426,7 @@ Dev-4-GKE-Plan:
 
 Dev-4-GKE-Apply:
   extends: .apply.without.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   needs: [Dev-4-GKE-Plan]
   variables:
     TF_ROOT: ${DEV_GKE_DIR}
@@ -426,6 +439,7 @@ Dev-4-GKE-Apply:
 
 Dev-4-GKE-Destroy:
   extends: .destroy.without.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   needs: [Dev-4-GKE-Plan]
   variables:
     TF_ROOT: ${DEV_GKE_DIR}
@@ -441,6 +455,7 @@ Dev-4-GKE-Destroy:
 #============================#
 Dev-5-Apps-Plan:
   extends: .plan.with.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   variables:
     TF_ROOT: ${DEV_APPS_DIR}
     TF_STATE_NAME: ${DEV_APPS_TF_STATE_NAME}
@@ -454,6 +469,7 @@ Dev-5-Apps-Plan:
 
 Dev-5-Apps-Apply:
   extends: .apply.with.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   needs: [Dev-5-Apps-Plan]
   variables:
     TF_ROOT: ${DEV_APPS_DIR}
@@ -468,6 +484,7 @@ Dev-5-Apps-Apply:
 
 Dev-5-Apps-Destroy:
   extends: .destroy.with.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   needs: [Dev-5-Apps-Plan]
   variables:
     TF_ROOT: ${DEV_APPS_DIR}
