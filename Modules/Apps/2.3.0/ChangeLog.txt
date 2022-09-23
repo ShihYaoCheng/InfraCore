@@ -1,4 +1,8 @@
-﻿2.2.0
+﻿2.3.0
+Add SLOs.
+Add Grafana dashboards.
+
+2.2.0
 The terraform upgrade to 1.2.9.
 
 2.1.0

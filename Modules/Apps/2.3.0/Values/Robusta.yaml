@@ -160,6 +160,11 @@ kube-prometheus-stack:
     ##
     dashboards:
       sre:
+        # https://grafana.com/grafana/dashboards/1860-node-exporter-full/
+        node-exporter-full:
+          gnetId: 1860
+          revision: 27
+          datasource: Prometheus
         # https://grafana.com/grafana/dashboards/10880
         loki-promtail:
           gnetId: 10880
@@ -196,13 +201,24 @@ kube-prometheus-stack:
           revision: 5
           datasource: Prometheus
         # https://grafana.com/grafana/dashboards/14643
-        sloth-slo-high-level:
-          gnetId: 14643
-          revision: 2
-          datasource: Prometheus
+        # Error updating options: Datasource DS_PROMETHEUS was not found
+#        sloth-slo-high-level:
+#          gnetId: 14643
+#          revision: 2
+#          datasource: Prometheus
         # https://grafana.com/grafana/dashboards/15175
         k8s:
           gnetId: 15175
+          revision: 1
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/15175
+        kube-state-metrics-v2:
+          gnetId: 13332
+          revision: 12
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/8588-1-kubernetes-deployment-statefulset-daemonset-metrics/
+        k8s-deployment-metrics:
+          gnetId: 8588
           revision: 1
           datasource: Prometheus
 
