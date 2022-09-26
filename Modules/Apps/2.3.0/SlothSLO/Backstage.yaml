@@ -17,7 +17,7 @@ slos:
         category: "availability"
       annotations:
         # Overwrite default Sloth SLO alert summmary on ticket and page alerts.
-        summary: "High error rate on 'table' requests responses"
+        summary: "High error rate on 'backstage' requests responses"
       page_alert:
         labels:
           severity: page

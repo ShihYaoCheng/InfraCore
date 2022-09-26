@@ -156,3 +156,47 @@ groups:
       sloth_slo: requests-availability
       sloth_spec: prometheus/v1
       sloth_version: fcf9ecf726a80befa3657c84dd31cf08acef81ce
+- name: sloth-slo-alerts-table-requests-availability
+  rules:
+  - alert: TableHighErrorRate
+    expr: |
+      (
+          max(slo:sli_error:ratio_rate5m{sloth_id="table-requests-availability", sloth_service="table", sloth_slo="requests-availability"} > (14.4 * 0.1)) without (sloth_window)
+          and
+          max(slo:sli_error:ratio_rate1h{sloth_id="table-requests-availability", sloth_service="table", sloth_slo="requests-availability"} > (14.4 * 0.1)) without (sloth_window)
+      )
+      or
+      (
+          max(slo:sli_error:ratio_rate30m{sloth_id="table-requests-availability", sloth_service="table", sloth_slo="requests-availability"} > (6 * 0.1)) without (sloth_window)
+          and
+          max(slo:sli_error:ratio_rate6h{sloth_id="table-requests-availability", sloth_service="table", sloth_slo="requests-availability"} > (6 * 0.1)) without (sloth_window)
+      )
+    labels:
+      category: availability
+      severity: page
+      sloth_severity: page
+    annotations:
+      summary: High error rate on 'table' requests responses
+      title: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
+        burn rate is too fast.
+  - alert: TableHighErrorRate
+    expr: |
+      (
+          max(slo:sli_error:ratio_rate2h{sloth_id="table-requests-availability", sloth_service="table", sloth_slo="requests-availability"} > (3 * 0.1)) without (sloth_window)
+          and
+          max(slo:sli_error:ratio_rate1d{sloth_id="table-requests-availability", sloth_service="table", sloth_slo="requests-availability"} > (3 * 0.1)) without (sloth_window)
+      )
+      or
+      (
+          max(slo:sli_error:ratio_rate6h{sloth_id="table-requests-availability", sloth_service="table", sloth_slo="requests-availability"} > (1 * 0.1)) without (sloth_window)
+          and
+          max(slo:sli_error:ratio_rate3d{sloth_id="table-requests-availability", sloth_service="table", sloth_slo="requests-availability"} > (1 * 0.1)) without (sloth_window)
+      )
+    labels:
+      category: availability
+      severity: ticket
+      sloth_severity: ticket
+    annotations:
+      summary: High error rate on 'table' requests responses
+      title: (ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
+        burn rate is too fast.

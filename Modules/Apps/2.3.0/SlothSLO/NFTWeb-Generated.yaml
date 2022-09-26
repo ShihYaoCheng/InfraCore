@@ -177,7 +177,7 @@ groups:
       severity: page
       sloth_severity: page
     annotations:
-      summary: High error rate on 'table' requests responses
+      summary: High error rate on 'nft-web' requests responses
       title: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
   - alert: NFTWebHighErrorRate
@@ -199,6 +199,6 @@ groups:
       slack_channel: '#sk-sre-info'
       sloth_severity: ticket
     annotations:
-      summary: High error rate on 'table' requests responses
+      summary: High error rate on 'nft-web' requests responses
       title: (ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
