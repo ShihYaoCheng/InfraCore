@@ -6,11 +6,11 @@
   "AppsVersion": 
   {
     "Backstage": "main",
-    "Battle": "v2.9.0",
-    "File": "v2.9.0",
+    "Battle": "v2.9.1F1",
+    "File": "v2.9.1F1",
     "NFT": "v2.6.0C2F2",
-    "Table": "v2.9.0F2",
-    "User": "v2.9.0",
+    "Table": "v2.9.1F1",
+    "User": "v2.9.1F1",
     "OfficialWeb": "main"
   },
   "HelmPathValueFiles":
@@ -28,9 +28,9 @@
     "Name": "ponponsnake.com",
     "SubDomain":
     {
-      "TW": "v2.9.0",
-      "EU": "eu.v2.9.0",
-      "LoadBalancer":"global.v2.9.0"
+      "TW": "v2.9.1",
+      "EU": "eu.v2.9.1",
+      "LoadBalancer":"global.v2.9.1"
     }
   },
   "GKE": {
