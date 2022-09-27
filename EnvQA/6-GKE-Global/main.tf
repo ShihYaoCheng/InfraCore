@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "gke" {
-  source  = "../../Modules/GKE/1.0.0"
+  source  = "../../Modules/GKE-Safe/0.2.0"
 
   ProjectName = local.ProjectName
 
@@ -20,5 +20,7 @@ module "gke" {
   GKE-NodePoolScale-4C16G = false
   GKE-MaxNum-4C16G        = 0
   GKE-NodeNum-4C16G       = 0
+
+  GKE-ControlPlaneCIDR = "10.0.0.0/28"
 }
 
