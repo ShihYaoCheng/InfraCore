@@ -239,6 +239,10 @@ variables:
   DEV_GKE_TF_STATE_NAME: "Dev-GKE"
   DEV_APPS_DIR: EnvDev/5-Apps
   DEV_APPS_TF_STATE_NAME: "Dev-Apps"
+  DEV_GKE_REL_DIR: EnvDev/6-GKE-Rel
+  DEV_GKE_REL_TF_STATE_NAME: "Dev-GKE-Rel"
+  DEV_APPS_REL_DIR: EnvDev/7-Apps-Rel
+  DEV_APPS_REL_TF_STATE_NAME: "Dev-Apps-Rel"
 
   QA_RES_DIR: EnvQA/1-Res
   QA_RES_TF_STATE_NAME: "QA-Res"
@@ -410,7 +414,7 @@ Dev-3-Database-Destroy:
     - g1
 
 #============================#
-# Dev - GKE                  #
+# Dev - GKE(TW)              #
 #============================#
 Dev-4-GKE-Plan:
   extends: .plan.without.var.file
@@ -451,7 +455,7 @@ Dev-4-GKE-Destroy:
     - g1
 
 #============================#
-# Dev - Apps                 #
+# Dev - Apps(TW)             #
 #============================#
 Dev-5-Apps-Plan:
   extends: .plan.with.var.file
@@ -496,6 +500,105 @@ Dev-5-Apps-Destroy:
     - cat $DEV_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
   tags:
     - g1
+
+
+#============================#
+# Dev - GKE(Release)         #
+#============================#
+Dev-6-GKE-Rel-Plan:
+  extends: .plan.without.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
+  variables:
+    TF_ROOT: ${DEV_GKE_REL_DIR}
+    TF_STATE_NAME: ${DEV_GKE_REL_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  tags:
+    - g1
+
+Dev-6-GKE-Rel-Apply:
+  extends: .apply.without.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
+  needs: [Dev-6-GKE-Rel-Plan]
+  variables:
+    TF_ROOT: ${DEV_GKE_REL_DIR}
+    TF_STATE_NAME: ${DEV_GKE_REL_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  tags:
+    - g1
+
+Dev-6-GKE-Rel-Destroy:
+  extends: .destroy.without.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
+  needs: [Dev-6-GKE-Rel-Plan]
+  variables:
+    TF_ROOT: ${DEV_GKE_REL_DIR}
+    TF_STATE_NAME: ${DEV_GKE_REL_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  tags:
+    - g1
+
+#============================#
+# Dev - Apps(Release)        #
+#============================#
+Dev-7-Apps-Rel-Plan:
+  extends: .plan.with.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
+  variables:
+    TF_ROOT: ${DEV_APPS_REL_DIR}
+    TF_STATE_NAME: ${DEV_APPS_REL_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $DEV_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
+  tags:
+    - g1
+
+Dev-7-Apps-Rel-Apply:
+  extends: .apply.with.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
+  needs: [Dev-7-Apps-Rel-Plan]
+  variables:
+    TF_ROOT: ${DEV_APPS_REL_DIR}
+    TF_STATE_NAME: ${DEV_APPS_REL_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $DEV_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
+  tags:
+    - g1
+
+Dev-7-Apps-Rel-Destroy:
+  extends: .destroy.with.var.file
+  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
+  needs: [Dev-7-Apps-Rel-Plan]
+  variables:
+    TF_ROOT: ${DEV_APPS_REL_DIR}
+    TF_STATE_NAME: ${DEV_APPS_REL_TF_STATE_NAME}
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $DEV_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $DEV_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
+  tags:
+    - g1
+
+
+
+
+
+
+
+
+
+
 
 
 

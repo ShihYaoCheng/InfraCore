@@ -1,0 +1,16 @@
+﻿#============================
+# Project                   #
+#============================
+locals {
+  Settings = jsondecode(file("../Settings.json"))
+
+  ProjectID = local.Settings["Project"]["ID"]
+  ProjectName = local.Settings["Project"]["Name"]
+
+  GKE-API-TW-Rel = local.Settings["GKE"]["TW-Rel"]["APIName"]
+  GKE-CA-TW-Rel = local.Settings["GKE"]["TW-Rel"]["CAName"]
+
+  # https://cloud.google.com/compute/docs/regions-zones
+  GCPRegion = "asia-east1"
+}
+
