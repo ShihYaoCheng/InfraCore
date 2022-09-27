@@ -25,7 +25,9 @@ variable "GCPZone" {
 # CloudSQL                  #
 #============================
 # https://cloud.google.com/sql/docs/mysql/instance-settings
-# db-f1-micro, db-g1-small, db-n1-standard-1, db-n1-standard-2, db-n1-standard-4,
+# https://cloud.google.com/sql/pricing
+# db-f1-micro(RAM 0.6G, Shared CPU), db-g1-small(RAM 1.7G, Shared CPU), 
+# db-n1-standard-1, db-n1-standard-2, db-n1-standard-4,
 # db-n1-standard-8, db-n1-standard-16, db-n1-standard-32, db-n1-standard-64,
 # db-n1-standard-96, db-n1-highmem-2, db-n1-highmem-4, db-n1-highmem-8, db-n1-highmem-16,
 # db-n1-highmem-32, db-n1-highmem-64, db-n1-highmem-96.
