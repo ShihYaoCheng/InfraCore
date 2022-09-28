@@ -179,7 +179,7 @@ spec:
             severity: page
             sloth_severity: page
           annotations:
-            summary: High error rate on 'table' requests responses
+            summary: High error rate on 'backstage' requests responses
             title: (page) SLO error budget
               burn rate is too fast.
         - alert: BackstageHighErrorRate
@@ -201,7 +201,7 @@ spec:
             slack_channel: '#sk-sre-info'
             sloth_severity: ticket
           annotations:
-            summary: High error rate on 'table' requests responses
+            summary: High error rate on 'backstage' requests responses
             title: (ticket) SLO error budget
               burn rate is too fast.
   
