@@ -10,5 +10,11 @@
       source = "hashicorp/google"
       version = "~>4.37.0"
     }
+
+    # https://registry.terraform.io/providers/hashicorp/helm/latest
+    helm = {
+      source  = "hashicorp/helm"
+      version = "~>2.6.0"
+    }
   }
 }

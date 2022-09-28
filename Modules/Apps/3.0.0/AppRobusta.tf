@@ -6,8 +6,6 @@
 # https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack#kube-prometheus-stack
 # https://github.com/prometheus-operator/kube-prometheus
 resource "helm_release" "Robusta" {
-  depends_on = [helm_release.Configuration]
-  
   name             = "robusta"
   repository       = "https://robusta-charts.storage.googleapis.com"
   chart            = "robusta"
@@ -33,7 +31,7 @@ resource "helm_release" "Robusta" {
 }
 
 resource "helm_release" "PrometheusResources" {
-  depends_on = [helm_release.Robusta, helm_release.Traefik]
+  depends_on = [helm_release.Robusta]
 
   name             = "prometheus-stack-resources"
   chart            = "${path.module}/Charts/prometheus-stack-resources"

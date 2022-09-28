@@ -1,20 +1,20 @@
 ﻿# https://artifacthub.io/packages/helm/traefik/traefik
 # https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
 # helm upgrade --install traefik traefik/traefik -n traefik --create-namespace
-resource "helm_release" "Traefik" {
-  name             = "traefik"
-  repository       = "https://helm.traefik.io/traefik"
-  chart            = "traefik"
-  version          = "~>10.24.3"
-  create_namespace = true
-  namespace        = "traefik"
-
-  # https://stackoverflow.com/questions/64696721/how-do-i-pass-variables-to-a-yaml-file-in-heml-tf
-  values = [templatefile("${path.module}/Values/traefik.yaml", {})]
-}
+#resource "helm_release" "Traefik" {
+#  name             = "traefik"
+#  repository       = "https://helm.traefik.io/traefik"
+#  chart            = "traefik"
+#  version          = "~>10.24.3"
+#  create_namespace = true
+#  namespace        = "traefik"
+#
+#  # https://stackoverflow.com/questions/64696721/how-do-i-pass-variables-to-a-yaml-file-in-heml-tf
+#  values = [templatefile("${path.module}/Values/traefik.yaml", {})]
+#}
 
 resource "helm_release" "TraefikResources" {
-  depends_on = [helm_release.Traefik, helm_release.Robusta]
+  depends_on = [helm_release.Robusta]
 
   name             = "traefik-resources"
   chart            = "${path.module}/Charts/traefik-resources"
@@ -22,7 +22,6 @@ resource "helm_release" "TraefikResources" {
 }
 
 data "kubernetes_service" "traefik" {
-  depends_on = [helm_release.Traefik]
   metadata {
     name = "traefik"
     namespace = "traefik"
@@ -30,11 +29,8 @@ data "kubernetes_service" "traefik" {
 }
 
 resource "helm_release" "Godaddy" {
-  depends_on = [helm_release.Traefik]
-
   name             = "godaddy-traefik"
   chart            = "${path.module}/Charts/Godaddy"
-#  namespace        = "traefik"
   namespace        = "default"
   
   set {

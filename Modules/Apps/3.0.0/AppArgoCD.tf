@@ -35,7 +35,7 @@ resource "helm_release" "ArgoCD" {
 }
 
 resource "helm_release" "ArgoCDResource" {
-  depends_on = [helm_release.ArgoCD, helm_release.Traefik]
+  depends_on = [helm_release.ArgoCD]
 
   count = var.ArgoCD_Enable ? 1 : 0
 
