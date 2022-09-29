@@ -3,7 +3,7 @@ module "AppsDev" {
   source = "../../Modules/Apps/3.0.0"
 
   ProjectName  = local.ProjectName
-  UniqueName   = "tw-dev"
+#  UniqueName   = "tw-dev"
   GCPProjectID = local.ProjectID
   GCPZone      = var.GCPZone
 

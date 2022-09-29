@@ -5,12 +5,12 @@ variable "ProjectName" {
   type = string
 }
 
-variable "UniqueName" {
-  type        = string
-}
+#variable "UniqueName" {
+#  type = string
+#}
 
 variable "GCPProjectID" {
-  type    = string
+  type = string
   #  default = "stellar-38931"
 }
 
@@ -35,13 +35,13 @@ variable "GodaddyDomainName" {
 }
 
 variable "GodaddySubDomainName1" {
-  type = string
+  type        = string
   #  default = "dev"
   description = "@ = empty"
 }
 
 variable "GodaddySubDomainName2" {
-  type = string
+  type        = string
   #  default = "@"
   description = "@ = empty"
 }
@@ -72,7 +72,7 @@ variable "Prometheus_StorageSize" {
 
 variable "Prometheus_Retention" {
   type = string
-#  default = "90d"
+  #  default = "90d"
 }
 
 variable "Grafana_AdminPassword" {
@@ -103,7 +103,7 @@ variable "Robusta_NotifyDeploymentEvent" {
 # Loki                      #
 #============================
 variable "Loki_Enable" {
-  type = bool
+  type    = bool
   default = true
 }
 
@@ -111,7 +111,7 @@ variable "Loki_Enable" {
 # Tempo                     #
 #============================
 variable "Tempo_Enable" {
-  type = bool
+  type    = bool
   default = false
 }
 
@@ -119,18 +119,18 @@ variable "Tempo_Enable" {
 # Velero                    #
 #============================
 variable "Velero_Enable" {
-  type = bool
+  type    = bool
   default = false
 }
 
 variable "Velero_BackupSchedule" {
-  type = string
+  type    = string
   default = "0 1 * * *"
 }
 
 variable "Velero_BackupScheduleTTL" {
-  type = string
-  default = "720h" 
+  type        = string
+  default     = "720h"
   description = "How long the backup file will be deleted. 720h = 30d"
 }
 
@@ -139,11 +139,11 @@ variable "Velero_BackupScheduleTTL" {
 #============================
 variable "CertManager_Enable" {
   type = bool
-#  default = true
+  #  default = true
 }
 
 variable "CertManager_CreateProdCert" {
-  type    = bool
+  type = bool
   #  default = false
 }
 
@@ -153,7 +153,7 @@ variable "CertManager_CreateProdCert" {
 #============================
 variable "CloudSQLProxy_Enable" {
   type = bool
-#  default = true
+  #  default = true
 }
 
 
@@ -165,13 +165,13 @@ variable "CloudSQLProxy_Enable" {
 # helm upgrade --install user ./charts/userserver -f ./charts/values-sre.yaml -n user --create-namespace
 # helm uninstall user -n user
 variable "ArgoCD_Enable" {
-  type    = bool
-#  default = true
+  type = bool
+  #  default = true
 }
 
 variable "ArgoCD_EnableSelfHeal" {
-  type    = bool
-#  default = true
+  type = bool
+  #  default = true
 }
 
 variable "ArgoCD_EnableAppBattle" {
@@ -203,18 +203,18 @@ variable "ArgoCD_EnableAppUser" {
 }
 
 variable "ArgoCD_EnableIngress" {
-  type    = bool
-#  default = false
+  type = bool
+  #  default = false
 }
 
 variable "ArgoCD_IngressUseProdCert" {
-  type    = bool
-#  default = false
+  type = bool
+  #  default = false
 }
 
 variable "ArgoCD_SyncWindowTaipeiTime" {
-  type = string
-#  default = "* * * * *"
+  type        = string
+  #  default = "* * * * *"
   description = "Timezone: UTC + 0. Cron format: minute(0~59), hour(0~23), day of the month(1~31), month(1~12),day of the week (0~6)(Sunday to Saturday; 7 is also Sunday on some systems)"
 }
 
@@ -233,8 +233,8 @@ variable "ArgoCD_GitLabTokenSecret" {
 # https://stackoverflow.com/questions/53846273/helm-passing-array-values-through-set
 # https://helm.sh/docs/intro/using_helm/#the-format-and-limitations-of---set
 variable "ArgoCD_BackstageSqlPassword" {
-  type        = string
-  sensitive   = true
+  type      = string
+  sensitive = true
 }
 
 variable "ArgoCD_BackstageHelmValueFiles" {
@@ -268,8 +268,8 @@ variable "ArgoCD_TableHelmValueFiles" {
 }
 
 variable "ArgoCD_UserSqlPassword" {
-  type        = string
-  sensitive   = true
+  type      = string
+  sensitive = true
 }
 
 variable "ArgoCD_UserHelmValueFiles" {

@@ -10,6 +10,10 @@ variable "GCPProjectID" {
 #  default = "stellar-38931"
 }
 
+variable "UniqueName" {
+  type = string
+}
+
 # https://cloud.google.com/compute/docs/regions-zones
 variable "GCPRegion" {
   type        = string

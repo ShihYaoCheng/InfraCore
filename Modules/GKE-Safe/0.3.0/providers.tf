@@ -16,5 +16,11 @@
       source  = "hashicorp/helm"
       version = "~>2.6.0"
     }
+
+    # https://registry.terraform.io/providers/hashicorp/kubernetes/latest
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+      version = "2.13.1"
+    }
   }
 }

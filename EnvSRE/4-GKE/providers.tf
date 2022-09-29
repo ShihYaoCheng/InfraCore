@@ -15,3 +15,9 @@ provider "helm" {
     cluster_ca_certificate = base64decode(module.GKE-TW.CA-Certificate)
   }
 }
+
+provider "kubernetes" {
+  host = "https://${module.GKE-TW.API-Endpoint}"
+  token = data.google_client_config.default.access_token
+  cluster_ca_certificate = base64decode(module.GKE-TW.CA-Certificate)
+}
