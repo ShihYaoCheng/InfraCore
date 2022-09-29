@@ -17,11 +17,11 @@
   "HelmPathValueFiles": 
   {
     "Backstage": "{values-prod.yaml}",
-    "Battle": "{values-v2.9.1.yaml\\, EnableNEG.yaml}",
-    "File": "{values-v2.9.1.yaml\\, EnableNEG.yaml}",
+    "Battle": "{values-v2.10.0.yaml\\, EnableNEG.yaml}",
+    "File": "{values-v2.10.0.yaml\\, EnableNEG.yaml}",
     "NFT": "{values-beta.yaml}",
-    "Table": "{values-v2.9.1.yaml\\, EnableIngressReliability.yaml}",
-    "User": "{values-v2.9.1.yaml\\, SetServerName-Beta.yaml\\, EnableIngressReliability.yaml}",
+    "Table": "{values-v2.10.0.yaml\\, EnableIngressReliability.yaml}",
+    "User": "{values-v2.10.0.yaml\\, SetServerName-Beta.yaml\\, EnableIngressReliability.yaml}",
     "OfficialWeb": "{values-beta.yaml}"
   },
   "Domain": 
@@ -29,9 +29,9 @@
     "Name": "ponponsnake.com",
     "SubDomain":
     {
-      "TW": "v2.9.1",
-      "EU": "eu.v2.9.1",
-      "LoadBalancer":"global.v2.9.1" 
+      "TW": "v2.10.0",
+      "EU": "eu.v2.10.0",
+      "LoadBalancer":"global.v2.10.0" 
     }
   },
   "GKE": {
