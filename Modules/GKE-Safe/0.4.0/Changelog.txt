@@ -1,0 +1,13 @@
+﻿0.3.0
+Install applications:
+1. Traefik.
+2. CloudSQLProxy.
+3. Configuration.
+
+The ArgoCD Application can continue running even if the App module removed.
+
+0.2.0
+The terraform upgrade to 1.2.9.
+
+0.1.0
+Initialize version: create private cluster.
