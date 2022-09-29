@@ -1,4 +1,7 @@
-﻿0.3.0
+﻿0.4.0
+Add variable: GKE-NodeSizeGB.
+
+0.3.0
 Install applications:
 1. Traefik.
 2. CloudSQLProxy.

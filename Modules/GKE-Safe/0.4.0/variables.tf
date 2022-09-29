@@ -54,6 +54,10 @@ variable "GKE-Labels" {
 #  default = {"name"="sre"}
 }
 
+variable "GKE-NodeSizeGB" {
+  type = number
+}
+
 variable "GKE-CheapNodePool-2C8G" {
   type = bool
 }

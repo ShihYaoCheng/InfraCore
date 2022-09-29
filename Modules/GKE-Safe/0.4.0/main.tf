@@ -6,7 +6,7 @@
 # https://github.com/terraform-google-modules/terraform-google-kubernetes-engine/tree/v23.0.0/modules/private-cluster
 module "GKE-PrivateCluster" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/private-cluster"
-  version = "23.0.0"
+  version = "23.1.0"
 
   name              = var.ProjectName
   network           = var.ProjectName
@@ -61,6 +61,8 @@ module "GKE-PrivateCluster" {
       # e2-standard-4, CPU=4, Memory=16G
       machine_type = "e2-standard-2"
 
+      disk_size_gb = var.GKE-NodeSizeGB
+
       # Configuration required by cluster autoscaler to adjust the size of the node pool to the current cluster usage
       autoscaling = var.GKE-NodePoolScale-2C8G # Default = true
       # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
@@ -83,6 +85,8 @@ module "GKE-PrivateCluster" {
       # e2-standard-2, CPU=2, Memory=8G
       # e2-standard-4, CPU=4, Memory=16G
       machine_type = "e2-standard-4"
+
+      disk_size_gb = var.GKE-NodeSizeGB
 
       autoscaling = var.GKE-NodePoolScale-4C16G # Default = true
       # It needs four vCPU resources at least now when terraform creates all resources in Kubernetes.
