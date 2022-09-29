@@ -1,9 +1,9 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "Apps-Rel" {
-  source = "../../Modules/Apps/2.2.0"
+  source = "../../Modules/Apps/3.0.0"
 
   ProjectName  = local.ProjectName
-  UniqueName   = "TW-Rel"
+#  UniqueName   = "TW-Rel"
   GCPProjectID = local.ProjectID
   GCPZone      = "asia-east1-b"
 
@@ -22,7 +22,7 @@ module "Apps-Rel" {
   CloudSQLProxy_Enable = true
 
   Prometheus_StorageClassName = "standard"
-  Prometheus_StorageSize      = "100Gi"
+  Prometheus_StorageSize      = "60Gi"
   Prometheus_Retention        = "60d"
   Grafana_AdminPassword       = "gra4422"
 

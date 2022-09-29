@@ -1,7 +1,8 @@
 ﻿module "GKE-TW-Rel" {
-  source = "../../Modules/GKE-Safe/0.2.0"
+  source = "../../Modules/GKE-Safe/0.4.0"
 
   ProjectName = local.ProjectName
+  UniqueName  = "TW-Rel"
 
   GCPProjectID = local.ProjectID
   GCPRegion    = local.GCPRegion
@@ -13,6 +14,7 @@
   GKE-APIName          = local.GKE-API-TW-Rel
   GKE-CAName           = local.GKE-CA-TW-Rel
 
+  GKE-NodeSizeGB         = 70
   GKE-CheapNodePool-2C8G = true
   GKE-NodePoolScale-2C8G = false
   GKE-MaxNum-2C8G        = 3
