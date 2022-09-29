@@ -21,7 +21,7 @@
     "NFT": "{values-prod.yaml}",
     "Table": "{values-prod.yaml}",
     "User": "{values-prod.yaml}",
-    "OfficialWeb": "{values-v1.9.3.yaml}"
+    "OfficialWeb": "{values-v1.9.3.yaml\\, EnableIngressReliability.yaml}"
   },
   "Domain":
   {
