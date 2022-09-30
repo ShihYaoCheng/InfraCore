@@ -1,8 +1,9 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
-module "gke" {
-  source  = "../../Modules/GKE-Safe/0.2.0"
+module "GKE-EU" {
+  source  = "../../Modules/GKE-Safe/0.4.0"
 
   ProjectName = local.ProjectName
+  UniqueName = "eu"
 
   GCPProjectID = local.ProjectID
   GCPRegion = local.GCPRegion
@@ -12,6 +13,7 @@ module "gke" {
   GKE-APIName = local.GKE-API-EU
   GKE-CAName  = local.GKE-CA-EU
 
+  GKE-NodeSizeGB = 70
   GKE-CheapNodePool-2C8G  = true
   GKE-NodePoolScale-2C8G  = false
   GKE-MaxNum-2C8G         = 3

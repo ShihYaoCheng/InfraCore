@@ -1,9 +1,9 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "Apps" {
-  source = "../../Modules/Apps/2.2.0"
+  source = "../../Modules/Apps/3.0.0"
 
   ProjectName  = local.ProjectName
-  UniqueName   = "tw"
+#  UniqueName   = "tw"
   GCPProjectID = local.ProjectID
   GCPZone      = var.GCPZone
 
@@ -29,8 +29,6 @@ module "Apps" {
   Robusta_SlackAPIKey           = var.Robusta_SlackAPIKey
   Robusta_SlackChannel          = "sk-qa-info"
   Robusta_NotifyDeploymentEvent = true
-
-  CloudSQLProxy_Enable = true
 
   ArgoCD_Enable               = true
   ArgoCD_EnableSelfHeal       = true

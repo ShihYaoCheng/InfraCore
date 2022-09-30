@@ -151,10 +151,10 @@ variable "CertManager_CreateProdCert" {
 #============================
 # CloudSQL Proxy            #
 #============================
-variable "CloudSQLProxy_Enable" {
-  type = bool
-  #  default = true
-}
+#variable "CloudSQLProxy_Enable" {
+#  type = bool
+#  #  default = true
+#}
 
 
 #============================
