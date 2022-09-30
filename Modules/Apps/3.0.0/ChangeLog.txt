@@ -3,6 +3,8 @@ Move configuration and traefik helm chart to GKE.
 Purpose: I want to separate the Game Applications and System Applications so that I can change 
 the system applications and don't affect the game applications anymore.
 
+Remove variable: CloudSQLProxy_Enable.
+
 2.3.0
 Add SLOs.
 Add Grafana dashboards.
