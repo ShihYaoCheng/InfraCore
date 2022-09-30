@@ -505,7 +505,7 @@ Dev-5-Apps-Destroy:
 #============================#
 # Dev - GKE(Release)         #
 #============================#
-Dev-6-GKE-Rel-Plan:
+Rel-6-GKE-Plan:
   extends: .plan.without.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   variables:
@@ -517,10 +517,10 @@ Dev-6-GKE-Rel-Plan:
   tags:
     - g1
 
-Dev-6-GKE-Rel-Apply:
+Rel-6-GKE-Apply:
   extends: .apply.without.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [Dev-6-GKE-Rel-Plan]
+  needs: [Rel-6-GKE-Plan]
   variables:
     TF_ROOT: ${DEV_GKE_REL_DIR}
     TF_STATE_NAME: ${DEV_GKE_REL_TF_STATE_NAME}
@@ -530,10 +530,10 @@ Dev-6-GKE-Rel-Apply:
   tags:
     - g1
 
-Dev-6-GKE-Rel-Destroy:
+Rel-6-GKE-Destroy:
   extends: .destroy.without.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [Dev-6-GKE-Rel-Plan]
+  needs: [Rel-6-GKE-Plan]
   variables:
     TF_ROOT: ${DEV_GKE_REL_DIR}
     TF_STATE_NAME: ${DEV_GKE_REL_TF_STATE_NAME}
@@ -546,7 +546,7 @@ Dev-6-GKE-Rel-Destroy:
 #============================#
 # Dev - Apps(Release)        #
 #============================#
-Dev-7-Apps-Rel-Plan:
+Rel-7-Apps-Plan:
   extends: .plan.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   variables:
@@ -560,10 +560,10 @@ Dev-7-Apps-Rel-Plan:
   tags:
     - g1
 
-Dev-7-Apps-Rel-Apply:
+Rel-7-Apps-Apply:
   extends: .apply.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [Dev-7-Apps-Rel-Plan]
+  needs: [Rel-7-Apps-Plan]
   variables:
     TF_ROOT: ${DEV_APPS_REL_DIR}
     TF_STATE_NAME: ${DEV_APPS_REL_TF_STATE_NAME}
@@ -575,10 +575,10 @@ Dev-7-Apps-Rel-Apply:
   tags:
     - g1
 
-Dev-7-Apps-Rel-Destroy:
+Rel-7-Apps-Destroy:
   extends: .destroy.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [Dev-7-Apps-Rel-Plan]
+  needs: [Rel-7-Apps-Plan]
   variables:
     TF_ROOT: ${DEV_APPS_REL_DIR}
     TF_STATE_NAME: ${DEV_APPS_REL_TF_STATE_NAME}
