@@ -1,9 +1,9 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "AppsEu" {
-  source = "../../Modules/Apps/2.2.0"
+  source = "../../Modules/Apps/3.0.0"
 
   ProjectName  = local.ProjectName
-  UniqueName   = "eu"
+#  UniqueName   = "eu"
   GCPProjectID = local.ProjectID
   GCPZone      = var.GCPZone
 
@@ -18,8 +18,6 @@ module "AppsEu" {
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = false
-
-  CloudSQLProxy_Enable = false
 
   Prometheus_StorageClassName = "standard"
   Prometheus_StorageSize      = "20Gi"
