@@ -29,8 +29,6 @@ module "AppsDev" {
   Robusta_SlackChannel          = "sk-sre-info"
   Robusta_NotifyDeploymentEvent = true
 
-  CloudSQLProxy_Enable = true
-
   ArgoCD_Enable               = true
   ArgoCD_EnableSelfHeal       = false
   ArgoCD_EnableIngress        = true
