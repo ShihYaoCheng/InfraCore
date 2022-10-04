@@ -19,8 +19,6 @@ module "Apps" {
   CertManager_Enable         = true
   CertManager_CreateProdCert = true
 
-  CloudSQLProxy_Enable = true
-
   Prometheus_StorageClassName = "standard"
   Prometheus_StorageSize      = "60Gi"
   Prometheus_Retention        = "60d"
