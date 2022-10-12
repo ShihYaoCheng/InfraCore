@@ -23,6 +23,6 @@ module "GKE-EU" {
   GKE-MaxNum-4C16G        = 0
   GKE-NodeNum-4C16G       = 0
 
-  GKE-ControlPlaneCIDR = "10.0.0.0/28"
+  GKE-ControlPlaneCIDR = "10.0.0.16/28"
 }
 
