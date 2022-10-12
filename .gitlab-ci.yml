@@ -975,6 +975,8 @@ QA-8-LB-Plan:
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
+  tags:
+    - g1
 
 QA-8-LB-Apply:
   extends: .apply.with.var.file
@@ -991,6 +993,8 @@ QA-8-LB-Apply:
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
+  tags:
+    - g1
 
 QA-8-LB-Destroy:
   extends: .destroy.with.var.file
@@ -1007,6 +1011,8 @@ QA-8-LB-Destroy:
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
+  tags:
+    - g1
 
 
 
@@ -1230,6 +1236,9 @@ Prod-5-Apps-Plan:
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
       when: manual
+  tags:
+    - g1
+  
 
 Prod-5-Apps-Apply:
   extends: .apply.with.var.file
@@ -1245,6 +1254,8 @@ Prod-5-Apps-Apply:
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
       when: manual
+  tags:
+    - g1
 
 Prod-5-Apps-Destroy:
   extends: .destroy.with.var.file
@@ -1260,6 +1271,8 @@ Prod-5-Apps-Destroy:
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
       when: manual
+  tags:
+    - g1
 
 
 #============================#
@@ -1326,6 +1339,8 @@ Prod-7-Apps-Global-Plan:
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
       when: manual
+  tags:
+    - g1
 
 Prod-7-Apps-Global-Apply:
   extends: .apply.with.var.file
@@ -1341,6 +1356,8 @@ Prod-7-Apps-Global-Apply:
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
       when: manual
+  tags:
+    - g1
 
 Prod-7-Apps-Global-Destroy:
   extends: .destroy.with.var.file
@@ -1356,6 +1373,8 @@ Prod-7-Apps-Global-Destroy:
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
       when: manual
+  tags:
+    - g1
 
 
 #==============================#
@@ -1374,6 +1393,8 @@ Prod-8-LB-Plan:
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
       when: manual
+  tags:
+    - g1
 
 Prod-8-LB-Apply:
   extends: .apply.with.var.file
@@ -1389,6 +1410,8 @@ Prod-8-LB-Apply:
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
       when: manual
+  tags:
+    - g1
 
 Prod-8-LB-Destroy:
   extends: .destroy.with.var.file
@@ -1404,6 +1427,8 @@ Prod-8-LB-Destroy:
   rules:
     - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
       when: manual
+  tags:
+    - g1
 
 
 
