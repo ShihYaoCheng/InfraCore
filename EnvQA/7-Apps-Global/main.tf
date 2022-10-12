@@ -20,7 +20,7 @@ module "Apps" {
   CertManager_CreateProdCert = true
 
   Prometheus_StorageClassName = "standard"
-  Prometheus_StorageSize      = "80Gi"
+  Prometheus_StorageSize      = "60Gi"
   Prometheus_Retention        = "30d"
   Grafana_AdminPassword       = "gra4422"
 
