@@ -809,6 +809,8 @@ QA-5-Apps-Plan:
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
+  tags:
+    - g1
 
 QA-5-Apps-Apply:
   extends: .apply.with.var.file
@@ -825,6 +827,8 @@ QA-5-Apps-Apply:
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
+  tags:
+    - g1
 
 QA-5-Apps-Destroy:
   extends: .destroy.with.var.file
@@ -841,6 +845,8 @@ QA-5-Apps-Destroy:
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
+  tags:
+    - g1
 
 
 #============================#
@@ -912,6 +918,8 @@ QA-7-Apps-Global-Plan:
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
+  tags:
+    - g1
 
 QA-7-Apps-Global-Apply:
   extends: .apply.with.var.file
@@ -928,6 +936,8 @@ QA-7-Apps-Global-Apply:
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
+  tags:
+    - g1
 
 QA-7-Apps-Global-Destroy:
   extends: .destroy.with.var.file
@@ -944,6 +954,8 @@ QA-7-Apps-Global-Destroy:
 #  rules:
 #    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
 #      when: manual
+  tags:
+    - g1
 
 
 #============================#
