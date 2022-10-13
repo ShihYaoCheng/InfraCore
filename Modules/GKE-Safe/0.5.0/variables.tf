@@ -54,6 +54,10 @@ variable "GKE-Labels" {
 #  default = {"name"="sre"}
 }
 
+variable "GKE-CreateServiceAccount" {
+  type = bool
+}
+
 variable "GKE-NodeSizeGB" {
   type = number
 }

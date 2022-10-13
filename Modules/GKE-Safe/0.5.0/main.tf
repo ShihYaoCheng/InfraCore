@@ -52,7 +52,10 @@ module "GKE-PrivateCluster" {
     all = ["gke-worker-node"]
   }
 
+  create_service_account = var.GKE-CreateServiceAccount 
+
   initial_node_count = 0
+
   node_pools    = [
     {
       name         = "pool-e2-standard-2"
