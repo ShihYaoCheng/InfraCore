@@ -6,7 +6,7 @@
 # https://github.com/terraform-google-modules/terraform-google-kubernetes-engine/tree/v23.0.0/modules/private-cluster
 module "GKE-PrivateCluster" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/private-cluster"
-  version = "23.1.0"
+  version = "23.2.0"
 
   name              = var.ProjectName
   network           = var.ProjectName
