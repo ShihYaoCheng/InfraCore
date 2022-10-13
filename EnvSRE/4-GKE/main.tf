@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "GKE-TW" {
-  source = "../../Modules/GKE-Safe/0.4.0/"
+  source = "../../Modules/GKE-Safe/0.5.0/"
 
   ProjectName = local.ProjectName
 
@@ -12,8 +12,10 @@ module "GKE-TW" {
   GKE-Zones    = [local.GCPZone]
   GKE-Labels   = { "name" = "sre" }
 
-  GKE-ControlPlaneCIDR   = "10.0.0.0/28"
-  GKE-NodeSizeGB = 30
+  GKE-ControlPlaneCIDR     = "10.0.0.0/28"
+  GKE-CreateServiceAccount = true
+
+  GKE-NodeSizeGB         = 30
   GKE-CheapNodePool-2C8G = true
   GKE-NodePoolScale-2C8G = false
   GKE-MaxNum-2C8G        = 0

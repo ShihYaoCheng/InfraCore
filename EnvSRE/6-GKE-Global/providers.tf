@@ -5,3 +5,19 @@ provider "google" {
   zone    = local.GCPZone   # assign default value.
   credentials = file("../../../keys/dev-gitlab-sk-infra-gke.json")
 }
+
+data "google_client_config" "default" {}
+
+provider "helm" {
+  kubernetes {
+    host                   = "https://${module.GKE-EU.API-Endpoint}"
+    token                  = data.google_client_config.default.access_token
+    cluster_ca_certificate = base64decode(module.GKE-EU.CA-Certificate)
+  }
+}
+
+provider "kubernetes" {
+  host = "https://${module.GKE-EU.API-Endpoint}"
+  token = data.google_client_config.default.access_token
+  cluster_ca_certificate = base64decode(module.GKE-EU.CA-Certificate)
+}
