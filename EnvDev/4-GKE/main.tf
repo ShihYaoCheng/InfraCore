@@ -1,8 +1,8 @@
 ﻿module "GKE-TW-Dev" {
-  source = "../../Modules/GKE-Safe/0.4.0"
+  source = "../../Modules/GKE-Safe/0.5.0"
 
   ProjectName = local.ProjectName
-  UniqueName   = "TW-Dev"
+  UniqueName  = "TW-Dev"
 
   GCPProjectID = local.ProjectID
   GCPRegion    = local.GCPRegion
@@ -10,11 +10,12 @@
   GKE-Zones    = ["asia-east1-a"]
   GKE-Labels   = { "name" = "dev" }
 
-  GKE-ControlPlaneCIDR = "10.0.0.0/28"
-  GKE-APIName          = local.GKE-API-TW-Dev
-  GKE-CAName           = local.GKE-CA-TW-Dev
+  GKE-ControlPlaneCIDR     = "10.0.0.0/28"
+  GKE-APIName              = local.GKE-API-TW-Dev
+  GKE-CAName               = local.GKE-CA-TW-Dev
+  GKE-CreateServiceAccount = true
 
-  GKE-NodeSizeGB = 70
+  GKE-NodeSizeGB         = 70
   GKE-CheapNodePool-2C8G = true
   GKE-NodePoolScale-2C8G = false
   GKE-MaxNum-2C8G        = 3
