@@ -53,8 +53,8 @@ module "AppsEu" {
   ArgoCD_AppOfficialWebBranchOrTag = "main"
 
   ArgoCD_BackstageHelmValueFiles   = "{values-sre.yaml}"
-  ArgoCD_BattleHelmValueFiles      = "{values-sre.yaml\\, template-values-neg.yaml}"
-  ArgoCD_FileHelmValueFiles        = "{values-sre.yaml\\, template-values-neg.yaml}"
+  ArgoCD_BattleHelmValueFiles      = "{values-sre.yaml\\, EnableNEG.yaml}"
+  ArgoCD_FileHelmValueFiles        = "{values-sre.yaml\\, EnableNEG.yaml}"
   ArgoCD_NFTHelmValueFiles         = "{values-sre.yaml}"
   ArgoCD_TableHelmValueFiles       = "{values-sre.yaml}"
   ArgoCD_UserHelmValueFiles        = "{values-sre.yaml}"
