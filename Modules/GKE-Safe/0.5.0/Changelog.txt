@@ -1,4 +1,8 @@
-﻿0.4.0
+﻿0.5.0
+Add variable: GKE-CreateServiceAccount
+Upgrade CloudSQL proxy to 1.32.0.
+
+0.4.0
 Add variable: GKE-NodeSizeGB.
 
 0.3.0
