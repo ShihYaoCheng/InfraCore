@@ -1,9 +1,9 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "AppsTw" {
-  source = "../../Modules/Apps/2.1.0"
+  source = "../../Modules/Apps/3.0.0"
 
   ProjectName  = local.ProjectName
-  UniqueName   = "tw"
+#  UniqueName   = "tw"
   GCPProjectID = local.ProjectID
   GCPZone      = local.GCPZone
 
@@ -25,11 +25,11 @@ module "AppsTw" {
   Robusta_NotifyDeploymentEvent = true
 
   Prometheus_StorageClassName = "standard"
-  Prometheus_StorageSize      = "800Gi"
+  Prometheus_StorageSize      = "300Gi"
   Prometheus_Retention        = "90d"
   Grafana_AdminPassword       = var.GrafanaAdminPassword
 
-  CloudSQLProxy_Enable = true
+#  CloudSQLProxy_Enable = true
 
   ArgoCD_Enable               = true
   ArgoCD_EnableSelfHeal       = true
