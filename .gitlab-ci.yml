@@ -48,10 +48,10 @@ stages:
 
 image:
   # https://gitlab.com/gitlab-org/terraform-images/container_registry/2018822
-  name: registry.gitlab.com/gitlab-org/terraform-images/releases/1.0:v0.31.0
+#  name: registry.gitlab.com/gitlab-org/terraform-images/releases/1.0:v0.31.0
 #  name: registry.gitlab.com/gitlab-org/terraform-images/releases/1.0:latest
   # https://gitlab.com/gitlab-org/terraform-images/container_registry/3083041
-#  name: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
+  name: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
 
 .plan:
   stage: plan
