@@ -11,8 +11,7 @@
   CloudSQLBackstagePassword = var.CloudSQLBackstagePassword
   CloudSQLUserPassword      = var.CloudSQLUserPassword
 
-#  CloudSQLMachine                   = "db-n1-standard-2"
-  CloudSQLMachine                   = "db-g1-small"
+  CloudSQLMachine                   = "db-n1-standard-1"
   CloudSQLEnableDiskAutoResize      = true
   CloudSQLEnableAutoBackup          = true
   CloudSQLEnablePointInTimeRecovery = true
