@@ -56,7 +56,7 @@ module "Apps-Rel" {
   ArgoCD_BattleHelmValueFiles      = "{values-v2.10.1.yaml\\, EnableIngress.yaml}"
   ArgoCD_FileHelmValueFiles        = "{values-v2.10.1.yaml\\, EnableIngress.yaml}"
   ArgoCD_NFTHelmValueFiles         = "{values-beta.yaml}"
-  ArgoCD_TableHelmValueFiles       = "{values-v2.10.0.yaml\\, EnableIngressReliability.yaml}"
+  ArgoCD_TableHelmValueFiles       = "{values-v2.10.1.yaml\\, EnableIngressReliability.yaml}"
   ArgoCD_UserHelmValueFiles        = "{values-v2.10.1.yaml\\, SetServerName-Release.yaml\\, EnableIngressReliability.yaml\\, ConnectRelDB.yaml}"
   ArgoCD_OfficialWebHelmValueFiles = "{values-beta.yaml}"
 
