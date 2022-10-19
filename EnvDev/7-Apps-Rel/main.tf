@@ -3,7 +3,6 @@ module "Apps-Rel" {
   source = "../../Modules/Apps/3.0.0"
 
   ProjectName  = local.ProjectName
-#  UniqueName   = "TW-Rel"
   GCPProjectID = local.ProjectID
   GCPZone      = "asia-east1-b"
 
@@ -54,11 +53,11 @@ module "Apps-Rel" {
   ArgoCD_AppOfficialWebBranchOrTag = "main"
 
   ArgoCD_BackstageHelmValueFiles   = "{values-main.yaml}"
-  ArgoCD_BattleHelmValueFiles      = "{values-v2.10.0.yaml\\, EnableIngress.yaml}"
-  ArgoCD_FileHelmValueFiles        = "{values-v2.10.0.yaml\\, EnableIngress.yaml}"
+  ArgoCD_BattleHelmValueFiles      = "{values-v2.10.1.yaml\\, EnableIngress.yaml}"
+  ArgoCD_FileHelmValueFiles        = "{values-v2.10.1.yaml\\, EnableIngress.yaml}"
   ArgoCD_NFTHelmValueFiles         = "{values-beta.yaml}"
   ArgoCD_TableHelmValueFiles       = "{values-v2.10.0.yaml\\, EnableIngressReliability.yaml}"
-  ArgoCD_UserHelmValueFiles        = "{values-v2.10.0.yaml\\, SetServerName-Release.yaml\\, EnableIngressReliability.yaml\\, ConnectRelDB.yaml}"
+  ArgoCD_UserHelmValueFiles        = "{values-v2.10.1.yaml\\, SetServerName-Release.yaml\\, EnableIngressReliability.yaml\\, ConnectRelDB.yaml}"
   ArgoCD_OfficialWebHelmValueFiles = "{values-beta.yaml}"
 
   ArgoCD_BackstageSqlPassword = "backstage1234"
