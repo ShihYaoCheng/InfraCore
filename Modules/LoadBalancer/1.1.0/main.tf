@@ -1,4 +1,5 @@
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_firewall
+# Add firewall rule to VPC network.
 resource "google_compute_firewall" "default" {
   name    = "${var.ProjectName}-allow-lb-health-check"
   network = var.ProjectName
@@ -12,12 +13,6 @@ resource "google_compute_firewall" "default" {
   # https://cloud.google.com/load-balancing/docs/https/troubleshooting-ext-https-lbs#load_balanced_traffic_does_not_have_the_source_address_of_the_original_client
   source_ranges = ["130.211.0.0/22", "35.191.0.0/16"]
   target_tags   = ["gke-worker-node"]
-}
-
-# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_global_address
-resource "google_compute_global_address" "default" {
-  name         = var.ProjectName
-  address_type = "EXTERNAL"
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_health_check
@@ -52,21 +47,11 @@ data "kubernetes_service" "BattleTW" {
   provider = kubernetes.tw
 }
 
-#data "google_storage_bucket_object_content" "NEGBattle-TW" {
-#  bucket = var.ProjectName
-#  name   = "NEGBattleName-${var.NEGZone-TW}"
-#}
-
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_network_endpoint_group
 data "google_compute_network_endpoint_group" "NEGBattle-TW" {
   name = jsondecode(data.kubernetes_service.BattleTW.metadata[0].annotations["cloud.google.com/neg-status"])["network_endpoint_groups"]["80"]
   zone = var.ZoneTW
 }
-
-#data "google_storage_bucket_object_content" "NEGBattle-EU" {
-#  bucket = var.ProjectName
-#  name   = "NEGBattleName-${var.NEGZone-EU}"
-#}
 
 data "kubernetes_service" "BattleEU" {
   metadata {
@@ -121,11 +106,6 @@ resource "google_compute_backend_service" "battle" {
   }
 }
 
-#data "google_storage_bucket_object_content" "NEGFile-TW" {
-#  bucket = var.ProjectName
-#  name   = "NEGFileName-${var.NEGZone-TW}"
-#}
-
 data "kubernetes_service" "FileTW" {
   metadata {
     name      = "file"
@@ -140,11 +120,6 @@ data "google_compute_network_endpoint_group" "NEGFile-TW" {
   name = jsondecode(data.kubernetes_service.FileTW.metadata[0].annotations["cloud.google.com/neg-status"])["network_endpoint_groups"]["80"]
   zone = var.ZoneTW
 }
-
-#data "google_storage_bucket_object_content" "NEGFile-EU" {
-#  bucket = var.ProjectName
-#  name   = "NEGFileName-${var.NEGZone-EU}"
-#}
 
 data "kubernetes_service" "FileEU" {
   metadata {
@@ -200,6 +175,7 @@ resource "google_compute_backend_service" "file" {
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_url_map
+# https://cloud.google.com/load-balancing/docs/https/traffic-management-global#simple_host_and_path_rule
 resource "google_compute_url_map" "default" {
   name            = var.ProjectName
   default_service = google_compute_backend_service.battle.id
@@ -229,6 +205,12 @@ resource "google_compute_url_map" "default" {
 resource "google_compute_target_http_proxy" "default" {
   name    = var.ProjectName
   url_map = google_compute_url_map.default.id
+}
+
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_global_address
+resource "google_compute_global_address" "default" {
+  name         = var.ProjectName
+  address_type = "EXTERNAL"
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_global_forwarding_rule
