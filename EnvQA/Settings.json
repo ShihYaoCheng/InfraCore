@@ -7,21 +7,21 @@
   "AppsVersion": 
   {
     "Backstage": "main",
-    "Battle": "main",
-    "File": "main",
-    "NFT": "main",
-    "Table": "main",
-    "User": "main",
+    "Battle": "v2.10.1",
+    "File": "v2.10.1",
+    "NFT": "v2.10.0",
+    "Table": "v2.10.1",
+    "User": "v2.10.1",
     "OfficialWeb": "main"
   },
   "HelmPathValueFiles": 
   {
     "Backstage": "{values-prod.yaml}",
-    "Battle": "{values-v2.10.0.yaml\\, EnableNEG.yaml}",
-    "File": "{values-v2.10.0.yaml\\, EnableNEG.yaml}",
+    "Battle": "{values-prod.yaml}",
+    "File": "{values-prod.yaml}",
     "NFT": "{values-beta.yaml}",
-    "Table": "{values-v2.10.0.yaml\\, EnableIngressReliability.yaml}",
-    "User": "{values-v2.10.0.yaml\\, SetServerName-Beta.yaml\\, EnableIngressReliability.yaml}",
+    "Table": "{values-prod.yaml}",
+    "User": "{values-prod.yaml\\, SetServerName-Beta.yaml}",
     "OfficialWeb": "{values-beta.yaml}"
   },
   "Domain": 
@@ -29,9 +29,9 @@
     "Name": "ponponsnake.com",
     "SubDomain":
     {
-      "TW": "v2.10.0",
-      "EU": "eu.v2.10.0",
-      "LoadBalancer":"global.v2.10.0" 
+      "TW": "v2.10.1",
+      "EU": "eu.v2.10.1",
+      "LoadBalancer":"global.v2.10.1" 
     }
   },
   "GKE": {
