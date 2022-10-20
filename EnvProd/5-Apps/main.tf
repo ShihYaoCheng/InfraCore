@@ -9,7 +9,7 @@ module "AppsTw" {
 
   GodaddyDomainName = local.DomainName
   GodaddySubDomainName1 = local.SubDomainName
-  GodaddySubDomainName2 = "@"
+  GodaddySubDomainName2 = "www"
   GodaddyAPIKey      = var.GodaddyAPIKey
   GodaddyAPISecret   = var.GodaddyAPISecret
   ArgoCD_OfficialWebRedirectEnabled = true
