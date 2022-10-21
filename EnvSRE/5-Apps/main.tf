@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "AppsDev" {
-  source = "../../Modules/Apps/3.0.1"
+  source = "../../Modules/Apps/3.1.0"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
@@ -11,7 +11,7 @@ module "AppsDev" {
   GodaddySubDomainName2              = "@"
   GodaddyAPIKey                      = var.GodaddyAPIKey
   GodaddyAPISecret                   = var.GodaddyAPISecret
-  ArgoCD_OfficialWebRedirectEnabled  = "true"
+  ArgoCD_OfficialWebRedirectEnabled  = true
   ArgoCD_OfficialWebRedirectSrcFQDN  = "origingaia.com"
   ArgoCD_OfficialWebRedirectDestFQDN = "test.origingaia.com"
 

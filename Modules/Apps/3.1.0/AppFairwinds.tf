@@ -23,6 +23,7 @@ resource "helm_release" "Goldilocks" {
 # https://github.com/FairwindsOps/charts/tree/master/stable/polaris
 # Best Practices for Kubernetes Workload Configuration.(check YAML files)
 resource "helm_release" "Polaris" {
+  count = 0
   name             = "polaris"
   repository       = "https://charts.fairwinds.com/stable"
   chart            = "polaris"
