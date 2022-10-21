@@ -1,5 +1,6 @@
 ﻿0.6.0
 Upgrade Traefik to 17.0.3.
+Upgrade Kubernetes control plane to 1.23.12-gke.1600.
 
 0.5.0
 Add variable: GKE-CreateServiceAccount
