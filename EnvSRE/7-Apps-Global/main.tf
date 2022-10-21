@@ -1,9 +1,8 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "AppsEu" {
-  source = "../../Modules/Apps/3.0.0"
+  source = "../../Modules/Apps/3.0.1"
 
   ProjectName  = local.ProjectName
-#  UniqueName   = "eu"
   GCPProjectID = local.ProjectID
   GCPZone      = var.GCPZone
 

@@ -9,7 +9,7 @@ resource "helm_release" "Robusta" {
   name             = "robusta"
   repository       = "https://robusta-charts.storage.googleapis.com"
   chart            = "robusta"
-  version          = "~>0.10.5"
+  version          = "~>0.10.6"
   namespace        = "robusta"
 
   values = [

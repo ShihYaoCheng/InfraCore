@@ -35,6 +35,7 @@ apps:
     branchOrTag: main
     valueFiles: []
     redirect:
+      enabled: "false"
       srcFQDN: ""
       destFQDN: ""
   nft:

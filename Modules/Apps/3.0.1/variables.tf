@@ -306,7 +306,8 @@ variable "ArgoCD_AppNFTBranchOrTag" {
 }
 
 variable "ArgoCD_OfficialWebRedirectEnabled" {
-  type = bool
+  type = string
+  description = "possible values: true, false"
 }
 
 variable "ArgoCD_OfficialWebRedirectSrcFQDN" {

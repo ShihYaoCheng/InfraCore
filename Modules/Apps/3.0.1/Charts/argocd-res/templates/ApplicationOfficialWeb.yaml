@@ -15,10 +15,12 @@ spec:
       # and decide which Helm binary to use automatically. This field can be either 'v2' or 'v3'.
       version: v3
       valueFiles: {{ .Values.apps.officialWeb.valueFiles }}
-      parameters: 
-        - name: ingress.redirect.srcFQDN
+      parameters:
+        - name: ingress.middlewares.redirect.enabled
+          value: {{ .Values.apps.officialWeb.redirect.enabled }}
+        - name: ingress.middlewares.redirect.srcFQDN
           value: {{ .Values.apps.officialWeb.redirect.srcFQDN }}
-        - name: ingress.redirect.destFQDN
+        - name: ingress.middlewares.redirect.destFQDN
           value: {{ .Values.apps.officialWeb.redirect.destFQDN }}
   destination:
     server: https://kubernetes.default.svc
