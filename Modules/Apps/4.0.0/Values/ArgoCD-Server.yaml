@@ -1,0 +1,9 @@
+﻿server:
+  # https://pet2cattle.com/2022/03/argocd-redirect-loop
+  # https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#ui-base-path
+  extraArgs: ${serverExtraArgs}
+  
+  # -- Argo CD server log format: Either `text` or `json`
+  logFormat: json
+  
+  replicas: 2

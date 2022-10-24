@@ -1,0 +1,55 @@
+﻿apiVersion: batch/v1
+kind: Job
+metadata:
+  name: godaddy-{{uuidv4}}
+spec:
+  activeDeadlineSeconds: 60
+  ttlSecondsAfterFinished: 60
+  template:
+    spec:
+      containers:
+        - name: test
+          image: curlimages/curl
+          command: ["/bin/sh","-c"]
+          args:
+            - |
+              echo "domainName: {{.Values.domainName}}"
+              echo "subDomainName1: {{.Values.subDomainName1}}"
+              echo "subDomainName2: {{.Values.subDomainName2}}"
+              echo "ip: {{.Values.ip}}"
+              
+              curl -X DELETE https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/A/{{ required "provide subDomainName1" .Values.subDomainName1}} -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)'
+              curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": {{required "provide subDomainName1" .Values.subDomainName1 | quote}}, "ttl": 600, "type": "A"}]'
+              
+              if [[ ! -z "{{.Values.subDomainName2}}" ]] 
+              then
+                curl -X DELETE https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/A/{{ .Values.subDomainName2}} -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)'
+                curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": {{ .Values.subDomainName2 | quote}}, "ttl": 600, "type": "A"}]'
+              fi
+              
+          env:
+            - name: GodaddyKey
+              value: {{ .Values.godaddy.key }} 
+            - name: GodaddySecret
+              value: {{ .Values.godaddy.secret }}
+      restartPolicy: Never  
+      
+---
+{{/*apiVersion: batch/v1*/}}
+{{/*kind: Job*/}}
+{{/*metadata:*/}}
+{{/*  name: godaddy*/}}
+{{/*spec:*/}}
+{{/*  activeDeadlineSeconds: 60*/}}
+{{/*  ttlSecondsAfterFinished: 3600*/}}
+{{/*  template:*/}}
+{{/*    spec:*/}}
+{{/*      containers:*/}}
+{{/*        - name: test*/}}
+{{/*          image: curlimages/curl*/}}
+{{/*          command: ["/bin/sh","-c"]*/}}
+{{/*          args:*/}}
+{{/*            - >*/}}
+{{/*              curl -X DELETE https://api.godaddy.com/v1/domains/origingaia.com/records/A/ass -H 'Authorization: sso-key dLDHTMRqNn3i_BGrKtXeXzd2woS1ZyfDqrp:CQr3FX2Vp3aJ4oWx1eZPk3' &&*/}}
+{{/*              curl -X PATCH https://api.godaddy.com/v1/domains/origingaia.com/records/ -H 'Authorization: sso-key dLDHTMRqNn3i_BGrKtXeXzd2woS1ZyfDqrp:CQr3FX2Vp3aJ4oWx1eZPk3' -H 'Content-Type: application/json' -d '[{"data": "10.1.1.10", "name": "ass", "ttl": 600, "type": "A"}]'*/}}
+{{/*      restartPolicy: Never*/}}  
