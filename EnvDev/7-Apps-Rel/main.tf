@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "Apps-Rel" {
-  source = "../../Modules/Apps/3.0.0"
+  source = "../../Modules/Apps/3.1.0"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
