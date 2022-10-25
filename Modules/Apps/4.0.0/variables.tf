@@ -24,25 +24,58 @@ variable "GCPZone" {
 # Godaddy                   #
 #============================
 locals {
-  GodaddyFQDN1 = var.GodaddySubDomainName1 != "@" ? "${var.GodaddySubDomainName1}.${var.GodaddyDomainName}" : var.GodaddyDomainName
-  GodaddyFQDN2 = var.GodaddySubDomainName2 != "@" ? "${var.GodaddySubDomainName2}.${var.GodaddyDomainName}" : var.GodaddyDomainName
-  GodaddyFQDNs = var.GodaddySubDomainName2 != "" ? "{${local.GodaddyFQDN1}\\, ${local.GodaddyFQDN2}}" : "{${local.GodaddyFQDN1}}"
+#  GodaddyFQDN1 = var.GodaddySubDomainName1 != "@" ? "${var.GodaddySubDomainName1}.${var.GodaddyDomainName}" : var.GodaddyDomainName
+#  GodaddyFQDN2 = var.GodaddySubDomainName2 != "@" ? "${var.GodaddySubDomainName2}.${var.GodaddyDomainName}" : var.GodaddyDomainName
+#  GodaddyFQDNs = var.GodaddySubDomainName2 != "" ? "{${local.GodaddyFQDN1}\\, ${local.GodaddyFQDN2}}" : "{${local.GodaddyFQDN1}}"
+
+  
+  # https://stackoverflow.com/questions/59381410/how-can-i-convert-a-list-to-a-string-in-terraform
+
+  # GodaddySubDomainNames = ["test1","test2","test3"]
+  # v1 = "test1,test2,test3"
+  # subDomains = "test1\\,test2\\,test3"
+  # v2 = ["test1.apple.com", "test2.apple.com", "test3.apple.com"]
+  # v3 = "test1.apple.com, test2.apple.com, test3.apple.com"
+  # GodaddyFQDNs = "{test1.apple.com\\, test2.apple.com\\, test3.apple.com}"
+
+  # https://developer.hashicorp.com/terraform/language/functions/join
+  # join: convert an array to a string.
+  v1 = join(",", var.GodaddySubDomainNames)
+
+  # https://developer.hashicorp.com/terraform/language/functions/replace
+  subDomains = replace(local.v1, ",", "\\,")
+
+  # https://developer.hashicorp.com/terraform/language/functions/formatlist
+  # produces a list of strings.
+  v2 = formatlist("%s.%s", var.GodaddySubDomainNames, var.GodaddyDomainName)
+
+  # https://developer.hashicorp.com/terraform/language/functions/join
+  # join: convert an array to a string.
+  v3 = join(", ", local.v2)
+
+  # https://developer.hashicorp.com/terraform/language/functions/format
+  v4 = format("{%s}", local.v3)
+
+  # https://developer.hashicorp.com/terraform/language/functions/replace
+  GodaddyFQDNs = replace(local.v4, ",", "\\,")
 }
+
+#output "subDomains" {
+#  value = local.subDomains
+#}
+#
+#output "GodaddyFQDNs" {
+#  value = local.GodaddyFQDNs
+#}
 
 variable "GodaddyDomainName" {
   type = string
   #  default = "origingaia.com"
 }
 
-variable "GodaddySubDomainName1" {
-  type        = string
-  #  default = "dev"
-  description = "@ = empty"
-}
-
-variable "GodaddySubDomainName2" {
-  type        = string
-  #  default = "@"
+variable "GodaddySubDomainNames" {
+  type        = list(string)
+  #  default = ["dev", "www", "acl"]
   description = "@ = empty"
 }
 

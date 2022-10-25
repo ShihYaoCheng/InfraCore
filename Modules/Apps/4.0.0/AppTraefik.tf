@@ -39,13 +39,8 @@ resource "helm_release" "Godaddy" {
   }
 
   set {
-    name  = "subDomainName1"
-    value = var.GodaddySubDomainName1
-  }
-
-  set {
-    name  = "subDomainName2"
-    value = var.GodaddySubDomainName2
+    name  = "subDomainNames"
+    value = local.subDomains
   }
   
   set {

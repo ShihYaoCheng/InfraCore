@@ -1,14 +1,13 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "AppsEu" {
-  source = "../../Modules/Apps/3.1.0"
+  source = "../../Modules/Apps/4.0.0"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
   GCPZone      = var.GCPZone
 
   GodaddyDomainName                  = "origingaia.com"
-  GodaddySubDomainName1              = "eu.test"
-  GodaddySubDomainName2              = ""
+  GodaddySubDomainNames              = ["eu.test"]
   GodaddyAPIKey                      = var.GodaddyAPIKey
   GodaddyAPISecret                   = var.GodaddyAPISecret
   ArgoCD_OfficialWebRedirectEnabled  = false

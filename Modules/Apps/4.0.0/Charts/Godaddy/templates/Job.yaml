@@ -11,27 +11,43 @@ spec:
         - name: test
           image: curlimages/curl
           command: ["/bin/sh","-c"]
+          # https://linuxhint.com/bash_loop_list_strings/
+          # https://stackoverflow.com/questions/17029902/using-curl-post-with-variables-defined-in-bash-script-functions
           args:
             - |
               echo "domainName: {{.Values.domainName}}"
-              echo "subDomainName1: {{.Values.subDomainName1}}"
-              echo "subDomainName2: {{.Values.subDomainName2}}"
+              echo "subDomainNames: $(SubDomainNames)"
               echo "ip: {{.Values.ip}}"
+
+              for sub in ${SubDomainNames//,/ }
+              do
+                echo $sub
+                curl -X DELETE https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/A/${sub} -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)'
+{{/*                curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": "test1", "ttl": 600, "type": "A"}]'*/}}
               
-              curl -X DELETE https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/A/{{ required "provide subDomainName1" .Values.subDomainName1}} -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)'
-              curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": {{required "provide subDomainName1" .Values.subDomainName1 | quote}}, "ttl": 600, "type": "A"}]'
+                curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": "'"${sub}"'", "ttl": 600, "type": "A"}]'
+{{/*                curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": "$sub", "ttl": 600, "type": "A"}]'*/}}
+{{/*                curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": "$(sub)", "ttl": 600, "type": "A"}]'*/}}
               
-              if [[ ! -z "{{.Values.subDomainName2}}" ]] 
-              then
-                curl -X DELETE https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/A/{{ .Values.subDomainName2}} -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)'
-                curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": {{ .Values.subDomainName2 | quote}}, "ttl": 600, "type": "A"}]'
-              fi
+{{/*                curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": ${sub}, "ttl": 600, "type": "A"}]'*/}}
+              done
+              
+{{/*              curl -X DELETE https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/A/{{ required "provide subDomainName1" .Values.subDomainName1}} -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)'*/}}
+{{/*              curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": {{required "provide subDomainName1" .Values.subDomainName1 | quote}}, "ttl": 600, "type": "A"}]'*/}}
+{{/*              */}}
+{{/*              if [[ ! -z "{{.Values.subDomainName2}}" ]] */}}
+{{/*              then*/}}
+{{/*                curl -X DELETE https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/A/{{ .Values.subDomainName2}} -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)'*/}}
+{{/*                curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": {{ .Values.subDomainName2 | quote}}, "ttl": 600, "type": "A"}]'*/}}
+{{/*              fi*/}}
               
           env:
             - name: GodaddyKey
               value: {{ .Values.godaddy.key }} 
             - name: GodaddySecret
               value: {{ .Values.godaddy.secret }}
+            - name: SubDomainNames
+              value: {{ .Values.subDomainNames }}
       restartPolicy: Never  
       
 ---
