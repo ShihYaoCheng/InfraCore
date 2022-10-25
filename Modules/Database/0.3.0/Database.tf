@@ -21,3 +21,12 @@ resource "mysql_database" "Backstage" {
   default_character_set = "utf8mb4"
   default_collation     = "utf8mb4_0900_ai_ci"
 }
+
+resource "mysql_database" "BackstageRel" {
+  count = var.CloudSQLCreateReleaseUserAndDB ? 1 : 0
+  
+  depends_on            = [module.CloudSQL]
+  name                  = "BackstageRel"
+  default_character_set = "utf8mb4"
+  default_collation     = "utf8mb4_0900_ai_ci"
+}

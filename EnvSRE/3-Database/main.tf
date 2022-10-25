@@ -1,5 +1,5 @@
 ﻿module "database" {
-  source  = "../../Modules/Database/0.2.0"
+  source  = "../../Modules/Database/0.3.0"
 
   ProjectName = local.ProjectName
   GCPProjectID = local.ProjectID
@@ -15,5 +15,5 @@
   CloudSQLEnableHighlyAvailable = false
   CloudSQLAllowDeletion = true
   CloudSQLMachine = "db-g1-small"
-  CloudSQLCreateReleaseUserAndDB = false
+  CloudSQLCreateReleaseUserAndDB = true
 }
