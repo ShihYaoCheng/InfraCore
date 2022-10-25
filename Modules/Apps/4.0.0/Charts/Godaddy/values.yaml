@@ -5,7 +5,8 @@
 #domainName: "origingaia.com"
 domainName: ""
 
-# example: test.
+# example: "test1, test2"
+enablePlainSubDomainName: false
 #subDomainNames: "test1, test2"
 subDomainNames: ""
 

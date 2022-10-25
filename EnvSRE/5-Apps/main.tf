@@ -7,8 +7,8 @@ module "AppsDev" {
   GCPZone      = var.GCPZone
 
   GodaddyDomainName                  = "origingaia.com"
-#  GodaddySubDomainNames              = ["@", "test", "test1", "test2"]
-  GodaddySubDomainNames              = ["test", "test1", "test2"]
+  EnableGodaddyPlainDomain           = true
+  GodaddySubDomainNames              = ["test", "test1"]
   GodaddyAPIKey                      = var.GodaddyAPIKey
   GodaddyAPISecret                   = var.GodaddyAPISecret
   ArgoCD_OfficialWebRedirectEnabled  = true

@@ -1,4 +1,8 @@
-﻿3.1.0
+﻿4.0.0
+Add new variables: GodaddySubDomainNames, EnableGodaddyPlainDomain
+Remove variables: GodaddySubDomainName1, GodaddySubDomainName2
+
+3.1.0
 Upgrade helm charts.
 
 3.0.1

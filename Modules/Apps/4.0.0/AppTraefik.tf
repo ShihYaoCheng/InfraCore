@@ -39,8 +39,13 @@ resource "helm_release" "Godaddy" {
   }
 
   set {
+    name  = "enablePlainSubDomainName"
+    value = var.EnableGodaddyPlainDomain
+  }
+
+  set {
     name  = "subDomainNames"
-    value = local.subDomains
+    value = local.SubDomainsForGodaddyHelmValues
   }
   
   set {

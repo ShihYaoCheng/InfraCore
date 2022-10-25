@@ -34,43 +34,50 @@ locals {
   # GodaddySubDomainNames = ["test1","test2","test3"]
   # v1 = "test1,test2,test3"
   # subDomains = "test1\\,test2\\,test3"
-  # v2 = ["test1.apple.com", "test2.apple.com", "test3.apple.com"]
-  # v3 = "test1.apple.com, test2.apple.com, test3.apple.com"
-  # GodaddyFQDNs = "{test1.apple.com\\, test2.apple.com\\, test3.apple.com}"
+  
+  # v2 = ["test1.apple.com", "test2.apple.com"]
+  # v3 = ["test1.apple.com", "test2.apple.com", "apple.com"] if EnableGodaddyPlainDomain = true
+  # v4 = "test1.apple.com, test2.apple.com, apple.com"
+  # v5 = "{test1.apple.com, test2.apple.com, apple.com}"
+  # GodaddyFQDNs = "{apple.com\\, test1.apple.com\\, test2.apple.com}"
 
   # https://developer.hashicorp.com/terraform/language/functions/join
   # join: convert an array to a string.
   v1 = join(",", var.GodaddySubDomainNames)
 
   # https://developer.hashicorp.com/terraform/language/functions/replace
-  subDomains = replace(local.v1, ",", "\\,")
+  SubDomainsForGodaddyHelmValues = replace(local.v1, ",", "\\,")
 
   # https://developer.hashicorp.com/terraform/language/functions/formatlist
   # produces a list of strings.
   v2 = formatlist("%s.%s", var.GodaddySubDomainNames, var.GodaddyDomainName)
 
+  # https://developer.hashicorp.com/terraform/language/functions/concat
+  v3 = concat(local.v2, var.EnableGodaddyPlainDomain == true ? [var.GodaddyDomainName] : [])
+  
   # https://developer.hashicorp.com/terraform/language/functions/join
   # join: convert an array to a string.
-  v3 = join(", ", local.v2)
+  v4 = join(", ", local.v3)
 
   # https://developer.hashicorp.com/terraform/language/functions/format
-  v4 = format("{%s}", local.v3)
+  v5 = format("{%s}", local.v4)
 
   # https://developer.hashicorp.com/terraform/language/functions/replace
-  GodaddyFQDNs = replace(local.v4, ",", "\\,")
+  FQDNsForCertManager = replace(local.v5, ",", "\\,")
 }
 
-#output "subDomains" {
-#  value = local.subDomains
-#}
-#
-#output "GodaddyFQDNs" {
-#  value = local.GodaddyFQDNs
+#output "FQDNs" {
+#  value = local.FQDNsForCertManager
 #}
 
 variable "GodaddyDomainName" {
   type = string
   #  default = "origingaia.com"
+}
+
+variable "EnableGodaddyPlainDomain" {
+  type = bool
+  description = "Plain domain = @, for example: origingaia.com"
 }
 
 variable "GodaddySubDomainNames" {

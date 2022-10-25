@@ -5,6 +5,7 @@ metadata:
 spec:
   activeDeadlineSeconds: 60
   ttlSecondsAfterFinished: 60
+  completions: 1
   template:
     spec:
       containers:
@@ -16,21 +17,31 @@ spec:
           args:
             - |
               echo "domainName: {{.Values.domainName}}"
+              echo "EnablePlainSubDomainName: {{ .Values.enablePlainSubDomainName }}"
               echo "subDomainNames: $(SubDomainNames)"
               echo "ip: {{.Values.ip}}"
 
+              {{- if .Values.enablePlainSubDomainName }}
+              echo "Register @"
+              echo "Delete All A Records"
+              curl -X DELETE https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/A/@ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)'
+
+              echo "Add an A Record"
+              curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": "@", "ttl": 600, "type": "A"}]'
+              {{- end }}
+
               for sub in ${SubDomainNames//,/ }
               do
-                echo $sub
+                echo "Register SubDomain: $sub"
+                echo "Delete All A Records"
                 curl -X DELETE https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/A/${sub} -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)'
+              
+                echo "Add an A Record"
 {{/*                curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": "test1", "ttl": 600, "type": "A"}]'*/}}
-              
                 curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": "'"${sub}"'", "ttl": 600, "type": "A"}]'
-{{/*                curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": "$sub", "ttl": 600, "type": "A"}]'*/}}
-{{/*                curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": "$(sub)", "ttl": 600, "type": "A"}]'*/}}
-              
-{{/*                curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": ${sub}, "ttl": 600, "type": "A"}]'*/}}
               done
+
+
               
 {{/*              curl -X DELETE https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/A/{{ required "provide subDomainName1" .Values.subDomainName1}} -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)'*/}}
 {{/*              curl -X PATCH https://api.godaddy.com/v1/domains/{{ required "provide domainName" .Values.domainName}}/records/ -H 'Authorization: sso-key $(GodaddyKey):$(GodaddySecret)' -H 'Content-Type: application/json' -d '[{"data": {{ required "provide ip" .Values.ip | quote }}, "name": {{required "provide subDomainName1" .Values.subDomainName1 | quote}}, "ttl": 600, "type": "A"}]'*/}}
