@@ -8,12 +8,11 @@ module "AppsDev" {
 
   GodaddyDomainName                  = "origingaia.com"
   EnableGodaddyPlainDomain           = true
-  GodaddySubDomainNames              = ["test", "test1"]
+  GodaddySubDomainNames              = ["test", "test1", "www"]
   GodaddyAPIKey                      = var.GodaddyAPIKey
   GodaddyAPISecret                   = var.GodaddyAPISecret
   ArgoCD_OfficialWebRedirectEnabled  = true
-  ArgoCD_OfficialWebRedirectSrcFQDN  = "origingaia.com"
-  ArgoCD_OfficialWebRedirectDestFQDN = "test.origingaia.com"
+  ArgoCD_OfficialWebRedirectDestFQDN = "www.origingaia.com"
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = false

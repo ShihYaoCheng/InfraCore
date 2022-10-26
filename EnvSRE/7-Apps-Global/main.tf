@@ -10,8 +10,8 @@ module "AppsEu" {
   GodaddySubDomainNames              = ["eu.test"]
   GodaddyAPIKey                      = var.GodaddyAPIKey
   GodaddyAPISecret                   = var.GodaddyAPISecret
+  EnableGodaddyPlainDomain           = false
   ArgoCD_OfficialWebRedirectEnabled  = false
-  ArgoCD_OfficialWebRedirectSrcFQDN  = ""
   ArgoCD_OfficialWebRedirectDestFQDN = ""
 
   CertManager_Enable         = true

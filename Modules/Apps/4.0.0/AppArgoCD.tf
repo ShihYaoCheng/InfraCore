@@ -156,8 +156,8 @@ resource "helm_release" "ArgoCDResource" {
     value = var.ArgoCD_OfficialWebRedirectEnabled
   }
   set {
-    name  = "apps.officialWeb.redirect.srcFQDN"
-    value = var.ArgoCD_OfficialWebRedirectSrcFQDN
+    name  = "apps.officialWeb.redirect.domainName"
+    value = var.GodaddyDomainName
   }
   set {
     name  = "apps.officialWeb.redirect.destFQDN"

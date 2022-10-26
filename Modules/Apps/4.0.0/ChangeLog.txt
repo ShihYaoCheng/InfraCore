@@ -1,6 +1,11 @@
 ﻿4.0.0
 Add new variables: GodaddySubDomainNames, EnableGodaddyPlainDomain
-Remove variables: GodaddySubDomainName1, GodaddySubDomainName2
+Remove variables: GodaddySubDomainName1, GodaddySubDomainName2, ArgoCD_OfficialWebRedirectSrcFQDN
+
+1. The App module supports the subDomain Names array and can register multiple FQDN.
+2. The App module supports wildcard forwarding. When all requests come in, all request 
+forwarding to ArgoCD_OfficialWebRedirectDestFQDN. 
+
 
 3.1.0
 Upgrade helm charts.
