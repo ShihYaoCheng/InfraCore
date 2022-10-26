@@ -15,7 +15,7 @@
   },
   "HelmPathValueFiles":
   {
-    "Backstage": "{values-prod.yaml}",
+    "Backstage": "{values-v1.10.2.yaml\\, LineID-Production.yaml}",
     "Battle": "{values-prod.yaml}",
     "File": "{values-prod.yaml}",
     "NFT": "{values-prod.yaml}",
