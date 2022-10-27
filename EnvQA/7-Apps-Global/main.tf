@@ -66,5 +66,7 @@ module "Apps" {
   ArgoCD_UserSqlPassword      = "user1234"
 }
 
-
+output "Settings" {
+  value = local.Settings
+}
 

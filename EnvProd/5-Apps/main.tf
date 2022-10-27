@@ -67,5 +67,7 @@ module "AppsTw" {
   ArgoCD_UserSqlPassword      = var.UserSqlPassword
 }
 
-
+output "Settings" {
+  value = local.Settings
+}
 
