@@ -21,7 +21,7 @@ module "GKE-PrivateCluster" {
   zones = [var.GCPZone] # worker node run on multiple zones.
   # Accepted values are `UNSPECIFIED`, `RAPID`, `REGULAR` and `STABLE`. Defaults to `REGULAR`.
   release_channel = "UNSPECIFIED"
-  kubernetes_version = "1.23.12-gke.1600"
+  kubernetes_version = "1.23.12-gke.100"
   #  kubernetes_version = "1.23.9-gke.900"
   # (Taipei) From 12:00 AM to 4:00 AM.
   maintenance_start_time = "16:00" # UTC.
