@@ -1,19 +1,18 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "Apps-Rel" {
-  source = "../../Modules/Apps/3.1.0"
+  source = "../../Modules/Apps/4.0.0"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
   GCPZone      = "asia-east1-b"
 
   GodaddyDomainName                  = "origingaia.com"
-  GodaddySubDomainName1              = "rel"
-  GodaddySubDomainName2              = ""
+  EnableGodaddyPlainDomain           = false
+  GodaddySubDomainNames              = ["rel"]
   GodaddyAPIKey                      = var.GodaddyAPIKey
   GodaddyAPISecret                   = var.GodaddyAPISecret
   ArgoCD_OfficialWebRedirectEnabled  = false
   ArgoCD_OfficialWebRedirectDestFQDN = ""
-  ArgoCD_OfficialWebRedirectSrcFQDN  = ""
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = true
