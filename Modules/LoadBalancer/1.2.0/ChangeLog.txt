@@ -1,4 +1,7 @@
-﻿1.1.0
+﻿1.2.0
+Add CDN for the official website.
+
+1.1.0
 The terraform upgrade to 1.2.9.
 
 1.0.0
