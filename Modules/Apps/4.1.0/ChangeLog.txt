@@ -1,4 +1,8 @@
-﻿4.0.0
+﻿4.1.0
+Add grafana dashboard: 15757, 15758, 15759, 15760, 13407.
+
+
+4.0.0
 Add new variables: GodaddySubDomainNames, EnableGodaddyPlainDomain
 Remove variables: GodaddySubDomainName1, GodaddySubDomainName2, ArgoCD_OfficialWebRedirectSrcFQDN
 

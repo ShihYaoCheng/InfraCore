@@ -221,7 +221,31 @@ kube-prometheus-stack:
           gnetId: 8588
           revision: 1
           datasource: Prometheus
-
+        # https://grafana.com/grafana/dashboards/15757-kubernetes-views-global/
+        k8s-views-global:
+          gnetId: 15757
+          revision: 19
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/15758-kubernetes-views-namespaces/
+        k8s-views-namespace:
+          gnetId: 15758
+          revision: 14
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/15759-kubernetes-views-nodes/
+        k8s-views-nodes:
+          gnetId: 15759
+          revision: 13
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/15760-kubernetes-views-pods/
+        k8s-views-pods:
+          gnetId: 15760
+          revision: 14
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/13407-loki2-0-global-metrics/
+        loki2-global-metrics:
+          gnetId: 13407
+          revision: 1
+          datasource: Prometheus
 
 
         # https://github.com/grafana/tempo/tree/main/operations/tempo-mixin-compiled/dashboards
