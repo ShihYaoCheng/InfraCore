@@ -29,8 +29,8 @@
     "Name": "ponponsnake.com",
     "SubDomain":
     {
-      "TW": "v2.10.1",
-      "EU": "eu.v2.10.1",
+      "TW": "v2.10.2",
+      "EU": "eu.v2.10.2",
       "LoadBalancer":"global.v2.10.1" 
     }
   },
