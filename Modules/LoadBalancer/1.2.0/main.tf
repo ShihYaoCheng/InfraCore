@@ -203,9 +203,13 @@ resource "google_compute_backend_service" "OfficialWeb" {
   # Default is 30 seconds. Valid range is [1, 86400].
   timeout_sec = 360
   
+  # https://cloud.google.com/cdn/docs/best-practices
   enable_cdn = true
   cdn_policy {
-    default_ttl = 3600
+    default_ttl = 3600 # 3600 = 1 hour.
+    client_ttl = 3600 # 3600 = 1 hour.
+    max_ttl = 10800 # 10800 = 3 hour.
+    
     cache_mode = "CACHE_ALL_STATIC"
     signed_url_cache_max_age_sec = 3600
     
@@ -214,6 +218,8 @@ resource "google_compute_backend_service" "OfficialWeb" {
       include_protocol = false
       include_query_string = false
     }
+    
+    negative_caching = true
   }
 
   backend {
