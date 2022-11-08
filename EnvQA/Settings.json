@@ -31,7 +31,7 @@
     {
       "TW": "v2.10.2",
       "EU": "eu.v2.10.2",
-      "LoadBalancer":"global.v2.10.1" 
+      "LoadBalancer":"global.v2.10.2" 
     }
   },
   "GKE": {
