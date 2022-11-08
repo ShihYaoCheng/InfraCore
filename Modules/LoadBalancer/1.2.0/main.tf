@@ -266,8 +266,9 @@ resource "google_compute_url_map" "Default" {
       service = google_compute_backend_service.File.id
     }
 
+    # https://cloud.google.com/cdn/docs/best-practices#versioned-urls
     path_rule {
-      paths   = ["/cdn/*"]
+      paths   = ["/cdn/${var.GodaddySubDomainName}/*"]
       service = google_compute_backend_service.OfficialWeb.id
       route_action {
         url_rewrite {
