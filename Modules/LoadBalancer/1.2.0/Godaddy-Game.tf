@@ -1,5 +1,5 @@
-﻿resource "helm_release" "Godaddy" {
-  name             = "godaddy-load-balancer"
+﻿resource "helm_release" "GodaddyGame" {
+  name             = "godaddy-game-load-balancer"
   chart            = "${path.module}/Charts/Godaddy"
   namespace        = "default"
 
@@ -15,7 +15,7 @@
 
   set {
     name  = "ip"
-    value = google_compute_global_address.default.address
+    value = google_compute_global_address.Game.address
   }
 
   set_sensitive {
