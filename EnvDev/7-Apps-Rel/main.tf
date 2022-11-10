@@ -51,7 +51,7 @@ module "Apps-Rel" {
   ArgoCD_AppUserBranchOrTag        = "main"
   ArgoCD_AppOfficialWebBranchOrTag = "main"
 
-  ArgoCD_BackstageHelmValueFiles   = "{values-beta.yaml}"
+  ArgoCD_BackstageHelmValueFiles   = "{values-beta.yaml\\, CloudSQL-Rel.yaml}"
   ArgoCD_BattleHelmValueFiles      = "{values-v2.11.0.yaml\\, EnableIngress.yaml}"
   ArgoCD_FileHelmValueFiles        = "{values-v2.11.0.yaml\\, EnableIngress.yaml}"
   ArgoCD_NFTHelmValueFiles         = "{values-beta.yaml}"
