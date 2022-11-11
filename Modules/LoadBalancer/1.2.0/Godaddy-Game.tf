@@ -9,8 +9,8 @@
   }
 
   set {
-    name  = "subDomainName"
-    value = var.GodaddySubDomainName
+    name  = "subDomainNames"
+    value = local.SubDomainsForGodaddyHelmValues
   }
 
   set {

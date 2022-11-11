@@ -144,12 +144,12 @@ resource "google_compute_url_map" "Game" {
   default_service = google_compute_backend_service.Battle.id
 
   host_rule {
-    hosts        = [local.GodaddyFQDN]
-    path_matcher = "global"
+    hosts        = local.GodaddyFQDNs
+    path_matcher = "game"
   }
 
   path_matcher {
-    name            = "global"
+    name            = "game"
     default_service = google_compute_backend_service.File.id
 
     path_rule {

@@ -18,7 +18,21 @@ variable "ZoneEU" {
 # Godaddy                   #
 #============================
 locals {
-  GodaddyFQDN = "${var.GodaddySubDomainName}.${var.GodaddyDomainName}"
+  # GodaddyFQDN = "${var.GodaddySubDomainName}.${var.GodaddyDomainName}"
+  GodaddyFQDNs = formatlist("%s.%s", var.GodaddySubDomainNames, var.GodaddyDomainName)
+  
+  # https://stackoverflow.com/questions/59381410/how-can-i-convert-a-list-to-a-string-in-terraform
+
+  # GodaddySubDomainNames = ["test1","test2","test3"]
+  # v1 = "test1,test2,test3"
+  # SubDomainsForGodaddyHelmValues = "test1\\,test2\\,test3"
+
+  # https://developer.hashicorp.com/terraform/language/functions/join
+  # join: convert an array to a string.
+  v1 = join(",", var.GodaddySubDomainNames)
+
+  # https://developer.hashicorp.com/terraform/language/functions/replace
+  SubDomainsForGodaddyHelmValues = replace(local.v1, ",", "\\,")
 }
 
 variable "GodaddyDomainName" {
@@ -26,9 +40,9 @@ variable "GodaddyDomainName" {
   #  default = "origingaia.com"
 }
 
-variable "GodaddySubDomainName" {
-  type = string
-  #  default = "dev"
+variable "GodaddySubDomainNames" {
+  type        = list(string)
+  #  default = ["dev", "www", "acl"]
 }
 
 variable "GodaddyAPIKey" {

@@ -5,7 +5,7 @@ module "LoadBalancer" {
   ProjectName = local.ProjectName
 
   GodaddyDomainName = "origingaia.com"
-  GodaddySubDomainName = "global"
+  GodaddySubDomainNames = ["global"]
   GodaddyAPIKey = var.GodaddyAPIKey
   GodaddyAPISecret = var.GodaddyAPISecret
 
