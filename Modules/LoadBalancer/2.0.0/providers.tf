@@ -24,5 +24,11 @@
 
       configuration_aliases = [ kubernetes.tw, kubernetes.eu ]
     }
+
+    # https://registry.terraform.io/providers/hashicorp/random/latest
+    random = {
+      source = "hashicorp/random"
+      version = "3.4.3"
+    }
   }
 }
