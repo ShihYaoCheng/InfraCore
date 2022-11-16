@@ -6,13 +6,15 @@ module "AppsDev" {
   GCPProjectID = local.ProjectID
   GCPZone      = var.GCPZone
 
-  GodaddyDomainName                  = "origingaia.com"
+  GodaddyDomainName                  = local.DomainName
   EnableGodaddyPlainDomain           = true
-  GodaddySubDomainNames              = ["test", "test1", "www"]
+#  GodaddySubDomainNames              = ["test", "test1", "www"]
+  GodaddySubDomainNames              = local.SubDomainNames
   GodaddyAPIKey                      = var.GodaddyAPIKey
   GodaddyAPISecret                   = var.GodaddyAPISecret
   ArgoCD_OfficialWebRedirectEnabled  = true
-  ArgoCD_OfficialWebRedirectDestFQDN = "www.origingaia.com"
+#  ArgoCD_OfficialWebRedirectDestFQDN = "www.origingaia.com"
+  ArgoCD_OfficialWebRedirectDestFQDN = "www.${local.DomainName}"
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = false

@@ -8,6 +8,9 @@ locals {
 
   GKE-API-EU = local.Settings["GKE"]["EU"]["APIName"]
   GKE-CA-EU = local.Settings["GKE"]["EU"]["CAName"]
+
+  DomainName = local.Settings["Domain"]["Name"]
+  SubDomainNames = local.Settings["Domain"]["SubDomain"]["EU"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones

@@ -16,5 +16,16 @@
       "APIName": "GKE-API-EU",
       "CAName": "GKE-CA-EU"
     }
+  },
+  "Domain":
+  {
+    "Name": "origingaia.com",
+    "SubDomain":
+    {
+      "TW": ["www", "v2.1.0", "v2.2.0", "v2.3.0", "test"],
+      "EU": ["eu.v2.3.0"],
+      "GameLoadBalancer": "global.v2.3.0",
+      "CDNLoadBalancer": "cdn"
+    }
   }
 }

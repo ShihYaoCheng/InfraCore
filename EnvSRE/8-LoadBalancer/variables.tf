@@ -10,6 +10,10 @@ locals {
   GKE-CA-TW = local.Settings["GKE"]["TW-Dev"]["CAName"]
   GKE-API-EU = local.Settings["GKE"]["EU"]["APIName"]
   GKE-CA-EU = local.Settings["GKE"]["EU"]["CAName"]
+
+  DomainName = local.Settings["Domain"]["Name"]
+  GameSubDomainName = local.Settings["Domain"]["SubDomain"]["GameLoadBalancer"]
+  CDNSubDomainName = local.Settings["Domain"]["SubDomain"]["CDNLoadBalancer"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones

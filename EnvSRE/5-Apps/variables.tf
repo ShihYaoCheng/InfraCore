@@ -10,6 +10,9 @@ locals {
   GKE-CA-TW = local.Settings["GKE"]["TW-Dev"]["CAName"]
   GKE-API-TW-Rel = local.Settings["GKE"]["TW-Rel"]["APIName"]
   GKE-CA-TW-Rel = local.Settings["GKE"]["TW-Rel"]["CAName"]
+
+  DomainName = local.Settings["Domain"]["Name"]
+  SubDomainNames = local.Settings["Domain"]["SubDomain"]["TW"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones

@@ -73,7 +73,7 @@ resource "google_compute_url_map" "CDN" {
   default_service = google_compute_backend_service.OfficialWeb.id
 
   host_rule {
-    hosts        = ["cdn.${var.GodaddyDomainName}"]
+    hosts        = local.cdnFQDNs
     path_matcher = "cdn"
   }
 
@@ -83,7 +83,7 @@ resource "google_compute_url_map" "CDN" {
 
     # https://cloud.google.com/cdn/docs/best-practices#versioned-urls
     path_rule {
-      paths   = ["/official/global/*"]
+      paths   = ["/official/*"]
 #      paths   = formatlist("/official/%s/*", var.GodaddySubDomainNames)
 #      paths   = ["/official/${var.GodaddySubDomainNames[0]}/*"]
       service = google_compute_backend_service.OfficialWeb.id
@@ -109,7 +109,7 @@ resource "google_compute_managed_ssl_certificate" "CDN" {
 #  name = random_id.certificate.hex
   managed {
 #    domains = ["global.origingaia.com"]
-    domains = ["cdn.${var.GodaddyDomainName}"]
+    domains = ["cdn.${var.DomainName}"]
   }
 }
 

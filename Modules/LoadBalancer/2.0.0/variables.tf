@@ -18,29 +18,37 @@ variable "ZoneEU" {
 # Godaddy                   #
 #============================
 locals {
-  # GodaddyFQDN = "${var.GodaddySubDomainName}.${var.GodaddyDomainName}"
-  GodaddyFQDNs = formatlist("%s.%s", var.GodaddySubDomainNames, var.GodaddyDomainName)
+  # gameFQDNs = ["global.ponponsnake.com", "dev.ponponsnake.com", "www.ponponsnake.com"]
+  gameFQDNs = formatlist("%s.%s", var.GameSubDomainNames, var.DomainName)
+  cdnFQDNs = formatlist("%s.%s", var.CDNSubDomainNames, var.DomainName)
   
   # https://stackoverflow.com/questions/59381410/how-can-i-convert-a-list-to-a-string-in-terraform
 
-  # GodaddySubDomainNames = ["test1","test2","test3"]
-  # v1 = "test1,test2,test3"
   # SubDomainsForGodaddyHelmValues = "test1\\,test2\\,test3"
 
   # https://developer.hashicorp.com/terraform/language/functions/join
   # join: convert an array to a string.
-  v1 = join(",", var.GodaddySubDomainNames)
+  # gameV1 = "test1,test2,test3"
+  gameV1 = join(",", var.GameSubDomainNames)
+  cdnV1 = join(",", var.CDNSubDomainNames)
 
   # https://developer.hashicorp.com/terraform/language/functions/replace
-  SubDomainsForGodaddyHelmValues = replace(local.v1, ",", "\\,")
+  # gameSubDomainsHelm = "test1\\,test2\\,test3"
+  gameSubDomainsHelm = replace(local.gameV1, ",", "\\,")
+  cdnSubDomainsHelm = replace(local.cdnV1, ",", "\\,")
 }
 
-variable "GodaddyDomainName" {
+variable "DomainName" {
   type = string
   #  default = "origingaia.com"
 }
 
-variable "GodaddySubDomainNames" {
+variable "GameSubDomainNames" {
+  type        = list(string)
+  #  default = ["dev", "www", "acl"]
+}
+
+variable "CDNSubDomainNames" {
   type        = list(string)
   #  default = ["dev", "www", "acl"]
 }

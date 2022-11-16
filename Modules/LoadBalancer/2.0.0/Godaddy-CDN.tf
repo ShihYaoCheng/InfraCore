@@ -5,12 +5,12 @@
 
   set {
     name  = "domainName"
-    value = var.GodaddyDomainName
+    value = var.DomainName
   }
 
   set {
     name  = "subDomainNames"
-    value = "cdn"
+    value = local.cdnSubDomainsHelm
   }
 
   set {

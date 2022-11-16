@@ -4,8 +4,10 @@ module "LoadBalancer" {
 
   ProjectName = local.ProjectName
 
-  GodaddyDomainName = "origingaia.com"
-  GodaddySubDomainNames = ["global"]
+  DomainName = local.DomainName
+  GameSubDomainNames = [local.GameSubDomainName]
+  CDNSubDomainNames = [local.CDNSubDomainName]
+  
   GodaddyAPIKey = var.GodaddyAPIKey
   GodaddyAPISecret = var.GodaddyAPISecret
 

@@ -2,7 +2,7 @@
 Add new load balancer for official web CDN.
 Upgrade the Godaddy helm chart.
 
-New Variables: GodaddySubDomainNames.
+New Variables: GameSubDomainNames, CDNSubDomainNames.
 Remove Variables: GodaddySubDomainName.
 
 1.1.0
