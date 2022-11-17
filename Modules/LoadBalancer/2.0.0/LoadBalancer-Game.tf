@@ -44,6 +44,25 @@ resource "google_compute_backend_service" "Battle" {
   # (Optional) How many seconds to wait for the backend before considering it a failed request. 
   # Default is 30 seconds. Valid range is [1, 86400].
   timeout_sec = 360
+
+  # https://cloud.google.com/cdn/docs/best-practices
+  enable_cdn = true
+  cdn_policy {
+#    default_ttl = 3600 # 3600 = 1 hour.
+#    client_ttl = 3600 # 3600 = 1 hour.
+#    max_ttl = 10800 # 10800 = 3 hour.
+
+    cache_mode = "USE_ORIGIN_HEADERS"
+    signed_url_cache_max_age_sec = 3600
+
+    cache_key_policy {
+      include_host = false
+      include_protocol = false
+      include_query_string = false
+    }
+
+    negative_caching = true
+  }
   
   backend {
     group          = data.google_compute_network_endpoint_group.NEGBattle-TW.id
@@ -112,6 +131,26 @@ resource "google_compute_backend_service" "File" {
   # (Optional) How many seconds to wait for the backend before considering it a failed request. 
   # Default is 30 seconds. Valid range is [1, 86400].
   timeout_sec = 360
+
+  # https://cloud.google.com/cdn/docs/best-practices
+  enable_cdn = true
+  cdn_policy {
+#    default_ttl = 3600 # 3600 = 1 hour.
+#    client_ttl = 3600 # 3600 = 1 hour.
+#    max_ttl = 10800 # 10800 = 3 hour.
+
+#    cache_mode = "CACHE_ALL_STATIC"
+    cache_mode = "USE_ORIGIN_HEADERS"
+    signed_url_cache_max_age_sec = 3600
+
+    cache_key_policy {
+      include_host = false
+      include_protocol = false
+      include_query_string = false
+    }
+
+    negative_caching = true
+  }
 
   backend {
     group          = data.google_compute_network_endpoint_group.NEGFile-TW.id
