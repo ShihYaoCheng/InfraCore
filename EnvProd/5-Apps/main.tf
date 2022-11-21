@@ -1,19 +1,17 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "AppsTw" {
-  source = "../../Modules/Apps/3.0.0"
+  source = "../../Modules/Apps/4.1.0"
 
   ProjectName  = local.ProjectName
-#  UniqueName   = "tw"
   GCPProjectID = local.ProjectID
   GCPZone      = local.GCPZone
 
-  GodaddyDomainName = local.DomainName
-  GodaddySubDomainName1 = local.SubDomainName
-  GodaddySubDomainName2 = "www"
-  GodaddyAPIKey      = var.GodaddyAPIKey
-  GodaddyAPISecret   = var.GodaddyAPISecret
-  ArgoCD_OfficialWebRedirectEnabled = true
-  ArgoCD_OfficialWebRedirectSrcFQDN = local.DomainName
+  GodaddyDomainName                  = local.DomainName
+  EnableGodaddyPlainDomain           = true
+  GodaddySubDomainNames              = [local.SubDomainName, "www", "v2.10.1", "v2.10.0", "v2.9.0", "acl"]
+  GodaddyAPIKey                      = var.GodaddyAPIKey
+  GodaddyAPISecret                   = var.GodaddyAPISecret
+  ArgoCD_OfficialWebRedirectEnabled  = true
   ArgoCD_OfficialWebRedirectDestFQDN = "${local.SubDomainName}.${local.DomainName}"
 
   CertManager_Enable         = true
@@ -28,8 +26,6 @@ module "AppsTw" {
   Prometheus_StorageSize      = "300Gi"
   Prometheus_Retention        = "90d"
   Grafana_AdminPassword       = var.GrafanaAdminPassword
-
-#  CloudSQLProxy_Enable = true
 
   ArgoCD_Enable               = true
   ArgoCD_EnableSelfHeal       = true
