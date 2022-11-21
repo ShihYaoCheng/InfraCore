@@ -1,0 +1,407 @@
+# https://github.com/robusta-dev/robusta/blob/master/helm/robusta/values.yaml
+
+# https://docs.robusta.dev/master/catalog/triggers/webhook.html
+#globalConfig:
+#  account_id: ""       # your official Robusta account_id
+#  signing_key: ""      # a secret key used to verify that webhook callers are allowed to trigger playbooks
+
+sinksConfig:
+- slack_sink:
+    name: main_slack_sink
+    slack_channel: ${slackChannel}
+    api_key: ${slackAPIKey}
+clusterName: ${clusterName}
+
+enablePrometheusStack: true
+enableServiceMonitors: true
+
+disableCloudRouting: true
+runner:
+  sendAdditionalTelemetry: false
+  resources:
+    requests:
+      cpu: 150m
+
+enablePlatformPlaybooks: false # noisy.
+
+platformPlaybooks:
+  - triggers:
+      - on_kubernetes_warning_event_create:
+          exclude: ["NodeSysctlChange"]
+    actions:
+      - event_report: {}
+      - event_resource_events: {}
+  - triggers:
+      - on_deployment_all_changes: {}
+      - on_daemonset_all_changes: {}
+      - on_statefulset_all_changes: {}
+    actions:
+      - resource_babysitter: {}
+  - triggers:
+      - on_configmap_all_changes: {}
+    actions:
+      - resource_babysitter:
+          fields_to_monitor: ["ConfigMap.data"]
+          ignored_namespaces: ["kube-system"] # kube-system configmaps updated a lot (spammy)
+
+
+
+grafanaRenderer:
+  resources:
+    requests:
+      cpu: 10m
+
+kubewatch:
+  resources:
+    requests:
+      cpu: 10m
+
+
+# https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+# https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+kube-prometheus-stack:
+  coreDns:
+    enabled: false
+  kubeDns:
+    enabled: true
+  kubeControllerManager:
+    enabled: false
+  kubeScheduler:
+    enabled: false
+  prometheusOperator:
+    resources:
+      requests:
+        cpu: 10m
+  alertmanager:
+    alertmanagerSpec:
+      resources:
+        requests:
+          cpu: 10m
+
+  # https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
+  grafana:
+    adminPassword: ${grafanaAdminPassword}
+    
+    ## Timezone for the default dashboards
+    ## Other options are: browser or a specific timezone, i.e. Europe/Luxembourg
+    defaultDashboardsTimezone: Asia/Taipei
+    
+    grafana.ini:
+      server:
+        root_url: "https://*.origingaia.com/grafana/"
+        serve_from_sub_path: true
+      
+    # The Prometheus add Loki to DataSource automatically.
+    ## Configure additional grafana datasources (passed through tpl)
+    ## ref: http://docs.grafana.org/administration/provisioning/#datasources
+    # https://grafana.com/docs/grafana/latest/administration/provisioning/#example-data-source-config-file
+    additionalDataSources:
+    # <string, required> name of the datasource. Required
+    - name: Loki
+      # <string, required> datasource type. Required
+      type: loki
+      # <string, required> access mode. proxy or direct (Server or Browser in the UI). Required
+      access: proxy
+      # <string> url
+      url: http://loki.loki:3100
+      # <bool> enable/disable basic auth
+      basicAuth: false
+      # <bool> allow users to edit datasources from the UI.
+      editable: false
+      # <map> fields that will be converted to json and stored in jsonData
+      jsonData:
+        # Controls whether a client verifies the server’s certificate chain and host name.
+        tlsSkipVerify: true
+      version: 1
+#    - name: Tempo
+#      type: tempo
+#      access: proxy
+#      url: http://tempo.tempo:3100
+#      basicAuth: false
+#      editable: false
+#      jsonData:
+#        tlsSkipVerify: true
+#      version: 1
+      
+    ## Configure grafana dashboard providers
+    ## ref: http://docs.grafana.org/administration/provisioning/#dashboards
+    ##
+    ## `path` must be /var/lib/grafana/dashboards/<provider_name>
+    ##
+    dashboardProviders:
+      sre.yaml:
+        apiVersion: 1
+        providers:
+        # <string> an unique provider name. Required
+        - name: 'sre'
+          # <int> Org id. Default to 1
+          orgId: 1
+          # <string> name of the dashboard folder.
+          folder: 'SRE'
+          # <string> provider type. Default to 'file'
+          type: file
+          # <bool> disable dashboard deletion
+          disableDeletion: true
+          # <int> how often Grafana will scan for changed dashboards
+          updateIntervalSeconds: 10
+          # <bool> allow updating provisioned dashboards from the UI
+          allowUiUpdates: false
+          options:
+            # <string, required> path to dashboard files on disk. Required when using the 'file' type
+            path: /var/lib/grafana/dashboards/sre
+            # <bool> use folder names from filesystem to create folders in Grafana
+            foldersFromFilesStructure: false
+      
+    ## Configure grafana dashboard to import
+    ## NOTE: To use dashboards you must also enable/configure dashboardProviders
+    ## ref: https://grafana.com/dashboards
+    ##
+    ## dashboards per provider, use provider name as key.
+    ##
+    dashboards:
+      sre:
+        # https://grafana.com/grafana/dashboards/1860-node-exporter-full/
+        node-exporter-full:
+          gnetId: 1860
+          revision: 27
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/10880
+        loki-promtail:
+          gnetId: 10880
+          revision: 1
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/10906
+        Traefik2:
+          gnetId: 10906
+          revision: 1
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/11074
+        1 Node Exporter for Prometheus Dashboard EN 20201010:
+          gnetId: 11074
+          revision: 9
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/11454-k8s-storage-volumes-cluster/
+        k8s-storage-volume:
+          gnetId: 11454
+          revision: 14
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/11455
+        k8s-storage-volume-namespace:
+          gnetId: 11455
+          revision: 6
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/12250
+        Traefik 2.2:
+          gnetId: 12250
+          revision: 1
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/14348
+        # Error updating options: Datasource DS_PROMETHEUS was not found
+#        sloth-slo-detail:
+#          gnetId: 14348
+#          revision: 5
+#          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/14643-high-level-sloth-slos/
+        sloth-slo-high-level:
+          gnetId: 14643
+          revision: 2
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/15175
+        k8s:
+          gnetId: 15175
+          revision: 1
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/15175
+        kube-state-metrics-v2:
+          gnetId: 13332
+          revision: 12
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/8588-1-kubernetes-deployment-statefulset-daemonset-metrics/
+        k8s-deployment-metrics:
+          gnetId: 8588
+          revision: 1
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/15757-kubernetes-views-global/
+        k8s-views-global:
+          gnetId: 15757
+          revision: 19
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/15758-kubernetes-views-namespaces/
+        k8s-views-namespace:
+          gnetId: 15758
+          revision: 14
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/15759-kubernetes-views-nodes/
+        k8s-views-nodes:
+          gnetId: 15759
+          revision: 13
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/15760-kubernetes-views-pods/
+        k8s-views-pods:
+          gnetId: 15760
+          revision: 14
+          datasource: Prometheus
+        # https://grafana.com/grafana/dashboards/13407-loki2-0-global-metrics/
+        loki2-global-metrics:
+          gnetId: 13407
+          revision: 1
+          datasource: Prometheus
+
+
+        # https://github.com/grafana/tempo/tree/main/operations/tempo-mixin-compiled/dashboards
+        tempo-operational:
+          url: https://raw.githubusercontent.com/grafana/tempo/main/operations/tempo-mixin-compiled/dashboards/tempo-operational.json
+        tempo-reads:
+          url: https://raw.githubusercontent.com/grafana/tempo/main/operations/tempo-mixin-compiled/dashboards/tempo-reads.json
+        tempo-resources:
+          url: https://raw.githubusercontent.com/grafana/tempo/main/operations/tempo-mixin-compiled/dashboards/tempo-resources.json
+        tempo-writes:
+          url: https://raw.githubusercontent.com/grafana/tempo/main/operations/tempo-mixin-compiled/dashboards/tempo-writes.json
+
+        argocd:
+          url: https://raw.githubusercontent.com/argoproj/argo-cd/master/examples/dashboard.json
+        cert-manager:
+          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
+      #         token: ''
+      #   local-dashboard-base64:
+      #     url: https://example.com/repository/test-b64.json
+    #     token: ''
+    #     b64content: true
+  # https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+  # https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+  ## Deploy a Prometheus instance
+  prometheus:
+    ## Settings affecting prometheusSpec
+    ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#prometheusspec
+    prometheusSpec:
+      resources:
+        requests:
+          cpu: 150m
+      # Select all ServiceMonitor and PodMonitor without any label filter.
+      
+      ## If true, a nil or {} value for prometheus.prometheusSpec.serviceMonitorSelector will cause the
+      ## prometheus resource to be created with selectors based on values in the helm deployment,
+      ## which will also match the servicemonitors created
+      ##
+      serviceMonitorSelectorNilUsesHelmValues: false
+      
+      ## If true, a nil or {} value for prometheus.prometheusSpec.podMonitorSelector will cause the
+      ## prometheus resource to be created with selectors based on values in the helm deployment,
+      ## which will also match the podmonitors created
+      ##
+      podMonitorSelectorNilUsesHelmValues: false
+        
+      ruleSelectorNilUsesHelmValues: false
+      probeSelectorNilUsesHelmValues: false
+      
+      ## If true, a nil or {} value for prometheus.prometheusSpec.probeSelector will cause the
+      ## prometheus resource to be created with selectors based on values in the helm deployment,
+      ## which will also match the probes created
+      ##
+      #    probeSelectorNilUsesHelmValues: false
+      
+      ## Number of replicas of each shard to deploy for a Prometheus deployment.
+      ## Number of replicas multiplied by shards is the total number of Pods created.
+      replicas: 1
+      
+      ## How long to retain metrics
+      # retention: 90d
+      retention: ${prometheusRetention}
+      
+      ## Prometheus StorageSpec for persistent data
+      ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/user-guides/storage.md
+      ##
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: ${prometheusStorageClassName}
+            accessModes: [ "ReadWriteOnce" ]
+            resources:
+              requests:
+                storage: ${prometheusStorageSize}
+#                storage: 60Gi
+  
+#additionalPrometheusRulesMap: {}
+#  rule-name:
+#    groups:
+#    - name: my_group
+#      rules:
+#      - record: my_record
+#        expr: 100 * my_record
+
+
+rsa:
+  prv: '-----BEGIN RSA PRIVATE KEY-----
+
+    MIIEowIBAAKCAQEA41vzuGBpUvnuq8TDpSjyEDSSo/LBaIii8TgoE8/CdphjsYmv
+
+    cBKCvSNUbEXjgAsmALnnwl/vD6uRmEUpnwhgEsQL0KYapbHKSyYx91p51aNGzCjO
+
+    X68Yo2gGcodq6RXCgRcS/MyGXbvRydFtKSS5TGbAHjIvArh44oF1gV1vb/OVvnbu
+
+    pgGu7sOHiSMRAwIEs0x4fluAPuk4pkNStZ7j4mzY/gkgG9YC5Vq416JwjF8pnwZr
+
+    QfkmHL/9e/OiPMlkG1ojqfPhKAhcQt5WTDQGNHjElpJ+pDnAp400EF73l7JVtNY+
+
+    8BAvZelXxC5OmkYi1bkcQzQPa6Y9CiG3y7IUfQIDAQABAoIBAQCGkbhRmw78A96W
+
+    YGIEcZXErblVvKtpOeZnq/tcro3FMDFhtcLXLL2hQTYI19ztvquBpodcbvfKaJxG
+
+    ajlWXdivgsYTex0ukWrQzAyrASw3nOqckFKGI9cLcNjQFQLcbvqu+X9NjajB9hcX
+
+    wxM/VPMwG2j+9mkIzTMPrdxk826v7XlOpNHC4xL5jcFnc/t+yNeLJ9HHhjrebHym
+
+    zJLCMfeS8ptXf2Eunt4Hln8+HfuOU2pObNkJf251/ZHiH2qmrLzdbqgGm/KnT96D
+
+    Mz9Kjgt5xUffvcjngjxggvvOzjgOCHMXuKD8EjEVP+uY2BrPvG6kDLn7UiK5ymYs
+
+    e0tRO/mpAoGBAPGIvXTTuaiaJ44QyLKDtJ5VWTzVUD1ROAvM5yFD38bi0r061bOe
+
+    OeK4MPc5/SnMX/txj/kqfdqC4/zWL6gjBjQ4TnScp9+WK2qDVS5XLEsGhPCF74Ia
+
+    Z+LFDc+Sm6WZji2pt2Lo9OQ7zS7XKjucR2gUStecmfxx9HxGTynMmjt7AoGBAPD5
+
+    4M6aMS19Fi4nVwKgD4u/U03utbAbzSnsbMz+JHjYn5IvjIpz+Vxw+j8jCum4LSmZ
+
+    NsahfXyWXILz7E8QVDlIngO6653eCFugMGag7cSa4ZAbvVCVNAfQXbS0ZQTawCoZ
+
+    9VfVFjesP44DmhKz7PlX6BxJfk1y2zZP2AwBqJJnAoGAbi1I9uzJyO4g0v42/q9z
+
+    ibI3FbfcdUwCO+fJGvSCNJAtP2KCLwAjOZd5xpyuLg3rTqCb4zYN2MpSQ3hUnubz
+
+    Ioj4yNrY/PXccibciVn8e3DK3YjLG1b+QoRO63veAilMoOnFHJpVc3MQAqjlu/Fq
+
+    5UA0b6wg1fYJZ1MPM2sAg9cCgYBcISyx0IG8wnYYbzH07v0CkMNoqDsOeZKW1K1E
+
+    MmX/TdK0MTmqNWzAyvDh8qPZd3DM1qb6igNP/qyf5GIUWEnbHMhM5MnwMVNAtJ3M
+
+    nvpIkG5sii53AJRD6IXq8I0urfOKJSKH0hAMeO5TfU0KmX+gVNuI9RA0zBTDTwNq
+
+    k7e/QQKBgD16iaDyRruV8mJEDmFYNQSSTnYqxOtNmDTvUuqd92ImKBCU5zn8FVya
+
+    NckC9kzfME8Yeu9NqoEITAjjrDza6chMRojXcvhHP+Yqz8rDC2V8g5ZSrLNDuYbH
+
+    /ZQeMzjhzf80ptCOSk+FEpt5ivlOryYJRYWNdeizC0xFmvmtTuAJ
+
+    -----END RSA PRIVATE KEY-----
+
+    '
+  pub: '-----BEGIN PUBLIC KEY-----
+
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA41vzuGBpUvnuq8TDpSjy
+
+    EDSSo/LBaIii8TgoE8/CdphjsYmvcBKCvSNUbEXjgAsmALnnwl/vD6uRmEUpnwhg
+
+    EsQL0KYapbHKSyYx91p51aNGzCjOX68Yo2gGcodq6RXCgRcS/MyGXbvRydFtKSS5
+
+    TGbAHjIvArh44oF1gV1vb/OVvnbupgGu7sOHiSMRAwIEs0x4fluAPuk4pkNStZ7j
+
+    4mzY/gkgG9YC5Vq416JwjF8pnwZrQfkmHL/9e/OiPMlkG1ojqfPhKAhcQt5WTDQG
+
+    NHjElpJ+pDnAp400EF73l7JVtNY+8BAvZelXxC5OmkYi1bkcQzQPa6Y9CiG3y7IU
+
+    fQIDAQAB
+
+    -----END PUBLIC KEY-----
+
+    '
