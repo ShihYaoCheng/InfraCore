@@ -12,7 +12,7 @@ module "AppsTw" {
   GodaddyAPIKey                      = var.GodaddyAPIKey
   GodaddyAPISecret                   = var.GodaddyAPISecret
   ArgoCD_OfficialWebRedirectEnabled  = true
-  ArgoCD_OfficialWebRedirectDestFQDN = "${local.SubDomainName}.${local.DomainName}"
+  ArgoCD_OfficialWebRedirectDestFQDN = "www.${local.DomainName}"
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = true
