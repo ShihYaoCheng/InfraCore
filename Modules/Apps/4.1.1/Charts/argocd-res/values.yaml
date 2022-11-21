@@ -36,7 +36,6 @@ apps:
     valueFiles: []
     redirect:
       enabled: false
-      srcFQDN: ""
       destFQDN: ""
   nft:
     enabled: true

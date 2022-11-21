@@ -18,8 +18,6 @@ spec:
       parameters:
         - name: ingress.middlewares.redirect.enabled
           value: {{ .Values.apps.officialWeb.redirect.enabled | quote }}
-        - name: ingress.middlewares.redirect.srcFQDN
-          value: {{ .Values.apps.officialWeb.redirect.srcFQDN }}
         - name: ingress.middlewares.redirect.destFQDN
           value: {{ .Values.apps.officialWeb.redirect.destFQDN }}
   destination:

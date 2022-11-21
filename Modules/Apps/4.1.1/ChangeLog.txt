@@ -1,4 +1,8 @@
-﻿4.1.0
+﻿4.1.1
+Remove unnecessary variable in argocd-res chart: apps.officialWeb.redirect.srcFQDN.
+
+
+4.1.0
 Add grafana dashboard: 15757, 15758, 15759, 15760, 13407.
 
 
