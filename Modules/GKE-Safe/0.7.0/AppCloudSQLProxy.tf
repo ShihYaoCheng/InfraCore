@@ -20,7 +20,7 @@ module "CloudSQLWorkloadIdentity" {
   depends_on = [kubernetes_namespace_v1.CloudSQL]
 
   source  = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
-  version = "21.0.0"
+  version = "24.0.0"
 
   project_id   = var.GCPProjectID
   cluster_name = var.ProjectName

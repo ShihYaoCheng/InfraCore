@@ -2,7 +2,7 @@
 proxy:
   # https://console.cloud.google.com/gcr/images/cloudsql-docker/GLOBAL/gce-proxy
   image: gcr.io/cloudsql-docker/gce-proxy
-  tag: 1.32.0
+  tag: 1.33.1
   serviceAccountName: sql-proxy
   connectionName: stellar-38931:asia-east1:cqi-sk-sre
   serviceName: cloud-sql-proxy 

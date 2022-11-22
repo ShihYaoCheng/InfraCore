@@ -1,4 +1,8 @@
-﻿0.6.0
+﻿0.7.0
+Upgrade module and helm chart to latest version.
+
+
+0.6.0
 Upgrade Traefik to 17.0.3.
 Upgrade Kubernetes control plane to 1.23.12-gke.100.
 
