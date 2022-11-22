@@ -12,8 +12,9 @@ locals {
   GKE-CA-EU = local.Settings["GKE"]["EU"]["CAName"]
 
   DomainName = local.Settings["Domain"]["Name"]
-  GameSubDomainName = local.Settings["Domain"]["SubDomain"]["GameLoadBalancer"]
-  CDNSubDomainName = local.Settings["Domain"]["SubDomain"]["CDNLoadBalancer"]
+  GameSubDomainName = local.Settings["Domain"]["SubDomain"]["LB-Game"]
+  CDNSubDomainName = local.Settings["Domain"]["SubDomain"]["LB-CDN"]
+  CDNUrlPathOfficial = local.Settings["CDN"]["UrlPathOfficial"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones

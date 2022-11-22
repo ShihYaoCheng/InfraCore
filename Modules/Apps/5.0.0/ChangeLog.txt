@@ -1,4 +1,8 @@
-﻿4.1.1
+﻿5.0.0
+Add new variables: ArgoCD_OfficialWebCDNEnabled, ArgoCD_OfficialWebCDNUrl.
+
+
+4.1.1
 Remove unnecessary variable in argocd-res chart: apps.officialWeb.redirect.srcFQDN.
 
 

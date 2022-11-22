@@ -1,20 +1,23 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "AppsDev" {
-  source = "../../Modules/Apps/4.1.0"
+  source = "../../Modules/Apps/5.0.0"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
   GCPZone      = var.GCPZone
 
-  GodaddyDomainName                  = local.DomainName
-  EnableGodaddyPlainDomain           = true
-#  GodaddySubDomainNames              = ["test", "test1", "www"]
-  GodaddySubDomainNames              = local.SubDomainNames
-  GodaddyAPIKey                      = var.GodaddyAPIKey
-  GodaddyAPISecret                   = var.GodaddyAPISecret
+  GodaddyDomainName        = local.DomainName
+  EnableGodaddyPlainDomain = true
+  #  GodaddySubDomainNames              = ["test", "test1", "www"]
+  GodaddySubDomainNames    = local.SubDomainNames
+  GodaddyAPIKey            = var.GodaddyAPIKey
+  GodaddyAPISecret         = var.GodaddyAPISecret
+  
   ArgoCD_OfficialWebRedirectEnabled  = true
-#  ArgoCD_OfficialWebRedirectDestFQDN = "www.origingaia.com"
+  #  ArgoCD_OfficialWebRedirectDestFQDN = "www.origingaia.com"
   ArgoCD_OfficialWebRedirectDestFQDN = "www.${local.DomainName}"
+  ArgoCD_OfficialWebCDNEnabled       = true
+  ArgoCD_OfficialWebCDNUrl           = local.CDNUrlOfficial
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = false

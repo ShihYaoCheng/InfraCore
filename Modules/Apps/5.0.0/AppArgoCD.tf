@@ -163,6 +163,14 @@ resource "helm_release" "ArgoCDResource" {
     name  = "apps.officialWeb.redirect.destFQDN"
     value = var.ArgoCD_OfficialWebRedirectDestFQDN
   }
+  set {
+    name  = "apps.officialWeb.cdn.enabled"
+    value = var.ArgoCD_OfficialWebCDNEnabled
+  }
+  set {
+    name  = "apps.officialWeb.cdn.url"
+    value = var.ArgoCD_OfficialWebCDNUrl
+  }
 
   set {
     name  = "apps.nft.enabled"

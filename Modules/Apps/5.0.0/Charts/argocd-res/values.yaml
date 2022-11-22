@@ -37,6 +37,9 @@ apps:
     redirect:
       enabled: false
       destFQDN: ""
+    cdn:
+      enabled: false
+      url: ""
   nft:
     enabled: true
     branchOrTag: main

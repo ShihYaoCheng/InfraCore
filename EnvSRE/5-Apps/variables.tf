@@ -13,6 +13,11 @@ locals {
 
   DomainName = local.Settings["Domain"]["Name"]
   SubDomainNames = local.Settings["Domain"]["SubDomain"]["TW"]
+
+  CDNUrlPathOfficial = local.Settings["CDN"]["UrlPathOfficial"]
+  CDNSubDomainName = local.Settings["Domain"]["SubDomain"]["LB-CDN"]
+
+  CDNUrlOfficial = "https://${local.CDNSubDomainName}.${local.DomainName}${local.CDNUrlPathOfficial}"
 }
 
 # https://cloud.google.com/compute/docs/regions-zones

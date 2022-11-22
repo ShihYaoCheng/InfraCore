@@ -352,3 +352,12 @@ variable "ArgoCD_OfficialWebRedirectEnabled" {
 variable "ArgoCD_OfficialWebRedirectDestFQDN" {
   type = string
 }
+
+variable "ArgoCD_OfficialWebCDNEnabled" {
+  type = bool
+}
+
+variable "ArgoCD_OfficialWebCDNUrl" {
+  type = string
+  #  default = "https://cdn.origingaia.com/official/v2.1.0/*"
+}

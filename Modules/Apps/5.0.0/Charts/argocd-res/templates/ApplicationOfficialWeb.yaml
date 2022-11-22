@@ -20,6 +20,10 @@ spec:
           value: {{ .Values.apps.officialWeb.redirect.enabled | quote }}
         - name: ingress.middlewares.redirect.destFQDN
           value: {{ .Values.apps.officialWeb.redirect.destFQDN }}
+        - name: cdn.enabled
+          value: {{ .Values.apps.officialWeb.cdn.enabled | quote }}
+        - name: cdn.url
+          value: {{ .Values.apps.officialWeb.cdn.url }}
   destination:
     server: https://kubernetes.default.svc
     namespace: official-web

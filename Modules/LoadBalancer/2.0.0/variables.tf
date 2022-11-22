@@ -20,6 +20,7 @@ variable "ZoneEU" {
 locals {
   # gameFQDNs = ["global.ponponsnake.com", "dev.ponponsnake.com", "www.ponponsnake.com"]
   gameFQDNs = formatlist("%s.%s", var.GameSubDomainNames, var.DomainName)
+  # cdnFQDNs = ["cdn.ponponsnake.com", "cdn-beta.ponponsnake.com"]
   cdnFQDNs = formatlist("%s.%s", var.CDNSubDomainNames, var.DomainName)
   
   # https://stackoverflow.com/questions/59381410/how-can-i-convert-a-list-to-a-string-in-terraform
@@ -51,6 +52,11 @@ variable "GameSubDomainNames" {
 variable "CDNSubDomainNames" {
   type        = list(string)
   #  default = ["dev", "www", "acl"]
+}
+
+variable "CDNUrlPathOfficial" {
+  type = string
+  #  default = "/official/v2.1.0"
 }
 
 variable "GodaddyAPIKey" {

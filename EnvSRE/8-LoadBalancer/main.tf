@@ -7,6 +7,7 @@ module "LoadBalancer" {
   DomainName = local.DomainName
   GameSubDomainNames = [local.GameSubDomainName]
   CDNSubDomainNames = [local.CDNSubDomainName]
+  CDNUrlPathOfficial = local.CDNUrlPathOfficial
   
   GodaddyAPIKey = var.GodaddyAPIKey
   GodaddyAPISecret = var.GodaddyAPISecret

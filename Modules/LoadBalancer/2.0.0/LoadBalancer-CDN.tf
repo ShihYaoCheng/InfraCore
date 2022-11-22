@@ -74,6 +74,7 @@ resource "google_compute_url_map" "CDN" {
 
   host_rule {
     hosts        = local.cdnFQDNs
+#    hosts        = ["cdn.ponponsnake.com"]
     path_matcher = "cdn"
   }
 
@@ -83,7 +84,8 @@ resource "google_compute_url_map" "CDN" {
 
     # https://cloud.google.com/cdn/docs/best-practices#versioned-urls
     path_rule {
-      paths   = ["/official/*"]
+      paths   = ["${var.CDNUrlPathOfficial}/*"]
+#      paths   = ["/official/*"]
 #      paths   = formatlist("/official/%s/*", var.GodaddySubDomainNames)
 #      paths   = ["/official/${var.GodaddySubDomainNames[0]}/*"]
       service = google_compute_backend_service.OfficialWeb.id
@@ -96,25 +98,21 @@ resource "google_compute_url_map" "CDN" {
   }
 }
 
-#resource "random_id" "certificate" {
-#  byte_length = 4
-#  prefix      = "${var.ProjectName}-cdn-"
-#  keepers = {
-#    domains = local.v1
-#  }
-#}
+resource "random_id" "cert" {
+  byte_length = 2
+}
 
 resource "google_compute_managed_ssl_certificate" "CDN" {
-  name             = "${var.ProjectName}-cdn"
+  name             = "${var.ProjectName}-cdn-${random_id.cert.hex}"
 #  name = random_id.certificate.hex
   managed {
-#    domains = ["global.origingaia.com"]
-    domains = ["cdn.${var.DomainName}"]
+#    domains = ["cdn.origingaia.com"]
+    domains = local.cdnFQDNs
   }
 }
 
 resource "google_compute_target_https_proxy" "CDN" {
-  name             = "${var.ProjectName}-cdn"
+  name             = "${var.ProjectName}-cdn-${random_id.cert.hex}"
 #  name             = random_id.certificate.hex
   url_map          = google_compute_url_map.CDN.id
   ssl_certificates = [google_compute_managed_ssl_certificate.CDN.id]
@@ -127,7 +125,7 @@ resource "google_compute_global_address" "CDN" {
 }
 
 resource "google_compute_global_forwarding_rule" "CDN" {
-  name                  = "${var.ProjectName}-cdn"
+  name                  = "${var.ProjectName}-cdn-${random_id.cert.hex}"
 #  name             = random_id.certificate.hex
   target                = google_compute_target_https_proxy.CDN.id
   port_range            = "443"

@@ -1,9 +1,11 @@
 {
-  "Project": {
+  "Project": 
+  {
     "ID": "stellar-38931",
     "Name": "cqi-sk-test"
   },
-  "GKE": {
+  "GKE": 
+  {
     "TW-Dev": {
       "APIName": "GKE-API-TW",
       "CAName": "GKE-CA-TW"  
@@ -24,8 +26,12 @@
     {
       "TW": ["www", "v2.1.0", "v2.2.0", "v2.3.0", "test"],
       "EU": ["eu.v2.3.0"],
-      "GameLoadBalancer": "global.v2.3.0",
-      "CDNLoadBalancer": "cdn"
+      "LB-Game": "global.v2.3.0",
+      "LB-CDN": "cdn-beta"
     }
+  },
+  "CDN": 
+  {
+    "UrlPathOfficial": "/official/v2.3.0"
   }
 }

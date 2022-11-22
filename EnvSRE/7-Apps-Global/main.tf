@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "AppsEu" {
-  source = "../../Modules/Apps/4.1.0"
+  source = "../../Modules/Apps/5.0.0"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
@@ -13,6 +13,8 @@ module "AppsEu" {
   EnableGodaddyPlainDomain           = false
   ArgoCD_OfficialWebRedirectEnabled  = false
   ArgoCD_OfficialWebRedirectDestFQDN = ""
+  ArgoCD_OfficialWebCDNEnabled       = false
+  ArgoCD_OfficialWebCDNUrl           = ""
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = false
