@@ -8,7 +8,7 @@
     # https://registry.terraform.io/providers/hashicorp/google/latest
     google = {
       source = "hashicorp/google"
-      version = "~>4.37.0"
+      version = "~>4.44.0"
     }
   }
 }

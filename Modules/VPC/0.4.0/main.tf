@@ -1,7 +1,7 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/network/google/latest
 module "VPC" {
   source  = "terraform-google-modules/network/google"
-  version = "~>5.2.0"
+  version = "~>6.0.0"
 
   network_name = var.ProjectName
   project_id   = var.GCPProjectID
