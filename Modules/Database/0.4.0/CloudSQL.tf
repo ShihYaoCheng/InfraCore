@@ -9,7 +9,7 @@ data "http" "MyIP" {
 # https://registry.terraform.io/modules/GoogleCloudPlatform/sql-db/google/latest/submodules/mysql
 module "CloudSQL" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/mysql"
-  version = "10.0.2"
+  version = "13.0.1"
 
   database_version    = "MYSQL_8_0"
   encryption_key_name = null
