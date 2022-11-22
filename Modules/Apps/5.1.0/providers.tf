@@ -8,19 +8,19 @@
     # https://registry.terraform.io/providers/hashicorp/google/latest
     google = {
       source = "hashicorp/google"
-      version = "~>4.37.0"
+      version = "~>4.44.0"
     }
 
     # https://registry.terraform.io/providers/hashicorp/helm/latest
     helm = {
       source  = "hashicorp/helm"
-      version = "~>2.6.0"
+      version = "~>2.7.1"
     }
 
     # https://registry.terraform.io/providers/hashicorp/kubernetes/latest
     kubernetes = {
       source = "hashicorp/kubernetes"
-      version = "2.13.1"
+      version = "2.16.0"
     }
   }
 }

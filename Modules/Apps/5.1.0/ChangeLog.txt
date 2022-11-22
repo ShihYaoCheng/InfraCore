@@ -1,4 +1,8 @@
-﻿5.0.0
+﻿5.1.0
+Upgrade helm chart, module, provider to latest version.
+
+
+5.0.0
 Add new variables: ArgoCD_OfficialWebCDNEnabled, ArgoCD_OfficialWebCDNUrl.
 
 
