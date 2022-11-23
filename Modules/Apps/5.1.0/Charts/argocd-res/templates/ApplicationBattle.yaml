@@ -5,7 +5,7 @@ metadata:
   name: battle
   namespace: argocd
 spec:
-  project: sk
+  project: default
   source:
     repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppBattle.git
     targetRevision: {{ .Values.apps.battle.branchOrTag }}

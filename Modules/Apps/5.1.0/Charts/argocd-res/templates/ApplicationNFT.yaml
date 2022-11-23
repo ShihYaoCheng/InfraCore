@@ -5,7 +5,7 @@ metadata:
   name: nft
   namespace: argocd
 spec:
-  project: sk
+  project: default
   source:
     repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppNFT.git
     targetRevision: {{ .Values.apps.nft.branchOrTag }}

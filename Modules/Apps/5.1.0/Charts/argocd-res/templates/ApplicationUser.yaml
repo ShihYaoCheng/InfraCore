@@ -5,7 +5,7 @@ metadata:
   name: user
   namespace: argocd
 spec:
-  project: sk
+  project: default
   source:
     repoURL: https://gitlab.com/GameSnake/SRE/ArgoCDAppUser.git
     targetRevision: {{ .Values.apps.user.branchOrTag }}

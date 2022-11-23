@@ -13,20 +13,19 @@ resource "helm_release" "ArgoCD" {
 
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd"
-  version    = "~>4.10.9"
+  version    = "~>5.14.1"
 
   create_namespace = true
   namespace        = "argocd"
 
   # https://stackoverflow.com/questions/64696721/how-do-i-pass-variables-to-a-yaml-file-in-heml-tf
   values = [
-    templatefile("${path.module}/Values/argocd.yaml", {}),
-    templatefile("${path.module}/Values/argocd-configs.yaml", {}),
-    templatefile("${path.module}/Values/argocd-controller.yaml", {}),
-    templatefile("${path.module}/Values/ArgoCD-Projects.yaml",
-      {
-        syncWindowCronTime = var.ArgoCD_SyncWindowTaipeiTime
-      }),
+    templatefile("${path.module}/Values/ArgoCD-Resources.yaml", {}),
+    templatefile("${path.module}/Values/ArgoCD-Controller.yaml", {}),
+#    templatefile("${path.module}/Values/ArgoCD-Projects.yaml",
+#      {
+#        syncWindowCronTime = var.ArgoCD_SyncWindowTaipeiTime
+#      }),
     templatefile("${path.module}/Values/ArgoCD-Server.yaml",
       {
         serverExtraArgs = var.ArgoCD_EnableIngress ? "[--insecure, --basehref, /argocd]" : "[]"
