@@ -1,5 +1,5 @@
 ﻿module "database" {
-  source  = "../../Modules/Database/0.3.0"
+  source  = "../../Modules/Database/0.4.0"
 
   ProjectName = local.ProjectName
   GCPProjectID = local.ProjectID

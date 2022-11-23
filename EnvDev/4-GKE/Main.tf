@@ -1,5 +1,5 @@
 ﻿module "GKE-TW-Dev" {
-  source = "../../Modules/GKE-Safe/0.6.0"
+  source = "../../Modules/GKE-Safe/0.7.0"
 
   ProjectName = local.ProjectName
   UniqueName  = "TW-Dev"

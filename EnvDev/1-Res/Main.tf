@@ -1,5 +1,5 @@
 ﻿module "sk-dev-bucket" {
-  source  = "../../Modules/Resources/0.2.0"
+  source  = "../../Modules/Resources/0.3.0"
 
   # https://cloud.google.com/storage/docs/troubleshooting#bucket-name-conflict
   # The GCS bucket name must be unique in the entire GCP. If you have a 409 conflict error

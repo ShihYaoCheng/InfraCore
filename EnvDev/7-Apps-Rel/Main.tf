@@ -1,18 +1,21 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
-module "Apps" {
-  source = "../../Modules/Apps/4.1.0"
+module "Apps-Rel" {
+  source = "../../Modules/Apps/5.1.0"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
-  GCPZone      = "asia-east1-a"
+  GCPZone      = "asia-east1-b"
 
-  GodaddyDomainName                  = "origingaia.com"
-  EnableGodaddyPlainDomain           = false
-  GodaddySubDomainNames              = ["dev"]
-  GodaddyAPIKey                      = var.GodaddyAPIKey
-  GodaddyAPISecret                   = var.GodaddyAPISecret
+  GodaddyDomainName        = "origingaia.com"
+  EnableGodaddyPlainDomain = false
+  GodaddySubDomainNames    = ["rel"]
+  GodaddyAPIKey            = var.GodaddyAPIKey
+  GodaddyAPISecret         = var.GodaddyAPISecret
+
   ArgoCD_OfficialWebRedirectEnabled  = false
   ArgoCD_OfficialWebRedirectDestFQDN = ""
+  ArgoCD_OfficialWebCDNEnabled       = false
+  ArgoCD_OfficialWebCDNUrl           = ""
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = true
@@ -22,9 +25,9 @@ module "Apps" {
   Prometheus_Retention        = "60d"
   Grafana_AdminPassword       = "gra4422"
 
-  Robusta_ClusterName           = "sk-dev"
+  Robusta_ClusterName           = "sk-rel"
   Robusta_SlackAPIKey           = var.Robusta_SlackAPIKey
-  Robusta_SlackChannel          = "sk-dev-info"
+  Robusta_SlackChannel          = "sk-rel-info"
   Robusta_NotifyDeploymentEvent = false
 
   ArgoCD_Enable               = true
@@ -51,19 +54,19 @@ module "Apps" {
   ArgoCD_AppUserBranchOrTag        = "main"
   ArgoCD_AppOfficialWebBranchOrTag = "main"
 
-  ArgoCD_BackstageHelmValueFiles   = "{values-main.yaml}"
-  ArgoCD_BattleHelmValueFiles      = "{values-main.yaml}"
-  ArgoCD_FileHelmValueFiles        = "{values-main.yaml}"
-  ArgoCD_NFTHelmValueFiles         = "{values-main.yaml}"
-  ArgoCD_TableHelmValueFiles       = "{values-main.yaml}"
-  ArgoCD_UserHelmValueFiles        = "{values-main.yaml}"
-  ArgoCD_OfficialWebHelmValueFiles = "{values-main.yaml}"
+  ArgoCD_BackstageHelmValueFiles   = "{values-beta.yaml\\, CloudSQL-Rel.yaml}"
+  ArgoCD_BattleHelmValueFiles      = "{values-v2.11.1.yaml\\, EnableIngress.yaml}"
+  ArgoCD_FileHelmValueFiles        = "{values-v2.11.1.yaml\\, EnableIngress.yaml}"
+  ArgoCD_NFTHelmValueFiles         = "{values-beta.yaml}"
+  ArgoCD_TableHelmValueFiles       = "{values-v2.11.1.yaml\\, EnableIngressReliability.yaml}"
+  ArgoCD_UserHelmValueFiles        = "{values-v2.11.1.yaml\\, SetServerName-Release.yaml\\, EnableIngressReliability.yaml\\, ConnectRelDB.yaml}"
+  ArgoCD_OfficialWebHelmValueFiles = "{values-beta.yaml}"
 
   ArgoCD_BackstageSqlPassword = "backstage1234"
   ArgoCD_UserSqlPassword      = "user1234"
 
   providers = {
-    helm       = helm.dev
-    kubernetes = kubernetes.dev
+    helm       = helm.rel
+    kubernetes = kubernetes.rel
   }
 }
