@@ -15,13 +15,13 @@
   },
   "HelmPathValueFiles":
   {
-    "Backstage": "{values-v1.11.3.yaml\\, LineID-Production.yaml}",
+    "Backstage": "{values-v1.11.4.yaml\\, LineID-Production.yaml}",
     "Battle": "{values-prod.yaml}",
     "File": "{values-prod.yaml}",
     "NFT": "{values-prod.yaml}",
     "Table": "{values-prod.yaml}",
     "User": "{values-prod.yaml}",
-    "OfficialWeb": "{values-v1.11.3.yaml\\, EnableIngress-Prod.yaml}"
+    "OfficialWeb": "{values-v1.11.4.yaml\\, EnableIngress-Prod.yaml}"
   },
   "Domain":
   {
