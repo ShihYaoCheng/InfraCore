@@ -1,0 +1,12 @@
+﻿2.0.0
+Add new load balancer for official web CDN.
+Upgrade the Godaddy helm chart.
+
+New Variables: GameSubDomainNames, CDNEnabled, CDNSubDomainNames, CDNUrlPathOfficial.
+Remove Variables: GodaddySubDomainName.
+
+1.1.0
+The terraform upgrade to 1.2.9.
+
+1.0.0
+DNS register automatically.
