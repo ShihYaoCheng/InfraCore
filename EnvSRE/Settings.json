@@ -32,6 +32,7 @@
   },
   "CDN": 
   {
+    "Enabled": true,
     "UrlPathOfficial": "/official/v2.3.0"
   }
 }

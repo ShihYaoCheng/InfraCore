@@ -15,6 +15,8 @@ data "google_compute_network_endpoint_group" "NEGOfficialWeb" {
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_backend_service
 resource "google_compute_backend_service" "OfficialWeb" {
+  count = var.CDNEnabled ? 1 : 0
+  
   name = "${var.ProjectName}-official-web"
 
   # (Optional) The protocol this BackendService uses to communicate with backends. 
@@ -69,8 +71,10 @@ resource "google_compute_backend_service" "OfficialWeb" {
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_url_map
 # https://cloud.google.com/load-balancing/docs/https/traffic-management-global#simple_host_and_path_rule
 resource "google_compute_url_map" "CDN" {
+  count = var.CDNEnabled ? 1 : 0
+  
   name            = "${var.ProjectName}-cdn"
-  default_service = google_compute_backend_service.OfficialWeb.id
+  default_service = google_compute_backend_service.OfficialWeb[0].id
 
   host_rule {
     hosts        = local.cdnFQDNs
@@ -80,7 +84,7 @@ resource "google_compute_url_map" "CDN" {
 
   path_matcher {
     name            = "cdn"
-    default_service = google_compute_backend_service.OfficialWeb.id
+    default_service = google_compute_backend_service.OfficialWeb[0].id
 
     # https://cloud.google.com/cdn/docs/best-practices#versioned-urls
     path_rule {
@@ -88,7 +92,7 @@ resource "google_compute_url_map" "CDN" {
 #      paths   = ["/official/*"]
 #      paths   = formatlist("/official/%s/*", var.GodaddySubDomainNames)
 #      paths   = ["/official/${var.GodaddySubDomainNames[0]}/*"]
-      service = google_compute_backend_service.OfficialWeb.id
+      service = google_compute_backend_service.OfficialWeb[0].id
       route_action {
         url_rewrite {
           path_prefix_rewrite = "/"
@@ -103,6 +107,8 @@ resource "random_id" "cert" {
 }
 
 resource "google_compute_managed_ssl_certificate" "CDN" {
+  count = var.CDNEnabled ? 1 : 0
+  
   name             = "${var.ProjectName}-cdn-${random_id.cert.hex}"
 #  name = random_id.certificate.hex
   managed {
@@ -112,24 +118,29 @@ resource "google_compute_managed_ssl_certificate" "CDN" {
 }
 
 resource "google_compute_target_https_proxy" "CDN" {
+  count = var.CDNEnabled ? 1 : 0
+  
   name             = "${var.ProjectName}-cdn-${random_id.cert.hex}"
 #  name             = random_id.certificate.hex
-  url_map          = google_compute_url_map.CDN.id
-  ssl_certificates = [google_compute_managed_ssl_certificate.CDN.id]
+  url_map          = google_compute_url_map.CDN[0].id
+  ssl_certificates = [google_compute_managed_ssl_certificate.CDN[0].id]
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_global_address
 resource "google_compute_global_address" "CDN" {
+  count = var.CDNEnabled ? 1 : 0
+  
   name         = "${var.ProjectName}-cdn"
   address_type = "EXTERNAL"
 }
 
 resource "google_compute_global_forwarding_rule" "CDN" {
+  count = var.CDNEnabled ? 1 : 0
+  
   name                  = "${var.ProjectName}-cdn-${random_id.cert.hex}"
-#  name             = random_id.certificate.hex
-  target                = google_compute_target_https_proxy.CDN.id
+  target                = google_compute_target_https_proxy.CDN[0].id
   port_range            = "443"
-  ip_address            = google_compute_global_address.CDN.id
+  ip_address            = google_compute_global_address.CDN[0].id
   ip_protocol           = "TCP"
   load_balancing_scheme = "EXTERNAL"
 }

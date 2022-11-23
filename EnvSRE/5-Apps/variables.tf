@@ -14,6 +14,7 @@ locals {
   DomainName = local.Settings["Domain"]["Name"]
   SubDomainNames = local.Settings["Domain"]["SubDomain"]["TW"]
 
+  CDNEnabled = local.Settings["CDN"]["Enabled"]
   CDNUrlPathOfficial = local.Settings["CDN"]["UrlPathOfficial"]
   CDNSubDomainName = local.Settings["Domain"]["SubDomain"]["LB-CDN"]
 

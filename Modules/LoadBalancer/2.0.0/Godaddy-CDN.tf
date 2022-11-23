@@ -1,4 +1,6 @@
 ﻿resource "helm_release" "GodaddyCDN" {
+  count = var.CDNEnabled ? 1 : 0
+  
   name             = "godaddy-cdn-load-balancer"
   chart            = "${path.module}/Charts/Godaddy"
   namespace        = "default"
@@ -15,7 +17,7 @@
 
   set {
     name  = "ip"
-    value = google_compute_global_address.CDN.address
+    value = google_compute_global_address.CDN[0].address
   }
 
   set_sensitive {

@@ -4,17 +4,19 @@ module "LoadBalancer" {
 
   ProjectName = local.ProjectName
 
-  DomainName = local.DomainName
+  DomainName         = local.DomainName
   GameSubDomainNames = [local.GameSubDomainName]
-  CDNSubDomainNames = [local.CDNSubDomainName]
+
+  CDNEnabled         = local.CDNEnabled
+  CDNSubDomainNames  = [local.CDNSubDomainName]
   CDNUrlPathOfficial = local.CDNUrlPathOfficial
-  
-  GodaddyAPIKey = var.GodaddyAPIKey
+
+  GodaddyAPIKey    = var.GodaddyAPIKey
   GodaddyAPISecret = var.GodaddyAPISecret
 
   ZoneTW = "asia-east1-c"
   ZoneEU = "europe-west2-c"
-  
+
   providers = {
     kubernetes.tw = kubernetes.tw
     kubernetes.eu = kubernetes.eu

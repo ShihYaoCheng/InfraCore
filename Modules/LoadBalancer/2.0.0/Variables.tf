@@ -49,6 +49,10 @@ variable "GameSubDomainNames" {
   #  default = ["dev", "www", "acl"]
 }
 
+variable "CDNEnabled" {
+  type = bool
+}
+
 variable "CDNSubDomainNames" {
   type        = list(string)
   #  default = ["dev", "www", "acl"]
