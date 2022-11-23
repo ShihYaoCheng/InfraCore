@@ -1,4 +1,8 @@
-﻿2.0.0
+﻿2.1.0
+Upgrade providers.
+
+
+2.0.0
 Add new load balancer for official web CDN.
 Upgrade the Godaddy helm chart.
 
