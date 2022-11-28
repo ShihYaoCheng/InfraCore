@@ -8,7 +8,7 @@ module "AppsTw" {
 
   GodaddyDomainName                  = local.DomainName
   EnableGodaddyPlainDomain           = true
-  GodaddySubDomainNames              = [local.SubDomainName, "www", "v2.10.1", "v2.10.0", "v2.9.0", "acl"]
+  GodaddySubDomainNames              = [local.SubDomainName, "www","v2.11.0", "v2.10.1", "v2.10.0", "v2.9.0", "acl"]
   GodaddyAPIKey                      = var.GodaddyAPIKey
   GodaddyAPISecret                   = var.GodaddyAPISecret
   ArgoCD_OfficialWebRedirectEnabled  = true
