@@ -1,0 +1,28 @@
+﻿0.7.0
+Upgrade module and helm chart to latest version.
+
+
+0.6.0
+Upgrade Traefik to 17.0.3.
+Upgrade Kubernetes control plane to 1.23.12-gke.100.
+
+0.5.0
+Add variable: GKE-CreateServiceAccount
+Upgrade CloudSQL proxy to 1.32.0.
+
+0.4.0
+Add variable: GKE-NodeSizeGB.
+
+0.3.0
+Install applications:
+1. Traefik.
+2. CloudSQLProxy.
+3. Configuration.
+
+The ArgoCD Application can continue running even if the App module removed.
+
+0.2.0
+The terraform upgrade to 1.2.9.
+
+0.1.0
+Initialize version: create private cluster.
