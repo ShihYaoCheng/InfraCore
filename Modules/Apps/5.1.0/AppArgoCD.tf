@@ -1,6 +1,6 @@
 ﻿# https://artifacthub.io/packages/helm/argo/argo-cd
+# https://github.com/argoproj/argo-helm/blob/argo-cd-5.14.1/charts/argo-cd/values.yaml
 # https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/values.yaml
-# https://github.com/argoproj/argo-helm/blob/argo-cd-4.9.8/charts/argo-cd/values.yaml
 # helm upgrade --install argocd argo/argo-cd -n argocd --create-namespace
 # helm uninstall argocd -n argocd
 
