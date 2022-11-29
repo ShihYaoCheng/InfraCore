@@ -1,14 +1,19 @@
 # https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "LoadBalancer" {
-  source = "../../Modules/LoadBalancer/1.1.0"
+  source = "../../Modules/LoadBalancer/2.1.0"
 
   ProjectName  = local.ProjectName
   
   GodaddyAPIKey        = var.GodaddyAPIKey
   GodaddyAPISecret     = var.GodaddyAPISecret
-  GodaddyDomainName    = local.DomainName
-  GodaddySubDomainName = local.SubDomainName
 
+  DomainName         = local.DomainName
+  GameSubDomainNames = [local.GameSubDomainName]
+
+  CDNEnabled         = local.CDNEnabled
+  CDNSubDomainNames  = [local.CDNSubDomainName]
+  CDNUrlPathOfficial = local.CDNUrlPathOfficial
+  
   ZoneTW = "asia-east1-a"
   ZoneEU = "europe-west2-a"
 

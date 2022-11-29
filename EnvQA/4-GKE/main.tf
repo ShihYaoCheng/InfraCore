@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "GKE-TW" {
-  source = "../../Modules/GKE-Safe/0.6.0"
+  source = "../../Modules/GKE-Safe/0.7.0"
 
   ProjectName = local.ProjectName
   UniqueName  = "tw"

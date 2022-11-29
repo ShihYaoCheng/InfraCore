@@ -1,18 +1,21 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "Apps" {
-  source = "../../Modules/Apps/4.0.0"
+  source = "../../Modules/Apps/5.1.0"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
   GCPZone      = var.GCPZone
 
-  GodaddyDomainName                  = local.DomainName
-  EnableGodaddyPlainDomain           = false
-  GodaddySubDomainNames              = [local.SubDomainName]
-  GodaddyAPIKey                      = var.GodaddyAPIKey
-  GodaddyAPISecret                   = var.GodaddyAPISecret
+  GodaddyDomainName        = local.DomainName
+  EnableGodaddyPlainDomain = false
+  GodaddySubDomainNames    = [local.SubDomainName]
+  GodaddyAPIKey            = var.GodaddyAPIKey
+  GodaddyAPISecret         = var.GodaddyAPISecret
+
   ArgoCD_OfficialWebRedirectEnabled  = false
   ArgoCD_OfficialWebRedirectDestFQDN = ""
+  ArgoCD_OfficialWebCDNEnabled       = local.CDNEnabled
+  ArgoCD_OfficialWebCDNUrl           = local.CDNUrlOfficial
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = true
