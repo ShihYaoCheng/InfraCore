@@ -9,7 +9,7 @@
     "Backstage": "main",
     "Battle": "v2.11.1F0",
     "File": "v2.11.1F0",
-    "NFT": "v2.10.0F2",
+    "NFT": "v2.10.0F3",
     "Table": "v2.11.1F4",
     "User": "v2.11.1F0",
     "OfficialWeb": "main"
@@ -29,9 +29,9 @@
     "Name": "ponponsnake.com",
     "SubDomain":
     {
-      "TW": "v2.11.1",
-      "EU": "eu.v2.11.1",
-      "LoadBalancer":"global.v2.11.1" 
+      "TW": "v2.12.0",
+      "EU": "eu.v2.12.0",
+      "LoadBalancer":"global.v2.12.0" 
     }
   },
   "GKE": {
