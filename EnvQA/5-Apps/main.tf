@@ -8,7 +8,7 @@ module "Apps" {
 
   GodaddyDomainName        = local.DomainName
   EnableGodaddyPlainDomain = false
-  GodaddySubDomainNames    = [local.SubDomainName]
+  GodaddySubDomainNames    = local.SubDomainNames
   GodaddyAPIKey            = var.GodaddyAPIKey
   GodaddyAPISecret         = var.GodaddyAPISecret
 

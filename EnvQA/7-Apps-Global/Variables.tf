@@ -25,7 +25,7 @@ locals {
   UserHelmValueFiles = local.Settings["HelmPathValueFiles"]["User"]
 
   DomainName = local.Settings["Domain"]["Name"]
-  SubDomainName = local.Settings["Domain"]["SubDomain"]["EU"]
+  SubDomainNames = local.Settings["Domain"]["SubDomain"]["EU"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones

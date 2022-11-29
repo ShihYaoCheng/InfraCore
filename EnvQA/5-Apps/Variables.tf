@@ -27,7 +27,7 @@ locals {
   OfficialWebHelmValueFiles = local.Settings["HelmPathValueFiles"]["OfficialWeb"]
 
   DomainName = local.Settings["Domain"]["Name"]
-  SubDomainName = local.Settings["Domain"]["SubDomain"]["TW"]
+  SubDomainNames = local.Settings["Domain"]["SubDomain"]["TW"]
 
   CDNEnabled = local.Settings["CDN"]["Enabled"]
   CDNUrlPathOfficial = local.Settings["CDN"]["UrlPathOfficial"]
