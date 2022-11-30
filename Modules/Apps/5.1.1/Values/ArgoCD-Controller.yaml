@@ -3,6 +3,10 @@ controller:
   resources:
     requests:
       cpu: 100m
+      memory: 500Mi
+    limits:
+      memory: 500Mi
+      
   ## Application controller metrics configuration
   metrics:
     # -- Deploy metrics service

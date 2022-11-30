@@ -1,4 +1,8 @@
-﻿5.1.0
+﻿5.1.1
+Add resources: memory request, memory limit.
+
+
+5.1.0
 Upgrade helm chart, module, provider to latest version.
 
 

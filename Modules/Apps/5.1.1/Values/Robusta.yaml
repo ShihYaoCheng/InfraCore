@@ -16,11 +16,15 @@ enablePrometheusStack: true
 enableServiceMonitors: true
 
 disableCloudRouting: true
+
 runner:
   sendAdditionalTelemetry: false
   resources:
     requests:
       cpu: 150m
+      memory: 1.2Gi
+    limits:
+      memory: 1.2Gi
 
 enablePlatformPlaybooks: false # noisy.
 
@@ -85,6 +89,13 @@ kube-prometheus-stack:
     ## Timezone for the default dashboards
     ## Other options are: browser or a specific timezone, i.e. Europe/Luxembourg
     defaultDashboardsTimezone: Asia/Taipei
+    
+    resources: 
+      requests:
+        cpu: 50m
+        memory: 400Mi
+      limits:
+        memory: 400Mi
     
     grafana.ini:
       server:
@@ -277,6 +288,9 @@ kube-prometheus-stack:
       resources:
         requests:
           cpu: 150m
+          memory: 1Gi
+        limits:
+          memory: 1Gi
       # Select all ServiceMonitor and PodMonitor without any label filter.
       
       ## If true, a nil or {} value for prometheus.prometheusSpec.serviceMonitorSelector will cause the
