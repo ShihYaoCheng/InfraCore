@@ -1,2 +1,5 @@
-﻿0.2.0
+﻿0.3.0
+Upgrade google provider to 4.44.0.
+
+0.2.0
 Upgrade terraform required_version to 1.2.9.
