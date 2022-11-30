@@ -1,0 +1,51 @@
+﻿5.1.0
+Upgrade helm chart, module, provider to latest version.
+
+
+5.0.0
+Add new variables: ArgoCD_OfficialWebCDNEnabled, ArgoCD_OfficialWebCDNUrl.
+
+
+4.1.1
+Remove unnecessary variable in argocd-res chart: apps.officialWeb.redirect.srcFQDN.
+
+
+4.1.0
+Add grafana dashboard: 15757, 15758, 15759, 15760, 13407.
+
+
+4.0.0
+Add new variables: GodaddySubDomainNames, EnableGodaddyPlainDomain
+Remove variables: GodaddySubDomainName1, GodaddySubDomainName2, ArgoCD_OfficialWebRedirectSrcFQDN
+
+1. The App module supports the subDomain Names array and can register multiple FQDN.
+2. The App module supports wildcard forwarding. When all requests come in, all request 
+forwarding to ArgoCD_OfficialWebRedirectDestFQDN. 
+
+
+3.1.0
+Upgrade helm charts.
+
+3.0.1
+Fix the following variables doesn't work: 
+1. ArgoCD_OfficialWebRedirectEnabled
+2. ArgoCD_OfficialWebRedirectSrcFQDN
+3. ArgoCD_OfficialWebRedirectDestFQDN
+
+3.0.0
+Move configuration and traefik helm chart to GKE.
+Purpose: I want to separate the Game Applications and System Applications so that I can change 
+the system applications and don't affect the game applications anymore.
+
+Remove variable: CloudSQLProxy_Enable.
+
+2.3.0
+Add SLOs.
+Add Grafana dashboards.
+
+2.2.0
+The terraform upgrade to 1.2.9.
+
+2.1.0
+Feature1: Add many of the A records to the same IP address.
+Feature2: Add traefik redirect.

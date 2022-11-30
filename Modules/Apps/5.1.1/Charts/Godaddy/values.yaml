@@ -1,0 +1,19 @@
+# helm upgrade --install godaddy ./Charts/Godaddy -n default
+# helm uninstall godaddy -n default
+
+# example: origingaia.com
+#domainName: "origingaia.com"
+domainName: ""
+
+# example: "test1, test2"
+enablePlainSubDomainName: false
+#subDomainNames: "test1, test2"
+subDomainNames: ""
+
+# example: 10.10.10.10
+#ip: "10.10.10.10"
+ip: ""
+
+godaddy:
+  key: ""
+  secret: ""

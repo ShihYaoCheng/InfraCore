@@ -1,0 +1,13 @@
+# https://github.com/robusta-dev/robusta/blob/master/helm/robusta/values.yaml
+
+# https://docs.robusta.dev/master/catalog/triggers/kubernetes.html
+# https://docs.robusta.dev/master/catalog/actions/event-enrichment.html
+# https://docs.robusta.dev/master/catalog/actions/change-tracking.html
+customPlaybooks:
+  - triggers:
+      - on_deployment_all_changes:
+          labels_selector: trigger=argocd
+    actions:
+      - deployment_status_enricher: {}
+      - deployment_events_enricher: {}
+      - resource_babysitter: {}
