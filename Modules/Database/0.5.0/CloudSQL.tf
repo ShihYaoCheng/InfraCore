@@ -102,3 +102,9 @@ resource "google_storage_bucket_object" "CloudSQLConnectionName" {
   content = module.CloudSQL.instance_connection_name
 }
 
+resource "google_storage_bucket_object" "CloudSQLInstanceName" {
+  bucket  = var.ProjectName
+  name    = "CloudSQLInstanceName"
+  content = module.CloudSQL.instance_name
+}
+
