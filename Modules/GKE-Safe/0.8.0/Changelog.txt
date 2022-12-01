@@ -1,4 +1,8 @@
-﻿0.7.0
+﻿0.8.0
+Add helm chart: https://artifacthub.io/packages/helm/rimusz/gcloud-sqlproxy
+
+
+0.7.0
 Upgrade module and helm chart to latest version.
 
 

@@ -17,7 +17,6 @@ locals {
   CDNEnabled = local.Settings["CDN"]["Enabled"]
   CDNUrlPathOfficial = local.Settings["CDN"]["UrlPathOfficial"]
   CDNSubDomainName = local.Settings["Domain"]["SubDomain"]["LB-CDN"]
-
   CDNUrlOfficial = "https://${local.CDNSubDomainName}.${local.DomainName}${local.CDNUrlPathOfficial}"
 }
 

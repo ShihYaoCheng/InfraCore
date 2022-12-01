@@ -11,6 +11,7 @@ module "AppsEu" {
   GodaddyAPIKey                      = var.GodaddyAPIKey
   GodaddyAPISecret                   = var.GodaddyAPISecret
   EnableGodaddyPlainDomain           = false
+  
   ArgoCD_OfficialWebRedirectEnabled  = false
   ArgoCD_OfficialWebRedirectDestFQDN = ""
   ArgoCD_OfficialWebCDNEnabled       = false
