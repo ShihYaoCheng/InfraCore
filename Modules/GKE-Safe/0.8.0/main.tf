@@ -31,13 +31,12 @@ module "GKE-PrivateCluster" {
   enable_network_egress_export = true
   enable_shielded_nodes = true
   enable_vertical_pod_autoscaling = false
+  network_policy = true
 
   deploy_using_private_endpoint = false
   enable_private_nodes = true
   grant_registry_access = true
   cluster_resource_labels = var.GKE-Labels
-  description = "just for test"
-
 
   # https://cloud.google.com/kubernetes-engine/docs/how-to/authorized-networks
   # https://avd.aquasec.com/misconfig/google/gke/avd-gcp-0061/

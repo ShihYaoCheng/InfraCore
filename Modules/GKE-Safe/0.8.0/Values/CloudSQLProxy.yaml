@@ -39,7 +39,20 @@ networkPolicy:
   enabled: true
 
   ingress:
-    from: []
+#    from: []
+    from:
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: user
+        podSelector:
+          matchLabels:
+            app: user
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: backstage
+        podSelector:
+          matchLabels:
+            app: backstage
     # # List of sources which should be able to access the pods selected for this rule.
     # # Items in this list are combined using a logical OR operation.
     # # If this field is empty or missing, this rule matches all sources (traffic not restricted by source).
