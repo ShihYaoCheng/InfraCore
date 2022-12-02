@@ -1,5 +1,6 @@
 ﻿5.1.1
 Add resources: memory request, memory limit.
+Remove sk-sealed-secret helm chart.
 
 
 5.1.0
