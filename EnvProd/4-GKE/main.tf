@@ -9,6 +9,7 @@ module "GKE-TW" {
   GCPRegion    = local.GCPRegion
   GCPZone      = local.GCPZone
   GKE-Zones    = [local.GCPZone]
+  GKE-Labels   = { "location" = "tw", "environment" = "production" }
 
   GKE-APIName = local.GKE-API-TW
   GKE-CAName  = local.GKE-CA-TW

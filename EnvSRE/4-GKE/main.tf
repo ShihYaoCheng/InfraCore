@@ -4,13 +4,13 @@ module "GKE-TW" {
 
   ProjectName = local.ProjectName
 
-  UniqueName = "tw-dev"
+  UniqueName = "tw-test"
 
   GCPProjectID = local.ProjectID
   GCPRegion    = local.GCPRegion
   GCPZone      = local.GCPZone
   GKE-Zones    = [local.GCPZone]
-  GKE-Labels   = { "name" = "sre" }
+  GKE-Labels   = { "location" = "tw", "environment" = "test" }
 
   GKE-ControlPlaneCIDR     = "10.0.0.0/28"
   GKE-CreateServiceAccount = true

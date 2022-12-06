@@ -8,7 +8,7 @@
   GCPRegion    = local.GCPRegion
   GCPZone      = "asia-east1-b"
   GKE-Zones    = ["asia-east1-b"]
-  GKE-Labels   = { "name" = "release" }
+  GKE-Labels   = { "location" = "tw", "environment" = "release" }
 
   GKE-ControlPlaneCIDR     = "10.0.0.16/28"
   GKE-APIName              = local.GKE-API-TW-Rel

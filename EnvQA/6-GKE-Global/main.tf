@@ -9,6 +9,7 @@ module "GKE-EU" {
   GCPRegion    = local.GCPRegion
   GCPZone      = local.GCPZone
   GKE-Zones    = [local.GCPZone]
+  GKE-Labels   = { "location" = "eu", "env" = "qa" }
   
   GKE-APIName = local.GKE-API-EU
   GKE-CAName  = local.GKE-CA-EU
