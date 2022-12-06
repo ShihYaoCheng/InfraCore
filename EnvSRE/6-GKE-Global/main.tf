@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "GKE-EU" {
-  source = "../../Modules/GKE-Safe/0.8.0"
+  source = "../../Modules/GKE-Safe/1.0.0"
 
   ProjectName = local.ProjectName
 
@@ -29,5 +29,6 @@ module "GKE-EU" {
   GKE-MaxNum-4C16G        = 2
   GKE-NodeNum-4C16G       = 2
 
+  CloudSQL_Enabled = false
 }
 

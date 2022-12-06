@@ -1,4 +1,8 @@
-﻿0.8.0
+﻿1.0.0
+Add variable: Enable_CloudSQL.
+
+
+0.8.0
 Add helm chart: https://artifacthub.io/packages/helm/rimusz/gcloud-sqlproxy
 
 

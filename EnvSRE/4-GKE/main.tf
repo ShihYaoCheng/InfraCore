@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "GKE-TW" {
-  source = "../../Modules/GKE-Safe/0.8.0"
+  source = "../../Modules/GKE-Safe/1.0.0"
 
   ProjectName = local.ProjectName
 
@@ -28,6 +28,8 @@ module "GKE-TW" {
 
   GKE-APIName = local.GKE-API-TW
   GKE-CAName  = local.GKE-CA-TW
+  
+  CloudSQL_Enabled = true
 }
 
 #module "GKE-Rel" {

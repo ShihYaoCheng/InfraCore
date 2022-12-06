@@ -7,25 +7,27 @@
   CloudSQLReleaseName = "cloud-sql-proxy"
 }
 
-#data "google_storage_bucket_object_content" "CloudSQLConnectionName" {
-#  bucket = var.ProjectName
-#  name   = "CloudSQLConnectionName"
-#}
-
 data "google_storage_bucket_object_content" "CloudSQLInstanceName" {
   bucket = var.ProjectName
   name   = "CloudSQLInstanceName"
 }
 
 resource "kubernetes_namespace_v1" "CloudSQL" {
+  count = var.CloudSQL_Enabled ? 1 : 0
+  
   metadata {
-#    name = "cloud-sql"
     name = local.CloudSQLNamespace
   }
 }
 
+resource "random_id" "CloudSQL" {
+  byte_length = 2
+}
+
 # https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest/submodules/workload-identity
 module "CloudSQLWorkloadIdentity" {
+  count = var.CloudSQL_Enabled ? 1 : 0
+  
   depends_on = [kubernetes_namespace_v1.CloudSQL]
 
   source  = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
@@ -35,11 +37,10 @@ module "CloudSQLWorkloadIdentity" {
   cluster_name = var.ProjectName
   location     = var.GCPZone
 
-  name         = "cloud-sql-proxy"
+  name         = "cloud-sql-proxy-${random_id.CloudSQL.dec}"
   gcp_sa_name = local.GCP_SA_NAME
   k8s_sa_name = local.K8S_SA_NAME
 
-#  namespace    = "cloud-sql"
   namespace    = local.CloudSQLNamespace
   roles        = ["roles/cloudsql.client"]
 }
@@ -48,7 +49,9 @@ module "CloudSQLWorkloadIdentity" {
 # https://github.com/rimusz/charts/blob/master/stable/gcloud-sqlproxy/values.yaml
 # https://github.com/rimusz/charts/tree/master/stable/gcloud-sqlproxy/
 resource "helm_release" "CloudSQLProxy" {
-  name             = local.CloudSQLReleaseName
+  count = var.CloudSQL_Enabled ? 1 : 0
+  
+  name             = "${local.CloudSQLReleaseName}-${random_id.CloudSQL.dec}"
   repository       = "https://charts.rimusz.net"
   chart            = "gcloud-sqlproxy"
   version          = "~>0.23.0"
@@ -93,21 +96,4 @@ resource "helm_release" "CloudSQLProxy" {
   values = [templatefile("${path.module}/Values/CloudSQLProxy.yaml", {})]
 }
 
-#resource "helm_release" "CloudSQLProxy" {
-#  depends_on = [module.CloudSQLWorkloadIdentity]
-#
-#  name             = "cloud-sql-proxy"
-#  chart            = "${path.module}/Charts/CloudSQL"
-#  namespace        = "cloud-sql"
-#
-#  set {
-#    name  = "proxy.connectionName"
-#    value = data.google_storage_bucket_object_content.CloudSQLConnectionName.content
-#  }
-#
-#  set {
-#    name  = "proxy.serviceAccountName"
-#    value = local.K8S_SA_NAME
-#  }
-#}
 

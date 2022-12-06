@@ -95,3 +95,11 @@ variable "GKE-NodeNum-4C16G" {
   type = number
   description = "USD 113.28"
 }
+
+
+#============================
+# CloudSQL Proxy            #
+#============================
+variable "CloudSQL_Enabled" {
+  type = bool
+}
