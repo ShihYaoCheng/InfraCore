@@ -1,0 +1,39 @@
+# https://kubernetes.io/docs/concepts/storage/storage-classes/#gce-pd
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: standard-retain
+provisioner: kubernetes.io/gce-pd
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  type: pd-standard # default = pd-standard
+  fstype: ext4 # default = ext4
+  replication-type: none # default = none
+reclaimPolicy: Retain # default = Delete
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ssd-retain
+provisioner: kubernetes.io/gce-pd
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  type: pd-ssd # default = pd-standard
+  fstype: ext4 # default = ext4
+  replication-type: none # default = none
+reclaimPolicy: Retain # default = Delete
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ssd-delete
+provisioner: kubernetes.io/gce-pd
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  type: pd-ssd # default = pd-standard
+  fstype: ext4 # default = ext4
+  replication-type: none # default = none
+reclaimPolicy: Delete # default = Delete

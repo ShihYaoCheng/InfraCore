@@ -1,0 +1,106 @@
+﻿# https://artifacthub.io/packages/helm/rimusz/gcloud-sqlproxy
+# https://github.com/rimusz/charts/blob/master/stable/gcloud-sqlproxy/values.yaml
+
+## SQL connection settings
+##
+#cloudsql:
+#  ## PostgreSQL/MySQL instances:
+#  ## update with your GCP project, the region of your Cloud SQL instance
+#  ## and the name of your Cloud SQL instance
+#  ## PostgreSQL port 5432 or MySQL port 3306, or other port you set for your SQL instance.
+#  ## Use different ports for different instances.
+#  instances:
+#    # GCP instance name.
+#    - instance: "cqi-sk-test-29513"
+#      # GCP project where the instance exists.
+#      project: "stellar-38931"
+#      # GCP region where the instance exists.
+#      region: "asia-east1"
+#      # Port number for the proxy to expose for this instance.
+#      port: 3306
+
+#serviceAccount:
+#  # Specifies whether a ServiceAccount should be created
+#  create: false
+#  # The name of the ServiceAccount to use.
+#  # If not set and create is true, a name is generated using the fullname template
+#  name: "sql-proxy"
+
+## Specifies service type and option to enable internal LoadBalancer
+## If service.internalLB is true, service.type should be: LoadBalancer
+service:
+  enabled: true
+  type: ClusterIP
+  internalLB: false
+
+networkPolicy:
+  ## Specifies whether a NetworkPolicy should be created
+  ##
+  enabled: true
+
+  ingress:
+#    from: []
+    from:
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: user
+        podSelector:
+          matchLabels:
+            app: user
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: backstage
+        podSelector:
+          matchLabels:
+            app: backstage
+    # # List of sources which should be able to access the pods selected for this rule.
+    # # Items in this list are combined using a logical OR operation.
+    # # If this field is empty or missing, this rule matches all sources (traffic not restricted by source).
+    # # If this field is present and contains at least on item,
+    # # this rule allows traffic only if the traffic matches at least one item in the from list.
+    #   - podSelector:           # chooses pods with gcloud-sqlproxy-client="true"
+    #       matchLabels:
+    #         gcloud-sqlproxy-client: "true"
+
+## Configure resource requests and limits
+## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+## Resources are commented out as sometimes Memory/CPU limit causes spikes in query times
+## https://github.com/GoogleCloudPlatform/cloudsql-proxy/issues/168#issuecomment-394099416
+resources:
+  requests:
+    cpu: 100m
+    memory: 200Mi
+  limits:
+    memory: 200Mi
+
+livenessProbe:
+  enabled: false
+
+# Http Liveness Probe if enabled will override default tcp port check
+httpLivenessProbe:
+  enabled: true
+  port: 8090
+
+# Http Readiness Probe if enabled will override default tcp port check
+httpReadinessProbe:
+  enabled: true
+  port: 8090
+
+readinessProbe:
+  enabled: false
+
+## Configure a HorizontalPodAutoscaler for pod autoscaling.
+## Requires that resources requests are set above.
+autoscaling:
+  enabled: false
+#  minReplicas: 1
+#  maxReplicas: 3
+## Only one of target CPU and Memory are required to enable the HPA.
+## The ideal target varies and depends on gcloud-sqlproxy usage.
+#  targetCPUUtilizationPercentage: 50
+#  targetMemoryUtilizationPercentage: 50
+
+## Configure Security Context
+securityContext: {}
+#   runAsUser: 1000
+#   fsGroup: 1000
