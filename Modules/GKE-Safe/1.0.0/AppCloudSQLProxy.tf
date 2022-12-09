@@ -88,7 +88,7 @@ resource "helm_release" "CloudSQLProxy" {
   }
   
   set {
-    name  = "nameOverride"
+    name  = "fullnameOverride"
     value = local.CloudSQLReleaseName
   }
   
