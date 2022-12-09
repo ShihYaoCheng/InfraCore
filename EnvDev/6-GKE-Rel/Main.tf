@@ -27,6 +27,6 @@
   GKE-NodeNum-4C16G       = 0
 
   CloudSQLProxy_Enabled             = true
-  CloudSQLProxy_EnableNetworkPolicy = false
+  CloudSQLProxy_EnableNetworkPolicy = true
 }
 
