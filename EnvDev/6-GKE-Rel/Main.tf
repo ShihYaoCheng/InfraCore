@@ -1,5 +1,5 @@
 ﻿module "GKE-TW-Rel" {
-  source = "../../Modules/GKE-Safe/0.7.0"
+  source = "../../Modules/GKE-Safe/1.0.0"
 
   ProjectName = local.ProjectName
   UniqueName  = "TW-Rel"
@@ -25,5 +25,7 @@
   GKE-NodePoolScale-4C16G = false
   GKE-MaxNum-4C16G        = 0
   GKE-NodeNum-4C16G       = 0
+
+  CloudSQLProxy_Enabled = true
 }
 
