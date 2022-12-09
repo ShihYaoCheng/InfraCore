@@ -30,5 +30,6 @@ module "GKE-EU" {
   GKE-NodeNum-4C16G       = 2
 
   CloudSQLProxy_Enabled = false
+  CloudSQLProxy_EnableNetworkPolicy = false
 }
 
