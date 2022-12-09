@@ -36,7 +36,7 @@ service:
 networkPolicy:
   ## Specifies whether a NetworkPolicy should be created
   ##
-  enabled: true
+#  enabled: true
 
   ingress:
 #    from: []
