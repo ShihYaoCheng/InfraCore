@@ -103,3 +103,7 @@ variable "GKE-NodeNum-4C16G" {
 variable "CloudSQLProxy_Enabled" {
   type = bool
 }
+
+variable "CloudSQLProxy_EnableNetworkPolicy" {
+  type = bool
+}

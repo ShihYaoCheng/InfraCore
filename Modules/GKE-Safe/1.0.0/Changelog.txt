@@ -1,5 +1,5 @@
 ﻿1.0.0
-Add variable: EnableProxy_CloudSQL.
+Add variables: EnableProxy_CloudSQL, CloudSQLProxy_EnableNetworkPolicy.
 
 
 0.8.0

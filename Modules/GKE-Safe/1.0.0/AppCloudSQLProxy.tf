@@ -91,6 +91,11 @@ resource "helm_release" "CloudSQLProxy" {
     name  = "nameOverride"
     value = local.CloudSQLReleaseName
   }
+  
+  set {
+    name  = "networkPolicy.enabled"
+    value = tostring(var.CloudSQLProxy_EnableNetworkPolicy)
+  }
 
   # https://stackoverflow.com/questions/64696721/how-do-i-pass-variables-to-a-yaml-file-in-heml-tf
   values = [templatefile("${path.module}/Values/CloudSQLProxy.yaml", {})]
