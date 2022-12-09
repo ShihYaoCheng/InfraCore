@@ -13,7 +13,7 @@ data "google_storage_bucket_object_content" "CloudSQLInstanceName" {
 }
 
 resource "kubernetes_namespace_v1" "CloudSQL" {
-  count = var.CloudSQL_Enabled ? 1 : 0
+  count = var.CloudSQLProxy_Enabled ? 1 : 0
   
   metadata {
     name = local.CloudSQLNamespace
@@ -26,7 +26,7 @@ resource "random_id" "CloudSQL" {
 
 # https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest/submodules/workload-identity
 module "CloudSQLWorkloadIdentity" {
-  count = var.CloudSQL_Enabled ? 1 : 0
+  count = var.CloudSQLProxy_Enabled ? 1 : 0
   
   depends_on = [kubernetes_namespace_v1.CloudSQL]
 
@@ -49,7 +49,7 @@ module "CloudSQLWorkloadIdentity" {
 # https://github.com/rimusz/charts/blob/master/stable/gcloud-sqlproxy/values.yaml
 # https://github.com/rimusz/charts/tree/master/stable/gcloud-sqlproxy/
 resource "helm_release" "CloudSQLProxy" {
-  count = var.CloudSQL_Enabled ? 1 : 0
+  count = var.CloudSQLProxy_Enabled ? 1 : 0
   
   name             = "${local.CloudSQLReleaseName}-${random_id.CloudSQL.dec}"
   repository       = "https://charts.rimusz.net"

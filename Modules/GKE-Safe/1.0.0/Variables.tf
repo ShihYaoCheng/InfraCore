@@ -100,6 +100,6 @@ variable "GKE-NodeNum-4C16G" {
 #============================
 # CloudSQL Proxy            #
 #============================
-variable "CloudSQL_Enabled" {
+variable "CloudSQLProxy_Enabled" {
   type = bool
 }

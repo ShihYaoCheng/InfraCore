@@ -29,6 +29,6 @@ module "GKE-EU" {
   GKE-MaxNum-4C16G        = 2
   GKE-NodeNum-4C16G       = 2
 
-  CloudSQL_Enabled = false
+  CloudSQLProxy_Enabled = false
 }
 

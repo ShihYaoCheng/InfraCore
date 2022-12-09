@@ -29,7 +29,7 @@ module "GKE-TW" {
   GKE-APIName = local.GKE-API-TW
   GKE-CAName  = local.GKE-CA-TW
   
-  CloudSQL_Enabled = true
+  CloudSQLProxy_Enabled = true
 }
 
 #module "GKE-Rel" {
