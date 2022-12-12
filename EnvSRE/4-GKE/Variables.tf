@@ -7,10 +7,10 @@ locals {
   ProjectID = local.Settings["Project"]["ID"]
   ProjectName = local.Settings["Project"]["Name"]
   
-  GKE-API-TW = local.Settings["GKE"]["TW-Dev"]["APIName"]
-  GKE-CA-TW = local.Settings["GKE"]["TW-Dev"]["CAName"]
-  GKE-API-TW-Rel = local.Settings["GKE"]["TW-Rel"]["APIName"]
-  GKE-CA-TW-Rel = local.Settings["GKE"]["TW-Rel"]["CAName"]
+  GKE-API-AsiaTaiwanDev = local.Settings["GKE"]["AsiaTaiwanDev"]["APIName"]
+  GKE-CA-AsiaTaiwanDev = local.Settings["GKE"]["AsiaTaiwanDev"]["CAName"]
+#  GKE-API-AsiaTaiwanRelease = local.Settings["GKE"]["AsiaTaiwanRelease"]["APIName"]
+#  GKE-CA-AsiaTaiwanRelease = local.Settings["GKE"]["AsiaTaiwanRelease"]["CAName"]
 
   # https://cloud.google.com/compute/docs/regions-zones
   GCPRegion = "asia-east1"

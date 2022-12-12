@@ -6,8 +6,8 @@ locals {
   ProjectID = local.Settings["Project"]["ID"]
   ProjectName = local.Settings["Project"]["Name"]
 
-  GKE-API-EU = local.Settings["GKE"]["EU"]["APIName"]
-  GKE-CA-EU = local.Settings["GKE"]["EU"]["CAName"]
+  GKE-API-EuropeLondon = local.Settings["GKE"]["EuropeLondon"]["APIName"]
+  GKE-CA-EuropeLondon = local.Settings["GKE"]["EuropeLondon"]["CAName"]
 
   DomainName = local.Settings["Domain"]["Name"]
   SubDomainNames = local.Settings["Domain"]["SubDomain"]["EU"]

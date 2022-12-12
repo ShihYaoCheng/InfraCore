@@ -26,8 +26,8 @@ module "GKE-TW" {
   GKE-MaxNum-4C16G        = 2
   GKE-NodeNum-4C16G       = 2
 
-  GKE-APIName = local.GKE-API-TW
-  GKE-CAName  = local.GKE-CA-TW
+  GKE-APIName = local.GKE-API-AsiaTaiwanDev
+  GKE-CAName  = local.GKE-CA-AsiaTaiwanDev
   
   CloudSQLProxy_Enabled = true
   CloudSQLProxy_EnableNetworkPolicy = true
