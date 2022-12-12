@@ -1,5 +1,6 @@
 ﻿locals {
   CloudSQLNamespace = "cloud-sql"
+  
   # Service Account format = "^[a-z](?:[-a-z0-9]{4,28}[a-z0-9])$"
   GCP_SA_NAME = lower("${var.ProjectName}-${var.UniqueName}-sql")
   K8S_SA_NAME = "sql-proxy"
@@ -51,7 +52,8 @@ module "CloudSQLWorkloadIdentity" {
 resource "helm_release" "CloudSQLProxy" {
   count = var.CloudSQLProxy_Enabled ? 1 : 0
   
-  name             = "${local.CloudSQLReleaseName}-${random_id.CloudSQL.dec}"
+#  name             = "${local.CloudSQLReleaseName}-${random_id.CloudSQL.dec}"
+  name             = local.CloudSQLReleaseName
   repository       = "https://charts.rimusz.net"
   chart            = "gcloud-sqlproxy"
   version          = "~>0.23.0"
@@ -88,7 +90,8 @@ resource "helm_release" "CloudSQLProxy" {
   }
   
   set {
-    name  = "fullnameOverride"
+#    name  = "fullnameOverride"
+    name  = "nameOverride"
     value = local.CloudSQLReleaseName
   }
   
