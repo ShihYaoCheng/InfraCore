@@ -6,11 +6,11 @@ locals {
   ProjectID = local.Settings["Project"]["ID"]
   ProjectName = local.Settings["Project"]["Name"]
 
-  GKE-API-EuropeLondon = local.Settings["GKE"]["EuropeLondon"]["APIName"]
-  GKE-CA-EuropeLondon = local.Settings["GKE"]["EuropeLondon"]["CAName"]
+  GKE-API-London = local.Settings["GKE"]["London"]["APIName"]
+  GKE-CA-London = local.Settings["GKE"]["London"]["CAName"]
 
   DomainName = local.Settings["Domain"]["Name"]
-  SubDomainNames = local.Settings["Domain"]["SubDomain"]["EU"]
+  SubDomainNames = local.Settings["Domain"]["SubDomain"]["London"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones

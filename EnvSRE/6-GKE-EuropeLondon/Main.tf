@@ -14,9 +14,9 @@ module "GKE-EuropeLondon" {
   GKE-CreateServiceAccount = true
 
   GKE-Zones   = [local.GCPZone]
-  GKE-Labels   = { "location" = "eu", "environment" = "test" }
-  GKE-APIName = local.GKE-API-EU
-  GKE-CAName  = local.GKE-CA-EU
+  GKE-Labels   = { "location" = "europe-london", "environment" = "test" }
+  GKE-APIName = local.GKE-API-London
+  GKE-CAName  = local.GKE-CA-London
 
   GKE-NodeSizeGB         = 30
   GKE-CheapNodePool-2C8G = true

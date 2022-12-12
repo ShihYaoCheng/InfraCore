@@ -10,7 +10,7 @@ module "GKE-TW" {
   GCPRegion    = local.GCPRegion
   GCPZone      = local.GCPZone
   GKE-Zones    = [local.GCPZone]
-  GKE-Labels   = { "location" = "tw", "environment" = "test" }
+  GKE-Labels   = { "location" = "asia-taiwan", "environment" = "test" }
 
   GKE-ControlPlaneCIDR     = "10.0.0.0/28"
   GKE-CreateServiceAccount = true
@@ -26,8 +26,8 @@ module "GKE-TW" {
   GKE-MaxNum-4C16G        = 2
   GKE-NodeNum-4C16G       = 2
 
-  GKE-APIName = local.GKE-API-AsiaTaiwanDev
-  GKE-CAName  = local.GKE-CA-AsiaTaiwanDev
+  GKE-APIName = local.GKE-API-TaiwanDev
+  GKE-CAName  = local.GKE-CA-TaiwanDev
   
   CloudSQLProxy_Enabled = true
   CloudSQLProxy_EnableNetworkPolicy = true

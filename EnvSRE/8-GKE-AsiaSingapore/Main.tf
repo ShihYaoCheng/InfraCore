@@ -1,5 +1,5 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
-module "GKE-Europe-London" {
+module "GKE-AsiaSingapore" {
   source = "../../Modules/GKE-Safe/1.0.0"
 
   ProjectName = local.ProjectName
@@ -8,15 +8,16 @@ module "GKE-Europe-London" {
   GCPRegion    = local.GCPRegion
   GCPZone      = local.GCPZone
 
-  UniqueName = "eu-test"
+  UniqueName = "asia-singapore-test"
 
-  GKE-ControlPlaneCIDR     = "10.0.0.16/28"
+  # https://www.calculator.net/ip-subnet-calculator.html
+  GKE-ControlPlaneCIDR     = "10.0.0.32/28"
   GKE-CreateServiceAccount = true
 
   GKE-Zones   = [local.GCPZone]
-  GKE-Labels   = { "location" = "eu", "environment" = "test" }
-  GKE-APIName = local.GKE-API-EU
-  GKE-CAName  = local.GKE-CA-EU
+  GKE-Labels   = { "location" = "asia-singapore", "environment" = "test" }
+  GKE-APIName = local.GKE-API-Singapore
+  GKE-CAName  = local.GKE-CA-Singapore
 
   GKE-NodeSizeGB         = 30
   GKE-CheapNodePool-2C8G = true

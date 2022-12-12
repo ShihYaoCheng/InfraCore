@@ -6,13 +6,13 @@ locals {
   ProjectID   = local.Settings["Project"]["ID"]
   ProjectName = local.Settings["Project"]["Name"]
 
-  GKE-API-AsiaTaiwanDev = local.Settings["GKE"]["AsiaTaiwanDev"]["APIName"]
-  GKE-CA-AsiaTaiwanDev = local.Settings["GKE"]["AsiaTaiwanDev"]["CAName"]
+  GKE-API-TaiwanDev = local.Settings["GKE"]["TaiwanDev"]["APIName"]
+  GKE-CA-TaiwanDev = local.Settings["GKE"]["TaiwanDev"]["CAName"]
 #  GKE-API-TW-Rel = local.Settings["GKE"]["TW-Rel"]["APIName"]
 #  GKE-CA-TW-Rel = local.Settings["GKE"]["TW-Rel"]["CAName"]
 
   DomainName = local.Settings["Domain"]["Name"]
-  SubDomainNames = local.Settings["Domain"]["SubDomain"]["TW"]
+  SubDomainNames = local.Settings["Domain"]["SubDomain"]["Taiwan"]
 
   CDNEnabled = local.Settings["CDN"]["Enabled"]
   CDNUrlPathOfficial = local.Settings["CDN"]["UrlPathOfficial"]
