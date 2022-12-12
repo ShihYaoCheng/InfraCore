@@ -53,16 +53,16 @@ module "AppsEuropeLondon" {
   ArgoCD_AppNFTBranchOrTag         = "main"
   ArgoCD_AppOfficialWebBranchOrTag = "main"
 
-  ArgoCD_BackstageHelmValueFiles   = "{values-sre.yaml}"
+  ArgoCD_BackstageHelmValueFiles   = "{}"
   ArgoCD_BattleHelmValueFiles      = "{values-sre.yaml\\, EnableNEG.yaml}"
   ArgoCD_FileHelmValueFiles        = "{values-sre.yaml\\, EnableNEG.yaml}"
-  ArgoCD_NFTHelmValueFiles         = "{values-sre.yaml}"
-  ArgoCD_TableHelmValueFiles       = "{values-sre.yaml}"
-  ArgoCD_UserHelmValueFiles        = "{values-sre.yaml}"
-  ArgoCD_OfficialWebHelmValueFiles = "{values-sre.yaml}"
+  ArgoCD_NFTHelmValueFiles         = "{}"
+  ArgoCD_TableHelmValueFiles       = "{}"
+  ArgoCD_UserHelmValueFiles        = "{}"
+  ArgoCD_OfficialWebHelmValueFiles = "{}"
 
-  ArgoCD_BackstageSqlPassword = "backstage1234"
-  ArgoCD_UserSqlPassword      = "user1234"
+  ArgoCD_BackstageSqlPassword = ""
+  ArgoCD_UserSqlPassword      = ""
 }
 
 
