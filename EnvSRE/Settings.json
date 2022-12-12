@@ -6,17 +6,21 @@
   },
   "GKE": 
   {
-    "TW-Dev": {
-      "APIName": "GKE-API-TW",
-      "CAName": "GKE-CA-TW"  
+    "Asia-Taiwan-Dev": {
+      "APIName": "GKE-API-Asia-Taiwan-Dev",
+      "CAName": "GKE-CA-Asia-Taiwan-Dev"  
     },
-    "TW-Rel": {
-      "APIName": "GKE-API-TW-Rel",
-      "CAName": "GKE-CA-TW-Rel"
+    "Asia-Taiwan-Release": {
+      "APIName": "GKE-API-Asia-Taiwan-Release",
+      "CAName": "GKE-CA-Asia-Taiwan-Release"
     },
-    "EU": {
-      "APIName": "GKE-API-EU",
-      "CAName": "GKE-CA-EU"
+    "Asia-Singapore": {
+      "APIName": "GKE-API-Asia-Singapore",
+      "CAName": "GKE-CA-Asia-Singapore"
+    },
+    "Europe-London": {
+      "APIName": "GKE-API-Europe-London",
+      "CAName": "GKE-CA-Europe-London"
     }
   },
   "Domain":
