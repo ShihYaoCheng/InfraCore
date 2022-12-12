@@ -25,7 +25,7 @@ module "AppsEuropeLondon" {
   Prometheus_Retention        = "1d"
   Grafana_AdminPassword       = "gra4422"
 
-  Robusta_ClusterName           = "sre-eu"
+  Robusta_ClusterName           = "sre-london"
   Robusta_SlackAPIKey           = var.Robusta_SlackAPIKey
   Robusta_SlackChannel          = "sk-sre-info"
   Robusta_NotifyDeploymentEvent = false

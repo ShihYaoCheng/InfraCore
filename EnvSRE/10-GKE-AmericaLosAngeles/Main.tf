@@ -8,16 +8,16 @@ module "GKE-AsiaSingapore" {
   GCPRegion    = local.GCPRegion
   GCPZone      = local.GCPZone
 
-  UniqueName = "asia-singapore-test"
+  UniqueName = "america-los-angeles-test"
 
   # https://www.calculator.net/ip-subnet-calculator.html
-  GKE-ControlPlaneCIDR     = "10.0.0.32/28"
+  GKE-ControlPlaneCIDR     = "10.0.0.48/28"
   GKE-CreateServiceAccount = true
 
   GKE-Zones   = [local.GCPZone]
-  GKE-Labels   = { "location" = "asia-singapore", "environment" = "test" }
-  GKE-APIName = local.GKE-API-Singapore
-  GKE-CAName  = local.GKE-CA-Singapore
+  GKE-Labels   = { "location" = "asia-los-angeles", "environment" = "test" }
+  GKE-APIName = local.GKE-API-LosAngeles
+  GKE-CAName  = local.GKE-CA-LosAngeles
 
   GKE-NodeSizeGB         = 30
   GKE-CheapNodePool-2C8G = true

@@ -6,10 +6,10 @@ locals {
   ProjectID = local.Settings["Project"]["ID"]
   ProjectName = local.Settings["Project"]["Name"]
 
-  GKE-API-Singapore = local.Settings["GKE"]["Singapore"]["APIName"]
-  GKE-CA-Singapore = local.Settings["GKE"]["Singapore"]["CAName"]
+  GKE-API-LosAngeles = local.Settings["GKE"]["LosAngeles"]["APIName"]
+  GKE-CA-LosAngeles = local.Settings["GKE"]["LosAngeles"]["CAName"]
 
   # https://cloud.google.com/compute/docs/regions-zones
-  GCPRegion = "asia-southeast1"
-  GCPZone = "asia-southeast1-b"
+  GCPRegion = "us-west2"
+  GCPZone = "us-west2-b"
 }
