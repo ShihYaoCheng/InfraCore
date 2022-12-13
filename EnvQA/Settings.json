@@ -2,7 +2,24 @@
   "Project": 
   {
     "ID": "cqi-operation",
-    "Name": "cqi-sk-qa"
+    "Name": "cqi-sk-qa",
+
+    "Taiwan": {
+      "Region": "asia-east1",
+      "Zone": "asia-east1-c"
+    },
+    "London": {
+      "Region": "europe-west2",
+      "Zone": "europe-west2-c"
+    },
+    "Singapore": {
+      "Region": "asia-southeast1",
+      "Zone": "asia-southeast1-c"
+    },
+    "LosAngeles": {
+      "Region": "us-west2",
+      "Zone": "us-west2-c"
+    }
   },
   "AppsVersion": 
   {
@@ -29,8 +46,10 @@
     "Name": "ponponsnake.com",
     "SubDomain":
     {
-      "TW": ["v2.12.0"],
-      "EU": ["eu.v2.12.0"],
+      "Taiwan": ["v2.12.0"],
+      "London": ["london.v2.12.0"],
+      "Singapore": ["singapore.v2.3.0"],
+      "LosAngeles": ["la.v2.3.0"],
       "LB-Game": "global.v2.12.0",
       "LB-CDN": "cdn-beta"
     }
@@ -41,13 +60,21 @@
     "UrlPathOfficial": "/official/v2.12.0"
   },
   "GKE": {
-    "TW": {
-      "APIName": "GKE-API-TW",
-      "CAName": "GKE-CA-TW"
+    "Taiwan": {
+      "APIName": "GKE-API-Taiwan",
+      "CAName": "GKE-CA-Taiwan"
     },
-    "EU": {
-      "APIName": "GKE-API-EU",
-      "CAName": "GKE-CA-EU"
+    "Singapore": {
+      "APIName": "GKE-API-Singapore",
+      "CAName": "GKE-CA-Singapore"
+    },
+    "London": {
+      "APIName": "GKE-API-London",
+      "CAName": "GKE-CA-London"
+    },
+    "LosAngeles": {
+      "APIName": "GKE-API-LosAngeles",
+      "CAName": "GKE-CA-LosAngeles"
     }
   }
 }

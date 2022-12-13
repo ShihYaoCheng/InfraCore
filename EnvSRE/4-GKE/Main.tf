@@ -10,7 +10,7 @@ module "GKE-TW" {
   GCPRegion    = local.GCPRegion
   GCPZone      = local.GCPZone
   GKE-Zones    = [local.GCPZone]
-  GKE-Labels   = { "location" = "asia-taiwan", "environment" = "test" }
+  GKE-Labels   = { "location" = "taiwan", "environment" = "test" }
 
   GKE-ControlPlaneCIDR     = "10.0.0.0/28"
   GKE-CreateServiceAccount = true
