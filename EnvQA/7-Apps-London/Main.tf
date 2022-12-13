@@ -1,16 +1,16 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
-module "Apps" {
-  source = "../../Modules/Apps/5.1.0"
+module "AppsLondon" {
+  source = "../../Modules/Apps/5.1.1"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
-  GCPZone      = var.GCPZone
+  GCPZone      = local.GCPZone
 
-  GodaddyDomainName        = local.DomainName
-  EnableGodaddyPlainDomain = false
-  GodaddySubDomainNames    = local.SubDomainNames
-  GodaddyAPIKey            = var.GodaddyAPIKey
-  GodaddyAPISecret         = var.GodaddyAPISecret
+  GodaddyDomainName                  = local.DomainName
+  GodaddySubDomainNames              = local.SubDomainNames
+  GodaddyAPIKey                      = var.GodaddyAPIKey
+  GodaddyAPISecret                   = var.GodaddyAPISecret
+  EnableGodaddyPlainDomain           = false
 
   ArgoCD_OfficialWebRedirectEnabled  = false
   ArgoCD_OfficialWebRedirectDestFQDN = ""
@@ -25,7 +25,7 @@ module "Apps" {
   Prometheus_Retention        = "30d"
   Grafana_AdminPassword       = "gra4422"
 
-  Robusta_ClusterName           = "sk-qa-eu"
+  Robusta_ClusterName           = "sk-qa-london"
   Robusta_SlackAPIKey           = var.Robusta_SlackAPIKey
   Robusta_SlackChannel          = "sk-qa-info"
   Robusta_NotifyDeploymentEvent = true
@@ -47,24 +47,24 @@ module "Apps" {
   ArgoCD_EnableAppUser        = false
   ArgoCD_EnableAppOfficialWeb = false
 
-  ArgoCD_AppBackstageBranchOrTag   = local.AppBackstage
+  ArgoCD_AppBackstageBranchOrTag   = ""
   ArgoCD_AppBattleBranchOrTag      = local.AppBattle
   ArgoCD_AppFileBranchOrTag        = local.AppFile
-  ArgoCD_AppNFTBranchOrTag         = local.AppNFT
-  ArgoCD_AppTableBranchOrTag       = local.AppTable
-  ArgoCD_AppUserBranchOrTag        = local.AppUser
+  ArgoCD_AppNFTBranchOrTag         = ""
+  ArgoCD_AppTableBranchOrTag       = ""
+  ArgoCD_AppUserBranchOrTag        = ""
   ArgoCD_AppOfficialWebBranchOrTag = ""
 
-  ArgoCD_BackstageHelmValueFiles   = local.BackstageHelmValueFiles
+  ArgoCD_BackstageHelmValueFiles   = "{}"
   ArgoCD_BattleHelmValueFiles      = local.BattleHelmValueFiles
   ArgoCD_FileHelmValueFiles        = local.FileHelmValueFiles
-  ArgoCD_NFTHelmValueFiles         = local.NFTHelmValueFiles
-  ArgoCD_TableHelmValueFiles       = local.TableHelmValueFiles
-  ArgoCD_UserHelmValueFiles        = local.UserHelmValueFiles
-  ArgoCD_OfficialWebHelmValueFiles = ""
+  ArgoCD_NFTHelmValueFiles         = "{}"
+  ArgoCD_TableHelmValueFiles       = "{}"
+  ArgoCD_UserHelmValueFiles        = "{}"
+  ArgoCD_OfficialWebHelmValueFiles = "{}"
 
-  ArgoCD_BackstageSqlPassword = "backstage1234"
-  ArgoCD_UserSqlPassword      = "user1234"
+  ArgoCD_BackstageSqlPassword = ""
+  ArgoCD_UserSqlPassword      = ""
 }
 
 output "Settings" {
