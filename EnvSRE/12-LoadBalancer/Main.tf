@@ -1,6 +1,6 @@
 # https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "LoadBalancer" {
-  source = "../../Modules/LoadBalancer/2.1.0"
+  source = "../../Modules/LoadBalancer/3.0.0"
 
   ProjectName = local.ProjectName
 
@@ -14,11 +14,31 @@ module "LoadBalancer" {
   GodaddyAPIKey    = var.GodaddyAPIKey
   GodaddyAPISecret = var.GodaddyAPISecret
 
-  ZoneTW = "asia-east1-c"
-  ZoneEU = "europe-west2-c"
+  ZoneTaiwan = local.ZoneTaiwan
+  ZoneLondon = local.ZoneLondon
+  ZoneSingapore = local.ZoneSingapore
+  ZoneLosAngeles = local.ZoneLosAngeles
 
   providers = {
-    kubernetes.tw = kubernetes.tw
-    kubernetes.eu = kubernetes.eu
+    kubernetes.taiwan = kubernetes.taiwan
+    kubernetes.london = kubernetes.london
+    kubernetes.singapore = kubernetes.singapore
+    kubernetes.la = kubernetes.la
   }
+}
+
+output "ServiceLondon" {
+  value = module.LoadBalancer.ServiceLondon
+}
+
+output "FileLondon" {
+  value = module.LoadBalancer.FileLondon
+}
+
+output "ServiceSingapore" {
+  value = module.LoadBalancer.ServiceSingapore
+}
+
+output "FileSin" {
+  value = module.LoadBalancer.FileSingapore
 }

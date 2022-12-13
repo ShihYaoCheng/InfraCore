@@ -52,7 +52,7 @@
       "Taiwan": ["www", "v2.1.0", "v2.2.0", "v2.3.0", "test"],
       "London": ["london.v2.3.0"],
       "Singapore": ["singapore.v2.3.0"],
-      "LosAngeles": ["LosAngeles.v2.3.0"],
+      "LosAngeles": ["la.v2.3.0"],
       "LB-Game": "global.v2.3.0",
       "LB-CDN": "cdn-beta"
     }
