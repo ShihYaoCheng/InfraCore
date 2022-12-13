@@ -1,5 +1,5 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
-module "GKE-AmericaLosAngeles" {
+module "GKE-LosAngeles" {
   source = "../../Modules/GKE-Safe/1.0.0"
 
   ProjectName = local.ProjectName
@@ -8,14 +8,14 @@ module "GKE-AmericaLosAngeles" {
   GCPRegion    = local.GCPRegion
   GCPZone      = local.GCPZone
 
-  UniqueName = "america-los-angeles-test"
+  UniqueName = "los-angeles-test"
 
   # https://www.calculator.net/ip-subnet-calculator.html
   GKE-ControlPlaneCIDR     = "10.0.0.48/28"
   GKE-CreateServiceAccount = true
 
   GKE-Zones   = [local.GCPZone]
-  GKE-Labels   = { "location" = "asia-los-angeles", "environment" = "test" }
+  GKE-Labels   = { "location" = "los-angeles", "environment" = "test" }
   GKE-APIName = local.GKE-API-LosAngeles
   GKE-CAName  = local.GKE-CA-LosAngeles
 

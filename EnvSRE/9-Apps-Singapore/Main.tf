@@ -1,5 +1,5 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
-module "AppsAsiaSingapore" {
+module "AppsSingapore" {
   source = "../../Modules/Apps/5.1.1"
 
   ProjectName  = local.ProjectName
