@@ -1153,7 +1153,7 @@ QA-12-LB-Plan:
 QA-12-LB-Apply:
   extends: .apply.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-8-LB-Plan]
+  needs: [QA-12-LB-Plan]
   variables:
     TF_ROOT: $QA_LB_DIR
     TF_STATE_NAME: $QA_LB_TF_STATE_NAME
@@ -1168,7 +1168,7 @@ QA-12-LB-Apply:
 QA-12-LB-Destroy:
   extends: .destroy.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-8-LB-Plan]
+  needs: [QA-12-LB-Plan]
   variables:
     TF_ROOT: $QA_LB_DIR
     TF_STATE_NAME: $QA_LB_TF_STATE_NAME
