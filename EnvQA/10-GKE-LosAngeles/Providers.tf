@@ -13,14 +13,14 @@ data "google_client_config" "default" {}
 
 provider "helm" {
   kubernetes {
-    host                   = "https://${module.GKE-Singapore.API-Endpoint}"
+    host                   = "https://${module.GKE-LosAngeles.API-Endpoint}"
     token                  = data.google_client_config.default.access_token
-    cluster_ca_certificate = base64decode(module.GKE-Singapore.CA-Certificate)
+    cluster_ca_certificate = base64decode(module.GKE-LosAngeles.CA-Certificate)
   }
 }
 
 provider "kubernetes" {
-  host = "https://${module.GKE-Singapore.API-Endpoint}"
+  host = "https://${module.GKE-LosAngeles.API-Endpoint}"
   token = data.google_client_config.default.access_token
-  cluster_ca_certificate = base64decode(module.GKE-Singapore.CA-Certificate)
+  cluster_ca_certificate = base64decode(module.GKE-LosAngeles.CA-Certificate)
 }

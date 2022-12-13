@@ -7,8 +7,8 @@ locals {
   ProjectID = local.Settings["Project"]["ID"]
   ProjectName = local.Settings["Project"]["Name"]
 
-  GKE-API = local.Settings["GKE"]["Singapore"]["APIName"]
-  GKE-CA = local.Settings["GKE"]["Singapore"]["CAName"]
+  GKE-API = local.Settings["GKE"]["LosAngeles"]["APIName"]
+  GKE-CA = local.Settings["GKE"]["LosAngeles"]["CAName"]
 
   AppBattle = local.Settings["AppsVersion"]["Battle"]
   AppFile = local.Settings["AppsVersion"]["File"]
@@ -17,11 +17,11 @@ locals {
   FileHelmValueFiles = local.Settings["HelmPathValueFiles"]["File"]
 
   DomainName = local.Settings["Domain"]["Name"]
-  SubDomainNames = local.Settings["Domain"]["SubDomain"]["Singapore"]
+  SubDomainNames = local.Settings["Domain"]["SubDomain"]["LosAngeles"]
 
   # https://cloud.google.com/compute/docs/regions-zones
-  GCPRegion = local.Settings["Project"]["Singapore"]["Region"]
-  GCPZone = local.Settings["Project"]["Singapore"]["Zone"]
+  GCPRegion = local.Settings["Project"]["LosAngeles"]["Region"]
+  GCPZone = local.Settings["Project"]["LosAngeles"]["Zone"]
 }
 
 #============================

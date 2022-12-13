@@ -1,5 +1,5 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
-module "GKE-Singapore" {
+module "GKE-LosAngeles" {
   source = "../../Modules/GKE-Safe/1.0.0"
 
   ProjectName = local.ProjectName
@@ -8,13 +8,13 @@ module "GKE-Singapore" {
   GCPRegion    = local.GCPRegion
   GCPZone      = local.GCPZone
 
-  UniqueName = "singapore"
+  UniqueName = "la"
 
-  GKE-ControlPlaneCIDR     = "10.0.0.32/28"
+  GKE-ControlPlaneCIDR     = "10.0.0.48/28"
   GKE-CreateServiceAccount = true
 
   GKE-Zones   = [local.GCPZone]
-  GKE-Labels   = { "location" = "singapore", "environment" = "qa" }
+  GKE-Labels   = { "location" = "la", "environment" = "qa" }
   GKE-APIName = local.GKE-API
   GKE-CAName  = local.GKE-CA
 
