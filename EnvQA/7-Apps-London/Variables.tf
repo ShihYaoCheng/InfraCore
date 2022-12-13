@@ -10,19 +10,11 @@ locals {
   GKE-API-London = local.Settings["GKE"]["London"]["APIName"]
   GKE-CA-London = local.Settings["GKE"]["London"]["CAName"]
 
-#  AppBackstage = local.Settings["AppsVersion"]["Backstage"]
   AppBattle = local.Settings["AppsVersion"]["Battle"]
   AppFile = local.Settings["AppsVersion"]["File"]
-#  AppNFT = local.Settings["AppsVersion"]["NFT"]
-#  AppTable = local.Settings["AppsVersion"]["Table"]
-#  AppUser = local.Settings["AppsVersion"]["User"]
 
-#  BackstageHelmValueFiles = local.Settings["HelmPathValueFiles"]["Backstage"]
   BattleHelmValueFiles = local.Settings["HelmPathValueFiles"]["Battle"]
   FileHelmValueFiles = local.Settings["HelmPathValueFiles"]["File"]
-#  NFTHelmValueFiles = local.Settings["HelmPathValueFiles"]["NFT"]
-#  TableHelmValueFiles = local.Settings["HelmPathValueFiles"]["Table"]
-#  UserHelmValueFiles = local.Settings["HelmPathValueFiles"]["User"]
 
   DomainName = local.Settings["Domain"]["Name"]
   SubDomainNames = local.Settings["Domain"]["SubDomain"]["London"]
@@ -31,19 +23,6 @@ locals {
   GCPRegion = local.Settings["Project"]["London"]["Region"]
   GCPZone = local.Settings["Project"]["London"]["Zone"]
 }
-
-## https://cloud.google.com/compute/docs/regions-zones
-#variable "GCPRegion" {
-#  type        = string
-#  default     = "europe-west2"
-#  description = "cloud provider region."
-#}
-#
-#variable "GCPZone" {
-#  type        = string
-#  default     = "europe-west2-a"
-#  description = "cloud provider zone."
-#}
 
 #============================
 # ArgoCD                    #
