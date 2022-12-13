@@ -10,6 +10,6 @@ locals {
   GKE-CA-Singapore = local.Settings["GKE"]["Singapore"]["CAName"]
 
   # https://cloud.google.com/compute/docs/regions-zones
-  GCPRegion = "asia-southeast1"
-  GCPZone = "asia-southeast1-b"
+  GCPRegion = local.Settings["Project"]["Singapore"]["Region"]
+  GCPZone = local.Settings["Project"]["Singapore"]["Zone"]
 }

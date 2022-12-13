@@ -10,6 +10,6 @@ locals {
   GKE-CA-London = local.Settings["GKE"]["London"]["CAName"]
 
   # https://cloud.google.com/compute/docs/regions-zones
-  GCPRegion = "europe-west2"
-  GCPZone = "europe-west2-c"
+  GCPRegion = local.Settings["Project"]["London"]["Region"]
+  GCPZone = local.Settings["Project"]["London"]["Zone"]
 }

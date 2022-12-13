@@ -13,7 +13,7 @@ locals {
 #  GKE-CA-AsiaTaiwanRelease = local.Settings["GKE"]["AsiaTaiwanRelease"]["CAName"]
 
   # https://cloud.google.com/compute/docs/regions-zones
-  GCPRegion = "asia-east1"
-  GCPZone = "asia-east1-c"
+  GCPRegion = local.Settings["Project"]["Taiwan"]["Region"]
+  GCPZone = local.Settings["Project"]["Taiwan"]["Zone"]
 }
 

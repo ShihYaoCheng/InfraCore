@@ -2,7 +2,24 @@
   "Project": 
   {
     "ID": "stellar-38931",
-    "Name": "cqi-sk-test"
+    "Name": "cqi-sk-test",
+    
+    "Taiwan": {
+      "Region": "asia-east1",
+      "Zone": "asia-east1-c"
+    },
+    "London": {
+      "Region": "europe-west2",
+      "Zone": "europe-west2-c"
+    },
+    "Singapore": {
+      "Region": "asia-southeast1",
+      "Zone": "asia-southeast1-c"
+    },
+    "LosAngeles": {
+      "Region": "us-west2",
+      "Zone": "us-west2-c"
+    }
   },
   "GKE": 
   {
