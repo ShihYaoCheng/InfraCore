@@ -11,20 +11,24 @@ locals {
 
   DomainName = local.Settings["Domain"]["Name"]
   SubDomainNames = local.Settings["Domain"]["SubDomain"]["London"]
+
+  # https://cloud.google.com/compute/docs/regions-zones
+  GCPRegion = local.Settings["Project"]["London"]["Region"]
+  GCPZone = local.Settings["Project"]["London"]["Zone"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones
-variable "GCPRegion" {
-  type        = string
-  default     = "europe-west2"
-  description = "cloud provider region."
-}
-
-variable "GCPZone" {
-  type        = string
-  default     = "europe-west2-a"
-  description = "cloud provider zone."
-}
+#variable "GCPRegion" {
+#  type        = string
+#  default     = "europe-west2"
+#  description = "cloud provider region."
+#}
+#
+#variable "GCPZone" {
+#  type        = string
+#  default     = "europe-west2-a"
+#  description = "cloud provider zone."
+#}
 
 #============================
 # Godaddy                   #

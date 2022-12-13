@@ -4,7 +4,7 @@ module "AppsAsiaSingapore" {
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
-  GCPZone      = var.GCPZone
+  GCPZone      = local.GCPZone
 
   GodaddyDomainName        = local.DomainName
   GodaddySubDomainNames    = local.SubDomainNames
