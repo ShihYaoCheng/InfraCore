@@ -27,7 +27,7 @@ locals {
   OfficialWebHelmValueFiles = local.Settings["HelmPathValueFiles"]["OfficialWeb"]
 
   DomainName = local.Settings["Domain"]["Name"]
-  SubDomainNames = local.Settings["Domain"]["SubDomain"]["TW"]
+  SubDomainNames = local.Settings["Domain"]["SubDomain"]["Taiwan"]
 
   CDNEnabled = local.Settings["CDN"]["Enabled"]
   CDNUrlPathOfficial = local.Settings["CDN"]["UrlPathOfficial"]
@@ -38,19 +38,6 @@ locals {
   GCPRegion = local.Settings["Project"]["Taiwan"]["Region"]
   GCPZone = local.Settings["Project"]["Taiwan"]["Zone"]
 }
-
-# https://cloud.google.com/compute/docs/regions-zones
-#variable "GCPRegion" {
-#  type        = string
-#  default     = "asia-east1"
-#  description = "cloud provider region."
-#}
-#
-#variable "GCPZone" {
-#  type        = string
-#  default     = "asia-east1-a"
-#  description = "cloud provider zone."
-#}
 
 #============================
 # Godaddy                   #
