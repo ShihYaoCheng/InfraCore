@@ -4,7 +4,7 @@ module "Apps" {
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
-  GCPZone      = var.GCPZone
+  GCPZone      = local.GCPZone
 
   GodaddyDomainName        = local.DomainName
   EnableGodaddyPlainDomain = false

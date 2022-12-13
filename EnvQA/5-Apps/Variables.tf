@@ -33,20 +33,24 @@ locals {
   CDNUrlPathOfficial = local.Settings["CDN"]["UrlPathOfficial"]
   CDNSubDomainName = local.Settings["Domain"]["SubDomain"]["LB-CDN"]
   CDNUrlOfficial = "https://${local.CDNSubDomainName}.${local.DomainName}${local.CDNUrlPathOfficial}"
+
+  # https://cloud.google.com/compute/docs/regions-zones
+  GCPRegion = local.Settings["Project"]["Taiwan"]["Region"]
+  GCPZone = local.Settings["Project"]["Taiwan"]["Zone"]
 }
 
 # https://cloud.google.com/compute/docs/regions-zones
-variable "GCPRegion" {
-  type        = string
-  default     = "asia-east1"
-  description = "cloud provider region."
-}
-
-variable "GCPZone" {
-  type        = string
-  default     = "asia-east1-a"
-  description = "cloud provider zone."
-}
+#variable "GCPRegion" {
+#  type        = string
+#  default     = "asia-east1"
+#  description = "cloud provider region."
+#}
+#
+#variable "GCPZone" {
+#  type        = string
+#  default     = "asia-east1-a"
+#  description = "cloud provider zone."
+#}
 
 #============================
 # Godaddy                   #
