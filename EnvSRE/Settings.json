@@ -21,29 +21,6 @@
       "Zone": "us-west2-c"
     }
   },
-  "GKE": 
-  {
-    "TaiwanDev": {
-      "APIName": "GKE-API-Taiwan-Dev",
-      "CAName": "GKE-CA-Taiwan-Dev"  
-    },
-    "TaiwanRelease": {
-      "APIName": "GKE-API-Taiwan-Release",
-      "CAName": "GKE-CA-Taiwan-Release"
-    },
-    "Singapore": {
-      "APIName": "GKE-API-Singapore",
-      "CAName": "GKE-CA-Singapore"
-    },
-    "London": {
-      "APIName": "GKE-API-London",
-      "CAName": "GKE-CA-London"
-    },
-    "LosAngeles": {
-      "APIName": "GKE-API-LosAngeles",
-      "CAName": "GKE-CA-LosAngeles"
-    }
-  },
   "Domain":
   {
     "Name": "origingaia.com",
@@ -61,5 +38,28 @@
   {
     "Enabled": true,
     "UrlPathOfficial": "/official/v2.3.0"
+  },
+  "GKE":
+  {
+    "TaiwanDev": {
+      "APIName": "GKE-API-Taiwan-Dev",
+      "CAName": "GKE-CA-Taiwan-Dev"
+    },
+    "TaiwanRelease": {
+      "APIName": "GKE-API-Taiwan-Release",
+      "CAName": "GKE-CA-Taiwan-Release"
+    },
+    "Singapore": {
+      "APIName": "GKE-API-Singapore",
+      "CAName": "GKE-CA-Singapore"
+    },
+    "London": {
+      "APIName": "GKE-API-London",
+      "CAName": "GKE-CA-London"
+    },
+    "LosAngeles": {
+      "APIName": "GKE-API-LosAngeles",
+      "CAName": "GKE-CA-LosAngeles"
+    }
   }
 }
