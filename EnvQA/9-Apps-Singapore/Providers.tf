@@ -13,12 +13,12 @@ data "google_client_config" "default" {}
 
 data "google_storage_bucket_object_content" "GKE-API" {
   bucket = local.ProjectName
-  name   = local.GKE-API-London
+  name   = local.GKE-API
 }
 
 data "google_storage_bucket_object_content" "GKE-CA" {
   bucket = local.ProjectName
-  name   = local.GKE-CA-London
+  name   = local.GKE-CA
 }
 
 provider "helm" {

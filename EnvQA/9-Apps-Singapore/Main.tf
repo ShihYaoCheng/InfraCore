@@ -1,16 +1,16 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
-module "AppsLondon" {
+module "AppsSingapore" {
   source = "../../Modules/Apps/5.1.1"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
   GCPZone      = local.GCPZone
 
-  GodaddyDomainName                  = local.DomainName
-  GodaddySubDomainNames              = local.SubDomainNames
-  GodaddyAPIKey                      = var.GodaddyAPIKey
-  GodaddyAPISecret                   = var.GodaddyAPISecret
-  EnableGodaddyPlainDomain           = false
+  GodaddyDomainName        = local.DomainName
+  GodaddySubDomainNames    = local.SubDomainNames
+  GodaddyAPIKey            = var.GodaddyAPIKey
+  GodaddyAPISecret         = var.GodaddyAPISecret
+  EnableGodaddyPlainDomain = false
 
   ArgoCD_OfficialWebRedirectEnabled  = false
   ArgoCD_OfficialWebRedirectDestFQDN = ""
@@ -25,7 +25,7 @@ module "AppsLondon" {
   Prometheus_Retention        = "30d"
   Grafana_AdminPassword       = "gra4422"
 
-  Robusta_ClusterName           = "sk-qa-london"
+  Robusta_ClusterName           = "sk-qa-singapore"
   Robusta_SlackAPIKey           = var.Robusta_SlackAPIKey
   Robusta_SlackChannel          = "sk-qa-info"
   Robusta_NotifyDeploymentEvent = true
