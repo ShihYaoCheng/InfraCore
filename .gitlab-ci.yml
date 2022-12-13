@@ -963,7 +963,7 @@ QA-8-GKE-Singapore-Plan:
 QA-8-GKE-Singapore-Apply:
   extends: .apply.without.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-6-GKE-Singapore-Plan]
+  needs: [QA-8-GKE-Singapore-Plan]
   variables:
     TF_ROOT: $QA_GKE_Singapore_Dir
     TF_STATE_NAME: $QA_GKE_Singapore_TF_State_Name
@@ -976,7 +976,7 @@ QA-8-GKE-Singapore-Apply:
 QA-8-GKE-Singapore-Destroy:
   extends: .destroy.without.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-6-GKE-Singapore-Plan]
+  needs: [QA-8-GKE-Singapore-Plan]
   variables:
     TF_ROOT: $QA_GKE_Singapore_Dir
     TF_STATE_NAME: $QA_GKE_Singapore_TF_State_Name
@@ -1008,7 +1008,7 @@ QA-9-Apps-Singapore-Plan:
 QA-9-Apps-Singapore-Apply:
   extends: .apply.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-7-Apps-Singapore-Plan]
+  needs: [QA-9-Apps-Singapore-Plan]
   variables:
     TF_ROOT: $QA_APPS_Singapore_Dir
     TF_STATE_NAME: $QA_APPS_Singapore_TF_State_Name
@@ -1023,7 +1023,7 @@ QA-9-Apps-Singapore-Apply:
 QA-9-Apps-Singapore-Destroy:
   extends: .destroy.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-7-Apps-Singapore-Plan]
+  needs: [QA-9-Apps-Singapore-Plan]
   variables:
     TF_ROOT: $QA_APPS_Singapore_Dir
     TF_STATE_NAME: $QA_APPS_Singapore_TF_State_Name
