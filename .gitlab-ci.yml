@@ -254,10 +254,10 @@ variables:
   QA_GKE_TF_STATE_NAME: "QA-GKE"
   QA_APPS_DIR: EnvQA/5-Apps
   QA_APPS_TF_STATE_NAME: "QA-Apps"
-  QA_GKE_GLOBAL_DIR: EnvQA/6-GKE-Global
-  QA_GKE_GLOBAL_TF_STATE_NAME: "QA-GKE-Global"
-  QA_APPS_GLOBAL_DIR: EnvQA/7-Apps-Global
-  QA_APPS_GLOBAL_TF_STATE_NAME: "QA-Apps-Global"
+  QA_GKE_London_Dir: EnvQA/6-GKE-London
+  QA_GKE_London_TF_State_Name: "QA-GKE-London"
+  QA_APPS_London_Dir: EnvQA/7-Apps-London
+  QA_APPS_London_TF_State_Name: "QA-Apps-London"
   QA_LB_DIR: EnvQA/8-LoadBalancer
   QA_LB_TF_STATE_NAME: "QA-LB"
   
@@ -849,111 +849,93 @@ QA-5-Apps-Destroy:
     - g1
 
 
-#============================#
-# QA - GKE(EU)               #
-#============================#
-QA-6-GKE-Global-Plan:
+#=============================#
+# QA - GKE(London)
+#=============================#
+QA-6-GKE-London-Plan:
   extends: .plan.without.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   variables:
-    TF_ROOT: $QA_GKE_GLOBAL_DIR
-    TF_STATE_NAME: $QA_GKE_GLOBAL_TF_STATE_NAME
+    TF_ROOT: $QA_GKE_London_Dir
+    TF_STATE_NAME: $QA_GKE_London_TF_State_Name
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
   tags:
     - g1
 
-QA-6-GKE-Global-Apply:
+QA-6-GKE-London-Apply:
   extends: .apply.without.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-6-GKE-Global-Plan]
+  needs: [QA-6-GKE-London-Plan]
   variables:
-    TF_ROOT: $QA_GKE_GLOBAL_DIR
-    TF_STATE_NAME: $QA_GKE_GLOBAL_TF_STATE_NAME
+    TF_ROOT: $QA_GKE_London_Dir
+    TF_STATE_NAME: $QA_GKE_London_TF_State_Name
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
   tags:
     - g1
 
-QA-6-GKE-Global-Destroy:
+QA-6-GKE-London-Destroy:
   extends: .destroy.without.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-6-GKE-Global-Plan]
+  needs: [QA-6-GKE-London-Plan]
   variables:
-    TF_ROOT: $QA_GKE_GLOBAL_DIR
-    TF_STATE_NAME: $QA_GKE_GLOBAL_TF_STATE_NAME
+    TF_ROOT: $QA_GKE_London_Dir
+    TF_STATE_NAME: $QA_GKE_London_TF_State_Name
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
   tags:
     - g1
 
 
 
 #============================#
-# QA - Apps(Global)          #
+# QA - Apps(London)          
 #============================#
-QA-7-Apps-Global-Plan:
+QA-7-Apps-London-Plan:
   extends: .plan.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   variables:
-    TF_ROOT: $QA_APPS_GLOBAL_DIR
-    TF_STATE_NAME: $QA_APPS_GLOBAL_TF_STATE_NAME
+    TF_ROOT: $QA_APPS_London_Dir
+    TF_STATE_NAME: $QA_APPS_London_TF_State_Name
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
     - cd $TF_ROOT
     - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
   tags:
     - g1
 
-QA-7-Apps-Global-Apply:
+QA-7-Apps-London-Apply:
   extends: .apply.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-7-Apps-Global-Plan]
+  needs: [QA-7-Apps-London-Plan]
   variables:
-    TF_ROOT: $QA_APPS_GLOBAL_DIR
-    TF_STATE_NAME: $QA_APPS_GLOBAL_TF_STATE_NAME
+    TF_ROOT: $QA_APPS_London_Dir
+    TF_STATE_NAME: $QA_APPS_London_TF_State_Name
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
     - cd $TF_ROOT
     - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
   tags:
     - g1
 
-QA-7-Apps-Global-Destroy:
+QA-7-Apps-London-Destroy:
   extends: .destroy.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-7-Apps-Global-Plan]
+  needs: [QA-7-Apps-London-Plan]
   variables:
-    TF_ROOT: $QA_APPS_GLOBAL_DIR
-    TF_STATE_NAME: $QA_APPS_GLOBAL_TF_STATE_NAME
+    TF_ROOT: $QA_APPS_London_Dir
+    TF_STATE_NAME: $QA_APPS_London_TF_State_Name
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
     - cd $TF_ROOT
     - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
   tags:
     - g1
 
