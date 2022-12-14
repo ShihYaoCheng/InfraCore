@@ -266,8 +266,8 @@ variables:
   QA_GKE_LosAngeles_TF_State_Name: "QA-GKE-LosAngeles"
   QA_APPS_LosAngeles_Dir: EnvQA/11-Apps-LosAngeles
   QA_APPS_LosAngeles_TF_State_Name: "QA-Apps-LosAngeles"
-  QA_LB_DIR: EnvQA/8-LoadBalancer
-  QA_LB_TF_STATE_NAME: "QA-LB"
+  QA_LB_Dir: EnvQA/12-LoadBalancer
+  QA_LB_TF_State_Name: "QA-LB"
   
   PROD_REVIEW_RES_DIR: EnvProdReview/1-Res
   PROD_REVIEW_RES_TF_STATE_NAME: "Prod-Review-Res"
@@ -1140,8 +1140,8 @@ QA-12-LB-Plan:
   extends: .plan.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   variables:
-    TF_ROOT: $QA_LB_DIR
-    TF_STATE_NAME: $QA_LB_TF_STATE_NAME
+    TF_ROOT: $QA_LB_Dir
+    TF_STATE_NAME: $QA_LB_TF_State_Name
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
@@ -1155,8 +1155,8 @@ QA-12-LB-Apply:
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   needs: [QA-12-LB-Plan]
   variables:
-    TF_ROOT: $QA_LB_DIR
-    TF_STATE_NAME: $QA_LB_TF_STATE_NAME
+    TF_ROOT: $QA_LB_Dir
+    TF_STATE_NAME: $QA_LB_TF_State_Name
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
@@ -1170,8 +1170,8 @@ QA-12-LB-Destroy:
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   needs: [QA-12-LB-Plan]
   variables:
-    TF_ROOT: $QA_LB_DIR
-    TF_STATE_NAME: $QA_LB_TF_STATE_NAME
+    TF_ROOT: $QA_LB_Dir
+    TF_STATE_NAME: $QA_LB_TF_State_Name
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
