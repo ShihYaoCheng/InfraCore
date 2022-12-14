@@ -7,8 +7,8 @@ locals {
   ProjectID = local.Settings["Project"]["ID"]
   ProjectName = local.Settings["Project"]["Name"]
 
-  GKE-API-TW = local.Settings["GKE"]["TW"]["APIName"]
-  GKE-CA-TW = local.Settings["GKE"]["TW"]["CAName"]
+  GKE-API-Taiwan = local.Settings["GKE"]["Taiwan"]["APIName"]
+  GKE-CA-Taiwan = local.Settings["GKE"]["Taiwan"]["CAName"]
   
   AppBackstage = local.Settings["AppsVersion"]["Backstage"]
   AppBattle = local.Settings["AppsVersion"]["Battle"]
@@ -27,10 +27,16 @@ locals {
   OfficialWebHelmValueFiles = local.Settings["HelmPathValueFiles"]["OfficialWeb"]
 
   DomainName = local.Settings["Domain"]["Name"]
-  SubDomainName = local.Settings["Domain"]["SubDomain"]["TW"]
+  SubDomainNames = local.Settings["Domain"]["SubDomain"]["Taiwan"]
 
-  GCPRegion = "asia-east1"
-  GCPZone = "asia-east1-a"
+  CDNEnabled = local.Settings["CDN"]["Enabled"]
+  CDNUrlPathOfficial = local.Settings["CDN"]["UrlPathOfficial"]
+  CDNSubDomainName = local.Settings["Domain"]["SubDomain"]["LB-CDN"]
+  CDNUrlOfficial = "https://${local.CDNSubDomainName}.${local.DomainName}${local.CDNUrlPathOfficial}"
+
+  # https://cloud.google.com/compute/docs/regions-zones
+  GCPRegion = local.Settings["Project"]["Taiwan"]["Region"]
+  GCPZone = local.Settings["Project"]["Taiwan"]["Zone"]
 }
 
 #============================
@@ -45,7 +51,6 @@ variable "GodaddyAPISecret" {
   type      = string
   sensitive = true
 }
-
 
 #============================
 # ArgoCD                    #

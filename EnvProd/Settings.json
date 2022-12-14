@@ -46,7 +46,7 @@
     "Name": "ponponsnake.com",
     "SubDomain":
     {
-      "Taiwan": ["v2.11.1"],
+      "Taiwan": ["v2.11.1", "www", "v2.11.0", "v2.10.1", "v2.10.0", "v2.9.0", "acl"],
       "London": ["london.v2.11.1"],
       "Singapore": ["singapore.v2.11.1"],
       "LosAngeles": ["la.v2.11.1"],

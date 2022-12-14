@@ -1,31 +1,34 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "AppsTw" {
-  source = "../../Modules/Apps/4.1.0"
+  source = "../../Modules/Apps/5.1.1"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
   GCPZone      = local.GCPZone
 
-  GodaddyDomainName                  = local.DomainName
-  EnableGodaddyPlainDomain           = true
-  GodaddySubDomainNames              = [local.SubDomainName, "www","v2.11.0", "v2.10.1", "v2.10.0", "v2.9.0", "acl"]
-  GodaddyAPIKey                      = var.GodaddyAPIKey
-  GodaddyAPISecret                   = var.GodaddyAPISecret
+  GodaddyDomainName        = local.DomainName
+  EnableGodaddyPlainDomain = true
+  GodaddySubDomainNames    = local.SubDomainNames
+  GodaddyAPIKey            = var.GodaddyAPIKey
+  GodaddyAPISecret         = var.GodaddyAPISecret
+
   ArgoCD_OfficialWebRedirectEnabled  = true
   ArgoCD_OfficialWebRedirectDestFQDN = "www.${local.DomainName}"
+  ArgoCD_OfficialWebCDNEnabled       = local.CDNEnabled
+  ArgoCD_OfficialWebCDNUrl           = local.CDNUrlOfficial
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = true
-
-  Robusta_ClusterName           = "sk-prod-tw"
-  Robusta_SlackAPIKey           = var.Robusta_SlackAPIKey
-  Robusta_SlackChannel          = "sk-prod-info"
-  Robusta_NotifyDeploymentEvent = true
 
   Prometheus_StorageClassName = "standard"
   Prometheus_StorageSize      = "300Gi"
   Prometheus_Retention        = "90d"
   Grafana_AdminPassword       = var.GrafanaAdminPassword
+
+  Robusta_ClusterName           = "sk-prod-tw"
+  Robusta_SlackAPIKey           = var.Robusta_SlackAPIKey
+  Robusta_SlackChannel          = "sk-prod-info"
+  Robusta_NotifyDeploymentEvent = true
 
   ArgoCD_Enable               = true
   ArgoCD_EnableSelfHeal       = true
