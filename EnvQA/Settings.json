@@ -36,7 +36,7 @@
     "Backstage": "{values-v1.12.1.yaml}",
     "Battle": "{values-prod.yaml}",
     "File": "{values-prod.yaml}",
-    "NFT": "{values-beta.yaml}",
+    "NFT": "{values-prod.yaml}",
     "Table": "{values-prod.yaml}",
     "User": "{values-prod.yaml\\, SetServerName-Beta.yaml}",
     "OfficialWeb": "{values-v1.12.1.yaml\\, EnableNEG.yaml}"
