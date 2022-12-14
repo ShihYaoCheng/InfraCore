@@ -11,45 +11,81 @@ provider "google" {
 
 data "google_client_config" "default" {}
 
-data "google_storage_bucket_object_content" "GKE-API-TW" {
+data "google_storage_bucket_object_content" "GKE-API-Taiwan" {
   bucket = local.ProjectName
-  name   = local.GKE-API-TW
+  name   = local.GKE-API-Taiwan
 }
 
-data "google_storage_bucket_object_content" "GKE-CA-TW" {
+data "google_storage_bucket_object_content" "GKE-CA-Taiwan" {
   bucket = local.ProjectName
-  name   = local.GKE-CA-TW
+  name   = local.GKE-CA-Taiwan
 }
 
 provider "kubernetes" {
-  alias = "tw"
-  host = "https://${data.google_storage_bucket_object_content.GKE-API-TW.content}"
+  alias = "taiwan"
+  host = "https://${data.google_storage_bucket_object_content.GKE-API-Taiwan.content}"
   token = data.google_client_config.default.access_token
-  cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.GKE-CA-TW.content)
+  cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.GKE-CA-Taiwan.content)
 }
 
 # permission: Storage Object Viewer
-data "google_storage_bucket_object_content" "GKE-API-EU" {
+data "google_storage_bucket_object_content" "GKE-API-London" {
   bucket = local.ProjectName
-  name   = local.GKE-API-EU
+  name   = local.GKE-API-London
 }
 
-data "google_storage_bucket_object_content" "GKE-CA-EU" {
+data "google_storage_bucket_object_content" "GKE-CA-London" {
   bucket = local.ProjectName
-  name   = local.GKE-CA-EU
+  name   = local.GKE-CA-London
 }
 
 provider "kubernetes" {
-  alias = "eu"
-  host = "https://${data.google_storage_bucket_object_content.GKE-API-EU.content}"
+  alias = "london"
+  host = "https://${data.google_storage_bucket_object_content.GKE-API-London.content}"
   token = data.google_client_config.default.access_token
-  cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.GKE-CA-EU.content)
+  cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.GKE-CA-London.content)
+}
+
+# permission: Storage Object Viewer
+data "google_storage_bucket_object_content" "GKE-API-Singapore" {
+  bucket = local.ProjectName
+  name   = local.GKE-API-Singapore
+}
+
+data "google_storage_bucket_object_content" "GKE-CA-Singapore" {
+  bucket = local.ProjectName
+  name   = local.GKE-CA-Singapore
+}
+
+provider "kubernetes" {
+  alias = "singapore"
+  host = "https://${data.google_storage_bucket_object_content.GKE-API-Singapore.content}"
+  token = data.google_client_config.default.access_token
+  cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.GKE-CA-Singapore.content)
+}
+
+# permission: Storage Object Viewer
+data "google_storage_bucket_object_content" "GKE-API-LosAngeles" {
+  bucket = local.ProjectName
+  name   = local.GKE-API-LosAngeles
+}
+
+data "google_storage_bucket_object_content" "GKE-CA-LosAngeles" {
+  bucket = local.ProjectName
+  name   = local.GKE-CA-LosAngeles
+}
+
+provider "kubernetes" {
+  alias = "la"
+  host = "https://${data.google_storage_bucket_object_content.GKE-API-LosAngeles.content}"
+  token = data.google_client_config.default.access_token
+  cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.GKE-CA-LosAngeles.content)
 }
 
 provider "helm" {
   kubernetes {
-    host                   = "https://${data.google_storage_bucket_object_content.GKE-API-TW.content}"
+    host                   = "https://${data.google_storage_bucket_object_content.GKE-API-Taiwan.content}"
     token                  = data.google_client_config.default.access_token
-    cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.GKE-CA-TW.content)
+    cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.GKE-CA-Taiwan.content)
   }
 }
