@@ -1,4 +1,4 @@
-﻿module "sk-qa-res" {
+﻿module "Resource" {
   source  = "../../Modules/Resources/0.3.0"
 
   # https://cloud.google.com/storage/docs/troubleshooting#bucket-name-conflict
