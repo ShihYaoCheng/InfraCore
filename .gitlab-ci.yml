@@ -299,8 +299,8 @@ variables:
   PROD_APPS_TF_STATE_NAME: "Prod-Apps"
   PROD_GKE_LondonDir: EnvProd/6-GKE-London
   PROD_GKE_London_TF_StateName: "Prod-GKE-London"
-  PROD_APPS_GLOBAL_DIR: EnvProd/7-Apps-Global
-  PROD_APPS_GLOBAL_TF_STATE_NAME: "Prod-Apps-Global"
+  PROD_Apps_LondonDir: EnvProd/7-Apps-London
+  PROD_Apps_London_TF_StateName: "Prod-Apps-London"
   PROD_LB_DIR: EnvProd/8-LoadBalancer
   PROD_LB_TF_STATE_NAME: "Prod-LB"
 
@@ -1490,13 +1490,13 @@ Prod-6-GKE-London-Destroy:
 
 
 #=============================#
-# Prod - Apps(Global)          #
+# Prod - Apps(London)
 #=============================#
-Prod-7-Apps-Global-Plan:
+Prod-7-Apps-London-Plan:
   extends: .plan.with.var.file
   variables:
-    TF_ROOT: ${PROD_APPS_GLOBAL_DIR}
-    TF_STATE_NAME: ${PROD_APPS_GLOBAL_TF_STATE_NAME}
+    TF_ROOT: $PROD_Apps_LondonDir
+    TF_STATE_NAME: $PROD_Apps_London_TF_StateName
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -1508,12 +1508,12 @@ Prod-7-Apps-Global-Plan:
   tags:
     - g1
 
-Prod-7-Apps-Global-Apply:
+Prod-7-Apps-London-Apply:
   extends: .apply.with.var.file
-  needs: [Prod-7-Apps-Global-Plan]
+  needs: [Prod-7-Apps-London-Plan]
   variables:
-    TF_ROOT: ${PROD_APPS_GLOBAL_DIR}
-    TF_STATE_NAME: ${PROD_APPS_GLOBAL_TF_STATE_NAME}
+    TF_ROOT: $PROD_Apps_LondonDir
+    TF_STATE_NAME: $PROD_Apps_London_TF_StateName
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
@@ -1525,12 +1525,12 @@ Prod-7-Apps-Global-Apply:
   tags:
     - g1
 
-Prod-7-Apps-Global-Destroy:
+Prod-7-Apps-London-Destroy:
   extends: .destroy.with.var.file
-  needs: [Prod-7-Apps-Global-Plan]
+  needs: [Prod-7-Apps-London-Plan]
   variables:
-    TF_ROOT: ${PROD_APPS_GLOBAL_DIR}
-    TF_STATE_NAME: ${PROD_APPS_GLOBAL_TF_STATE_NAME}
+    TF_ROOT: $PROD_Apps_LondonDir
+    TF_STATE_NAME: $PROD_Apps_London_TF_StateName
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
