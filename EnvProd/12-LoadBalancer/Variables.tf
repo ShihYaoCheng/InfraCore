@@ -3,19 +3,30 @@
 #============================
 locals {
   Settings = jsondecode(file("../Settings.json"))
+
   ProjectID = local.Settings["Project"]["ID"]
   ProjectName = local.Settings["Project"]["Name"]
 
-  GKE-API-TW = local.Settings["GKE"]["TW"]["APIName"]
-  GKE-CA-TW = local.Settings["GKE"]["TW"]["CAName"]
-  GKE-API-EU = local.Settings["GKE"]["EU"]["APIName"]
-  GKE-CA-EU = local.Settings["GKE"]["EU"]["CAName"]
+  ZoneTaiwan = local.Settings["Project"]["Taiwan"]["Zone"]
+  ZoneLondon = local.Settings["Project"]["London"]["Zone"]
+  ZoneSingapore = local.Settings["Project"]["Singapore"]["Zone"]
+  ZoneLosAngeles = local.Settings["Project"]["LosAngeles"]["Zone"]
+
+  GKE-API-Taiwan = local.Settings["GKE"]["Taiwan"]["APIName"]
+  GKE-CA-Taiwan = local.Settings["GKE"]["Taiwan"]["CAName"]
+  GKE-API-London = local.Settings["GKE"]["London"]["APIName"]
+  GKE-CA-London = local.Settings["GKE"]["London"]["CAName"]
+  GKE-API-Singapore = local.Settings["GKE"]["Singapore"]["APIName"]
+  GKE-CA-Singapore = local.Settings["GKE"]["Singapore"]["CAName"]
+  GKE-API-LosAngeles = local.Settings["GKE"]["LosAngeles"]["APIName"]
+  GKE-CA-LosAngeles = local.Settings["GKE"]["LosAngeles"]["CAName"]
 
   DomainName = local.Settings["Domain"]["Name"]
-  SubDomainName = local.Settings["Domain"]["SubDomain"]["LoadBalancer"]
+  GameSubDomainName = local.Settings["Domain"]["SubDomain"]["LB-Game"]
 
-  GCPRegion = "asia-east1"
-  GCPZone = "asia-east1-a"
+  CDNSubDomainName = local.Settings["Domain"]["SubDomain"]["LB-CDN"]
+  CDNEnabled = local.Settings["CDN"]["Enabled"]
+  CDNUrlPathOfficial = local.Settings["CDN"]["UrlPathOfficial"]
 }
 
 #============================
@@ -30,4 +41,3 @@ variable "GodaddyAPISecret" {
   type      = string
   sensitive = true
 }
-
