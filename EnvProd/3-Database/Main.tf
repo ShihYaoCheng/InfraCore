@@ -1,5 +1,5 @@
 ﻿module "DB" {
-  source = "../../Modules/Database/0.2.0"
+  source = "../../Modules/Database/0.5.0"
 
   ProjectName = local.ProjectName
 
