@@ -6,11 +6,11 @@ module "AppsLondon" {
   GCPProjectID = local.ProjectID
   GCPZone      = local.GCPZone
 
-  GodaddyDomainName                  = local.DomainName
-  GodaddySubDomainNames              = local.SubDomainNames
-  GodaddyAPIKey                      = var.GodaddyAPIKey
-  GodaddyAPISecret                   = var.GodaddyAPISecret
-  EnableGodaddyPlainDomain           = false
+  GodaddyDomainName        = local.DomainName
+  GodaddySubDomainNames    = local.SubDomainNames
+  GodaddyAPIKey            = var.GodaddyAPIKey
+  GodaddyAPISecret         = var.GodaddyAPISecret
+  EnableGodaddyPlainDomain = false
 
   ArgoCD_OfficialWebRedirectEnabled  = false
   ArgoCD_OfficialWebRedirectDestFQDN = ""
