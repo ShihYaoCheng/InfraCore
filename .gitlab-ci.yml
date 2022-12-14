@@ -309,7 +309,12 @@ variables:
   PROD_Apps_SingaporeDir: EnvProd/9-Apps-Singapore
   PROD_Apps_Singapore_TF_StateName: "Prod-Apps-Singapore"
   
-  PROD_LB_DIR: EnvProd/8-LoadBalancer
+  PROD_GKE_LosAngelesDir: EnvProd/10-GKE-LosAngeles
+  PROD_GKE_LosAngeles_TF_StateName: "Prod-GKE-LosAngeles"
+  PROD_Apps_LosAngelesDir: EnvProd/11-Apps-LosAngeles
+  PROD_Apps_LosAngeles_TF_StateName: "Prod-Apps-LosAngeles"
+  
+  PROD_LB_DIR: EnvProd/12-LoadBalancer
   PROD_LB_TF_STATE_NAME: "Prod-LB"
 
 
@@ -1651,6 +1656,111 @@ Prod-9-Apps-Singapore-Destroy:
       when: manual
   tags:
     - g1
+
+
+
+
+#============================#
+# Prod - GKE(LosAngeles)
+#============================#
+Prod-10-GKE-LosAngeles-Plan:
+  extends: .plan.without.var.file
+  variables:
+    TF_ROOT: $PROD_GKE_LosAngelesDir
+    TF_STATE_NAME: $PROD_GKE_LosAngeles_TF_StateName
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  rules:
+    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
+  tags:
+    - g1
+
+Prod-10-GKE-LosAngeles-Apply:
+  extends: .apply.without.var.file
+  needs: [Prod-10-GKE-LosAngeles-Plan]
+  variables:
+    TF_ROOT: $PROD_GKE_LosAngelesDir
+    TF_STATE_NAME: $PROD_GKE_LosAngeles_TF_StateName
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  rules:
+    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
+  tags:
+    - g1
+
+Prod-10-GKE-LosAngeles-Destroy:
+  extends: .destroy.without.var.file
+  needs: [Prod-10-GKE-LosAngeles-Plan]
+  variables:
+    TF_ROOT: $PROD_GKE_LosAngelesDir
+    TF_STATE_NAME: $PROD_GKE_LosAngeles_TF_StateName
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+  rules:
+    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
+  tags:
+    - g1
+
+
+#=============================#
+# Prod - Apps(LosAngeles)
+#=============================#
+Prod-11-Apps-LosAngeles-Plan:
+  extends: .plan.with.var.file
+  variables:
+    TF_ROOT: $PROD_Apps_LosAngelesDir
+    TF_STATE_NAME: $PROD_Apps_LosAngeles_TF_StateName
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
+  rules:
+    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
+  tags:
+    - g1
+
+Prod-11-Apps-LosAngeles-Apply:
+  extends: .apply.with.var.file
+  needs: [Prod-11-Apps-LosAngeles-Plan]
+  variables:
+    TF_ROOT: $PROD_Apps_LosAngelesDir
+    TF_STATE_NAME: $PROD_Apps_LosAngeles_TF_StateName
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
+  rules:
+    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
+  tags:
+    - g1
+
+Prod-11-Apps-LosAngeles-Destroy:
+  extends: .destroy.with.var.file
+  needs: [Prod-11-Apps-LosAngeles-Plan]
+  variables:
+    TF_ROOT: $PROD_Apps_LosAngelesDir
+    TF_STATE_NAME: $PROD_Apps_LosAngeles_TF_StateName
+  before_script:
+    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
+    - cd ${TF_ROOT}
+    - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
+  rules:
+    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
+      when: manual
+  tags:
+    - g1
+
 
 
 
