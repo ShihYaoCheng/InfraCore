@@ -13,5 +13,4 @@ provider "google-beta" {
   project = local.ProjectID # assign default value.
   region  = var.GCPRegion   # assign default value.
   zone    = var.GCPZone     # assign default value.
-  credentials = file("../../../keys/dev-gitlab-sk-infra-res.json")
 }
