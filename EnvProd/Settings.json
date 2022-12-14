@@ -1,9 +1,27 @@
 {
-  "Project": {
+  "Project":
+  {
     "ID": "cqi-operation",
-    "Name": "cqi-sk-prod"
+    "Name": "cqi-sk-prod",
+
+    "Taiwan": {
+      "Region": "asia-east1",
+      "Zone": "asia-east1-a"
+    },
+    "London": {
+      "Region": "europe-west2",
+      "Zone": "europe-west2-a"
+    },
+    "Singapore": {
+      "Region": "asia-southeast1",
+      "Zone": "asia-southeast1-a"
+    },
+    "LosAngeles": {
+      "Region": "us-west2",
+      "Zone": "us-west2-a"
+    }
   },
-  "AppsVersion": 
+  "AppsVersion":
   {
     "Backstage": "main",
     "Battle": "v2.11.1F0",
@@ -21,26 +39,42 @@
     "NFT": "{values-prod.yaml}",
     "Table": "{values-prod.yaml}",
     "User": "{values-prod.yaml}",
-    "OfficialWeb": "{values-v1.12.1.yaml\\, EnableIngress-Prod.yaml}"
+    "OfficialWeb": "{values-v1.12.1.yaml\\, EnableIngress-Prod.yaml\\, EnableNEG.yaml}"
   },
   "Domain":
   {
     "Name": "ponponsnake.com",
     "SubDomain":
     {
-      "TW": "v2.11.1",
-      "EU": "eu.v2.11.1",
-      "LoadBalancer":"global.v2.11.1"
+      "Taiwan": ["v2.11.1"],
+      "London": ["london.v2.11.1"],
+      "Singapore": ["singapore.v2.11.1"],
+      "LosAngeles": ["la.v2.11.1"],
+      "LB-Game": "global.v2.11.1",
+      "LB-CDN": "cdn"
     }
   },
+  "CDN":
+  {
+    "Enabled": false,
+    "UrlPathOfficial": "/official/v2.11.1"
+  },
   "GKE": {
-    "TW": {
-      "APIName": "GKE-API-TW",
-      "CAName": "GKE-CA-TW"
+    "Taiwan": {
+      "APIName": "GKE-API-Taiwan",
+      "CAName": "GKE-CA-Taiwan"
     },
-    "EU": {
-      "APIName": "GKE-API-EU",
-      "CAName": "GKE-CA-EU"
+    "Singapore": {
+      "APIName": "GKE-API-Singapore",
+      "CAName": "GKE-CA-Singapore"
+    },
+    "London": {
+      "APIName": "GKE-API-London",
+      "CAName": "GKE-CA-London"
+    },
+    "LosAngeles": {
+      "APIName": "GKE-API-LosAngeles",
+      "CAName": "GKE-CA-LosAngeles"
     }
   }
 }
