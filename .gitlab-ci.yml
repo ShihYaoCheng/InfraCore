@@ -1763,18 +1763,14 @@ Prod-11-Apps-LosAngeles-Destroy:
 
 
 
-
-
-
-
 #==============================#
 # Prod - LoadBalancer          #
 #==============================#
-Prod-8-LB-Plan:
+Prod-12-LB-Plan:
   extends: .plan.with.var.file
   variables:
-    TF_ROOT: ${PROD_LB_DIR}
-    TF_STATE_NAME: ${PROD_LB_TF_STATE_NAME}
+    TF_ROOT: $PROD_LB_Dir
+    TF_STATE_NAME: $PROD_LB_TF_StateName
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
@@ -1786,12 +1782,12 @@ Prod-8-LB-Plan:
   tags:
     - g1
 
-Prod-8-LB-Apply:
+Prod-12-LB-Apply:
   extends: .apply.with.var.file
-  needs: [Prod-8-LB-Plan]
+  needs: [Prod-12-LB-Plan]
   variables:
-    TF_ROOT: ${PROD_LB_DIR}
-    TF_STATE_NAME: ${PROD_LB_TF_STATE_NAME}
+    TF_ROOT: $PROD_LB_Dir
+    TF_STATE_NAME: $PROD_LB_TF_StateName
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
@@ -1803,12 +1799,12 @@ Prod-8-LB-Apply:
   tags:
     - g1
 
-Prod-8-LB-Destroy:
+Prod-12-LB-Destroy:
   extends: .destroy.with.var.file
-  needs: [Prod-8-LB-Plan]
+  needs: [Prod-12-LB-Plan]
   variables:
-    TF_ROOT: ${PROD_LB_DIR}
-    TF_STATE_NAME: ${PROD_LB_TF_STATE_NAME}
+    TF_ROOT: $PROD_LB_Dir
+    TF_STATE_NAME: $PROD_LB_TF_StateName
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_LB_SA_BASE64 | base64 -d)
@@ -1819,81 +1815,6 @@ Prod-8-LB-Destroy:
       when: manual
   tags:
     - g1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#============================#
-# QA - Cloud Run             #
-#============================#
-#QA-6-CloudRun-Plan:
-#  extends: .plan.without.var.file
-#  variables:
-#    TF_ROOT: ${QA_CLOUD_RUN_DIR}
-#    TF_STATE_NAME: ${QA_CLOUD_RUN_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_CLOUD_RUN_SA_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#QA-6-CloudRun-Apply:
-#  extends: .apply.without.var.file
-#  needs: [QA-6-CloudRun-Plan]
-#  variables:
-#    TF_ROOT: ${QA_CLOUD_RUN_DIR}
-#    TF_STATE_NAME: ${QA_CLOUD_RUN_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_CLOUD_RUN_SA_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-#
-#QA-6-CloudRun-Destroy:
-#  extends: .destroy.without.var.file
-#  needs: [QA-6-CloudRun-Plan]
-#  variables:
-#    TF_ROOT: ${QA_CLOUD_RUN_DIR}
-#    TF_STATE_NAME: ${QA_CLOUD_RUN_TF_STATE_NAME}
-#  before_script:
-#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_CLOUD_RUN_SA_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
-
-
-
-
-
 
 
 
