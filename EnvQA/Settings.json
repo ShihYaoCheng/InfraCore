@@ -48,8 +48,8 @@
     {
       "Taiwan": ["v2.12.0"],
       "London": ["london.v2.12.0"],
-      "Singapore": ["singapore.v2.3.0"],
-      "LosAngeles": ["la.v2.3.0"],
+      "Singapore": ["singapore.v2.12.0"],
+      "LosAngeles": ["la.v2.12.0"],
       "LB-Game": "global.v2.12.0",
       "LB-CDN": "cdn-beta"
     }
