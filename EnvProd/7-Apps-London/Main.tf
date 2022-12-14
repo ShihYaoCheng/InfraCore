@@ -1,31 +1,34 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
-module "AppsEU" {
-  source = "../../Modules/Apps/4.1.0"
+module "AppsLondon" {
+  source = "../../Modules/Apps/5.1.1"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
   GCPZone      = local.GCPZone
 
   GodaddyDomainName                  = local.DomainName
-  EnableGodaddyPlainDomain           = false
-  GodaddySubDomainNames              = [local.SubDomainName]
+  GodaddySubDomainNames              = local.SubDomainNames
   GodaddyAPIKey                      = var.GodaddyAPIKey
   GodaddyAPISecret                   = var.GodaddyAPISecret
+  EnableGodaddyPlainDomain           = false
+
   ArgoCD_OfficialWebRedirectEnabled  = false
   ArgoCD_OfficialWebRedirectDestFQDN = ""
+  ArgoCD_OfficialWebCDNEnabled       = false
+  ArgoCD_OfficialWebCDNUrl           = ""
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = true
-
-  Robusta_ClusterName           = "sk-prod-eu"
-  Robusta_SlackAPIKey           = var.Robusta_SlackAPIKey
-  Robusta_SlackChannel          = "sk-prod-info"
-  Robusta_NotifyDeploymentEvent = true
 
   Prometheus_StorageClassName = "standard"
   Prometheus_StorageSize      = "300Gi"
   Prometheus_Retention        = "90d"
   Grafana_AdminPassword       = var.GrafanaAdminPassword
+
+  Robusta_ClusterName           = "sk-prod-london"
+  Robusta_SlackAPIKey           = var.Robusta_SlackAPIKey
+  Robusta_SlackChannel          = "sk-prod-info"
+  Robusta_NotifyDeploymentEvent = true
 
   ArgoCD_Enable               = true
   ArgoCD_EnableSelfHeal       = true
@@ -43,21 +46,21 @@ module "AppsEU" {
   ArgoCD_EnableAppUser        = false
   ArgoCD_EnableAppOfficialWeb = false
 
-  ArgoCD_AppBackstageBranchOrTag   = local.AppBackstage
+  ArgoCD_AppBackstageBranchOrTag   = ""
   ArgoCD_AppBattleBranchOrTag      = local.AppBattle
   ArgoCD_AppFileBranchOrTag        = local.AppFile
-  ArgoCD_AppNFTBranchOrTag         = local.AppNFT
-  ArgoCD_AppTableBranchOrTag       = local.AppTable
-  ArgoCD_AppUserBranchOrTag        = local.AppUser
-  ArgoCD_AppOfficialWebBranchOrTag = local.AppOfficialWeb
+  ArgoCD_AppNFTBranchOrTag         = ""
+  ArgoCD_AppTableBranchOrTag       = ""
+  ArgoCD_AppUserBranchOrTag        = ""
+  ArgoCD_AppOfficialWebBranchOrTag = ""
 
-  ArgoCD_BackstageHelmValueFiles   = local.BackstageHelmValueFiles
+  ArgoCD_BackstageHelmValueFiles   = "{}"
   ArgoCD_BattleHelmValueFiles      = local.BattleHelmValueFiles
   ArgoCD_FileHelmValueFiles        = local.FileHelmValueFiles
-  ArgoCD_NFTHelmValueFiles         = local.NFTHelmValueFiles
-  ArgoCD_TableHelmValueFiles       = local.TableHelmValueFiles
-  ArgoCD_UserHelmValueFiles        = local.UserHelmValueFiles
-  ArgoCD_OfficialWebHelmValueFiles = local.OfficialWebHelmValueFiles
+  ArgoCD_NFTHelmValueFiles         = "{}"
+  ArgoCD_TableHelmValueFiles       = "{}"
+  ArgoCD_UserHelmValueFiles        = "{}"
+  ArgoCD_OfficialWebHelmValueFiles = "{}"
 
   ArgoCD_BackstageSqlPassword = ""
   ArgoCD_UserSqlPassword      = ""

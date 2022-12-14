@@ -7,43 +7,21 @@ locals {
   ProjectID = local.Settings["Project"]["ID"]
   ProjectName = local.Settings["Project"]["Name"]
 
-  GKE-API-EU = local.Settings["GKE"]["EU"]["APIName"]
-  GKE-CA-EU = local.Settings["GKE"]["EU"]["CAName"]
+  GKE-API-London = local.Settings["GKE"]["London"]["APIName"]
+  GKE-CA-London = local.Settings["GKE"]["London"]["CAName"]
 
-  AppBackstage = local.Settings["AppsVersion"]["Backstage"]
   AppBattle = local.Settings["AppsVersion"]["Battle"]
   AppFile = local.Settings["AppsVersion"]["File"]
-  AppNFT = local.Settings["AppsVersion"]["NFT"]
-  AppTable = local.Settings["AppsVersion"]["Table"]
-  AppUser = local.Settings["AppsVersion"]["User"]
-  AppOfficialWeb = local.Settings["AppsVersion"]["OfficialWeb"]
 
-  BackstageHelmValueFiles = local.Settings["HelmPathValueFiles"]["Backstage"]
   BattleHelmValueFiles = local.Settings["HelmPathValueFiles"]["Battle"]
   FileHelmValueFiles = local.Settings["HelmPathValueFiles"]["File"]
-  NFTHelmValueFiles = local.Settings["HelmPathValueFiles"]["NFT"]
-  TableHelmValueFiles = local.Settings["HelmPathValueFiles"]["Table"]
-  UserHelmValueFiles = local.Settings["HelmPathValueFiles"]["User"]
-  OfficialWebHelmValueFiles = local.Settings["HelmPathValueFiles"]["OfficialWeb"]
 
   DomainName = local.Settings["Domain"]["Name"]
-  SubDomainName = local.Settings["Domain"]["SubDomain"]["EU"]
+  SubDomainNames = local.Settings["Domain"]["SubDomain"]["London"]
 
-  GCPRegion = "europe-west2"
-  GCPZone = "europe-west2-a"
-}
-
-#============================
-# Godaddy                   #
-#============================
-variable "GodaddyAPIKey" {
-  type      = string
-  sensitive = true
-}
-
-variable "GodaddyAPISecret" {
-  type      = string
-  sensitive = true
+  # https://cloud.google.com/compute/docs/regions-zones
+  GCPRegion = local.Settings["Project"]["London"]["Region"]
+  GCPZone = local.Settings["Project"]["London"]["Zone"]
 }
 
 #============================
@@ -64,6 +42,19 @@ variable "ArgoCD_GitLabTokenSecret" {
 variable "GrafanaAdminPassword" {
   type        = string
   sensitive   = true
+}
+
+#============================
+# Godaddy                   #
+#============================
+variable "GodaddyAPIKey" {
+  type      = string
+  sensitive = true
+}
+
+variable "GodaddyAPISecret" {
+  type      = string
+  sensitive = true
 }
 
 #============================
