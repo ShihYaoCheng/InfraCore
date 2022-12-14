@@ -297,7 +297,7 @@ variables:
   PROD_GKE_TF_STATE_NAME: "Prod-GKE"
   PROD_APPS_DIR: EnvProd/5-Apps
   PROD_APPS_TF_STATE_NAME: "Prod-Apps"
-  PROD_GKE_London_DIR: EnvProd/6-GKE-London
+  PROD_GKE_LondonDir: EnvProd/6-GKE-London
   PROD_GKE_London_TF_StateName: "Prod-GKE-London"
   PROD_APPS_GLOBAL_DIR: EnvProd/7-Apps-Global
   PROD_APPS_GLOBAL_TF_STATE_NAME: "Prod-Apps-Global"
@@ -1447,7 +1447,7 @@ Prod-5-Apps-Destroy:
 Prod-6-GKE-London-Plan:
   extends: .plan.without.var.file
   variables:
-    TF_ROOT: $PROD_GKE_London_Dir
+    TF_ROOT: $PROD_GKE_LondonDir
     TF_STATE_NAME: $PROD_GKE_London_TF_StateName
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
@@ -1462,7 +1462,7 @@ Prod-6-GKE-London-Apply:
   extends: .apply.without.var.file
   needs: [Prod-6-GKE-London-Plan]
   variables:
-    TF_ROOT: $PROD_GKE_London_Dir
+    TF_ROOT: $PROD_GKE_LondonDir
     TF_STATE_NAME: $PROD_GKE_London_TF_StateName
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
@@ -1477,7 +1477,7 @@ Prod-6-GKE-London-Destroy:
   extends: .destroy.without.var.file
   needs: [Prod-6-GKE-London-Plan]
   variables:
-    TF_ROOT: $PROD_GKE_London_Dir
+    TF_ROOT: $PROD_GKE_LondonDir
     TF_STATE_NAME: $PROD_GKE_London_TF_StateName
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
