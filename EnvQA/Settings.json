@@ -24,11 +24,11 @@
   "AppsVersion": 
   {
     "Backstage": "main",
-    "Battle": "v2.11.1F0S0",
-    "File": "v2.11.1F0S0",
+    "Battle": "v2.12.1C0",
+    "File": "v2.12.1C0",
     "NFT": "v2.10.0F3",
-    "Table": "v2.11.1F4",
-    "User": "v2.11.1F0",
+    "Table": "v2.12.1C0",
+    "User": "v2.12.1C0",
     "OfficialWeb": "main"
   },
   "HelmPathValueFiles": 
@@ -46,18 +46,18 @@
     "Name": "ponponsnake.com",
     "SubDomain":
     {
-      "Taiwan": ["v2.12.0"],
-      "London": ["london.v2.12.0"],
-      "Singapore": ["singapore.v2.12.0"],
-      "LosAngeles": ["la.v2.12.0"],
-      "LB-Game": "global.v2.12.0",
+      "Taiwan": ["v2.12.1"],
+      "London": ["london.v2.12.1"],
+      "Singapore": ["singapore.v2.12.1"],
+      "LosAngeles": ["la.v2.12.1"],
+      "LB-Game": "global.v2.12.1",
       "LB-CDN": "cdn-beta"
     }
   },
   "CDN":
   {
     "Enabled": true,
-    "UrlPathOfficial": "/official/v2.12.0"
+    "UrlPathOfficial": "/official/v2.12.1"
   },
   "GKE": {
     "Taiwan": {
