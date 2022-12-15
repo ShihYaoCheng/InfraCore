@@ -8,6 +8,12 @@ resource "helm_release" "Traefik" {
   version          = "~>20.4.1"
   create_namespace = true
   namespace        = "traefik"
+  
+  # Add the Client IP to X-Forwarded-For header.
+  set {
+    name  = "service.spec.externalTrafficPolicy"
+    value = "Local"
+  }
 
   # https://stackoverflow.com/questions/64696721/how-do-i-pass-variables-to-a-yaml-file-in-heml-tf
   values = [templatefile("${path.module}/Values/Traefik.yaml", {})]

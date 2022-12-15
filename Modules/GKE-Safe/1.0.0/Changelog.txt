@@ -1,6 +1,8 @@
 ﻿1.0.0
 Add variables: EnableProxy_CloudSQL, CloudSQLProxy_EnableNetworkPolicy.
 
+Set service.spec.externalTrafficPolicy to Local that add the client IP to X-Forwarded-For header.
+
 
 0.8.0
 Add helm chart: https://artifacthub.io/packages/helm/rimusz/gcloud-sqlproxy
