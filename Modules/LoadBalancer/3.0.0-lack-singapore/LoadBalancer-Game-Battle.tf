@@ -19,14 +19,14 @@ data "kubernetes_service" "BattleLondon" {
   provider = kubernetes.london
 }
 
-data "kubernetes_service" "BattleSingapore" {
-  metadata {
-    name      = "battle"
-    namespace = "battle"
-  }
-
-  provider = kubernetes.singapore
-}
+#data "kubernetes_service" "BattleSingapore" {
+#  metadata {
+#    name      = "battle"
+#    namespace = "battle"
+#  }
+#
+#  provider = kubernetes.singapore
+#}
 
 data "kubernetes_service" "BattleLosAngeles" {
   metadata {
@@ -50,10 +50,10 @@ data "google_compute_network_endpoint_group" "NEGBattle-London" {
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_network_endpoint_group
-data "google_compute_network_endpoint_group" "NEGBattle-Singapore" {
-  name = jsondecode(data.kubernetes_service.BattleSingapore.metadata[0].annotations["cloud.google.com/neg-status"])["network_endpoint_groups"]["80"]
-  zone = var.ZoneSingapore
-}
+#data "google_compute_network_endpoint_group" "NEGBattle-Singapore" {
+#  name = jsondecode(data.kubernetes_service.BattleSingapore.metadata[0].annotations["cloud.google.com/neg-status"])["network_endpoint_groups"]["80"]
+#  zone = var.ZoneSingapore
+#}
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_network_endpoint_group
 data "google_compute_network_endpoint_group" "NEGBattle-LosAngeles" {
@@ -109,11 +109,11 @@ resource "google_compute_backend_service" "Battle" {
     balancing_mode = "RATE"
     max_rate       = 1000
   }
-  backend {
-    group          = data.google_compute_network_endpoint_group.NEGBattle-Singapore.id
-    balancing_mode = "RATE"
-    max_rate       = 1000
-  }
+#  backend {
+#    group          = data.google_compute_network_endpoint_group.NEGBattle-Singapore.id
+#    balancing_mode = "RATE"
+#    max_rate       = 1000
+#  }
   backend {
     group          = data.google_compute_network_endpoint_group.NEGBattle-LosAngeles.id
     balancing_mode = "RATE"

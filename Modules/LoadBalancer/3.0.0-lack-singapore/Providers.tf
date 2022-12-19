@@ -22,7 +22,8 @@
       source = "hashicorp/kubernetes"
       version = "2.16.0"
 
-      configuration_aliases = [ kubernetes.taiwan, kubernetes.london, kubernetes.singapore, kubernetes.la ]
+#      configuration_aliases = [ kubernetes.taiwan, kubernetes.london, kubernetes.singapore, kubernetes.la ]
+      configuration_aliases = [ kubernetes.taiwan, kubernetes.london, kubernetes.la ]
     }
 
     # https://registry.terraform.io/providers/hashicorp/random/latest

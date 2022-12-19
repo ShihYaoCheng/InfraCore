@@ -1,6 +1,6 @@
 # https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "LoadBalancer" {
-  source = "../../Modules/LoadBalancer/3.0.0"
+  source = "../../Modules/LoadBalancer/3.0.0-lack-singapore"
 
   ProjectName = local.ProjectName
 

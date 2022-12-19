@@ -16,14 +16,14 @@ data "kubernetes_service" "FileLondon" {
   provider = kubernetes.london
 }
 
-data "kubernetes_service" "FileSingapore" {
-  metadata {
-    name      = "file"
-    namespace = "file"
-  }
-
-  provider = kubernetes.singapore
-}
+#data "kubernetes_service" "FileSingapore" {
+#  metadata {
+#    name      = "file"
+#    namespace = "file"
+#  }
+#
+#  provider = kubernetes.singapore
+#}
 
 data "kubernetes_service" "FileLosAngeles" {
   metadata {
@@ -45,10 +45,10 @@ data "google_compute_network_endpoint_group" "NEGFile-London" {
   zone = var.ZoneLondon
 }
 
-data "google_compute_network_endpoint_group" "NEGFile-Singapore" {
-  name = jsondecode(data.kubernetes_service.FileSingapore.metadata[0].annotations["cloud.google.com/neg-status"])["network_endpoint_groups"]["80"]
-  zone = var.ZoneSingapore
-}
+#data "google_compute_network_endpoint_group" "NEGFile-Singapore" {
+#  name = jsondecode(data.kubernetes_service.FileSingapore.metadata[0].annotations["cloud.google.com/neg-status"])["network_endpoint_groups"]["80"]
+#  zone = var.ZoneSingapore
+#}
 
 data "google_compute_network_endpoint_group" "NEGFile-LosAngeles" {
   name = jsondecode(data.kubernetes_service.FileLosAngeles.metadata[0].annotations["cloud.google.com/neg-status"])["network_endpoint_groups"]["80"]
@@ -104,11 +104,11 @@ resource "google_compute_backend_service" "File" {
     balancing_mode = "RATE"
     max_rate       = 1000
   }
-  backend {
-    group          = data.google_compute_network_endpoint_group.NEGFile-Singapore.id
-    balancing_mode = "RATE"
-    max_rate       = 1000
-  }
+#  backend {
+#    group          = data.google_compute_network_endpoint_group.NEGFile-Singapore.id
+#    balancing_mode = "RATE"
+#    max_rate       = 1000
+#  }
   backend {
     group          = data.google_compute_network_endpoint_group.NEGFile-LosAngeles.id
     balancing_mode = "RATE"
@@ -123,18 +123,3 @@ resource "google_compute_backend_service" "File" {
   }
 }
 
-output "ServiceLondon" {
-  value = data.kubernetes_service.FileLondon.id
-}
-
-output "ServiceSingapore" {
-  value = data.kubernetes_service.FileSingapore.id
-}
-
-output "FileLondon" {
-  value = data.google_compute_network_endpoint_group.NEGFile-London.id
-}
-
-output "FileSingapore" {
-  value = data.google_compute_network_endpoint_group.NEGFile-Singapore.id
-}
