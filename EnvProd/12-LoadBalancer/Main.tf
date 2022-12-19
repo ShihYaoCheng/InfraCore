@@ -22,7 +22,7 @@ module "LoadBalancer" {
   providers = {
     kubernetes.taiwan = kubernetes.taiwan
     kubernetes.london = kubernetes.london
-    kubernetes.singapore = kubernetes.singapore
+#    kubernetes.singapore = kubernetes.singapore
     kubernetes.la = kubernetes.la
   }
 }
