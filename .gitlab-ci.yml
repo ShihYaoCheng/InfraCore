@@ -314,8 +314,8 @@ variables:
   PROD_Apps_LosAngelesDir: EnvProd/11-Apps-LosAngeles
   PROD_Apps_LosAngeles_TF_StateName: "Prod-Apps-LosAngeles"
   
-  PROD_LB_DIR: EnvProd/12-LoadBalancer
-  PROD_LB_TF_STATE_NAME: "Prod-LB"
+  PROD_LB_Dir: EnvProd/12-LoadBalancer
+  PROD_LB_TF_StateName: "Prod-LB"
 
 
 # TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/sre-infra
