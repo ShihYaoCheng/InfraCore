@@ -1,0 +1,26 @@
+﻿3.0.0
+Add Singapore and Los Angeles cluster.
+
+Rename variables:
+ZoneTW to ZoneTaiwan.
+ZoneEU to ZoneLondon.
+
+Add variables: ZoneSingapore, ZoneLosAngeles.
+
+
+2.1.0
+Upgrade providers.
+
+
+2.0.0
+Add new load balancer for official web CDN.
+Upgrade the Godaddy helm chart.
+
+New Variables: GameSubDomainNames, CDNEnabled, CDNSubDomainNames, CDNUrlPathOfficial.
+Remove Variables: GodaddySubDomainName.
+
+1.1.0
+The terraform upgrade to 1.2.9.
+
+1.0.0
+DNS register automatically.
