@@ -1,6 +1,6 @@
 # https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "LoadBalancer" {
-  source = "../../Modules/LoadBalancer/3.0.0-lack-singapore"
+  source = "../../Modules/LoadBalancer/3.0.0"
 
   ProjectName = local.ProjectName
 
@@ -22,7 +22,7 @@ module "LoadBalancer" {
   providers = {
     kubernetes.taiwan = kubernetes.taiwan
     kubernetes.london = kubernetes.london
-#    kubernetes.singapore = kubernetes.singapore
+    kubernetes.singapore = kubernetes.singapore
     kubernetes.la = kubernetes.la
   }
 }

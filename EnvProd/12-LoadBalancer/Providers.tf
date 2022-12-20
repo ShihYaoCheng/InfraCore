@@ -47,22 +47,22 @@ provider "kubernetes" {
 }
 
 # permission: Storage Object Viewer
-#data "google_storage_bucket_object_content" "GKE-API-Singapore" {
-#  bucket = local.ProjectName
-#  name   = local.GKE-API-Singapore
-#}
-#
-#data "google_storage_bucket_object_content" "GKE-CA-Singapore" {
-#  bucket = local.ProjectName
-#  name   = local.GKE-CA-Singapore
-#}
-#
-#provider "kubernetes" {
-#  alias = "singapore"
-#  host = "https://${data.google_storage_bucket_object_content.GKE-API-Singapore.content}"
-#  token = data.google_client_config.default.access_token
-#  cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.GKE-CA-Singapore.content)
-#}
+data "google_storage_bucket_object_content" "GKE-API-Singapore" {
+  bucket = local.ProjectName
+  name   = local.GKE-API-Singapore
+}
+
+data "google_storage_bucket_object_content" "GKE-CA-Singapore" {
+  bucket = local.ProjectName
+  name   = local.GKE-CA-Singapore
+}
+
+provider "kubernetes" {
+  alias = "singapore"
+  host = "https://${data.google_storage_bucket_object_content.GKE-API-Singapore.content}"
+  token = data.google_client_config.default.access_token
+  cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.GKE-CA-Singapore.content)
+}
 
 # permission: Storage Object Viewer
 data "google_storage_bucket_object_content" "GKE-API-LosAngeles" {
