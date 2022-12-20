@@ -6,7 +6,7 @@
 provider "google" {
   project = local.ProjectID # assign default value.
   region  = local.GCPRegion # assign default value.
-  zone    = "asia-east1-a"   # assign default value.
+  zone    = "asia-east1-b"   # assign default value.
 }
 
 data "google_client_config" "default" {}
