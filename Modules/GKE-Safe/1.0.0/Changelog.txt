@@ -1,4 +1,11 @@
-﻿1.0.0
+﻿Caution.
+If something goes wrong and you can't resolve it. You decide to delete Kubernetes manually.
+You must delete the following resources:
+1.ServiceAccount: [project name]-[unique name]-sql.
+2.GitLab: Terraform State.
+
+
+1.0.0
 Add variables: EnableProxy_CloudSQL, CloudSQLProxy_EnableNetworkPolicy.
 
 Set service.spec.externalTrafficPolicy to Local that add the client IP to X-Forwarded-For header.
