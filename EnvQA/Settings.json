@@ -33,13 +33,13 @@
   },
   "HelmPathValueFiles": 
   {
-    "Backstage": "{values-v1.12.2.yaml}",
+    "Backstage": "{values-v1.12.3.yaml}",
     "Battle": "{values-prod.yaml}",
     "File": "{values-prod.yaml}",
     "NFT": "{values-prod.yaml}",
     "Table": "{values-prod.yaml}",
     "User": "{values-prod.yaml\\, SetServerName-Beta.yaml}",
-    "OfficialWeb": "{values-v1.12.2.yaml\\, EnableNEG.yaml}"
+    "OfficialWeb": "{values-v1.12.3.yaml\\, EnableNEG.yaml}"
   },
   "Domain": 
   {
