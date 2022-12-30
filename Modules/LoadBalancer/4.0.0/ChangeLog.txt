@@ -1,4 +1,8 @@
-﻿3.0.0
+﻿4.0.0
+Remove Taiwan.
+
+
+3.0.0
 Add Singapore and Los Angeles cluster.
 
 Rename variables:

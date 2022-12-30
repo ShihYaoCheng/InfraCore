@@ -1,13 +1,4 @@
-﻿data "kubernetes_service" "FileTaiwan" {
-  metadata {
-    name      = "file"
-    namespace = "file"
-  }
-
-  provider = kubernetes.taiwan
-}
-
-data "kubernetes_service" "FileLondon" {
+﻿data "kubernetes_service" "FileLondon" {
   metadata {
     name      = "file"
     namespace = "file"
@@ -35,11 +26,6 @@ data "kubernetes_service" "FileLosAngeles" {
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_network_endpoint_group
-data "google_compute_network_endpoint_group" "NEGFile-Taiwan" {
-  name = jsondecode(data.kubernetes_service.FileTaiwan.metadata[0].annotations["cloud.google.com/neg-status"])["network_endpoint_groups"]["80"]
-  zone = var.ZoneTaiwan
-}
-
 data "google_compute_network_endpoint_group" "NEGFile-London" {
   name = jsondecode(data.kubernetes_service.FileLondon.metadata[0].annotations["cloud.google.com/neg-status"])["network_endpoint_groups"]["80"]
   zone = var.ZoneLondon
@@ -90,18 +76,13 @@ resource "google_compute_backend_service" "File" {
   }
 
   backend {
-    group          = data.google_compute_network_endpoint_group.NEGFile-Taiwan.id
+    group          = data.google_compute_network_endpoint_group.NEGFile-London.id
     balancing_mode = "RATE"
 
     # max_rate - (Optional) The max requests per second (RPS) of the group. 
     # Can be used with either RATE or UTILIZATION balancing modes, but required if RATE mode.
     # For RATE mode, either maxRate or one of maxRatePerInstance or maxRatePerEndpoint, 
     # as appropriate for group type, must be set.
-    max_rate = 1000
-  }
-  backend {
-    group          = data.google_compute_network_endpoint_group.NEGFile-London.id
-    balancing_mode = "RATE"
     max_rate       = 1000
   }
   backend {
@@ -121,20 +102,4 @@ resource "google_compute_backend_service" "File" {
     enable      = false
     sample_rate = 1
   }
-}
-
-output "ServiceLondon" {
-  value = data.kubernetes_service.FileLondon.id
-}
-
-output "ServiceSingapore" {
-  value = data.kubernetes_service.FileSingapore.id
-}
-
-output "FileLondon" {
-  value = data.google_compute_network_endpoint_group.NEGFile-London.id
-}
-
-output "FileSingapore" {
-  value = data.google_compute_network_endpoint_group.NEGFile-Singapore.id
 }

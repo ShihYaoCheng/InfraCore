@@ -4,13 +4,13 @@
     namespace = "official-web"
   }
 
-  provider = kubernetes.taiwan
+  provider = kubernetes.singapore
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_network_endpoint_group
 data "google_compute_network_endpoint_group" "NEGOfficialWeb" {
   name = jsondecode(data.kubernetes_service.OfficialWeb.metadata[0].annotations["cloud.google.com/neg-status"])["network_endpoint_groups"]["80"]
-  zone = var.ZoneTaiwan
+  zone = var.ZoneSingapore
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_backend_service

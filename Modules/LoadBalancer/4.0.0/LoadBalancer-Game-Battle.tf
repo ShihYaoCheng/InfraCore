@@ -1,15 +1,6 @@
 ﻿# https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/service
 # https://www.terraform.io/language/meta-arguments/resource-provider
 # permission: Kubernetes Engine Viewer.
-data "kubernetes_service" "BattleTaiwan" {
-  metadata {
-    name      = "battle"
-    namespace = "battle"
-  }
-
-  provider = kubernetes.taiwan
-}
-
 data "kubernetes_service" "BattleLondon" {
   metadata {
     name      = "battle"
@@ -35,12 +26,6 @@ data "kubernetes_service" "BattleLosAngeles" {
   }
 
   provider = kubernetes.la
-}
-
-# https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_network_endpoint_group
-data "google_compute_network_endpoint_group" "NEGBattle-Taiwan" {
-  name = jsondecode(data.kubernetes_service.BattleTaiwan.metadata[0].annotations["cloud.google.com/neg-status"])["network_endpoint_groups"]["80"]
-  zone = var.ZoneTaiwan
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_network_endpoint_group
@@ -95,18 +80,13 @@ resource "google_compute_backend_service" "Battle" {
   }
 
   backend {
-    group          = data.google_compute_network_endpoint_group.NEGBattle-Taiwan.id
+    group          = data.google_compute_network_endpoint_group.NEGBattle-London.id
     balancing_mode = "RATE"
 
     # max_rate - (Optional) The max requests per second (RPS) of the group. 
     # Can be used with either RATE or UTILIZATION balancing modes, but required if RATE mode.
     # For RATE mode, either maxRate or one of maxRatePerInstance or maxRatePerEndpoint, 
     # as appropriate for group type, must be set.
-    max_rate = 1000
-  }
-  backend {
-    group          = data.google_compute_network_endpoint_group.NEGBattle-London.id
-    balancing_mode = "RATE"
     max_rate       = 1000
   }
   backend {

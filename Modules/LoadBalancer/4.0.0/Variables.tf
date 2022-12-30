@@ -6,10 +6,6 @@ variable "ProjectName" {
 #  default = "cqi-sk-test"
 }
 
-variable "ZoneTaiwan" {
-  type = string
-}
-
 variable "ZoneLondon" {
   type = string
 }
