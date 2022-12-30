@@ -8,13 +8,13 @@ module "GKE-London" {
   GCPRegion    = local.GCPRegion
   GCPZone      = local.GCPZone
 
-  UniqueName = "eu-test"
+  UniqueName = "london-test"
 
   GKE-ControlPlaneCIDR     = "10.0.0.16/28"
   GKE-CreateServiceAccount = true
 
   GKE-Zones   = [local.GCPZone]
-  GKE-Labels   = { "location" = "europe-london", "environment" = "test" }
+  GKE-Labels   = { "location" = "london", "environment" = "test" }
   GKE-APIName = local.GKE-API-London
   GKE-CAName  = local.GKE-CA-London
 
