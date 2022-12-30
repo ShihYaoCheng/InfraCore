@@ -2,32 +2,25 @@
 # Project                   #
 #============================
 locals {
-  Settings = jsondecode(file("../Settings.json"))
-  ProjectID = local.Settings["Project"]["ID"]
+  Settings    = jsondecode(file("../Settings.json"))
+  ProjectID   = local.Settings["Project"]["ID"]
   ProjectName = local.Settings["Project"]["Name"]
 
-  GKE-API-Singapore = local.Settings["GKE"]["Singapore"]["APIName"]
-  GKE-CA-Singapore = local.Settings["GKE"]["Singapore"]["CAName"]
+  GKE-API-TaiwanDev = local.Settings["GKE"]["Singapore"]["APIName"]
+  GKE-CA-TaiwanDev = local.Settings["GKE"]["Singapore"]["CAName"]
 
   DomainName = local.Settings["Domain"]["Name"]
   SubDomainNames = local.Settings["Domain"]["SubDomain"]["Singapore"]
 
+  CDNEnabled = local.Settings["CDN"]["Enabled"]
+  CDNUrlPathOfficial = local.Settings["CDN"]["UrlPathOfficial"]
+  CDNSubDomainName = local.Settings["Domain"]["SubDomain"]["LB-CDN"]
+  CDNUrlOfficial = "https://${local.CDNSubDomainName}.${local.DomainName}${local.CDNUrlPathOfficial}"
+
+  # https://cloud.google.com/compute/docs/regions-zones
   GCPRegion = local.Settings["Project"]["Singapore"]["Region"]
   GCPZone = local.Settings["Project"]["Singapore"]["Zone"]
 }
-
-# https://cloud.google.com/compute/docs/regions-zones
-#variable "GCPRegion" {
-#  type        = string
-#  default     = "asia-southeast1"
-#  description = "cloud provider region."
-#}
-#
-#variable "GCPZone" {
-#  type        = string
-#  default     = "asia-southeast1-b"
-#  description = "cloud provider zone."
-#}
 
 #============================
 # Godaddy                   #
@@ -57,7 +50,6 @@ variable "ArgoCD_GitLabTokenSecret" {
   description = "Deploy token"
 }
 
-
 #============================
 # Robusta                   #
 #============================
@@ -65,3 +57,4 @@ variable "Robusta_SlackAPIKey" {
   type      = string
   sensitive = true
 }
+
