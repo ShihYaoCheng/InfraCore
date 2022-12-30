@@ -8,23 +8,6 @@ provider "google" {
 
 data "google_client_config" "default" {}
 
-data "google_storage_bucket_object_content" "GKE-API-Taiwan" {
-  bucket = local.ProjectName
-  name   = local.GKE-API-Taiwan
-}
-
-data "google_storage_bucket_object_content" "GKE-CA-Taiwan" {
-  bucket = local.ProjectName
-  name   = local.GKE-CA-Taiwan
-}
-
-provider "kubernetes" {
-  alias = "taiwan"
-  host = "https://${data.google_storage_bucket_object_content.GKE-API-Taiwan.content}"
-  token = data.google_client_config.default.access_token
-  cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.GKE-CA-Taiwan.content)
-}
-
 # permission: Storage Object Viewer
 data "google_storage_bucket_object_content" "GKE-API-London" {
   bucket = local.ProjectName
@@ -81,8 +64,8 @@ provider "kubernetes" {
 
 provider "helm" {
   kubernetes {
-    host                   = "https://${data.google_storage_bucket_object_content.GKE-API-Taiwan.content}"
+    host                   = "https://${data.google_storage_bucket_object_content.GKE-API-Singapore.content}"
     token                  = data.google_client_config.default.access_token
-    cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.GKE-CA-Taiwan.content)
+    cluster_ca_certificate = base64decode(data.google_storage_bucket_object_content.GKE-CA-Singapore.content)
   }
 }

@@ -4,10 +4,6 @@
     "ID": "stellar-38931",
     "Name": "cqi-sk-test",
     
-    "Taiwan": {
-      "Region": "asia-east1",
-      "Zone": "asia-east1-c"
-    },
     "London": {
       "Region": "europe-west2",
       "Zone": "europe-west2-c"
@@ -26,9 +22,8 @@
     "Name": "origingaia.com",
     "SubDomain":
     {
-      "Taiwan": ["www", "v2.1.0", "v2.2.0", "v2.3.0", "test"],
       "London": ["london.v2.3.0"],
-      "Singapore": ["singapore.v2.3.0"],
+      "Singapore": ["singapore.v2.3.0", "www", "test"],
       "LosAngeles": ["la.v2.3.0"],
       "LB-Game": "global.v2.3.0",
       "LB-CDN": "cdn-beta"
@@ -41,14 +36,6 @@
   },
   "GKE":
   {
-    "TaiwanDev": {
-      "APIName": "GKE-API-Taiwan-Dev",
-      "CAName": "GKE-CA-Taiwan-Dev"
-    },
-    "TaiwanRelease": {
-      "APIName": "GKE-API-Taiwan-Release",
-      "CAName": "GKE-CA-Taiwan-Release"
-    },
     "Singapore": {
       "APIName": "GKE-API-Singapore",
       "CAName": "GKE-CA-Singapore"

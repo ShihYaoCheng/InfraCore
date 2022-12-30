@@ -7,13 +7,10 @@ locals {
   ProjectID = local.Settings["Project"]["ID"]
   ProjectName = local.Settings["Project"]["Name"]
 
-  ZoneTaiwan = local.Settings["Project"]["Taiwan"]["Zone"]
   ZoneLondon = local.Settings["Project"]["London"]["Zone"]
   ZoneSingapore = local.Settings["Project"]["Singapore"]["Zone"]
   ZoneLosAngeles = local.Settings["Project"]["LosAngeles"]["Zone"]
 
-  GKE-API-Taiwan = local.Settings["GKE"]["TaiwanDev"]["APIName"]
-  GKE-CA-Taiwan = local.Settings["GKE"]["TaiwanDev"]["CAName"]
   GKE-API-London = local.Settings["GKE"]["London"]["APIName"]
   GKE-CA-London = local.Settings["GKE"]["London"]["CAName"]
   GKE-API-Singapore = local.Settings["GKE"]["Singapore"]["APIName"]
