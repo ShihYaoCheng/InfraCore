@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "Apps-Rel" {
-  source = "../../Modules/Apps/5.1.1"
+  source = "../../Modules/Apps/6.0.0"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
@@ -16,6 +16,8 @@ module "Apps-Rel" {
   ArgoCD_OfficialWebRedirectDestFQDN = ""
   ArgoCD_OfficialWebCDNEnabled       = false
   ArgoCD_OfficialWebCDNUrl           = ""
+  ArgoCD_OfficialKey                 = "official1234"
+  ArgoCD_BackstageKey                = "backstage1234"
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = true
