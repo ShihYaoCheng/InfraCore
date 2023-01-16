@@ -1,0 +1,16 @@
+﻿# https://github.com/netdata/helmchart/tree/master/charts/netdata
+# https://github.com/netdata/helmchart/blob/master/charts/netdata/values.yaml
+ingress:
+  enabled: false
+  path: /netdata/(.*)
+  hosts: [sre.origingaia.com]
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+parent:
+  database:
+    persistence: true
+    storageclass: ssd-delete
+  alarms:
+    persistence: true
+    storageclass: ssd-delete
