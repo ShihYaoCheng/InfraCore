@@ -39,7 +39,7 @@ resource "helm_release" "ArgoCDResource" {
   count = var.ArgoCD_Enable ? 1 : 0
 
   name      = "argocd-resources"
-  chart     = "${path.module}/Charts/argocd-res"
+  chart     = "${path.module}/Charts/ArgoCDResources"
   namespace = "argocd"
 
   set {
