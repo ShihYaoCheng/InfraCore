@@ -12,14 +12,14 @@ module "AppsSingapore" {
   GodaddySubDomainNames    = local.SubDomainNames
   GodaddyAPIKey            = var.GodaddyAPIKey
   GodaddyAPISecret         = var.GodaddyAPISecret
-  
+
   ArgoCD_OfficialWebRedirectEnabled  = true
   #  ArgoCD_OfficialWebRedirectDestFQDN = "www.origingaia.com"
   ArgoCD_OfficialWebRedirectDestFQDN = "www.${local.DomainName}"
   ArgoCD_OfficialWebCDNEnabled       = local.CDNEnabled
   ArgoCD_OfficialWebCDNUrl           = local.CDNUrlOfficial
-  ArgoCD_BackstageKey = "backstage1234"
-  ArgoCD_OfficialKey  = "official1234"
+  ArgoCD_OfficialKey                 = "official1234"
+  ArgoCD_BackstageKey                = "backstage1234"
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = false
