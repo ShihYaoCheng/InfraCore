@@ -25,6 +25,8 @@ apps:
     branchOrTag: main
     valueFiles: []
     sqlPassword: ""
+    officialKey: ""
+    backstageKey: ""
   backstage:
     enabled: true
     branchOrTag: main

@@ -312,6 +312,16 @@ variable "ArgoCD_UserSqlPassword" {
   sensitive = true
 }
 
+variable "ArgoCD_OfficialKey" {
+  type = string
+  sensitive = true
+}
+
+variable "ArgoCD_BackstageKey" {
+  type = string
+  sensitive = true
+}
+
 variable "ArgoCD_UserHelmValueFiles" {
   type        = string
   description = "Sample: {values-sre.yaml}"

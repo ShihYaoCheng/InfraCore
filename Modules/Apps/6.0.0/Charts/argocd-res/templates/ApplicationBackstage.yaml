@@ -18,6 +18,8 @@ spec:
       parameters: 
         - name: cloudSQL.userPassword
           value: {{ .Values.apps.backstage.sqlPassword }}
+        - name: credentials.backstageKey
+          value: {{ .Values.apps.user.backstageKey }}
   destination:
     server: https://kubernetes.default.svc
     namespace: backstage

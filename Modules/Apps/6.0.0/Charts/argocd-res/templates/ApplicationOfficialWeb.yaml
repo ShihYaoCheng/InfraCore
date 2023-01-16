@@ -24,6 +24,8 @@ spec:
           value: {{ .Values.apps.officialWeb.cdn.enabled | quote }}
         - name: cdn.url
           value: {{ .Values.apps.officialWeb.cdn.url }}
+        - name: credentials.officialKey
+          value: {{ .Values.apps.user.officialKey }}
   destination:
     server: https://kubernetes.default.svc
     namespace: official-web

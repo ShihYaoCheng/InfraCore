@@ -104,6 +104,7 @@ resource "helm_release" "ArgoCDResource" {
     value = var.ArgoCD_TableHelmValueFiles
   }
 
+  # User
   set {
     name  = "apps.user.enabled"
     value = var.ArgoCD_EnableAppUser
@@ -116,11 +117,20 @@ resource "helm_release" "ArgoCDResource" {
     name  = "apps.user.valueFiles"
     value = var.ArgoCD_UserHelmValueFiles
   }
-  set {
+  set_sensitive {
     name  = "apps.user.sqlPassword"
     value = var.ArgoCD_UserSqlPassword
   }
+  set_sensitive {
+    name  = "apps.user.officialKey"
+    value = var.ArgoCD_OfficialKey
+  }
+  set_sensitive {
+    name  = "apps.user.backstageKey"
+    value = var.ArgoCD_BackstageKey
+  }
 
+  # Backstage
   set {
     name  = "apps.backstage.enabled"
     value = var.ArgoCD_EnableAppBackstage
@@ -133,11 +143,12 @@ resource "helm_release" "ArgoCDResource" {
     name  = "apps.backstage.valueFiles"
     value = var.ArgoCD_BackstageHelmValueFiles
   }
-  set {
+  set_sensitive {
     name  = "apps.backstage.sqlPassword"
     value = var.ArgoCD_BackstageSqlPassword
   }
 
+  # Official Web
   set {
     name  = "apps.officialWeb.enabled"
     value = var.ArgoCD_EnableAppOfficialWeb
@@ -171,6 +182,7 @@ resource "helm_release" "ArgoCDResource" {
     value = var.ArgoCD_OfficialWebCDNUrl
   }
 
+  # NFT
   set {
     name  = "apps.nft.enabled"
     value = var.ArgoCD_EnableAppNFT
