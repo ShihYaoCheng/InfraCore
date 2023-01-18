@@ -27,19 +27,19 @@
     "Battle": "v3.1.0F7",
     "File": "v3.1.0F10",
     "NFT": "v3.1.0F0S2",
-    "Table": "v3.1.0F4",
+    "Table": "v3.1.0F5",
     "User": "v3.1.0F5",
     "OfficialWeb": "main"
   },
   "HelmPathValueFiles": 
   {
-    "Backstage": "{values-v2.1.2.yaml}",
+    "Backstage": "{values-v2.1.3.yaml}",
     "Battle": "{values-prod.yaml}",
     "File": "{values-prod.yaml}",
     "NFT": "{values-prod.yaml}",
     "Table": "{values-prod.yaml}",
     "User": "{values-prod.yaml\\, SetServerName-Beta.yaml}",
-    "OfficialWeb": "{values-v2.1.2.yaml\\, EnableNEG.yaml}"
+    "OfficialWeb": "{values-v2.1.3.yaml\\, EnableNEG.yaml}"
   },
   "Domain": 
   {
