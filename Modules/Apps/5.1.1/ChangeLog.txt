@@ -2,6 +2,8 @@
 Add resources: memory request, memory limit.
 Remove sk-sealed-secret helm chart.
 
+Set the Robusta to 0.10.8.
+
 
 5.1.0
 Upgrade helm chart, module, provider to latest version.
