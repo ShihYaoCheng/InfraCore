@@ -14,7 +14,7 @@ module "GKE-London" {
   GKE-CreateServiceAccount = true
 
   GKE-Zones   = [local.GCPZone]
-  GKE-Labels   = { "location" = "london", "environment" = "qa" }
+  GKE-Labels   = { "location" = "london", "env" = "qa" }
   GKE-APIName = local.GKE-API-London
   GKE-CAName  = local.GKE-CA-London
 

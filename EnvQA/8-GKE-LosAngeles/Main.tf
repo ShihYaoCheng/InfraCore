@@ -14,7 +14,7 @@ module "GKE-LosAngeles" {
   GKE-CreateServiceAccount = true
 
   GKE-Zones   = [local.GCPZone]
-  GKE-Labels   = { "location" = "la", "environment" = "qa" }
+  GKE-Labels   = { "location" = "la", "env" = "qa" }
   GKE-APIName = local.GKE-API
   GKE-CAName  = local.GKE-CA
 
