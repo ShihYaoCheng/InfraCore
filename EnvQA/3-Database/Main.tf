@@ -4,8 +4,8 @@
   ProjectName = local.ProjectName
 
   GCPProjectID = local.ProjectID
-  GCPRegion    = var.GCPRegion
-  GCPZone      = var.GCPZone
+  GCPRegion    = local.GCPRegion
+  GCPZone      = local.GCPZone
 
   CloudSQLAdminPassword     = local.CloudSQLAdminPassword
   CloudSQLBackstagePassword = "backstage1234"

@@ -5,20 +5,15 @@ locals {
   Settings = jsondecode(file("../Settings.json"))
   ProjectID = local.Settings["Project"]["ID"]
   ProjectName = local.Settings["Project"]["Name"]
-  
+
+  # https://cloud.google.com/compute/docs/regions-zones
+  GCPRegion = local.Settings["Project"]["Singapore"]["Region"]
+  GCPZone = local.Settings["Project"]["Singapore"]["Zone"]
+}
+
+#============================
+# CloudSQL                  #
+#============================
+locals {
   CloudSQLAdminPassword = "admin1234"
 }
-
-# https://cloud.google.com/compute/docs/regions-zones
-variable "GCPRegion" {
-  type        = string
-  default     = "asia-east1"
-  description = "cloud provider region."
-}
-
-variable "GCPZone" {
-  type        = string
-  default     = "asia-east1-a"
-  description = "cloud provider zone."
-}
-
