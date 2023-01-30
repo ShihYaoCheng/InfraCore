@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "AppsSingapore" {
-  source = "../../Modules/Apps/5.1.2"
+  source = "../../Modules/Apps/6.0.0"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
@@ -16,6 +16,8 @@ module "AppsSingapore" {
   ArgoCD_OfficialWebRedirectDestFQDN = ""
   ArgoCD_OfficialWebCDNEnabled       = false
   ArgoCD_OfficialWebCDNUrl           = ""
+  ArgoCD_OfficialKey                 = ""
+  ArgoCD_BackstageKey                = ""
 
   CertManager_Enable         = true
   CertManager_CreateProdCert = true
