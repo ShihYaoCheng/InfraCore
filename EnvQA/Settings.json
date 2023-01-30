@@ -38,7 +38,7 @@
     "File": "{values-prod.yaml}",
     "NFT": "{values-prod.yaml}",
     "Table": "{values-prod.yaml}",
-    "User": "{values-prod.yaml\\, SetServerName-Beta.yaml}",
+    "User": "{values-prod.yaml\\, SetBetaConfig.yaml}",
     "OfficialWeb": "{values-v2.1.3.yaml\\, EnableNEG.yaml}"
   },
   "Domain": 
