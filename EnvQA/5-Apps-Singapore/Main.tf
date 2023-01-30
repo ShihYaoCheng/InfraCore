@@ -1,5 +1,5 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
-module "Apps" {
+module "Apps-SG" {
   source = "../../Modules/Apps/6.0.0"
 
   ProjectName  = local.ProjectName
@@ -27,7 +27,7 @@ module "Apps" {
   Prometheus_Retention        = "30d"
   Grafana_AdminPassword       = "gra4422"
 
-  Robusta_ClusterName           = "sk-qa-tw"
+  Robusta_ClusterName           = "sk-qa-sg"
   Robusta_SlackAPIKey           = var.Robusta_SlackAPIKey
   Robusta_SlackChannel          = "sk-qa-info"
   Robusta_NotifyDeploymentEvent = true

@@ -1,15 +1,15 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
-module "GKE-TW" {
+module "GKE-SG" {
   source = "../../Modules/GKE-Safe/1.0.0"
 
   ProjectName = local.ProjectName
-  UniqueName = "tw"
+  UniqueName = "sg"
 
   GCPProjectID = local.ProjectID
   GCPRegion    = local.GCPRegion
   GCPZone      = local.GCPZone
   GKE-Zones    = [local.GCPZone]
-  GKE-Labels   = { "location" = "taiwan", "environment" = "qa" }
+  GKE-Labels   = { "location" = "sg", "env" = "qa" }
 
   GKE-ControlPlaneCIDR     = "10.0.0.0/28"
   GKE-CreateServiceAccount = true
@@ -24,8 +24,8 @@ module "GKE-TW" {
   GKE-MaxNum-4C16G        = 0
   GKE-NodeNum-4C16G       = 0
 
-  GKE-APIName = local.GKE-API-Taiwan
-  GKE-CAName  = local.GKE-CA-Taiwan
+  GKE-APIName = local.GKE-API-SG
+  GKE-CAName  = local.GKE-CA-SG
 
   CloudSQLProxy_Enabled = true
   CloudSQLProxy_EnableNetworkPolicy = true
