@@ -949,102 +949,102 @@ QA-7-Apps-London-Destroy:
 
 
 
-#=============================#
-# QA - GKE(Singapore)
-#=============================#
-QA-8-GKE-Singapore-Plan:
-  extends: .plan.without.var.file
-  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  variables:
-    TF_ROOT: $QA_GKE_Singapore_Dir
-    TF_STATE_NAME: $QA_GKE_Singapore_TF_State_Name
-  before_script:
-    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  tags:
-    - g1
-
-QA-8-GKE-Singapore-Apply:
-  extends: .apply.without.var.file
-  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-8-GKE-Singapore-Plan]
-  variables:
-    TF_ROOT: $QA_GKE_Singapore_Dir
-    TF_STATE_NAME: $QA_GKE_Singapore_TF_State_Name
-  before_script:
-    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  tags:
-    - g1
-
-QA-8-GKE-Singapore-Destroy:
-  extends: .destroy.without.var.file
-  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-8-GKE-Singapore-Plan]
-  variables:
-    TF_ROOT: $QA_GKE_Singapore_Dir
-    TF_STATE_NAME: $QA_GKE_Singapore_TF_State_Name
-  before_script:
-    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-  tags:
-    - g1
-
-
-
-#============================#
-# QA - Apps(Singapore)
-#============================#
-QA-9-Apps-Singapore-Plan:
-  extends: .plan.with.var.file
-  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  variables:
-    TF_ROOT: $QA_APPS_Singapore_Dir
-    TF_STATE_NAME: $QA_APPS_Singapore_TF_State_Name
-  before_script:
-    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
-    - cd $TF_ROOT
-    - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
-  tags:
-    - g1
-
-QA-9-Apps-Singapore-Apply:
-  extends: .apply.with.var.file
-  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-9-Apps-Singapore-Plan]
-  variables:
-    TF_ROOT: $QA_APPS_Singapore_Dir
-    TF_STATE_NAME: $QA_APPS_Singapore_TF_State_Name
-  before_script:
-    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
-    - cd $TF_ROOT
-    - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
-  tags:
-    - g1
-
-QA-9-Apps-Singapore-Destroy:
-  extends: .destroy.with.var.file
-  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-9-Apps-Singapore-Plan]
-  variables:
-    TF_ROOT: $QA_APPS_Singapore_Dir
-    TF_STATE_NAME: $QA_APPS_Singapore_TF_State_Name
-  before_script:
-    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
-    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
-    - cd $TF_ROOT
-    - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
-  tags:
-    - g1
+##=============================#
+## QA - GKE(Singapore)
+##=============================#
+#QA-8-GKE-Singapore-Plan:
+#  extends: .plan.without.var.file
+#  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
+#  variables:
+#    TF_ROOT: $QA_GKE_Singapore_Dir
+#    TF_STATE_NAME: $QA_GKE_Singapore_TF_State_Name
+#  before_script:
+#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#  tags:
+#    - g1
+#
+#QA-8-GKE-Singapore-Apply:
+#  extends: .apply.without.var.file
+#  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
+#  needs: [QA-8-GKE-Singapore-Plan]
+#  variables:
+#    TF_ROOT: $QA_GKE_Singapore_Dir
+#    TF_STATE_NAME: $QA_GKE_Singapore_TF_State_Name
+#  before_script:
+#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#  tags:
+#    - g1
+#
+#QA-8-GKE-Singapore-Destroy:
+#  extends: .destroy.without.var.file
+#  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
+#  needs: [QA-8-GKE-Singapore-Plan]
+#  variables:
+#    TF_ROOT: $QA_GKE_Singapore_Dir
+#    TF_STATE_NAME: $QA_GKE_Singapore_TF_State_Name
+#  before_script:
+#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#  tags:
+#    - g1
+#
+#
+#
+##============================#
+## QA - Apps(Singapore)
+##============================#
+#QA-9-Apps-Singapore-Plan:
+#  extends: .plan.with.var.file
+#  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
+#  variables:
+#    TF_ROOT: $QA_APPS_Singapore_Dir
+#    TF_STATE_NAME: $QA_APPS_Singapore_TF_State_Name
+#  before_script:
+#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#    - cd $TF_ROOT
+#    - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
+#  tags:
+#    - g1
+#
+#QA-9-Apps-Singapore-Apply:
+#  extends: .apply.with.var.file
+#  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
+#  needs: [QA-9-Apps-Singapore-Plan]
+#  variables:
+#    TF_ROOT: $QA_APPS_Singapore_Dir
+#    TF_STATE_NAME: $QA_APPS_Singapore_TF_State_Name
+#  before_script:
+#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#    - cd $TF_ROOT
+#    - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
+#  tags:
+#    - g1
+#
+#QA-9-Apps-Singapore-Destroy:
+#  extends: .destroy.with.var.file
+#  image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
+#  needs: [QA-9-Apps-Singapore-Plan]
+#  variables:
+#    TF_ROOT: $QA_APPS_Singapore_Dir
+#    TF_STATE_NAME: $QA_APPS_Singapore_TF_State_Name
+#  before_script:
+#    # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
+#    - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
+#    - cd $TF_ROOT
+#    - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
+#  tags:
+#    - g1
 
 
 
 #=============================#
 # QA - GKE(Los Angeles)
 #=============================#
-QA-10-GKE-LosAngeles-Plan:
+QA-8-GKE-LA-Plan:
   extends: .plan.without.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   variables:
@@ -1056,10 +1056,10 @@ QA-10-GKE-LosAngeles-Plan:
   tags:
     - g1
 
-QA-10-GKE-LosAngeles-Apply:
+QA-8-GKE-LA-Apply:
   extends: .apply.without.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-10-GKE-LosAngeles-Plan]
+  needs: [QA-8-GKE-LA-Plan]
   variables:
     TF_ROOT: $QA_GKE_LosAngeles_Dir
     TF_STATE_NAME: $QA_GKE_LosAngeles_TF_State_Name
@@ -1069,10 +1069,10 @@ QA-10-GKE-LosAngeles-Apply:
   tags:
     - g1
 
-QA-10-GKE-LosAngeles-Destroy:
+QA-8-GKE-LA-Destroy:
   extends: .destroy.without.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-10-GKE-LosAngeles-Plan]
+  needs: [QA-8-GKE-LA-Plan]
   variables:
     TF_ROOT: $QA_GKE_LosAngeles_Dir
     TF_STATE_NAME: $QA_GKE_LosAngeles_TF_State_Name
@@ -1086,7 +1086,7 @@ QA-10-GKE-LosAngeles-Destroy:
 #============================#
 # QA - Apps(Singapore)
 #============================#
-QA-11-Apps-LosAngeles-Plan:
+QA-9-Apps-LA-Plan:
   extends: .plan.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   variables:
@@ -1100,10 +1100,10 @@ QA-11-Apps-LosAngeles-Plan:
   tags:
     - g1
 
-QA-11-Apps-LosAngeles-Apply:
+QA-9-Apps-LA-Apply:
   extends: .apply.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-11-Apps-LosAngeles-Plan]
+  needs: [QA-9-Apps-LA-Plan]
   variables:
     TF_ROOT: $QA_APPS_LosAngeles_Dir
     TF_STATE_NAME: $QA_APPS_LosAngeles_TF_State_Name
@@ -1115,10 +1115,10 @@ QA-11-Apps-LosAngeles-Apply:
   tags:
     - g1
 
-QA-11-Apps-LosAngeles-Destroy:
+QA-9-Apps-LA-Destroy:
   extends: .destroy.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-11-Apps-LosAngeles-Plan]
+  needs: [QA-9-Apps-LA-Plan]
   variables:
     TF_ROOT: $QA_APPS_LosAngeles_Dir
     TF_STATE_NAME: $QA_APPS_LosAngeles_TF_State_Name
@@ -1136,7 +1136,7 @@ QA-11-Apps-LosAngeles-Destroy:
 #============================#
 # QA - LoadBalancer          #
 #============================#
-QA-12-LB-Plan:
+QA-10-LB-Plan:
   extends: .plan.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   variables:
@@ -1150,10 +1150,10 @@ QA-12-LB-Plan:
   tags:
     - g1
 
-QA-12-LB-Apply:
+QA-10-LB-Apply:
   extends: .apply.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-12-LB-Plan]
+  needs: [QA-10-LB-Plan]
   variables:
     TF_ROOT: $QA_LB_Dir
     TF_STATE_NAME: $QA_LB_TF_State_Name
@@ -1165,10 +1165,10 @@ QA-12-LB-Apply:
   tags:
     - g1
 
-QA-12-LB-Destroy:
+QA-10-LB-Destroy:
   extends: .destroy.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-12-LB-Plan]
+  needs: [QA-10-LB-Plan]
   variables:
     TF_ROOT: $QA_LB_Dir
     TF_STATE_NAME: $QA_LB_TF_State_Name
