@@ -250,23 +250,28 @@ variables:
   QA_VPC_TF_STATE_NAME: "QA-VPC"
   QA_DB_DIR: EnvQA/3-Database
   QA_DB_TF_STATE_NAME: "QA-DB"
-  QA_GKE_DIR: EnvQA/4-GKE
-  QA_GKE_TF_STATE_NAME: "QA-GKE"
-  QA_APPS_DIR: EnvQA/5-Apps
-  QA_APPS_TF_STATE_NAME: "QA-Apps"
+  
+  QA_GKE_SG_DIR: EnvQA/4-GKE-Singapore
+  QA_GKE_SG_TF_STATE_NAME: "QA-GKE-SG"
+  QA_APPS_SG_DIR: EnvQA/5-Apps-Singapore
+  QA_APPS_SG_TF_STATE_NAME: "QA-Apps-SG"
+  
   QA_GKE_London_Dir: EnvQA/6-GKE-London
   QA_GKE_London_TF_State_Name: "QA-GKE-London"
   QA_APPS_London_Dir: EnvQA/7-Apps-London
   QA_APPS_London_TF_State_Name: "QA-Apps-London"
-  QA_GKE_Singapore_Dir: EnvQA/8-GKE-Singapore
-  QA_GKE_Singapore_TF_State_Name: "QA-GKE-Singapore"
-  QA_APPS_Singapore_Dir: EnvQA/9-Apps-Singapore
-  QA_APPS_Singapore_TF_State_Name: "QA-Apps-Singapore"
-  QA_GKE_LosAngeles_Dir: EnvQA/10-GKE-LosAngeles
+  
+#  QA_GKE_Singapore_Dir: EnvQA/8-GKE-Singapore
+#  QA_GKE_Singapore_TF_State_Name: "QA-GKE-Singapore"
+#  QA_APPS_Singapore_Dir: EnvQA/9-Apps-Singapore
+#  QA_APPS_Singapore_TF_State_Name: "QA-Apps-Singapore"
+  
+  QA_GKE_LosAngeles_Dir: EnvQA/8-GKE-LosAngeles
   QA_GKE_LosAngeles_TF_State_Name: "QA-GKE-LosAngeles"
-  QA_APPS_LosAngeles_Dir: EnvQA/11-Apps-LosAngeles
+  QA_APPS_LosAngeles_Dir: EnvQA/9-Apps-LosAngeles
   QA_APPS_LosAngeles_TF_State_Name: "QA-Apps-LosAngeles"
-  QA_LB_Dir: EnvQA/12-LoadBalancer
+  
+  QA_LB_Dir: EnvQA/10-LoadBalancer
   QA_LB_TF_State_Name: "QA-LB"
   
   PROD_REVIEW_RES_DIR: EnvProdReview/1-Res
@@ -764,108 +769,90 @@ QA-3-DB-Destroy:
     - g1
 
 #============================#
-# QA - GKE                   #
+# QA - GKE(Singapore)        #
 #============================#
-QA-4-GKE-Plan:
+QA-4-GKE-SG-Plan:
   extends: .plan.without.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   variables:
-    TF_ROOT: $QA_GKE_DIR
-    TF_STATE_NAME: $QA_GKE_TF_STATE_NAME
+    TF_ROOT: $QA_GKE_SG_DIR
+    TF_STATE_NAME: $QA_GKE_SG_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
   tags:
     - g1
 
-QA-4-GKE-Apply:
+QA-4-GKE-SG-Apply:
   extends: .apply.without.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-4-GKE-Plan]
+  needs: [QA-4-GKE-SG-Plan]
   variables:
-    TF_ROOT: $QA_GKE_DIR
-    TF_STATE_NAME: $QA_GKE_TF_STATE_NAME
+    TF_ROOT: $QA_GKE_SG_DIR
+    TF_STATE_NAME: $QA_GKE_SG_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
   tags:
     - g1
 
-QA-4-GKE-Destroy:
+QA-4-GKE-SG-Destroy:
   extends: .destroy.without.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-4-GKE-Plan]
+  needs: [QA-4-GKE-SG-Plan]
   variables:
-    TF_ROOT: $QA_GKE_DIR
-    TF_STATE_NAME: $QA_GKE_TF_STATE_NAME
+    TF_ROOT: $QA_GKE_SG_DIR
+    TF_STATE_NAME: $QA_GKE_SG_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_GKE_SERVICE_ACCOUNT_BASE64 | base64 -d)
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
   tags:
     - g1
 
 #============================#
-# QA - Apps                  #
+# QA - Apps(Singapore)       #
 #============================#
-QA-5-Apps-Plan:
+QA-5-Apps-SG-Plan:
   extends: .plan.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
   variables:
-    TF_ROOT: $QA_APPS_DIR
-    TF_STATE_NAME: $QA_APPS_TF_STATE_NAME
+    TF_ROOT: $QA_APPS_SG_DIR
+    TF_STATE_NAME: $QA_APPS_SG_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
     - cd $TF_ROOT
     - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
   tags:
     - g1
 
-QA-5-Apps-Apply:
+QA-5-Apps-SG-Apply:
   extends: .apply.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-5-Apps-Plan]
+  needs: [QA-5-Apps-SG-Plan]
   variables:
-    TF_ROOT: $QA_APPS_DIR
-    TF_STATE_NAME: $QA_APPS_TF_STATE_NAME
+    TF_ROOT: $QA_APPS_SG_DIR
+    TF_STATE_NAME: $QA_APPS_SG_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
     - cd $TF_ROOT
     - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
   tags:
     - g1
 
-QA-5-Apps-Destroy:
+QA-5-Apps-SG-Destroy:
   extends: .destroy.with.var.file
   image: registry.gitlab.com/gitlab-org/terraform-images/releases/1.2:v0.43.2
-  needs: [QA-5-Apps-Plan]
+  needs: [QA-5-Apps-SG-Plan]
   variables:
-    TF_ROOT: $QA_APPS_DIR
-    TF_STATE_NAME: $QA_APPS_TF_STATE_NAME
+    TF_ROOT: $QA_APPS_SG_DIR
+    TF_STATE_NAME: $QA_APPS_SG_TF_STATE_NAME
   before_script:
     # https://registry.terraform.io/providers/hashicorp/google/latest/docs/guides/provider_reference#full-reference
     - export GOOGLE_CLOUD_KEYFILE_JSON=$(cat $PROD_APPS_SERVICE_ACCOUNT_BASE64 | base64 -d)
     - cd $TF_ROOT
     - cat $PROD_APPS_TF_VAR_FILE_BASE64 | base64 -d > var_file
-#  rules:
-#    - if: $CI_COMMIT_TAG # Run this job when a tag is created manually.
-#      when: manual
   tags:
     - g1
 
