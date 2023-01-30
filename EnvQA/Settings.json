@@ -42,18 +42,18 @@
     "Name": "ponponsnake.com",
     "SubDomain":
     {
-      "Taiwan": ["v3.1.0"],
-      "London": ["london.v3.1.0"],
-      "Singapore": ["singapore.v3.1.0"],
-      "LosAngeles": ["la.v3.1.0"],
-      "LB-Game": "global.v3.1.0",
+      "Taiwan": ["v3.2.0"],
+      "London": ["london.v3.2.0"],
+      "Singapore": ["singapore.v3.2.0"],
+      "LosAngeles": ["la.v3.2.0"],
+      "LB-Game": "global.v3.2.0",
       "LB-CDN": "cdn-beta"
     }
   },
   "CDN":
   {
     "Enabled": true,
-    "UrlPathOfficial": "/official/v3.1.0"
+    "UrlPathOfficial": "/official/v3.2.0"
   },
   "GKE": {
     "Taiwan": {
