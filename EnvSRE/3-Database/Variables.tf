@@ -8,23 +8,9 @@ locals {
 
   # https://cloud.google.com/compute/docs/regions-zones
   GCPRegion = local.Settings["Project"]["Singapore"]["Region"]
-#  GCPRegion = "asia-east1"
   GCPZone = local.Settings["Project"]["Singapore"]["Zone"]
-#  GCPZone = "asia-east1-a"
 }
 
-# https://cloud.google.com/compute/docs/regions-zones
-#variable "GCPRegion" {
-#  type        = string
-#  default     = "asia-east1"
-#  description = "cloud provider region."
-#}
-#
-#variable "GCPZone" {
-#  type        = string
-#  default     = "asia-east1-a"
-#  description = "cloud provider zone."
-#}
 
 #============================
 # CloudSQL                  #
