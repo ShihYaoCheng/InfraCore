@@ -4,10 +4,6 @@
     "ID": "cqi-operation",
     "Name": "sk-qa11",
 
-    "Taiwan": {
-      "Region": "asia-east1",
-      "Zone": "asia-east1-c"
-    },
     "London": {
       "Region": "europe-west2",
       "Zone": "europe-west2-c"
