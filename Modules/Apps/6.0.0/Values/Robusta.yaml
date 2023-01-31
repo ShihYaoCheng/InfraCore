@@ -21,7 +21,7 @@ runner:
   sendAdditionalTelemetry: false
   resources:
     requests:
-      cpu: 150m
+      cpu: 50m
       memory: 1.2Gi
     limits:
       memory: 1.2Gi
