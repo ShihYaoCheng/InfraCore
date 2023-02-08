@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "AppsSingapore" {
-  source = "../../Modules/Apps/6.0.0"
+  source = "../../Modules/Apps/6.1.0"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
