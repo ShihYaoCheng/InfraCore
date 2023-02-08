@@ -1,0 +1,52 @@
+---
+version: "prometheus/v1"
+service: "nft-web"
+labels:
+  project: "sk"
+slos:
+  # We allow failing (5xx and 429) 100 request every 1000 requests (90%).
+  - name: "requests-availability"
+    objective: 90
+    sli:
+      events:
+        error_query: sum(rate(http_server_duration_ms_count{job="nft-web", http_status_code=~"5..|429"}[{{.window}}]))
+        total_query: sum(rate(http_server_duration_ms_count{job="nft-web"}[{{.window}}]))
+    alerting:
+      name: NFTWebHighErrorRate
+      labels:
+        category: "availability"
+      annotations:
+        # Overwrite default Sloth SLO alert summmary on ticket and page alerts.
+        summary: "High error rate on 'nft-web' requests responses"
+      page_alert:
+        labels:
+          severity: page
+#          routing_key: sre-team
+      ticket_alert:
+        labels:
+          severity: ticket
+#          slack_channel: "#sk-sre-info"
+#  - name: "requests-latency"
+#    objective: 90
+#    description: "Warn that nft-web responses are being slow."
+#    labels:
+#      category: latency
+#    sli:
+#      events:
+#        error_query: |
+#          ( 
+#            sum(rate(http_server_duration_ms_count{}[{{.window}}])) 
+#            - 
+#            sum(rate(http_server_duration_ms_bucket{le="500"}[{{.window}}])) 
+#          )           
+#        total_query: sum(rate(http_server_duration_ms_count{}[{{.window}}]))
+#    alerting:
+#      name: NFTWebLatencyAlert
+#      labels:
+#        category: "latency"
+#      page_alert:
+#        labels:
+#          severity: page
+#      ticket_alert:
+#        labels:
+#          severity: ticket
