@@ -6,7 +6,8 @@ resource "helm_release" "Traefik" {
   name             = "traefik"
   repository       = "https://helm.traefik.io/traefik"
   chart            = "traefik"
-  version          = "~>20.4.1"
+#  version          = "~>20.4.1"
+  version          = "20.8.0"
   create_namespace = true
   namespace        = "traefik"
   

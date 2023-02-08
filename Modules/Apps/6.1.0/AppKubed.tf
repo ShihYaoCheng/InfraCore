@@ -3,7 +3,8 @@ resource "helm_release" "Kubed" {
   name             = "kubed"
   repository       = "https://charts.appscode.com/stable/"
   chart            = "kubed"
-  version          = "~>0.13.2"
+#  version          = "~>0.13.2"
+  version          = "0.13.2"
   namespace        = "kube-system"
 
   set {

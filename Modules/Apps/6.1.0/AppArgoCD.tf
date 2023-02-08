@@ -1,5 +1,5 @@
 ﻿# https://artifacthub.io/packages/helm/argo/argo-cd
-# https://github.com/argoproj/argo-helm/blob/argo-cd-5.14.1/charts/argo-cd/values.yaml
+# https://github.com/argoproj/argo-helm/blob/argo-cd-5.19.15/charts/argo-cd/values.yaml
 # https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/values.yaml
 # helm upgrade --install argocd argo/argo-cd -n argocd --create-namespace
 # helm uninstall argocd -n argocd
@@ -13,7 +13,8 @@ resource "helm_release" "ArgoCD" {
 
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd"
-  version    = "~>5.14.1"
+#  version    = "~>5.19.15"
+  version    = "5.19.15"
 
   create_namespace = true
   namespace        = "argocd"
@@ -22,6 +23,7 @@ resource "helm_release" "ArgoCD" {
   values = [
     templatefile("${path.module}/Values/ArgoCD-Resources.yaml", {}),
     templatefile("${path.module}/Values/ArgoCD-Controller.yaml", {}),
+#    templatefile("${path.module}/Values/ArgoCD-Configs.yaml", {}),
 #    templatefile("${path.module}/Values/ArgoCD-Projects.yaml",
 #      {
 #        syncWindowCronTime = var.ArgoCD_SyncWindowTaipeiTime

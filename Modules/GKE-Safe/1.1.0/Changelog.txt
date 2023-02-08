@@ -4,6 +4,9 @@ You must delete the following resources:
 1.ServiceAccount: [project name]-[unique name]-sql.
 2.GitLab: Terraform State.
 
+1.1.0
+Upgrade helm charts.
+
 
 1.0.0
 Add variables: EnableProxy_CloudSQL, CloudSQLProxy_EnableNetworkPolicy.

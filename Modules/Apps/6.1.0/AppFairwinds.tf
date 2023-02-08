@@ -53,7 +53,8 @@ resource "helm_release" "RBACManager" {
   name             = "rbac-manager"
   repository       = "https://charts.fairwinds.com/stable"
   chart            = "rbac-manager"
-  version          = "~>1.15.1"
+#  version          = "~>1.15.1"
+  version          = "1.15.1"
   create_namespace = true
   namespace        = "fairwinds"
   

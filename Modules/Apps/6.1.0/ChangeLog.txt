@@ -1,4 +1,8 @@
-﻿6.0.0
+﻿6.1.0
+Upgrade helm charts.
+
+
+6.0.0
 Add variable: ArgoCD_OfficialKey, ArgoCD_BackstageKey.
 
 
