@@ -3,7 +3,6 @@
 # https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/values.yaml
 # helm upgrade --install argocd argo/argo-cd -n argocd --create-namespace
 # helm uninstall argocd -n argocd
-
 resource "helm_release" "ArgoCD" {
   depends_on = [helm_release.Robusta]
 
@@ -23,7 +22,11 @@ resource "helm_release" "ArgoCD" {
   values = [
     templatefile("${path.module}/Values/ArgoCD-Resources.yaml", {}),
     templatefile("${path.module}/Values/ArgoCD-Controller.yaml", {}),
-#    templatefile("${path.module}/Values/ArgoCD-Configs.yaml", {}),
+    templatefile("${path.module}/Values/ArgoCD-Configs.yaml", 
+      {
+        CqiPassword_Bcrypt = var.ArgoCD_CqiPassword_Bcrypt
+      }),
+#    templatefile("${path.module}/Values/ArgoCD-Notifications.yaml", {}),
 #    templatefile("${path.module}/Values/ArgoCD-Projects.yaml",
 #      {
 #        syncWindowCronTime = var.ArgoCD_SyncWindowTaipeiTime

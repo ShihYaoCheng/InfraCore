@@ -1,4 +1,12 @@
-﻿6.1.0
+﻿6.2.0
+The ArgoCD add cqi account and disable admin account.
+
+New variable: ArgoCD_CqiPassword_Bcrypt.
+
+Send the ArgoCD event to the slack channel.
+
+
+6.1.0
 Upgrade helm charts.
 
 

@@ -270,6 +270,12 @@ variable "ArgoCD_GitLabTokenSecret" {
   description = "Deploy token"
 }
 
+variable "ArgoCD_CqiPassword_Bcrypt" {
+  type        = string
+  sensitive   = true
+  description = "ArgoCD account: cqi"
+}
+
 # https://stackoverflow.com/questions/53846273/helm-passing-array-values-through-set
 # https://helm.sh/docs/intro/using_helm/#the-format-and-limitations-of---set
 variable "ArgoCD_BackstageSqlPassword" {
