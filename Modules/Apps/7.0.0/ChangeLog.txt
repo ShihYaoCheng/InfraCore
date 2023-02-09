@@ -1,9 +1,12 @@
-﻿6.2.0
+﻿7.1.0
+The ArgoCD Notifications sends event to the slack channel.
+
+
+7.0.0
 The ArgoCD add cqi account and disable admin account.
 
 New variable: ArgoCD_CqiPassword_Bcrypt.
 
-Send the ArgoCD event to the slack channel.
 
 
 6.1.0
