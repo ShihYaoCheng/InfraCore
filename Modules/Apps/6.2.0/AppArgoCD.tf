@@ -17,6 +17,11 @@ resource "helm_release" "ArgoCD" {
 
   create_namespace = true
   namespace        = "argocd"
+  
+  set {
+    name  = "dex.enabled"
+    value = "false"
+  }
 
   # https://stackoverflow.com/questions/64696721/how-do-i-pass-variables-to-a-yaml-file-in-heml-tf
   values = [
