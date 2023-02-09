@@ -1,6 +1,6 @@
 ﻿# https://registry.terraform.io/modules/terraform-google-modules/kubernetes-engine/google/latest
 module "Apps" {
-  source = "../../Modules/Apps/6.0.0"
+  source = "../../Modules/Apps/7.0.0"
 
   ProjectName  = local.ProjectName
   GCPProjectID = local.ProjectID
@@ -66,6 +66,7 @@ module "Apps" {
 
   ArgoCD_BackstageSqlPassword = "backstage1234"
   ArgoCD_UserSqlPassword      = "user1234"
+  ArgoCD_CqiPassword_Bcrypt = "$2a$10$vSB.qa1a05DVChv1XKLPxe2C/Om6xW1zFdWkFs9yOMVOOa2.hSX.i"
 
   providers = {
     helm       = helm.dev
