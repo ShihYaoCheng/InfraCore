@@ -1,0 +1,237 @@
+環境分
+1.dev
+推上gitlab(main) 自動更新GKE
+2.release(較穩定開發版本，給企劃測試用)
+daily build to 
+3.beta 外部IP: 35.194.244.87
+4.prod
+
+
+Daily build 驗證
+
+    檢查Slack: 頻道: sk-qa-info
+    Desired (1) --> Running (1)
+
+    Beta的backstage和NFT目前沒有daily build , 是走tag流程
+
+
+
+Rollback 驗證
+
+    Rollback操作:
+        連上argocd網站->左手邊有managed application ->選擇要rollback的deploy->(Application頁面) History And Rollback->選擇版本->右上角可選rollback按鈕(Rollback後 auto-sync會關閉)
+
+    Application頁面:
+        App Detail: 開啟auto sync
+        Current Sync Status : deploy版本和gitlab最新版是否同步
+        Sync Windows: 可是定同步週期
+
+
+
+
+
+---------------------------------------------
+Dev環境: mian分支自動部屬
+Release環境: beta分支自動部屬
+Beta環境: 建立新v1.x.x分支 更改部屬檔 手動部屬
+Prod環境: 建立新TAG 更改部屬檔 手動部屬
+
+
+------------------------------------------------
+
+部屬Beta流程:
+    Step1 (不用): 建立DNS 
+        global.v2.8.0 IP:
+            GCP Loadbalancer -> cqi-sk-qa -> 前端 HTTP IP:通訊埠
+
+        檢查GKE的外部IP: v2.8.0 IP:
+            連上該GKE -> namespace : traefik -> get svc
+            kubectl get svc -n traefik
+
+
+    Step2 : 更新InfraCore專案
+        修改setting.json佈署設定黨
+        Beta: https://gitlab.com/GameSnake/SRE/InfraCore/-/blob/main/EnvQA/Settings.json
+
+        Step2.1 : AppsVersion 
+            指的是各APP的ArgoCDApp Gitlab庫的分支
+            例如: "OfficialWeb": "main"
+            或者要吃的Tag是哪個
+            例如: "Battle": "v2.7.0F31"
+
+
+
+
+
+
+        Step2.2 : HelmPathValueFiles: 
+            指的是吃哪一個佈署黨
+            例如: "Backstage": "{values-prod.yaml}" 吃的是 https://gitlab.com/GameSnake/SRE/ArgoCDAppBackstage/-/blob/main/chart/values-prod.yaml
+
+            Beta和Prod 的 Battle File 因為有做Global LB
+            所以須加上 template-values-neg.yaml 設定
+
+
+
+        Step2.3 : DomainNames
+            更新版本
+
+        Step2.4 : 建立Tag
+            如果要開設新分支更新Prod環境，需要建立Tag並push到gitlab，才能在Pipeline中看到Prod的plan
+
+
+    Step3 :  IngraCore PipeLine 
+        網址: https://gitlab.com/GameSnake/SRE/InfraCore/-/pipelines/
+
+        Step3.1 :選擇新推上的的commit
+
+        Step3.2 : 等待Security檢查完成
+
+        Step3.3: Plan:更新第5 第7 
+            QA-5-Apps-Plan
+            可點選plan看狀態 更新比較
+
+            如果發生unreachable錯誤，表示g1存取不到GKE
+                CQI DEV 25 -> Compute Engine -> gke-web-radar-beta-pool-2-e3982023-2kx6 -> 把外部IP複製 -> cqi-sk-prod -> 控制層授權網路 -> 
+        
+        Step3.4: Deploy : 第5 第7
+
+    Step4 :  argocd管理後台
+        網址: https://v2.8.0.ponponsnake.com/argocd/
+        網址: https://eu.v2.8.0.ponponsnake.com/argocd/
+
+        Step4.1 : SYNC APPS
+            Daily build是每天凌晨
+            若需要馬上更新，選擇SYNC APPS
+
+
+        Step4.2 : 檢查Slack
+            檢查Slack #sk-qa-info
+
+    
+    
+    Step5 : 回到IngraCore PipeLine 
+        Step5.1 : Plan : 更新第8
+            QA-8-LB-Plan
+
+        Step5.2 : Deploy : 第8
+
+        Step5.3 :  檢查
+            GCP-> Load balancing ->選擇cqi-sk-qa ->查看內容有無更新
+            前端注意版號更新
+            後端看是否健康狀態良好
+
+
+    Step6 : Postman 測試
+        佈署後Postman 測試api是否正常
+        Workspaces: CQI Games SK
+        v2.7.0 右鍵-> Run collection 
+
+    --------------------------
+    佈署Production:
+    Step7 : 上傳APK到阿里雲
+
+
+
+----------------------------
+
+部屬Release流程:
+    Step1.修改InfraCore設定檔 
+        路徑E:\Sam\CQIProject\InfraCore\InfraCore\EnvDev\7-Apps-Rel
+        ArgoCD_BattleHelmValueFiles      = "{values-v2.11.0.yaml\\, EnableIngress.yaml}"
+
+    Step2.commit推上gitlab
+
+    Step3.PipeLine
+        網址: https://gitlab.com/GameSnake/SRE/InfraCore/-/pipelines/
+
+        Step3.1 :選擇新推上的的commit
+
+        Step3.2 : 等待Security檢查完成
+
+        Step3.3: Plan:執行第6-GKE-Plan-Rel 
+
+        Step3.4: Deploy:執行第6-GKE-Apply-Rel 
+
+
+
+
+--------------
+DB密碼:
+https://gitlab.com/GameSnake/SRE/InfraCore/-/settings/ci_cd
+variables 找 PROD_APPS_TF_VAR_FILE_BASE64
+把他的值用 base64 解出來
+echo QXJnb0NEX0dpdExhYlRva2VuTmFtZSAgID0gImdpdGxhYi5zay5hcmdvY2QucmVhZCIKQXJnb0NEX0dpdExhYlRva2VuU2VjcmV0ID0gIllBVEppeWRDRU1aWTlSTlFtZl96IgpSb2J1c3RhX1NsYWNrQVBJS2V5ICAgICAgPSAieG94Yi0yNDEyNDc3NjU3NjgzLTM3MzY4MTQ3MTA2OTUtRUZYaGZWajNYcjlDa3AwN3Q2RmhjanBzIgpHcmFmYW5hQWRtaW5QYXNzd29yZCAgICAgPSAiemJXSGx1STRteFBjckVkSTEiCkJhY2tzdGFnZVNxbFBhc3N3b3JkICAgICA9ICIyTUxVN21lRjI0TURUOVZNZCIKVXNlclNxbFBhc3N3b3JkICAgICAgICAgID0gImRKOWh2VjI3Z3dsbVNWSWh4IgpHb2RhZGR5QVBJS2V5ICAgICAgICAgICAgPSAiZExESFRNUnFObjNpX0JHckt0WGVYemQyd29TMVp5ZkRxcnAiCkdvZGFkZHlBUElTZWNyZXQgICAgICAgICA9ICJDUXIzRlgyVnAzYUo0b1d4MWVaUGszIgo= | base64 --decode
+QXJnb0NEX0dpdExhYlRva2VuTmFtZSAgID0gImdpdGxhYi5zay5hcmdvY2QucmVhZCIKQXJnb0NEX0dpdExhYlRva2VuU2VjcmV0ID0gIllBVEppeWRDRU1aWTlSTlFtZl96IgpSb2J1c3RhX1NsYWNrQVBJS2V5ICAgICAgPSAieG94Yi0yNDEyNDc3NjU3NjgzLTM3MzY4MTQ3MTA2OTUtRUZYaGZWajNYcjlDa3AwN3Q2RmhjanBzIgpHcmFmYW5hQWRtaW5QYXNzd29yZCAgICAgPSAiemJXSGx1STRteFBjckVkSTEiCkJhY2tzdGFnZVNxbFBhc3N3b3JkICAgICA9ICIyTUxVN21lRjI0TURUOVZNZCIKVXNlclNxbFBhc3N3b3JkICAgICAgICAgID0gImRKOWh2VjI3Z3dsbVNWSWh4IgpHb2RhZGR5QVBJS2V5ICAgICAgICAgICAgPSAiZExESFRNUnFObjNpX0JHckt0WGVYemQyd29TMVp5ZkRxcnAiCkdvZGFkZHlBUElTZWNyZXQgICAgICAgICA9ICJDUXIzRlgyVnAzYUo0b1d4MWVaUGszIgo=
+
+GrafanaAdminPassword = "zbWHluI4mxPcrEdI1"
+BackstageSqlPassword = "2MLU7meF24MDT9VMd"
+UserSqlPassword = "dJ9hvV27gwlmSVIhx"
+
+
+---------------------------------
+ArgoCD管理後臺
+    
+    dev網址: https://dev.origingaia.com/argocd/
+    帳號:admin
+    密碼:6823hVyooLgbyw4p
+
+    
+    rel網址: https://rel.origingaia.com/argocd/
+    帳號:admin
+    密碼:dYZlqhP0otQb4pC6
+
+    https://v2.8.0.ponponsnake.com/argocd/
+    https://eu.v2.8.0.ponponsnake.com/argocd/
+    argocd:
+    ArgoCD QA(TW)
+    Rmhlk3a--TnzZwIa
+
+    ArgoCD QA(EU)
+    1oZ3QNiWeF5C7f2y
+
+    ArgoCD Prod (TW)
+    nRzXgZBaac8brXfP
+
+    ArgoCD Prod (EU)
+    6JX9XyXsg5uRLphV
+
+    LA
+    nhaycAp4Y695rzZF
+    
+
+    查詢密碼: 
+    連上GKE:
+    GKE -> 選取該GKE -> Control plane authorised networks (控制層授權網路) ->
+
+    Lens -> 連上該GKE -> config -> secret ->  argocd-initial-admin-secret
+
+------------------------------------------------------------------
+
+grafana 
+https://dev.origingaia.com/grafana/
+帳號: admin
+密碼: gra4422
+
+dev, rel, beta 都是使用這個帳號、密碼
+
+Production 
+帳號: admin
+密碼: zbWHluI4mxPcrEdI1
+帳號: cqi
+密碼: U6y2GYOoSURVXEwGY
+
+
+
+左側選Explore->上方左側切Loki ->Log browser選official-web -> label選app ->show logs
+
+
+------------------------------
+
+ArgoCDResource
+
+
+研究自動建立DNS流程
+
+
+
